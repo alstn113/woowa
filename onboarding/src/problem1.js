@@ -1,21 +1,23 @@
 const isWrongInput = (arr) => {
-  if (arr.length !== 2) return false;
-  if (arr[0] % 2 !== 1) return false;
-  if (arr[0] + 1 !== arr[1]) return false;
-  if (arr[0] < 1 || arr[1] > 400) return false;
-  return true;
+  if (arr.length !== 2) return true;
+  if (arr[0] % 2 !== 1) return true;
+  if (arr[0] + 1 !== arr[1]) return true;
+  if (arr[0] < 1 || arr[1] > 400) return true;
+  return false;
 };
 
 const plusAll = (v) => {
-  return str(v)
-    .split()
-    .reduce((acc, curr) => acc + curr, 0);
+  return String(v)
+    .split("")
+    .map(Number)
+    .reduce((acc, curr) => acc + curr);
 };
 
 const multiplyAll = (v) => {
-  return str(v)
-    .split()
-    .reduce((acc, curr) => acc * curr, 0);
+  return String(v)
+    .split("")
+    .map(Number)
+    .reduce((acc, curr) => acc * curr);
 };
 
 const getMaximumValue = (arr) => {
@@ -31,6 +33,7 @@ const problem1 = (pobi, crong) => {
     }
     const pobiMax = getMaximumValue(pobi);
     const crongMax = getMaximumValue(crong);
+    console.log(pobiMax, crongMax);
     if (pobiMax > crongMax) return 1;
     if (pobiMax < crongMax) return 2;
     return 0;
