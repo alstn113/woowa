@@ -13,7 +13,7 @@ const addRelation = (friendRelations, userA, userB) => {
 
 /**
  * 사용자의 친구 목록을 가져옵니다.
- * @param {Map<string, Array<string>>} friendRelations - 친구 관계
+ * @param {Map<string, string[]>} friendRelations - 친구 관계
  * @param {string} user - 사용자
  * @returns {string[]} - 친구 목록
  */
@@ -24,7 +24,7 @@ const getFriends = (friendRelations, user) => {
 /**
  * 사용자별 점수를 계산합니다.
  * @param {string[]} visitors - 방문자 목록
- * @param {Map<string, Array<string>>} friendRelations - 친구 관계
+ * @param {Map<string, string[]>} friendRelations - 친구 관계
  * @param {string} user - 현재 사용자
  * @returns {[string, number][]} - 사용자별 점수 배열
  */
