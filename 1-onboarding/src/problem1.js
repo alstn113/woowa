@@ -52,7 +52,7 @@ const getMaximumValue = (arr) => {
 };
 
 /**
- * 1번 문제의 메인 함수
+ * 주어진 문제에 대해서 승자를 반환하는 함수
  * @param {[number, number]} pobi pobi's pages
  * @param {[number, number]} crong crong's pages
  * @returns {number} 1: pobi win, 2: crong win, 0: draw, -1: error

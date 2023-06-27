@@ -14,7 +14,7 @@ const removeDuplicates = (arr) => {
 };
 
 /**
- * 주어진 문자열에서 중복 문자를 제거하는 함수
+ * 주어진 문제에 대해서 중복된 문자를 제거하는 함수
  * @param {string} cryptogram - 중복 문자를 제거할 문자열
  * @returns {string} - 중복 문자가 제거된 결과 문자열
  */
