@@ -13,7 +13,8 @@ const MESSAGES = Object.freeze({
 
 const ERROR_MESSAGES = Object.freeze({
   INVALID_INPUT: '1 또는 2를 입력하세요.',
-  INVALID_NUMBERS: '1~9 사이의 서로 다른 숫자 3개를 입력해주세요.',
+  DUPLICATED_NUMBERS: '중복되지 않은 숫자를 입력하세요.',
+  INVALID_LENGTH: '3자리 숫자를 입력하세요.',
 });
 
 const GAME_OPTIONS = Object.freeze({

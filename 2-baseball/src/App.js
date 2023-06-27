@@ -14,25 +14,19 @@ class App {
   }
 
   #processGame() {
-    try {
-      Console.readLine(MESSAGES.ENTER_NUMBERS, (input) => {
-        if (!this.#gameManager.isValidNumbers(input)) {
-          throw new Error(ERROR_MESSAGES.INVALID_NUMBERS);
-        }
-        const numbers = input.split('').map((number) => parseInt(number));
-        const { strike, ball } = this.#computer.checkNumbers(numbers);
+    Console.readLine(MESSAGES.ENTER_NUMBERS, (input) => {
+      const numbers = input.split('').map((number) => parseInt(number));
+      this.#gameManager.verifyNumbers(numbers);
+      const { strike, ball } = this.#computer.checkNumbers(numbers);
 
-        this.#printResult(strike, ball);
+      this.#printResult(strike, ball);
 
-        if (strike === 3) {
-          this.#replayOrExit();
-        } else {
-          this.#processGame();
-        }
-      });
-    } catch (e) {
-      throw e;
-    }
+      if (strike === 3) {
+        this.#replayOrExit();
+      } else {
+        this.#processGame();
+      }
+    });
   }
 
   #printResult(strike, ball) {
@@ -46,20 +40,16 @@ class App {
   }
 
   #replayOrExit() {
-    try {
-      Console.readLine(MESSAGES.START_OR_EXIT, (select) => {
-        if (select === GAME_OPTIONS.RESTART) {
-          this.#computer.startGame();
-          this.#processGame();
-        } else if (select === GAME_OPTIONS.EXIT) {
-          this.#exitGame();
-        } else {
-          throw new Error(ERROR_MESSAGES.INVALID_INPUT);
-        }
-      });
-    } catch (e) {
-      throw e;
-    }
+    Console.readLine(MESSAGES.START_OR_EXIT, (select) => {
+      if (select === GAME_OPTIONS.RESTART) {
+        this.#computer.startGame();
+        this.#processGame();
+      } else if (select === GAME_OPTIONS.EXIT) {
+        this.#exitGame();
+      } else {
+        throw new Error(ERROR_MESSAGES.INVALID_INPUT);
+      }
+    });
   }
 
   play() {

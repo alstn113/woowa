@@ -1,5 +1,5 @@
 const GameManager = require('../src/GameManager');
-const { MESSAGES } = require('../src/constants');
+const { ERROR_MESSAGES, MESSAGES } = require('../src/constants');
 
 describe('GameManager', () => {
   let gameManager;
@@ -8,30 +8,45 @@ describe('GameManager', () => {
     gameManager = new GameManager();
   });
 
-  it('should return correct result messages', () => {
-    // Test case 1: No strike, no ball
-    expect(gameManager.getResultMessage(0, 0)).toBe(MESSAGES.GUESS.NOTHING);
+  describe('getResultMessage', () => {
+    it('should return "낫싱" when strike and ball counts are 0', () => {
+      const result = gameManager.getResultMessage(0, 0);
+      expect(result).toBe(MESSAGES.GUESS.NOTHING);
+    });
 
-    // Test case 2: Only ball
-    expect(gameManager.getResultMessage(0, 2)).toBe(MESSAGES.GUESS.BALL(2));
+    it('should return the correct message for given strike and ball counts', () => {
+      const result1 = gameManager.getResultMessage(2, 1);
+      expect(result1).toBe(
+        `${MESSAGES.GUESS.BALL(1)} ${MESSAGES.GUESS.STRIKE(2)}`,
+      );
 
-    // Test case 3: Only strike
-    expect(gameManager.getResultMessage(3, 0)).toBe(MESSAGES.GUESS.STRIKE(3));
+      const result2 = gameManager.getResultMessage(0, 3);
+      expect(result2).toBe(`${MESSAGES.GUESS.BALL(3)}`);
 
-    // Test case 4: Both ball and strike
-    expect(gameManager.getResultMessage(2, 1)).toBe(
-      `${MESSAGES.GUESS.BALL(1)} ${MESSAGES.GUESS.STRIKE(2)}`,
-    );
+      const result3 = gameManager.getResultMessage(1, 0);
+      expect(result3).toBe(`${MESSAGES.GUESS.STRIKE(1)}`);
+    });
   });
 
-  it('should return true if input is valid', () => {
-    // Test case 1: Valid input
-    expect(gameManager.isValidNumbers('123')).toBeTruthy();
+  describe('verifyNumbers', () => {
+    it('should return true for valid numbers', () => {
+      const numbers = [1, 2, 3];
+      const result = gameManager.verifyNumbers(numbers);
+      expect(result).toBe(true);
+    });
 
-    // Test case 2: Invalid input (duplicated)
-    expect(gameManager.isValidNumbers('112')).toBeFalsy();
+    it('should throw an error for duplicated numbers', () => {
+      const numbers = [1, 2, 2];
+      expect(() => {
+        gameManager.verifyNumbers(numbers);
+      }).toThrow(Error(ERROR_MESSAGES.DUPLICATED));
+    });
 
-    // Test case 3: Invalid input (length)
-    expect(gameManager.isValidNumbers('1234')).toBeFalsy();
+    it('should throw an error for invalid length', () => {
+      const numbers = [1, 2];
+      expect(() => {
+        gameManager.verifyNumbers(numbers);
+      }).toThrow(Error(ERROR_MESSAGES.INVALID_LENGTH));
+    });
   });
 });
