@@ -1,5 +1,8 @@
-const { ERROR_MESSAGES } = require('../constants/Messages');
-const LottoException = require('../exception/LottoException');
+const {
+  validateLottoCount,
+  validateLottoRange,
+  validateLottoType,
+} = require('../validators/validator');
 
 class Lotto {
   #numbers;
@@ -10,27 +13,9 @@ class Lotto {
   }
 
   #validate() {
-    this.#validateLottoCount();
-    this.#validateDuplicateLotto();
-    this.#validateLottoRange();
-  }
-
-  #validateLottoCount() {
-    if (this.#numbers.length !== 6) {
-      throw new LottoException(ERROR_MESSAGES.LOTTO_WRONG_LENGTH);
-    }
-  }
-
-  #validateDuplicateLotto() {
-    const set = new Set(this.#numbers);
-    if (set.size !== this.#numbers.length) {
-      throw new LottoException(ERROR_MESSAGES.LOTTO_DUPLICATED_NUMBER);
-    }
-  }
-
-  #validateLottoRange() {
-    if (!this.#numbers.every((number) => 1 <= number && number <= 45))
-      throw new LottoException(ERROR_MESSAGES.LOTTO_OUT_OF_RANGE);
+    validateLottoCount(this.#numbers);
+    validateLottoRange(this.#numbers);
+    validateLottoType(this.#numbers);
   }
 
   get numbers() {

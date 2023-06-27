@@ -1,6 +1,6 @@
 const LottoManager = require('./domains/LottoManager');
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGES } = require('./constants/Messages');
+const { MESSAGES } = require('./constants/constants');
 
 class App {
   #lottoManager;
@@ -15,7 +15,7 @@ class App {
 
   #enterPurchaseAmount() {
     Console.readLine(MESSAGES.ENTER_PURCHASE_AMOUNT, (money) => {
-      const lottoCount = this.#lottoManager.getLottoCount(money);
+      const lottoCount = this.#lottoManager.getLottoCount(Number(money));
       this.#lottoManager.generateLottos(lottoCount);
       this.#lottoManager.printLottos(lottoCount);
       this.#enterWinningNumbers();
@@ -30,7 +30,10 @@ class App {
   }
 
   #enterBonusNumber() {
-    Console.readLine(MESSAGES.ENTER_BONUS_NUMBER, (bonusNumber) => {});
+    Console.readLine(MESSAGES.ENTER_BONUS_NUMBER, (bonusNumber) => {
+      this.#lottoManager.setBonusNumber(bonusNumber);
+      this.#lottoManager.printResult();
+    });
   }
 
   play() {

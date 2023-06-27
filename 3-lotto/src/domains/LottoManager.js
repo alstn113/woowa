@@ -1,35 +1,25 @@
 const Lotto = require('./Lotto');
-const InvalidInputException = require('../exception/InvalidInputException');
-const { MESSAGES, ERROR_MESSAGES } = require('../constants/Messages');
+const { MESSAGES, LOTTO_OPTIONS } = require('../constants/constants');
 const { Random, Console } = require('@woowacourse/mission-utils');
+const {
+  validateNumbersType,
+  validatePrice,
+} = require('../validators/validator');
 
 class LottoManager {
   #lottos;
   #winningNumbers;
+  #bonusNumber;
 
   constructor() {
     this.#lottos = [];
     this.#winningNumbers = null;
-  }
-
-  #validatePrice(price) {
-    if (isNaN(price))
-      throw new InvalidInputException(ERROR_MESSAGES.INVALID_INPUT);
-    if (price < 0) throw new InvalidInputException(ERROR_MESSAGES.LEAST_PRICE);
-    if (price % 1000 !== 0)
-      throw new InvalidInputException(ERROR_MESSAGES.NOT_MULTIPLE_OF_1000);
-  }
-
-  #validateNumbersType(numbers) {
-    if (
-      !numbers.every((number) => typeof number === 'number' && !isNaN(number))
-    )
-      throw new InvalidInputException(ERROR_MESSAGES.LOTTO_WRONG_TYPE);
+    this.#bonusNumber = null;
   }
 
   getLottoCount(money) {
-    this.#validatePrice(money);
-    return parseInt(money / 1000);
+    validatePrice(money);
+    return parseInt(money / LOTTO_OPTIONS.LOTTO_PRICE);
   }
 
   generateLottos(count) {
@@ -47,10 +37,12 @@ class LottoManager {
   }
 
   #generateLotto() {
-    const sortedRandomNumbers = Random.pickUniqueNumbersInRange(1, 45, 6).sort(
-      (a, b) => a - b,
-    );
-    const lotto = new Lotto(sortedRandomNumbers);
+    const randomNumbers = Random.pickUniqueNumbersInRange(
+      LOTTO_OPTIONS.LOTTO_MIN_NUMBER,
+      LOTTO_OPTIONS.LOTTO_MAX_NUMBER,
+      LOTTO_OPTIONS.LOTTO_COUNT,
+    ).sort((a, b) => a - b);
+    const lotto = new Lotto(randomNumbers);
     return lotto.numbers;
   }
 
@@ -61,7 +53,7 @@ class LottoManager {
       // Number는 숫자로 변환되지 않는 경우 NaN을 반환
       .map((number) => Number(number))
       .sort((a, b) => a - b);
-    this.#validateNumbersType(numbers);
+    validateNumbersType(numbers);
     this.#winningNumbers = new Lotto(numbers);
   }
 }
