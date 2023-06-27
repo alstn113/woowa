@@ -1,103 +1,70 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGES, ERROR_MESSAGES, GAME_OPTIONS } = require('./constants');
+const Computer = require('./Computer');
+const GameManager = require('./GameManager');
 
+// App = GameManager
 class App {
-  computer;
+  #computer;
+  #gameManager;
 
   constructor() {
-    this.computer = [];
+    this.#computer = new Computer();
+    this.#gameManager = new GameManager();
   }
 
-  generateNumbers() {
-    while (this.computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.computer.includes(number)) {
-        this.computer.push(number);
-      }
-    }
-  }
-
-  enterNumbers() {
-    MissionUtils.Console.print('숫자를 입력해주세요 : ');
+  #processGame() {
     try {
-      const input = MissionUtils.Console.readLine();
-      const numbers = input.split('').map((number) => parseInt(number));
-      return numbers;
+      Console.readLine(MESSAGES.ENTER_NUMBERS, (input) => {
+        if (!this.#gameManager.isValidNumbers(input)) {
+          throw new Error(ERROR_MESSAGES.INVALID_NUMBERS);
+        }
+        const numbers = input.split('').map((number) => parseInt(number));
+        const { strike, ball } = this.#computer.checkNumbers(numbers);
+
+        this.printResult(strike, ball);
+
+        if (strike === 3) {
+          this.replayOrExit();
+        } else {
+          this.#processGame();
+        }
+      });
     } catch (e) {
-      this.enterNumbers();
+      throw e;
     }
   }
 
-  checkNumbers(numbers) {
-    let strike = 0;
-    let ball = 0;
-    for (let i = 0; i < 3; i++) {
-      if (this.computer[i] === numbers[i]) {
-        strike++;
-      } else if (this.computer.includes(numbers[i])) {
-        ball++;
-      }
-    }
-
-    return { strike, ball };
+  printResult(strike, ball) {
+    const resultMessage = this.#gameManager.getResultMessage(strike, ball);
+    Console.print(resultMessage);
   }
 
-  printResult(result) {
-    const { strike, ball } = result;
-    if (strike === 0 && ball === 0) {
-      MissionUtils.Console.print('낫싱');
-    } else if (strike > 0 && ball === 0) {
-      MissionUtils.Console.print(`${strike}스트라이크`);
-    } else if (strike === 0 && ball > 0) {
-      MissionUtils.Console.print(`${ball}볼`);
-    } else {
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-    }
+  #exitGame() {
+    Console.print(MESSAGES.EXIT_GAME);
+    Console.close();
   }
 
-  startOrExitGame() {
-    MissionUtils.Console.print(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-    );
+  replayOrExit() {
     try {
-      const input = MissionUtils.Console.readLine();
-      if (input !== '1' && input !== '2') {
-        throw new Error('1 또는 2를 입력해주세요.');
-      }
+      Console.readLine(MESSAGES.START_OR_EXIT, (select) => {
+        if (select === GAME_OPTIONS.RESTART) {
+          this.#computer.startGame();
+          this.#processGame();
+        } else if (select === GAME_OPTIONS.EXIT) {
+          this.#exitGame();
+        } else {
+          throw new Error(ERROR_MESSAGES.INVALID_INPUT);
+        }
+      });
     } catch (e) {
-      MissionUtils.Console.print(e.message);
-      process.exit(0);
+      throw e;
     }
-    return input;
   }
 
   play() {
-    this.generateNumbers();
-    MissionUtils.Console.print(`숫자 야구 게임을 시작합니다.`);
-    while (true) {
-      try {
-        const numbers = this.enterNumbers();
-        const result = this.checkNumbers(numbers);
-        this.printResult(result);
-
-        if (result.strike === 3) {
-          MissionUtils.Console.print(
-            '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-          );
-          const v = this.endGame();
-          if (v === '1') {
-            this.computer = [];
-            this.play();
-          } else if (v === '2') {
-            MissionUtils.Console.print('게임을 종료합니다.');
-            break;
-          }
-        }
-      } catch (e) {
-        MissionUtils.Console.print(e.message);
-        MissionUtils.Console.print('게임종료');
-        break;
-      }
-    }
+    Console.print(MESSAGES.GAME_START);
+    this.#processGame();
   }
 }
 
