@@ -3,7 +3,6 @@ const { MESSAGES, ERROR_MESSAGES, GAME_OPTIONS } = require('./constants');
 const Computer = require('./Computer');
 const GameManager = require('./GameManager');
 
-// App = GameManager
 class App {
   #computer;
   #gameManager;
