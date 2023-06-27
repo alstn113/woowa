@@ -4,12 +4,12 @@ const LottoException = require('../exceptions/LottoException');
 const { ERROR_MESSAGES } = require('../constants/constants');
 
 const validateLottoCount = (numbers) => {
-  if (numbers.length !== 6) {
+  if (numbers.length !== LOTTO_OPTIONS.LOTTO_COUNT) {
     throw new LottoException(ERROR_MESSAGES.LOTTO_WRONG_LENGTH);
   }
 };
 
-const validateDuplicateLotto = (numbers) => {
+const validateLottoDuplicate = (numbers) => {
   const set = new Set(numbers);
   if (set.size !== numbers.length) {
     throw new LottoException(ERROR_MESSAGES.LOTTO_DUPLICATED_NUMBER);
@@ -67,9 +67,10 @@ const validatePrice = (price) => {
 
 module.exports = {
   validateLottoCount,
-  validateDuplicateLotto,
+  validateLottoDuplicate,
   validateLottoRange,
   validateLottoType,
+  // validateBonusNumber
   validateBonusType,
   validateBonusRange,
   validateBonusDuplicate,

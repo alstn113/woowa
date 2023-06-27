@@ -6,6 +6,7 @@ const {
   validateNumbersType,
   validatePrice,
 } = require('../validators/validator');
+const LottoResult = require('./LottoResult');
 
 class LottoManager {
   #lottos;
@@ -31,9 +32,11 @@ class LottoManager {
 
   printLottos() {
     const lottoCount = this.#lottos.length;
+    Console.print();
     Console.print(MESSAGES.PURCHASE_RESPONSE(lottoCount));
     this.#lottos.forEach((lotto) => {
-      Console.print(lotto);
+      const toString = `[${lotto.join(', ')}]`;
+      Console.print(toString);
     });
   }
 
@@ -60,6 +63,16 @@ class LottoManager {
 
   setBonusNumber(bonusNumber) {
     this.#bonusNumber = new Bonus(this.#winningNumbers.numbers, bonusNumber);
+  }
+
+  printResult() {
+    const lottoResult = new LottoResult(
+      this.#lottos,
+      this.#winningNumbers.numbers,
+      this.#bonusNumber.bonusNumber,
+    );
+
+    lottoResult.printResult();
   }
 }
 

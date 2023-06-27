@@ -32,7 +32,13 @@ class App {
   #enterBonusNumber() {
     Console.readLine(MESSAGES.ENTER_BONUS_NUMBER, (bonusNumber) => {
       this.#lottoManager.setBonusNumber(Number(bonusNumber));
+      this.#printResult();
     });
+  }
+
+  #printResult() {
+    this.#lottoManager.printResult();
+    Console.close();
   }
 
   play() {

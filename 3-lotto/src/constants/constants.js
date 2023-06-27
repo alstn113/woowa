@@ -20,21 +20,17 @@ const ERROR_MESSAGES = Object.freeze({
   BONUS_DUPLICATED_NUMBER: '보너스 번호는 당첨 번호와 중복될 수 없습니다.',
 });
 
-const PRIZE_AMOUNTS = Object.freeze({
-  FIRST_PRIZE: 2_000_000_000,
-  SECOND_PRIZE: 30_000_000,
-  THIRD_PRIZE: 1_500_000,
-  FOURTH_PRIZE: 50_000,
-  FIFTH_PRIZE: 5_000,
-});
+const PRIZE_AMOUNTS = Object.freeze([
+  5_000, 50_000, 1_500_000, 30_000_000, 2_000_000_000,
+]);
 
-const PRIZE_DESCRIPTIONS = Object.freeze({
-  FIRST_PRIZE: '6개 번호 일치',
-  SECOND_PRIZE: '5개 번호 + 보너스 번호 일치',
-  THIRD_PRIZE: '5개 번호 일치',
-  FOURTH_PRIZE: '4개 번호 일치',
-  FIFTH_PRIZE: '3개 번호 일치',
-});
+const PRIZE_DESCRIPTIONS = Object.freeze([
+  '3개 번호 일치',
+  '4개 번호 일치',
+  '5개 번호 일치',
+  '5개 번호 + 보너스 번호 일치',
+  '6개 번호 일치',
+]);
 
 const LOTTO_OPTIONS = Object.freeze({
   LOTTO_PRICE: 1000,
