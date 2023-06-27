@@ -1,12 +1,27 @@
-class Bonus {
-  #number;
+const {
+  validateBonusDuplicate,
+  validateBonusType,
+  validateBonusRange,
+} = require('../validators/validator');
 
-  constructor(number) {
-    this.#number = number;
+class Bonus {
+  #winningNumbers;
+  #bonusNumber;
+
+  constructor(winningNumbers, bonusNumber) {
+    this.#winningNumbers = winningNumbers;
+    this.#bonusNumber = bonusNumber;
+    this.#validate();
   }
 
-  get number() {
-    return this.#number;
+  #validate() {
+    validateBonusType(this.#bonusNumber);
+    validateBonusRange(this.#bonusNumber);
+    validateBonusDuplicate(this.#winningNumbers, this.#bonusNumber);
+  }
+
+  get bonusNumber() {
+    return this.#bonusNumber;
   }
 }
 

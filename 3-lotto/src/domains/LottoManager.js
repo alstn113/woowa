@@ -1,4 +1,5 @@
 const Lotto = require('./Lotto');
+const Bonus = require('./Bonus');
 const { MESSAGES, LOTTO_OPTIONS } = require('../constants/constants');
 const { Random, Console } = require('@woowacourse/mission-utils');
 const {
@@ -55,6 +56,10 @@ class LottoManager {
       .sort((a, b) => a - b);
     validateNumbersType(numbers);
     this.#winningNumbers = new Lotto(numbers);
+  }
+
+  setBonusNumber(bonusNumber) {
+    this.#bonusNumber = new Bonus(this.#winningNumbers.numbers, bonusNumber);
   }
 }
 

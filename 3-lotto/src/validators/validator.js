@@ -1,5 +1,6 @@
 const { LOTTO_OPTIONS } = require('../constants/constants');
 const InvalidInputException = require('../exceptions/InvalidInputException');
+const LottoException = require('../exceptions/LottoException');
 const { ERROR_MESSAGES } = require('../constants/constants');
 
 const validateLottoCount = (numbers) => {

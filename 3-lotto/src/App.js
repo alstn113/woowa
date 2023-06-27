@@ -31,8 +31,7 @@ class App {
 
   #enterBonusNumber() {
     Console.readLine(MESSAGES.ENTER_BONUS_NUMBER, (bonusNumber) => {
-      this.#lottoManager.setBonusNumber(bonusNumber);
-      this.#lottoManager.printResult();
+      this.#lottoManager.setBonusNumber(Number(bonusNumber));
     });
   }
 
