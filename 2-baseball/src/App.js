@@ -22,10 +22,10 @@ class App {
         const numbers = input.split('').map((number) => parseInt(number));
         const { strike, ball } = this.#computer.checkNumbers(numbers);
 
-        this.printResult(strike, ball);
+        this.#printResult(strike, ball);
 
         if (strike === 3) {
-          this.replayOrExit();
+          this.#replayOrExit();
         } else {
           this.#processGame();
         }
@@ -35,7 +35,7 @@ class App {
     }
   }
 
-  printResult(strike, ball) {
+  #printResult(strike, ball) {
     const resultMessage = this.#gameManager.getResultMessage(strike, ball);
     Console.print(resultMessage);
   }
@@ -45,7 +45,7 @@ class App {
     Console.close();
   }
 
-  replayOrExit() {
+  #replayOrExit() {
     try {
       Console.readLine(MESSAGES.START_OR_EXIT, (select) => {
         if (select === GAME_OPTIONS.RESTART) {
