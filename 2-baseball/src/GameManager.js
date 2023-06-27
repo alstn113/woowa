@@ -1,4 +1,4 @@
-const { ERROR_MESSAGES, MESSAGES } = require('./constants');
+const { ERROR_MESSAGES, MESSAGES } = require('./constants/Messages');
 
 class GameManager {
   constructor() {}

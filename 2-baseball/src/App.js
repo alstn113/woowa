@@ -1,5 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGES, ERROR_MESSAGES, GAME_OPTIONS } = require('./constants');
+const {
+  MESSAGES,
+  ERROR_MESSAGES,
+  GAME_OPTIONS,
+} = require('./constants/Messages');
 const Computer = require('./Computer');
 const GameManager = require('./GameManager');
 

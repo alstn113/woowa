@@ -1,5 +1,5 @@
 const GameManager = require('../src/GameManager');
-const { ERROR_MESSAGES, MESSAGES } = require('../src/constants');
+const { ERROR_MESSAGES, MESSAGES } = require('../src/constants/Messages');
 
 describe('GameManager', () => {
   let gameManager;
