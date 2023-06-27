@@ -4,7 +4,7 @@
  * @returns {boolean} - 유효한 이메일 주소인지 여부 (true: 유효함, false: 유효하지 않음)
  */
 const isValidEmail = (email) => {
-  return email.endsWith("@email.com");
+  return email.endsWith('@email.com');
 };
 
 /**

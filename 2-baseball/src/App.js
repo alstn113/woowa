@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   computer;
@@ -17,10 +17,10 @@ class App {
   }
 
   enterNumbers() {
-    MissionUtils.Console.print("숫자를 입력해주세요 : ");
+    MissionUtils.Console.print('숫자를 입력해주세요 : ');
     try {
       const input = MissionUtils.Console.readLine();
-      const numbers = input.split("").map((number) => parseInt(number));
+      const numbers = input.split('').map((number) => parseInt(number));
       return numbers;
     } catch (e) {
       this.enterNumbers();
@@ -44,7 +44,7 @@ class App {
   printResult(result) {
     const { strike, ball } = result;
     if (strike === 0 && ball === 0) {
-      MissionUtils.Console.print("낫싱");
+      MissionUtils.Console.print('낫싱');
     } else if (strike > 0 && ball === 0) {
       MissionUtils.Console.print(`${strike}스트라이크`);
     } else if (strike === 0 && ball > 0) {
@@ -56,12 +56,12 @@ class App {
 
   startOrExitGame() {
     MissionUtils.Console.print(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
     );
     try {
       const input = MissionUtils.Console.readLine();
-      if (input !== "1" && input !== "2") {
-        throw new Error("1 또는 2를 입력해주세요.");
+      if (input !== '1' && input !== '2') {
+        throw new Error('1 또는 2를 입력해주세요.');
       }
     } catch (e) {
       MissionUtils.Console.print(e.message);
@@ -81,20 +81,20 @@ class App {
 
         if (result.strike === 3) {
           MissionUtils.Console.print(
-            "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+            '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
           );
           const v = this.endGame();
-          if (v === "1") {
+          if (v === '1') {
             this.computer = [];
             this.play();
-          } else if (v === "2") {
-            MissionUtils.Console.print("게임을 종료합니다.");
+          } else if (v === '2') {
+            MissionUtils.Console.print('게임을 종료합니다.');
             break;
           }
         }
       } catch (e) {
         MissionUtils.Console.print(e.message);
-        MissionUtils.Console.print("게임종료");
+        MissionUtils.Console.print('게임종료');
         break;
       }
     }

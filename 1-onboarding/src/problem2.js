@@ -10,7 +10,7 @@ const removeDuplicates = (arr) => {
     if (stack[stack.length - 1] === v) stack.pop();
     else stack.push(v);
   }
-  return stack.join("");
+  return stack.join('');
 };
 
 /**
@@ -19,7 +19,7 @@ const removeDuplicates = (arr) => {
  * @returns {string} - 중복 문자가 제거된 결과 문자열
  */
 const problem2 = (cryptogram) => {
-  const arr = cryptogram.split("");
+  const arr = cryptogram.split('');
   return removeDuplicates(arr);
 };
 

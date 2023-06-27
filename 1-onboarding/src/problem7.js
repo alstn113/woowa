@@ -66,7 +66,7 @@ const getRecommendedFriends = (userScoreArr) => {
   return userScoreArr
     .sort(
       ([usernameA, scoreA], [usernameB, scoreB]) =>
-        scoreB - scoreA || usernameA.localeCompare(usernameB) // 점수가 같을 경우 알파벳 순으로 정렬
+        scoreB - scoreA || usernameA.localeCompare(usernameB), // 점수가 같을 경우 알파벳 순으로 정렬
     )
     .slice(0, 5)
     .map((entry) => entry[0]);

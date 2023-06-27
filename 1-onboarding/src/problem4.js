@@ -4,7 +4,7 @@
  * @returns {string} - 뒤집힌 대문자 알파벳
  */
 const reverseUpperCase = (char) => {
-  const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   return upper[26 - upper.indexOf(char) - 1];
 };
 
@@ -14,7 +14,7 @@ const reverseUpperCase = (char) => {
  * @returns {string} - 뒤집힌 소문자 알파벳
  */
 const reverseLowerCase = (char) => {
-  const lower = "abcdefghijklmnopqrstuvwxyz";
+  const lower = 'abcdefghijklmnopqrstuvwxyz';
   return lower[26 - lower.indexOf(char) - 1];
 };
 
@@ -25,17 +25,17 @@ const reverseLowerCase = (char) => {
  */
 const reverseWord = (word) => {
   return word
-    .split("")
+    .split('')
     .map((char) => {
-      if (char >= "A" && char <= "Z") {
+      if (char >= 'A' && char <= 'Z') {
         return reverseUpperCase(char);
-      } else if (char >= "a" && char <= "z") {
+      } else if (char >= 'a' && char <= 'z') {
         return reverseLowerCase(char);
       } else {
         return char;
       }
     })
-    .join("");
+    .join('');
 };
 
 /**

@@ -1,6 +1,6 @@
 const Message = Object.freeze({
-  POBI_WRONG_INPUT: "POBI_WRONG_INPUT",
-  CRONG_WRONG_INPUT: "CRONG_WRONG_INPUT",
+  POBI_WRONG_INPUT: 'POBI_WRONG_INPUT',
+  CRONG_WRONG_INPUT: 'CRONG_WRONG_INPUT',
 });
 
 /**
@@ -23,7 +23,7 @@ const isWrongInput = (arr) => {
  */
 const plusAll = (v) => {
   return String(v)
-    .split("")
+    .split('')
     .map(Number)
     .reduce((acc, curr) => acc + curr);
 };
@@ -35,7 +35,7 @@ const plusAll = (v) => {
  */
 const multiplyAll = (v) => {
   return String(v)
-    .split("")
+    .split('')
     .map(Number)
     .reduce((acc, curr) => acc * curr);
 };
