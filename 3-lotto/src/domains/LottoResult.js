@@ -32,13 +32,20 @@ class LottoResult {
 
   #compareLottos() {
     this.#lottos.forEach((lotto) => {
-      let matchingCount = this.#getMatchingCount(lotto);
-      matchingCount -= 3;
-      const isBonusMatch = lotto.includes(this.#bonusNumber);
-      if ((matchingCount === 5 && isBonusMatch) || matchingCount === 6) {
-        matchingCount += 1;
+      const matchingCount = this.#getMatchingCount(lotto);
+      switch (true) {
+        case matchingCount === 6:
+          this.#matches[4] += 1;
+          break;
+        case matchingCount === 5 && lotto.includes(this.#bonusNumber):
+          this.#matches[3] += 1;
+          break;
+        case matchingCount >= 3:
+          this.#matches[matchingCount - 3] += 1;
+          break;
+        default:
+          break;
       }
-      this.#matches[matchingCount] += 1;
     });
   }
 
