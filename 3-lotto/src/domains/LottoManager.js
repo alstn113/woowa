@@ -32,7 +32,6 @@ class LottoManager {
 
   printLottos() {
     const lottoCount = this.#lottos.length;
-    Console.print();
     Console.print(MESSAGES.PURCHASE_RESPONSE(lottoCount));
     this.#lottos.forEach((lotto) => {
       const toString = `[${lotto.join(', ')}]`;

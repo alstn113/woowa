@@ -1,5 +1,5 @@
 const MESSAGES = Object.freeze({
-  ENTER_PURCHASE_AMOUNT: `구입금액을 입력해 주세요.\n`,
+  ENTER_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',
   PURCHASE_RESPONSE: (amount) => `\n${amount}개를 구매했습니다.`,
   ENTER_WINNING_NUMBERS: `\n당첨 번호를 입력해 주세요.\n`,
   ENTER_BONUS_NUMBER: `\n보너스 번호를 입력해 주세요.\n`,
@@ -25,11 +25,11 @@ const PRIZE_AMOUNTS = Object.freeze([
 ]);
 
 const PRIZE_DESCRIPTIONS = Object.freeze([
-  '3개 번호 일치',
-  '4개 번호 일치',
-  '5개 번호 일치',
-  '5개 번호 + 보너스 번호 일치',
-  '6개 번호 일치',
+  '3개 일치',
+  '4개 일치',
+  '5개 일치',
+  '5개 일치, 보너스 볼 일치',
+  '6개 일치',
 ]);
 
 const LOTTO_OPTIONS = Object.freeze({
