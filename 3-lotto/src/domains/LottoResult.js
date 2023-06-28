@@ -50,7 +50,7 @@ class LottoResult {
 
     const totalSpent = this.#lottos.length * LOTTO_OPTIONS.LOTTO_PRICE;
 
-    this.#profitRate = ((this.#profit - totalSpent) / totalSpent) * 100;
+    this.#profitRate = (this.#profit / totalSpent) * 100;
   }
 
   #parsedProfitRate() {
