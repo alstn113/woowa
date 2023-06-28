@@ -70,7 +70,6 @@ module.exports = {
   validateLottoDuplicate,
   validateLottoRange,
   validateLottoType,
-  // validateBonusNumber
   validateBonusType,
   validateBonusRange,
   validateBonusDuplicate,
