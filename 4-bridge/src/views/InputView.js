@@ -8,19 +8,23 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(callback) {
-    Console.readLine('', () => {});
+  readBridgeSize() {
+    Console.readLine(MESSAGES.ENTER_BRIDGE_LENGTH, (bridgeLength) => {});
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(MESSAGES.ENTER_MOVING, (moving) => {});
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  readGameCommand() {
+    Console.readLine(MESSAGES.SELECT_RETRY_OR_EXIT, (command) => {});
+  },
 };
 
 module.exports = InputView;
