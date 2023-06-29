@@ -6,3 +6,5 @@ class AppException extends Error {
     this.name = this.constructor.name;
   }
 }
+
+module.exports = AppException;

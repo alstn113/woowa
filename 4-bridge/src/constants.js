@@ -11,7 +11,12 @@ const MESSAGES = Object.freeze({
   TOTAL_ATTEMPTS: '총 시도한 횟수',
 });
 
-const ERROR = Object.freeze({});
+const ERRORS = Object.freeze({
+  BRIDGE_INPUT_NOT_NUMBER: '다리 길이는 숫자만 가능합니다.',
+  BRIDGE_LENGTH_RANGE: '다리의 길이는 3 이상 20 이하의 숫자만 가능합니다.',
+  WRONG_MOVING: '이동할 칸은 위(U) 또는 아래(D)만 가능합니다.',
+  WRONG_COMMAND: 'R(재시도) 또는 Q(종료)만 입력 가능합니다.',
+});
 
 const BRIDGE = Object.freeze({
   MIN_LENGTH: 3,
@@ -30,7 +35,7 @@ const COMMAND = Object.freeze({
 
 module.exports = {
   MESSAGES,
-  ERROR,
+  ERRORS,
   BRIDGE,
   POSITIONS,
   COMMAND,
