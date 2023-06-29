@@ -30,8 +30,8 @@ class App {
       OutputView.printMap(isAlive, history);
 
       if (isGameClear) return this.#handleGameClear(history);
-      if (!isAlive) this.#retryOrExit(history);
-      this.#playRound();
+      if (!isAlive) return this.#retryOrExit(history);
+      return this.#playRound();
     });
   }
 
