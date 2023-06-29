@@ -13,24 +13,18 @@ const OutputView = {
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
    */
   printMap(isAlive, history) {
-    Console.print(
-      `[${history
+    const covertHistoryToString = (history, isAlive, positionToCheck) => {
+      return `[${history
         .map((moving, idx) => {
-          if (moving === POSITIONS.DOWN) return '   ';
+          if (moving !== positionToCheck) return '   ';
           if (idx === history.length - 1 && !isAlive) return ' X ';
           return ' O ';
         })
-        .join('|')}]`,
-    );
-    Console.print(
-      `[${history
-        .map((moving, idx) => {
-          if (moving === POSITIONS.UP) return '   ';
-          if (idx === history.length - 1 && !isAlive) return ' X ';
-          return ' O ';
-        })
-        .join('|')}]`,
-    );
+        .join('|')}]`;
+    };
+
+    Console.print(covertHistoryToString(history, isAlive, POSITIONS.UP));
+    Console.print(covertHistoryToString(history, isAlive, POSITIONS.DOWN));
   },
 
   /**
@@ -42,6 +36,7 @@ const OutputView = {
     Console.print(
       `${MESSAGES.GAME_RESULT}: ${isAlive ? MESSAGES.SUCCESS : MESSAGES.FAIL}`,
     );
+    Console.print('');
     Console.print(`${MESSAGES.TOTAL_ATTEMPTS}: ${totalAttempts}`);
     Console.close();
   },
