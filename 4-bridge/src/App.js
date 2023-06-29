@@ -28,32 +28,32 @@ class App {
       const { isAlive, history, isGameClear } = this.#bridgeGame.move(moving);
       OutputView.printMap(isAlive, history);
 
-      if (isGameClear) {
-        OutputView.printResult(isAlive, history, BridgeGame.totalAttempts);
-        InputView.close();
-        return;
-      }
-
-      if (isAlive) {
-        this.#playRound();
-        return;
-      }
-
-      this.#retryOrExit(history);
+      if (isGameClear) return this.#handleGameClear(history);
+      if (!isAlive) this.#retryOrExit(history);
+      this.#playRound();
     });
   }
 
   #retryOrExit(history) {
     InputView.readGameCommand((command) => {
-      if (command === COMMAND.EXIT) {
-        OutputView.printResult(false, history, BridgeGame.totalAttempts);
-        InputView.close();
-        return;
-      } else if (command === COMMAND.RETRY) {
-        this.#bridgeGame.retry();
-        this.#progress();
+      switch (command) {
+        case COMMAND.EXIT:
+          OutputView.printResult(false, history, BridgeGame.totalAttempts);
+          InputView.close();
+          break;
+        case COMMAND.RETRY:
+          this.#bridgeGame.retry();
+          this.#progress();
+          break;
+        default:
+          break;
       }
     });
+  }
+
+  #handleGameClear(history) {
+    OutputView.printResult(true, history, BridgeGame.totalAttempts);
+    InputView.close();
   }
 }
 

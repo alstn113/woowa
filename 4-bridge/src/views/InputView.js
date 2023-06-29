@@ -8,14 +8,15 @@ const {
 } = require('../validators');
 
 const InputView = {
-  read(query, callback) {
+  read(query, validate, callback) {
     Console.readLine(query, (value) => {
       try {
+        validate(value);
         callback(value);
       } catch (e) {
         if (e instanceof InvalidInputException) {
           Console.print(e.message);
-          this.read(query, callback);
+          this.read(query, validate, callback);
           return;
         }
         throw e;
@@ -24,22 +25,23 @@ const InputView = {
   },
 
   readBridgeSize(callback) {
-    this.read(MESSAGES.ENTER_BRIDGE_LENGTH, (bridgeLength) => {
-      validateBridgeLength(bridgeLength);
-      callback(bridgeLength);
-    });
+    this.read(
+      MESSAGES.ENTER_BRIDGE_LENGTH,
+      validateBridgeLength,
+      (bridgeLength) => {
+        callback(bridgeLength);
+      },
+    );
   },
 
   readMoving(callback) {
-    this.read(MESSAGES.ENTER_MOVING, (moving) => {
-      validateMoving(moving);
+    this.read(MESSAGES.ENTER_MOVING, validateMoving, (moving) => {
       callback(moving);
     });
   },
 
   readGameCommand(callback) {
-    this.read(MESSAGES.SELECT_RETRY_OR_EXIT, (command) => {
-      validateGameCommand(command);
+    this.read(MESSAGES.SELECT_RETRY_OR_EXIT, validateGameCommand, (command) => {
       callback(command);
     });
   },

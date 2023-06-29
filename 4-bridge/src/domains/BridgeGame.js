@@ -28,14 +28,6 @@ class BridgeGame {
   retry() {
     this.#history = [];
   }
-
-  getBridge() {
-    return this.#bridge;
-  }
-
-  getHistory() {
-    return this.#history;
-  }
 }
 
 module.exports = BridgeGame;
