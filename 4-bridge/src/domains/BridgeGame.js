@@ -12,15 +12,19 @@ const { generate } = require('../BridgeRandomNumberGenerator');
  */
 class BridgeGame {
   #bridge;
-  #bridgeLength;
   #history;
 
   constructor(bridgeLength) {
-    this.#bridgeLength = bridgeLength;
     this.#bridge = makeBridge(bridgeLength, () => generate());
+    this.#history = [];
   }
 
-  move() {}
+  move(moving) {
+    this.#history.push(moving);
+    const isAlive = moving === this.#bridge[this.#history.length - 1];
+    const isGameClear = isAlive && this.#history.length === this.#bridge.length;
+    return { isAlive, history: this.#history, isGameClear };
+  }
 
   retry() {}
 

@@ -22,7 +22,17 @@ class App {
 
   #move() {
     InputView.readMoving((moving) => {
-      const isAlive = this.#bridgeGame.move(moving);
+      const { isAlive, history, isGameClear } = this.#bridgeGame.move(moving);
+      OutputView.printMap(isAlive, history);
+
+      if (isGameClear) {
+        OutputView.printResult(isAlive, history, this.#totalAttempts);
+      }
+
+      if (isAlive) this.#move();
+
+      this.#totalAttempts += 1;
+      this.#retryOrExit();
     });
   }
 
