@@ -7,12 +7,11 @@
 const { makeBridge } = require('../BridgeMaker');
 const { generate } = require('../BridgeRandomNumberGenerator');
 
-/**
- * 다리 건너기 게임을 관리하는 클래스
- */
 class BridgeGame {
   #bridge;
   #history;
+
+  static totalAttempts = 0;
 
   constructor(bridgeLength) {
     this.#bridge = makeBridge(bridgeLength, () => generate());
@@ -26,10 +25,16 @@ class BridgeGame {
     return { isAlive, history: this.#history, isGameClear };
   }
 
-  retry() {}
+  retry() {
+    this.#history = [];
+  }
 
   getBridge() {
     return this.#bridge;
+  }
+
+  getHistory() {
+    return this.#history;
   }
 }
 

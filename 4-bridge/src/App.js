@@ -5,43 +5,53 @@ const { COMMAND } = require('./constants');
 
 class App {
   #bridgeGame;
-  #totalAttempts;
 
   constructor() {
     this.#bridgeGame = null;
-    this.#totalAttempts = 0;
   }
 
   play() {
     OutputView.startGame();
     InputView.readBridgeSize((bridgeLength) => {
       this.#bridgeGame = new BridgeGame(bridgeLength);
-      this.#move();
+      this.#progress();
     });
   }
 
-  #move() {
+  #progress() {
+    BridgeGame.totalAttempts += 1;
+    this.#playRound();
+  }
+
+  #playRound() {
     InputView.readMoving((moving) => {
       const { isAlive, history, isGameClear } = this.#bridgeGame.move(moving);
       OutputView.printMap(isAlive, history);
 
       if (isGameClear) {
-        OutputView.printResult(isAlive, history, this.#totalAttempts);
+        OutputView.printResult(isAlive, history, BridgeGame.totalAttempts);
+        InputView.close();
+        return;
       }
 
-      if (isAlive) this.#move();
+      if (isAlive) {
+        this.#playRound();
+        return;
+      }
 
-      this.#totalAttempts += 1;
-      this.#retryOrExit();
+      this.#retryOrExit(history);
     });
   }
 
-  #retryOrExit() {
+  #retryOrExit(history) {
     InputView.readGameCommand((command) => {
       if (command === COMMAND.EXIT) {
-        OutputView.printResult(this.#totalAttempts);
+        OutputView.printResult(false, history, BridgeGame.totalAttempts);
+        InputView.close();
+        return;
       } else if (command === COMMAND.RETRY) {
         this.#bridgeGame.retry();
+        this.#progress();
       }
     });
   }
