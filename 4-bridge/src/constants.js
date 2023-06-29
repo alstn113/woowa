@@ -13,15 +13,25 @@ const MESSAGES = Object.freeze({
 
 const ERROR = Object.freeze({});
 
+const BRIDGE = Object.freeze({
+  MIN_LENGTH: 3,
+  MAX_LENGTH: 20,
+});
+
+const POSITIONS = Object.freeze({
+  UP: 'U',
+  DOWN: 'D',
+});
+
 const COMMAND = Object.freeze({
   RETRY: 'R',
   EXIT: 'Q',
-  UP: 'U',
-  DOWN: 'D',
 });
 
 module.exports = {
   MESSAGES,
   ERROR,
+  BRIDGE,
+  POSITIONS,
   COMMAND,
 };
