@@ -2,6 +2,7 @@ const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
 const BridgeGame = require('./domains/BridgeGame');
 const { COMMAND } = require('./constants');
+const { generate } = require('./BridgeRandomNumberGenerator');
 
 class App {
   #bridgeGame;
@@ -13,7 +14,7 @@ class App {
   play() {
     OutputView.startGame();
     InputView.readBridgeSize((bridgeLength) => {
-      this.#bridgeGame = new BridgeGame(bridgeLength);
+      this.#bridgeGame = new BridgeGame(bridgeLength, generate);
       this.#progress();
     });
   }

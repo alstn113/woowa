@@ -5,7 +5,6 @@
 // 게임 진행을 위해 필요한 메서드를 추가 하거나 변경할 수 있다.
 
 const { makeBridge } = require('../BridgeMaker');
-const { generate } = require('../BridgeRandomNumberGenerator');
 
 class BridgeGame {
   #bridge;
@@ -13,8 +12,8 @@ class BridgeGame {
 
   static totalAttempts = 0;
 
-  constructor(bridgeLength) {
-    this.#bridge = makeBridge(bridgeLength, () => generate());
+  constructor(bridgeLength, generate) {
+    this.#bridge = makeBridge(bridgeLength, generate);
     this.#history = [];
   }
 
@@ -27,6 +26,14 @@ class BridgeGame {
 
   retry() {
     this.#history = [];
+  }
+
+  getBridge() {
+    return this.#bridge;
+  }
+
+  getHistory() {
+    return this.#history;
   }
 }
 
