@@ -18,8 +18,8 @@ class InputView {
     });
   }
 
-  readCoachsNames(callback) {
-    this.#read(MESSAGES.ENTER_COACHS_NAMES, callback);
+  readCoachs(callback) {
+    this.#read(MESSAGES.ENTER_COACHS, callback);
   }
 
   readExcludeMenu(coach, callback) {

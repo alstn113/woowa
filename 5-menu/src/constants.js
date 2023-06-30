@@ -1,6 +1,6 @@
 const MESSAGES = Object.freeze({
   START_LUNCH_RECOMMENDATION: '점심 메뉴 추천을 시작합니다.',
-  ENTER_COACHS_NAMES: '코치의 이름을 입력해 주세요. (, 로 구분)',
+  ENTER_COACHS: '\n코치의 이름을 입력해 주세요. (, 로 구분)\n',
   ENTER_EXCLUDE_MENU: (coach) => `${coach}(이)가 못 먹는 메뉴를 입력해 주세요`,
   RESULT_LUNCH_RECOMMENDATION: '메뉴 추천 결과입니다.',
   END_LUNCH_RECOMMENDATION: '추천을 완료했습니다.',
