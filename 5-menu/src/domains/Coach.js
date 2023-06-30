@@ -13,6 +13,10 @@ class Coach {
   getName() {
     return this.#name;
   }
+
+  getExcludeMenus() {
+    return this.#excludeMenus;
+  }
 }
 
 module.exports = Coach;
