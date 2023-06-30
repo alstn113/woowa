@@ -39,10 +39,12 @@ class App {
   }
 
   #printRecommendationResult() {
-    const recommendMenusForCoachs =
+    const { categoryForDays, recommendMenusForCoachs } =
       this.#recommendationManager.recommendMenus();
-    console.log(recommendMenusForCoachs);
-    this.#outputView.printRecommendationResult(recommendMenusForCoachs);
+    this.#outputView.printRecommendationResult(
+      categoryForDays,
+      recommendMenusForCoachs,
+    );
     this.#inputView.close();
   }
 }
