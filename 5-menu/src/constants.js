@@ -12,6 +12,8 @@ const ERRORS = Object.freeze({
   WRONNG_COACH_NAME_LENGTH: '코치의 이름은 최소 2글자, 최대 4글자이다.',
   WRONG_EXCLUDE_MENU_RANGE:
     '각 코치는 최소 0개, 최대 2개의 못 먹는 메뉴가 있다.',
+  DUPLICATED_COACH_NAME: '코치의 이름은 중복될 수 없다.',
+  DUPLICATED_EXCLUDE_MENU: '각 코치의 못 먹는 메뉴는 중복될 수 없다.',
 });
 
 const MENU = Object.freeze({
