@@ -1,13 +1,16 @@
+const Menu = require('./Menu');
+
 class Coach {
   #name;
-  #excludeMenus = [];
+  #excludeMenus;
 
   constructor(name) {
     this.#name = name;
+    this.#excludeMenus = [];
   }
 
   setExcludeMenus(excludeMenus) {
-    this.#excludeMenus = excludeMenus;
+    this.#excludeMenus = excludeMenus.map((menu) => new Menu(menu));
   }
 
   getName() {

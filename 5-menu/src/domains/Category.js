@@ -1,15 +1,10 @@
 class Category {
-  #index;
   #name;
   #menus;
 
-  constructor(index, name, menus) {
+  constructor(name, menus) {
     this.#name = name;
     this.#menus = menus;
-  }
-
-  getIndex() {
-    return this.#index;
   }
 
   getName() {
