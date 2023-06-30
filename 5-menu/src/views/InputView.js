@@ -38,6 +38,10 @@ class InputView {
   parseStringToArray(str) {
     return str.split(',').map((v) => v.trim());
   }
+
+  close() {
+    Console.close();
+  }
 }
 
 module.exports = InputView;

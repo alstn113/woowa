@@ -3,8 +3,8 @@ const MESSAGES = Object.freeze({
   ENTER_COACHS: '\n코치의 이름을 입력해 주세요. (, 로 구분)\n',
   ENTER_EXCLUDE_MENU: (coach) =>
     `\n${coach}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
-  RESULT_LUNCH_RECOMMENDATION: '메뉴 추천 결과입니다.',
-  END_LUNCH_RECOMMENDATION: '추천을 완료했습니다.',
+  RESULT_LUNCH_RECOMMENDATION: '\n메뉴 추천 결과입니다.',
+  END_LUNCH_RECOMMENDATION: '\n추천을 완료했습니다.',
 });
 
 const ERRORS = Object.freeze({

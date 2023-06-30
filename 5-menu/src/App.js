@@ -40,6 +40,7 @@ class App {
   #printRecommendationResult() {
     const coachs = this.#recommendationManager.getCoachs();
     this.#outputView.printRecommendationResult(coachs);
+    this.#inputView.close();
   }
 }
 
