@@ -6,7 +6,12 @@ const MESSAGES = Object.freeze({
   END_LUNCH_RECOMMENDATION: '추천을 완료했습니다.',
 });
 
-const ERRORS = Object.freeze({});
+const ERRORS = Object.freeze({
+  WRONG_COACHS_RANGE: '코치는 최소 2명, 최대 5명까지 식사를 함께 한다.',
+  WRONNG_COACH_NAME_LENGTH: '코치의 이름은 최소 2글자, 최대 4글자이다.',
+  WRONG_EXCLUDE_MENU_RANGE:
+    '각 코치는 최소 0개, 최대 2개의 못 먹는 메뉴가 있다.',
+});
 
 const MENU = Object.freeze({
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',

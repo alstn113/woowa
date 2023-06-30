@@ -19,11 +19,21 @@ class InputView {
   }
 
   readCoachs(callback) {
-    this.#read(MESSAGES.ENTER_COACHS, callback);
+    this.#read(MESSAGES.ENTER_COACHS, (input) => {
+      const coachs = this.parseStringToArray(input);
+      callback(coachs);
+    });
   }
 
   readExcludeMenu(coach, callback) {
-    this.#read(MESSAGES.ENTER_EXCLUDE_MENU(coach), callback);
+    this.#read(MESSAGES.ENTER_EXCLUDE_MENU(coach), (input) => {
+      const excludeMenu = this.parseStringToArray(input);
+      callback(excludeMenu);
+    });
+  }
+
+  parseStringToArray(input) {
+    return input.split(',').map((coach) => coach.trim());
   }
 }
 
