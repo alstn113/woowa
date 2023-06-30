@@ -1,4 +1,4 @@
-const InvalidInputException = require('@woowacourse/mission-utils');
+const InvalidInputException = require('../exceptions/InValidInputException');
 const { ERRORS } = require('../constants');
 
 const validateEnterCoachs = (coachs) => {
@@ -10,12 +10,12 @@ const validateEnterCoachs = (coachs) => {
   });
 };
 
-const validateExcludeMenu = (excludeMenu) => {
-  if (excludeMenu.length > 2 || excludeMenu.length < 0)
+const validateExcludeMenus = (excludeMenus) => {
+  if (excludeMenus.length > 2 || excludeMenus.length < 0)
     throw new InvalidInputException(ERRORS.WRONG_EXCLUDE_MENU_RANGE);
 };
 
 module.exports = {
   validateEnterCoachs,
-  validateExcludeMenu,
+  validateExcludeMenus,
 };

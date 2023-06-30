@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const InvalidInputException = require('../exceptions/InValidInputException');
 const { MESSAGES } = require('../constants');
+const { validateEnterCoachs, validateExcludeMenus } = require('../validators');
 
 class InputView {
   #read(query, callback) {
@@ -21,19 +22,21 @@ class InputView {
   readCoachs(callback) {
     this.#read(MESSAGES.ENTER_COACHS, (input) => {
       const coachs = this.parseStringToArray(input);
+      validateEnterCoachs(coachs);
       callback(coachs);
     });
   }
 
-  readExcludeMenu(coach, callback) {
+  readExcludeMenus(coach, callback) {
     this.#read(MESSAGES.ENTER_EXCLUDE_MENU(coach), (input) => {
-      const excludeMenu = this.parseStringToArray(input);
-      callback(excludeMenu);
+      const excludeMenus = this.parseStringToArray(input);
+      validateExcludeMenus(excludeMenus);
+      callback(excludeMenus);
     });
   }
 
-  parseStringToArray(input) {
-    return input.split(',').map((coach) => coach.trim());
+  parseStringToArray(str) {
+    return str.split(',').map((v) => v.trim());
   }
 }
 

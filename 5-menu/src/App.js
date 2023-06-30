@@ -21,7 +21,25 @@ class App {
   #readCoachs() {
     this.#inputView.readCoachs((coachs) => {
       this.#recommendationManager.setCoachs(coachs);
+      this.#readExcludeMenus();
     });
+  }
+
+  #readExcludeMenus(idx = 0) {
+    const coachs = this.#recommendationManager.getCoachs();
+    if (idx === coachs.length) return this.#printRecommendationResult();
+
+    const coachName = coachs[idx].getName();
+
+    this.#inputView.readExcludeMenus(coachName, (excludeMenus) => {
+      this.#recommendationManager.setExcludeMenus(idx, excludeMenus);
+      return this.#readExcludeMenus(idx + 1);
+    });
+  }
+
+  #printRecommendationResult() {
+    const coachs = this.#recommendationManager.getCoachs();
+    this.#outputView.printRecommendationResult(coachs);
   }
 }
 

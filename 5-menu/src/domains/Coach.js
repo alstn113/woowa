@@ -1,17 +1,17 @@
 class Coach {
   #name;
-  #excludedMenus = [];
+  #excludeMenus = [];
 
   constructor(name) {
-    this.name = name;
+    this.#name = name;
   }
 
-  /**
-   * 코치의 못먹는 메뉴를 지정합니다.
-   * @param {string[]} excludedMenus
-   */
-  setExcludedMenus(excludedMenus) {
-    this.#excludedMenus = excludedMenus;
+  setExcludeMenus(excludeMenus) {
+    this.#excludeMenus = excludeMenus;
+  }
+
+  getName() {
+    return this.#name;
   }
 }
 
