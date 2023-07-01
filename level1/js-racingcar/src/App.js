@@ -11,7 +11,14 @@ class App {
     // this.#outputView = new this.OutputView();
   }
 
-  async play() {}
+  async play() {
+    this.#inputView.readCarNames();
+    // 자동차 이름 입력
+    //
+    // 시도할 횟수 입력
+    //
+    // 실행 결과 출력 (과정, 결과)
+  }
 }
 
 export default App;
