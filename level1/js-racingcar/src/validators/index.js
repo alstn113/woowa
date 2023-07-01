@@ -2,8 +2,10 @@ import { ERRORS } from '../constants.js';
 import InvalidInputException from '../exceptions/InvalidInputException.js';
 
 export const validateCarNames = (carNames) => {
-  if (!carNames.every((carName) => carName <= 5 || carName.length >= 1))
+  if (!carNames.every((carName) => carName.length <= 5))
     throw new InvalidInputException(ERRORS.INVALID_CAR_NAME_LENGTH);
+  if (!carNames.every((carName) => carName.length > 0))
+    throw new InvalidInputException(ERRORS.CAR_NAMES_EMPTY);
   if (new Set(carNames).size !== carNames.length)
     throw new InvalidInputException(ERRORS.CAR_NAME_DUPLICATE);
 };

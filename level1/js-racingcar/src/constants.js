@@ -7,6 +7,7 @@ export const MESSAGES = Object.freeze({
 });
 
 export const ERRORS = Object.freeze({
+  CAR_NAMES_EMPTY: '자동차 이름을 비어있을 수 없습니다.',
   INVALID_CAR_NAME_LENGTH: '자동차 이름은 1~5자만 가능합니다.',
   CAR_NAME_DUPLICATE: '자동차 이름은 중복될 수 없습니다.',
   INVALID_TRY_COUNT_RANGE: '시도 횟수는 1 이상이어야 합니다.',
