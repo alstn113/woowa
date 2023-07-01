@@ -5,6 +5,11 @@ import Lotto from '../domains/Lotto.js';
 import Bonus from '../domains/Bonus.js';
 import LottoResult from '../domains/LottoResult.js';
 import { pickUniqueNumbersInRange } from '../utils/Random.js';
+import getInputWithValidation from '../utils/getInputWithValidation.js';
+import {
+  validateLottoNumbers,
+  validatePurchaseAmount,
+} from '../validators/index.js';
 
 class LottoController {
   #lottos;
@@ -18,23 +23,37 @@ class LottoController {
   }
 
   async buyLottos() {
-    const purchaseAmount = await InputView.readPurchaseAmount();
+    const purchaseAmount = this.#readPurchaseAmount();
     const lottoCount = parseInt(purchaseAmount / LOTTO.PRICE);
     this.#lottos = this.#generateLottos(lottoCount);
     OutputView.printLottos(this.#lottos);
   }
 
+  async #readPurchaseAmount() {
+    const purchaseAmount = await getInputWithValidation(
+      InputView.readPurchaseAmount,
+      validatePurchaseAmount,
+    );
+    return purchaseAmount;
+  }
+
   async readWinningNumbers() {
-    const numbers = await InputView.readWinningNumbers();
+    const numbers = await getInputWithValidation(
+      InputView.readWinningNumbers,
+      validateLottoNumbers,
+    );
     this.#winningNumbers = new Lotto(numbers);
   }
 
   async readBonusNumber() {
-    const number = await InputView.readBonusNumber(this.#winningNumbers);
+    const number = await getInputWithValidation(
+      InputView.readBonusNumber,
+      validateLottoNumbers,
+    );
     this.#bonusNumber = new Bonus(this.#winningNumbers, number);
   }
 
-  printResult() {
+  printLottoResult() {
     const lottoResult = new LottoResult(
       this.#lottos,
       this.#winningNumbers,
@@ -52,8 +71,7 @@ class LottoController {
         LOTTO.COUNT,
       );
 
-      const lotto = new Lotto(numbers);
-      return lotto;
+      return new Lotto(numbers);
     });
   }
 }

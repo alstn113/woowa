@@ -6,6 +6,10 @@ const OutputView = {
     Console.print(message);
   },
 
+  printError: (err) => {
+    OutputView.print(err.message);
+  },
+
   printLottos: (lottos) => {
     const lottoCount = lottos.length;
     OutputView.print(MESSAGES.PURCHASE_RESPONSE(lottoCount));
@@ -14,7 +18,7 @@ const OutputView = {
     });
   },
 
-  printResult: (lottoResult) => {
+  printLottoResult: (lottoResult) => {
     const profitRate = lottoResult.getProfitRate();
     const matches = lottoResult.getMatches();
 
