@@ -1,8 +1,11 @@
+import { LOTTO, PRIZE_AMOUNTS } from '../constants';
+
 class LottoResult {
   #lottos;
   #winningNumbers;
   #bonusNumber;
   #matches;
+  #profit;
   #profitRate;
 
   constructor(lottos, winningNumbers, bonusNumber) {
@@ -10,9 +13,11 @@ class LottoResult {
     this.#winningNumbers = winningNumbers;
     this.#bonusNumber = bonusNumber;
     this.#matches = [0, 0, 0, 0, 0];
+    this.#profit = 0;
     this.#profitRate = null;
 
     this.#compareLottos();
+    this.#calculateProfit();
   }
 
   #compareLottos() {
@@ -42,8 +47,32 @@ class LottoResult {
       .length;
   }
 
+  #calculateProfit() {
+    this.#matches.forEach((count, idx) => {
+      const prizeAmount = PRIZE_AMOUNTS[idx];
+      this.#profit += count * prizeAmount;
+    });
+
+    const totalSpent = this.#lottos.length * LOTTO.PRICE;
+
+    this.#profitRate = (this.#profit / totalSpent) * 100;
+  }
+
+  #parsedProfitRate() {
+    const [a, b] = this.#profitRate.toFixed(1).split('.');
+    return parseInt(a).toLocaleString() + '.' + b;
+  }
+
   getMatches() {
     return this.#matches;
+  }
+
+  getProfit() {
+    return this.#profit;
+  }
+
+  getProfitRate() {
+    return this.#parsedProfitRate();
   }
 }
 
