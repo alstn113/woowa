@@ -25,10 +25,10 @@ export const validateLottoNumbers = (numbers) => {
     throw new InvalidInputException(ERRORS.LOTTO.DUPLICATED);
 };
 
-export const validateBonusNumber = (bonusNumber, winningNumbers) => {
+export const validateBonusNumber = (winningNumbers, bonusNumber) => {
   if (typeof bonusNumber !== 'number')
     throw new InvalidInputException(ERRORS.BONUS.WRONG_TYPE);
-  if (bonusNumber < LOTTO.MIN || bonusNumber > LOTTO.MAX)
+  if (!(LOTTO.MIN_NUMBER <= bonusNumber && bonusNumber <= LOTTO.MAX_NUMBER))
     throw new InvalidInputException(ERRORS.BONUS.OUT_OF_RANGE);
   if (winningNumbers.includes(bonusNumber))
     throw new InvalidInputException(ERRORS.BONUS.DUPLICATED);

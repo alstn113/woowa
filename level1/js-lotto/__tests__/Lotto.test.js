@@ -1,12 +1,6 @@
 import Lotto from '../src/domains/Lotto';
 
 describe('Lotto', () => {
-  test('생성자 테스트', () => {
-    const numbers = [1, 2, 3, 4, 5, 6];
-    const lotto = new Lotto(numbers);
-    expect(lotto).toBeInstanceOf(Lotto);
-  });
-
   test('로또 생성 테스트', () => {
     const numbers = [1, 2, 3, 4, 5, 6];
     const lotto = new Lotto(numbers);
