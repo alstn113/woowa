@@ -9,7 +9,7 @@ class Bonus {
   }
 
   #validate(winningNumbers, number) {
-    validateBonusNumber(winningNumbers, number);
+    validateBonusNumber(winningNumbers)(number);
   }
 
   getNumber() {

@@ -9,7 +9,7 @@ const getInputWithValidation = async (resolve, validate) => {
       return input;
     } catch (error) {
       if (error instanceof InvalidInputException) {
-        OutputView.printError(error);
+        OutputView.printError(error.message);
       } else {
         throw error;
       }

@@ -6,8 +6,8 @@ const OutputView = {
     Console.print(message);
   },
 
-  printError: (err) => {
-    OutputView.print(err.message);
+  printError: (message) => {
+    OutputView.print(message);
   },
 
   printLottos: (lottos) => {

@@ -9,11 +9,12 @@ class App {
   #lottoController;
 
   constructor() {
-    this.#lottoController = new LottoController();
+    this.#lottoController = null;
   }
 
   async play() {
     while (true) {
+      this.#lottoController = new LottoController();
       await this.#lottoController.buyLottos();
       await this.#lottoController.readWinningNumbers();
       await this.#lottoController.readBonusNumber();
