@@ -1,4 +1,3 @@
-import { Console } from './utils/Console';
 import InputView from './views/InputView';
 // import OutputView from './views/OutputView';
 
@@ -12,7 +11,10 @@ class App {
   }
 
   async play() {
-    this.#inputView.readCarNames();
+    const input = await this.#inputView.readCarNames();
+    console.log(input);
+    const input2 = await this.#inputView.readTryCount();
+    console.log(input2);
     // 자동차 이름 입력
     //
     // 시도할 횟수 입력

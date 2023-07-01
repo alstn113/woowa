@@ -7,14 +7,13 @@ const rl = readline.createInterface({
 
 const Console = {
   readLine: (query) => {
-    // 비동기 처리를 위해 Promise 객체를 반환합니다.
     return new Promise((resolve) => {
       rl.question(query, (input) => resolve(input));
     });
   },
 
-  print: (text) => {
-    console.log(text);
+  print: (query) => {
+    console.log(query);
   },
 
   close: () => {
