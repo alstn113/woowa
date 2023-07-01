@@ -1,5 +1,5 @@
 class AppException extends Error {
-  static PREFIX = "[ERROR]";
+  static PREFIX = '[ERROR]';
 
   constructor(message) {
     super(`${AppException.PREFIX} ${message}`);
