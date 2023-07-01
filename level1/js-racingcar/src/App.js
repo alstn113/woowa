@@ -3,29 +3,25 @@ import OutputView from './views/OutputView';
 import RaceManager from './domains/RaceManager';
 
 class App {
-  #inputView;
-  #outputView;
   #raceManager;
 
   constructor() {
-    this.#inputView = new InputView();
-    this.#outputView = new OutputView();
     this.#raceManager = new RaceManager();
   }
 
   async play() {
-    this.#outputView.printStartGame();
+    OutputView.printStartGame();
 
-    const carNames = await this.#inputView.readCarNames();
+    const carNames = await InputView.readCarNames();
     this.#raceManager.setCars(carNames);
 
-    const tryCount = await this.#inputView.readTryCount();
+    const tryCount = await InputView.readTryCount();
     this.#raceManager.setTryCount(tryCount);
 
     const raceResult = this.#raceManager.startRace();
-    this.#outputView.printRaceResult(raceResult);
+    OutputView.printFinalWinners(raceResult);
 
-    this.#inputView.close();
+    InputView.close();
   }
 }
 

@@ -3,43 +3,43 @@ import Console from '../utils/Console.js';
 import InvalidInputException from '../exceptions/InvalidInputException.js';
 import { validateCarNames, validateTryCount } from '../validators/index.js';
 
-class InputView {
-  async #read(query, callback) {
+const InputView = {
+  read: async (query, callback) => {
     try {
       const input = await Console.readLine(query);
       return callback(input);
     } catch (e) {
       if (e instanceof InvalidInputException) {
         Console.print(e.message);
-        return this.#read(query, callback);
+        return InputView.read(query, callback);
       }
       throw e;
     }
-  }
+  },
 
-  async readCarNames() {
-    const carNames = await this.#read(MESSAGES.ENTER_CAR_NAMES, (input) => {
+  readCarNames: async () => {
+    const carNames = await InputView.read(MESSAGES.ENTER_CAR_NAMES, (input) => {
       input = input.split(',');
       validateCarNames(input);
       return input;
     });
 
     return carNames;
-  }
+  },
 
-  async readTryCount() {
-    const tryCount = await this.#read(MESSAGES.ENTER_TRY_COUNT, (input) => {
+  readTryCount: async () => {
+    const tryCount = await InputView.read(MESSAGES.ENTER_TRY_COUNT, (input) => {
       input = Number(input);
       validateTryCount(input);
       return input;
     });
 
     return tryCount;
-  }
+  },
 
-  close() {
+  close: () => {
     Console.close();
-  }
-}
+  },
+};
 
 export default InputView;

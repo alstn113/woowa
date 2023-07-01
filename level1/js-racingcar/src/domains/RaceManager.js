@@ -1,3 +1,4 @@
+import OutputView from '../views/OutputView.js';
 import Car from './Car.js';
 
 class RageManager {
@@ -18,15 +19,29 @@ class RageManager {
   }
 
   startRace() {
+    OutputView.printRaceResult();
+
     for (let i = 0; i < this.#tryCount; i++) {
       this.#processRace();
     }
 
-    return this.#cars; //TODO: raceResult 반환하기
+    const winners = this.#getWinners();
+    return winners;
+  }
+
+  #getWinners() {
+    const maxPosition = Math.max(...this.#cars.map((car) => car.getPosition()));
+    const winners = this.#cars.filter(
+      (car) => car.getPosition() === maxPosition,
+    );
+    return winners;
   }
 
   #processRace() {
-    this.#cars.forEach((car) => car.move());
+    this.#cars.forEach((car) => {
+      car.move();
+    });
+    OutputView.printRaceProgress(this.#cars);
   }
 }
 
