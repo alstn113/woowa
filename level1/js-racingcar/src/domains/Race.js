@@ -18,6 +18,10 @@ class Race {
     );
     return winners;
   }
+
+  getCars() {
+    return this.#cars;
+  }
 }
 
 export default Race;

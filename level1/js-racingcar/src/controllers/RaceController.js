@@ -33,7 +33,7 @@ class RaceController {
 
   printRaceResult() {
     const winners = this.#race.getWinners();
-    OutputView.printRaceResult(winners);
+    OutputView.printFinalWinners(winners);
     InputView.close();
   }
 }
