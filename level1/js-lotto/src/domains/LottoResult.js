@@ -1,34 +1,26 @@
 import { LOTTO, PRIZE_AMOUNTS } from '../constants';
 
 class LottoResult {
-  #lottos;
-  #winningNumbers;
-  #bonusNumber;
   #matches;
-  #profit;
   #profitRate;
 
   constructor(lottos, winningNumbers, bonusNumber) {
-    this.#lottos = lottos;
-    this.#winningNumbers = winningNumbers;
-    this.#bonusNumber = bonusNumber;
     this.#matches = [0, 0, 0, 0, 0];
-    this.#profit = 0;
     this.#profitRate = null;
 
-    this.#compareLottos();
-    this.#calculateProfit();
+    this.#compareLottos(lottos, winningNumbers, bonusNumber);
+    this.#calculateProfitRate(lottos);
   }
 
-  #compareLottos() {
-    this.#lottos.forEach((lotto) => {
-      const matchingCount = this.#getMatchingCount(lotto);
+  #compareLottos(lottos, winningNumbers, bonusNumber) {
+    lottos.forEach((lotto) => {
+      const matchingCount = this.#getMatchingCount(winningNumbers, lotto);
       switch (true) {
         case matchingCount === 6:
           this.#matches[4] += 1;
           break;
         case matchingCount === 5 &&
-          lotto.getNumbers().includes(this.#bonusNumber.getNumber()):
+          lotto.getNumbers().includes(bonusNumber.getNumber()):
           this.#matches[3] += 1;
           break;
         case matchingCount >= 3:
@@ -40,22 +32,21 @@ class LottoResult {
     });
   }
 
-  #getMatchingCount(lotto) {
+  #getMatchingCount(winningNumbers, lotto) {
     return lotto
       .getNumbers()
-      .filter((number) => this.#winningNumbers.getNumbers().includes(number))
-      .length;
+      .filter((number) => winningNumbers.getNumbers().includes(number)).length;
   }
 
-  #calculateProfit() {
-    this.#matches.forEach((count, idx) => {
+  #calculateProfitRate(lottos) {
+    const profit = this.#matches.reduce((acc, count, idx) => {
       const prizeAmount = PRIZE_AMOUNTS[idx];
-      this.#profit += count * prizeAmount;
-    });
+      return acc + count * prizeAmount;
+    }, 0);
 
-    const totalSpent = this.#lottos.length * LOTTO.PRICE;
+    const totalSpent = lottos.length * LOTTO.PRICE;
 
-    this.#profitRate = (this.#profit / totalSpent) * 100;
+    this.#profitRate = (profit / totalSpent) * 100;
   }
 
   #parsedProfitRate() {
@@ -65,10 +56,6 @@ class LottoResult {
 
   getMatches() {
     return this.#matches;
-  }
-
-  getProfit() {
-    return this.#profit;
   }
 
   getProfitRate() {
