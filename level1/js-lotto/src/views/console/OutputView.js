@@ -13,6 +13,8 @@ const OutputView = {
       Console.print(`[${lotto.getNumbers().join(', ')}]`);
     });
   },
+
+  printResult: (lottoResult) => {},
 };
 
 export default OutputView;
