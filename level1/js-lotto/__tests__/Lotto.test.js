@@ -38,5 +38,13 @@ describe('Lotto', () => {
       const numbers = [1, 2, 3, 4, 5, 'a'];
       expect(() => new Lotto(numbers)).toThrow();
     });
+
+    test('로또 번호가 정렬되어 있는 지 확인', () => {
+      const numbers = [4, 3, 9, 1, 2, 5];
+      const lotto = new Lotto(numbers);
+      const sorted = numbers.sort((a, b) => a - b);
+
+      expect(lotto.getNumbers()).toEqual(sorted);
+    });
   });
 });

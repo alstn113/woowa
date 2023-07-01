@@ -19,14 +19,14 @@ export const ERRORS = Object.freeze({
   }),
   LOTTO: Object.freeze({
     WRONG_LENGTH: `로또 번호는 ${LOTTO.COUNT}개여야 합니다.`,
-    DUPLICATED_NUMBER: '로또 번호는 중복될 수 없습니다.',
+    DUPLICATED: '로또 번호는 중복될 수 없습니다.',
     OUT_OF_RANGE: `로또 번호는 ${LOTTO.MIN_NUMBER} ~ ${LOTTO.MAX_NUMBER} 사이여야 합니다.`,
     WRONG_TYPE: '로또 번호는 숫자여야 합니다.',
   }),
   BONUS: Object.freeze({
     WRONG_TYPE: '보너스 번호는 숫자여야 합니다.',
     OUT_OF_RANGE: `보너스 번호는 ${LOTTO.MIN_NUMBER} ~ ${LOTTO.MAX_NUMBER} 사이여야 합니다.`,
-    DUPLICATED_NUMBER: '보너스 번호는 당첨 번호와 중복될 수 없습니다.',
+    DUPLICATED: '보너스 번호는 당첨 번호와 중복될 수 없습니다.',
   }),
 });
 

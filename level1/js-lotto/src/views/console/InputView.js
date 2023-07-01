@@ -47,12 +47,12 @@ const InputView = {
     return winningNumbers;
   },
 
-  readBonusNumber: async () => {
+  readBonusNumber: async (winningNumbers) => {
     const bonusNumber = await InputView.read(
       MESSAGES.ENTER_BONUS_NUMBER,
       (input) => {
         const number = Number(input);
-        validateBonusNumber(number);
+        validateBonusNumber(winningNumbers, number);
         return number;
       },
     );

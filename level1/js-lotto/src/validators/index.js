@@ -1,7 +1,7 @@
 import { ERRORS, LOTTO } from '../constants';
 import InvalidInputException from '../exceptions/InvalidInputException';
 
-export const validatePurchaseAmount = (amount) => {
+export const validatePurchaseAmount = (price) => {
   if (typeof price !== 'number' || isNaN(price))
     throw new InvalidInputException(ERRORS.PURCHASE_AMOUNT.WRONG_TYPE);
   if (price % LOTTO.PRICE !== 0 || price < LOTTO.PRICE)
@@ -26,10 +26,10 @@ export const validateLottoNumbers = (numbers) => {
 };
 
 export const validateBonusNumber = (winningNumbers, bonusNumber) => {
-  if (typeof bonusNumber !== 'number')
+  if (typeof bonusNumber !== 'number' || isNaN(bonusNumber))
     throw new InvalidInputException(ERRORS.BONUS.WRONG_TYPE);
   if (!(LOTTO.MIN_NUMBER <= bonusNumber && bonusNumber <= LOTTO.MAX_NUMBER))
     throw new InvalidInputException(ERRORS.BONUS.OUT_OF_RANGE);
-  if (winningNumbers.includes(bonusNumber))
+  if (winningNumbers.getNumbers().includes(bonusNumber))
     throw new InvalidInputException(ERRORS.BONUS.DUPLICATED);
 };
