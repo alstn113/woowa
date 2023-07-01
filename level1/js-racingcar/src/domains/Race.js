@@ -1,13 +1,18 @@
+import { generateRandomNumber } from '../utils/Random';
+
 class Race {
   #cars;
+  #random;
 
-  constructor(cars) {
+  constructor(cars, random = generateRandomNumber) {
     this.#cars = cars;
+    this.#random = random;
   }
 
   progress() {
     this.#cars.forEach((car) => {
-      car.move();
+      const randomNumber = this.#random(1, 10);
+      if (randomNumber >= 4) car.move();
     });
   }
 

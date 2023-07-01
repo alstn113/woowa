@@ -1,5 +1,3 @@
-import { generateRandomNumber } from '../utils/Random.js';
-
 class Car {
   #name;
   #position;
@@ -10,10 +8,7 @@ class Car {
   }
 
   move() {
-    const randomNumber = generateRandomNumber(1, 10);
-    if (randomNumber >= 4) {
-      this.#position += 1;
-    }
+    this.#position += 1;
   }
 
   getPosition() {
