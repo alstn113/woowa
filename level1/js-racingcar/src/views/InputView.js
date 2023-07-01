@@ -1,5 +1,6 @@
 import { MESSAGES } from '../constants.js';
 import Console from '../utils/Console.js';
+import InvalidInputException from '../exceptions/InvalidInputException.js';
 import { validateCarNames, validateTryCount } from '../validators/index.js';
 
 class InputView {
@@ -7,11 +8,10 @@ class InputView {
     try {
       const input = await Console.readLine(query);
       return callback(input);
-    } catch {
+    } catch (e) {
       if (e instanceof InvalidInputException) {
         Console.print(e.message);
-        this.#read(query, callback);
-        return;
+        return this.#read(query, callback);
       }
       throw e;
     }
