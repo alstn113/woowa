@@ -1,4 +1,5 @@
 import { ERRORS, LOTTO } from '../constants';
+import InvalidInputException from '../exceptions/InvalidInputException';
 
 export const validatePurchaseAmount = (amount) => {
   if (typeof price !== 'number' || isNaN(price))
@@ -12,9 +13,13 @@ export const validatePurchaseAmount = (amount) => {
 export const validateLottoNumbers = (numbers) => {
   if (numbers.length !== LOTTO.COUNT)
     throw new InvalidInputException(ERRORS.LOTTO.WRONG_LENGTH);
-  if (numbers.some((number) => typeof number !== 'number'))
+  if (!numbers.every((number) => typeof number === 'number'))
     throw new InvalidInputException(ERRORS.LOTTO.WRONG_TYPE);
-  if (numbers.some((number) => number < LOTTO.MIN || number > LOTTO.MAX))
+  if (
+    !numbers.every(
+      (number) => LOTTO.MIN_NUMBER <= number && number <= LOTTO.MAX_NUMBER,
+    )
+  )
     throw new InvalidInputException(ERRORS.LOTTO.OUT_OF_RANGE);
   if (new Set(numbers).size !== numbers.length)
     throw new InvalidInputException(ERRORS.LOTTO.DUPLICATED);

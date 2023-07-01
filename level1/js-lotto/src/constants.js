@@ -1,3 +1,10 @@
+export const LOTTO = Object.freeze({
+  PRICE: 1000,
+  COUNT: 6,
+  MIN_NUMBER: 1,
+  MAX_NUMBER: 45,
+});
+
 export const MESSAGES = Object.freeze({
   ENTER_PURCHASE_AMOUNT: '구입금액을 입력해 주세요.\n',
   PURCHASE_RESPONSE: (amount) => `\n${amount}개를 구매했습니다.`,
@@ -34,10 +41,3 @@ export const PRIZE_DESCRIPTIONS = Object.freeze([
   '5개 일치, 보너스 볼 일치',
   '6개 일치',
 ]);
-
-export const LOTTO = Object.freeze({
-  PRICE: 1000,
-  COUNT: 6,
-  MIN_NUMBER: 1,
-  MAX_NUMBER: 45,
-});
