@@ -17,15 +17,16 @@ const InputView = {
     }
   },
 
-  // readCarNames: async () => {
-  //   const carNames = await InputView.read(MESSAGES.ENTER_CAR_NAMES, (input) => {
-  //     input = input.split(',');
-  //     validateCarNames(input);
-  //     return input;
-  //   });
+  readPurchaseAmount: async () => {
+    const purchaseAmount = await InputView.read(
+      MESSAGES.ENTER_CAR_NAMES,
+      (input) => {
+        return input;
+      },
+    );
 
-  //   return carNames;
-  // },
+    return purchaseAmount;
+  },
 
   close: () => {
     Console.close();
