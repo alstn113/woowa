@@ -12,8 +12,8 @@
 
 - ## 레벨 1
 
-  - [ ] javascript-racingcar (1단계 - 자동차 경주 구현)
-  - [ ] javascript-racingcar (2단계 - 자동차 경주 리팩토링)
+  - [x] javascript-racingcar (1단계 - 자동차 경주 구현)
+  - [x] javascript-racingcar (2단계 - 자동차 경주 리팩토링)
 
   - [ ] javascript-lotto (1단계 - 콘솔 기반 로또 게임)
   - [ ] javascript-lotto (2단계 - 웹 기반 로또 게임)
