@@ -3,6 +3,7 @@ import OutputView from '../views/console/OutputView.js';
 import { LOTTO } from '../constants.js';
 import Lotto from '../domains/Lotto.js';
 import Bonus from '../domains/Bonus.js';
+import LottoResult from '../domains/LottoResult.js';
 import { pickUniqueNumbersInRange } from '../utils/Random.js';
 
 class LottoController {
@@ -33,7 +34,15 @@ class LottoController {
     this.#bonusNumber = new Bonus(this.#winningNumbers, number);
   }
 
-  printResult() {}
+  printResult() {
+    const lottoResult = new LottoResult(
+      this.#lottos,
+      this.#winningNumbers,
+      this.#bonusNumber,
+    );
+    OutputView.printResult(lottoResult);
+    InputView.close();
+  }
 
   #generateLottos(lottoCount) {
     return Array.from({ length: lottoCount }).map(() => {
