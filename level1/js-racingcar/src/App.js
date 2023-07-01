@@ -1,27 +1,16 @@
-import InputView from './views/InputView';
-import OutputView from './views/OutputView';
-import RaceManager from './domains/RaceManager';
+import RaceController from './domains/RaceController';
 
 class App {
-  #raceManager;
+  #raceController;
 
   constructor() {
-    this.#raceManager = new RaceManager();
+    this.#raceController = new RaceController();
   }
 
   async play() {
-    OutputView.printStartGame();
-
-    const carNames = await InputView.readCarNames();
-    this.#raceManager.setCars(carNames);
-
-    const tryCount = await InputView.readTryCount();
-    this.#raceManager.setTryCount(tryCount);
-
-    const raceResult = this.#raceManager.startRace();
-    OutputView.printFinalWinners(raceResult);
-
-    InputView.close();
+    await this.#raceController.init();
+    this.#raceController.startRace();
+    this.#raceController.printRaceResult();
   }
 }
 
