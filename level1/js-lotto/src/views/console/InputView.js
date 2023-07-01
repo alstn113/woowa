@@ -19,6 +19,11 @@ const InputView = {
     return Number(bonusNumber);
   },
 
+  readCommand: async () => {
+    const answer = await InputView.read(MESSAGES.RETRY_OR_EXIT);
+    return answer;
+  },
+
   close: () => {
     Console.close();
   },

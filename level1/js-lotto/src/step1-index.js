@@ -9,16 +9,23 @@ class App {
   #lottoController;
 
   constructor() {
-    this.#lottoController = null;
+    this.#lottoController = new LottoController();
   }
 
   async play() {
-    this.#lottoController = new LottoController();
-    await this.#lottoController.buyLottos();
-    await this.#lottoController.readWinningNumbers();
-    await this.#lottoController.readBonusNumber();
-    this.#lottoController.printResult();
-    // await this.#retryOrExit();
+    while (true) {
+      await this.#lottoController.buyLottos();
+      await this.#lottoController.readWinningNumbers();
+      await this.#lottoController.readBonusNumber();
+      this.#lottoController.printLottoResult();
+
+      const retry = await this.#lottoController.readCommand();
+
+      if (!retry) {
+        this.#lottoController.exit();
+        break;
+      }
+    }
   }
 }
 
