@@ -1,10 +1,8 @@
-class OutputView {
-  constructor() {
-    throw new Error('This class cannot be instantiated.');
-  }
+import Console from '../utils/Console';
 
-  static print(message) {
-    console.log(message);
+class OutputView {
+  printRaceResult() {
+    return;
   }
 }
 

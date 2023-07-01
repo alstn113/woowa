@@ -1,11 +1,12 @@
 import { MESSAGES } from '../constants.js';
 import Console from '../utils/Console.js';
+import { validateCarNames, validateTryCount } from '../validators/index.js';
 
 class InputView {
   async #read(query, callback) {
     try {
       const input = await Console.readLine(query);
-      return input;
+      return callback(input);
     } catch {
       if (e instanceof InvalidInputException) {
         Console.print(e.message);
@@ -17,13 +18,27 @@ class InputView {
   }
 
   async readCarNames() {
-    const carNames = await this.#read(MESSAGES.ENTER_CAR_NAMES);
+    const carNames = await this.#read(MESSAGES.ENTER_CAR_NAMES, (input) => {
+      input = input.split(',');
+      validateCarNames(input);
+      return input;
+    });
+
     return carNames;
   }
 
   async readTryCount() {
-    const input = await this.#read(MESSAGES.ENTER_TRY_COUNT);
-    return input;
+    const tryCount = await this.#read(MESSAGES.ENTER_TRY_COUNT, (input) => {
+      input = Number(input);
+      validateTryCount(input);
+      return input;
+    });
+
+    return tryCount;
+  }
+
+  close() {
+    Console.close();
   }
 }
 

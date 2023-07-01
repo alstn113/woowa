@@ -1,5 +1,5 @@
 import InputView from './views/InputView';
-// import OutputView from './views/OutputView';
+import OutputView from './views/OutputView';
 
 class App {
   #inputView;
@@ -7,19 +7,20 @@ class App {
 
   constructor() {
     this.#inputView = new InputView();
-    // this.#outputView = new this.OutputView();
+    this.#outputView = new OutputView();
   }
 
   async play() {
-    const input = await this.#inputView.readCarNames();
-    console.log(input);
-    const input2 = await this.#inputView.readTryCount();
-    console.log(input2);
     // 자동차 이름 입력
-    //
+    const carNames = await this.#inputView.readCarNames();
+
     // 시도할 횟수 입력
-    //
-    // 실행 결과 출력 (과정, 결과)
+    const tryCount = await this.#inputView.readTryCount();
+
+    // 게임 결과
+    this.#outputView.printRaceResult();
+
+    this.#inputView.close();
   }
 }
 
