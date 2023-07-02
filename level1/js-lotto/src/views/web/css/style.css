@@ -46,7 +46,10 @@ section {
   padding: 1rem;
 }
 
-.lotto-card__header {
+.lotto-money-input {
+}
+
+.lotto-money-input__header {
   margin: 1rem;
   text-align: center;
 }
