@@ -24,19 +24,14 @@ class LottoController {
     this.#bonusNumber = null;
   }
 
-  async buyLottos() {
-    const purchaseAmount = await this.#readPurchaseAmount();
-    const lottoCount = parseInt(purchaseAmount / LOTTO.PRICE);
-    this.#lottos = this.#generateLottos(lottoCount);
-    OutputView.printLottos(this.#lottos);
-  }
-
-  async #readPurchaseAmount() {
+  async readPurchaseAmount() {
     const purchaseAmount = await getInputWithValidation(
       InputView.readPurchaseAmount,
       validatePurchaseAmount,
     );
-    return purchaseAmount;
+    const lottoCount = parseInt(purchaseAmount / LOTTO.PRICE);
+    this.#lottos = this.#generateLottos(lottoCount);
+    OutputView.printLottos(this.#lottos);
   }
 
   async readWinningNumbers() {

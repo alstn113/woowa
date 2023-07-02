@@ -15,17 +15,17 @@ class App {
   async play() {
     while (true) {
       this.#lottoController = new LottoController();
-      await this.#lottoController.buyLottos();
+      await this.#lottoController.readPurchaseAmount();
       await this.#lottoController.readWinningNumbers();
       await this.#lottoController.readBonusNumber();
       this.#lottoController.printLottoResult();
 
       const retry = await this.#lottoController.readCommand();
 
-      if (!retry) {
-        this.#lottoController.exit();
-        break;
-      }
+      if (retry) continue;
+
+      this.#lottoController.exit();
+      break;
     }
   }
 }
