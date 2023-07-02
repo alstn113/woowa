@@ -1,3 +1,7 @@
-class Modal extends Component {}
+import Component from '../core/Component';
 
-export default Modal;
+class LottoResultModal extends Component {
+  template() {}
+}
+
+export default LottoResultModal;

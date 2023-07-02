@@ -8,6 +8,13 @@
   box-sizing: border-box;
 }
 
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .header {
   width: 100%;
   height: 60px;
@@ -38,8 +45,8 @@ section {
 }
 
 .lotto-card {
-  width: 320px;
-  height: 500px;
+  width: 450px;
+  height: 550px;
   border: 1px solid #000;
   display: flex;
   flex-direction: column;
@@ -77,4 +84,39 @@ section {
 .lotto-item {
   display: flex;
   align-items: center;
+}
+
+.winning-numbers-input {
+  width: 100%;
+}
+
+.winning-numbers-wrapper {
+  display: flex;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.winning-number {
+  display: block;
+
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+
+  border: 1px solid;
+  border-color: #000;
+  border-radius: 4px;
+}
+
+.bonus-number {
+  display: block;
+  margin-left: auto;
+  text-align: center;
+
+  width: 2rem;
+  height: 2rem;
+
+  border: 1px solid;
+  border-color: #000;
+  border-radius: 4px;
 }
