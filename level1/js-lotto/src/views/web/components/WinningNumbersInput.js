@@ -14,16 +14,16 @@ class WinningNumbersInput extends Component {
       </div>
 
       <div class="winning-numbers-wrapper">
-        <input type="number" class="winning-number" />
-        <input type="number" class="winning-number" />
-        <input type="number" class="winning-number" />
-        <input type="number" class="winning-number" />
-        <input type="number" class="winning-number" />
-        <input type="number" class="winning-number" />
+        <input type="number" class="winning-number" value="" />
+        <input type="number" class="winning-number" value="" />
+        <input type="number" class="winning-number" value="" />
+        <input type="number" class="winning-number" value="" />
+        <input type="number" class="winning-number" value="" />
+        <input type="number" class="winning-number" value="" />
         <input type="number" class="bonus-number" />
       </div>
 
-      <button>결과 확인하기</button>
+      <button type="button">결과 확인하기</button>
     </form>
     `;
   }
@@ -41,7 +41,6 @@ class WinningNumbersInput extends Component {
       const bonusNumber = Number(
         this.$target.querySelector('.bonus-number').value,
       );
-
       enterWinningNumbers(winningNumbers, bonusNumber);
     });
   }

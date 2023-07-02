@@ -7,11 +7,11 @@ import Bonus from '../../domains/Bonus.js';
 import LottoResult from '../../domains/LottoResult.js';
 
 // components
-import LottoMoneyInput from './components/LottoMoneyInput.js';
 import LottoList from './components/LottoList.js';
+import LottoMoneyInput from './components/LottoMoneyInput.js';
+import WinningNumbersInput from './components/WinningNumbersInput.js';
 
 import './css';
-import WinningNumbersInput from './components/WinningNumbersInput.js';
 
 class App extends Component {
   setup() {
@@ -83,7 +83,10 @@ class App extends Component {
       );
 
       this.setState({ lottoResult });
-      console.log(this.$state.lottoResult);
+      console.log(
+        this.$state.lottoResult.getMatches(),
+        this.$state.lottoResult.getProfitRate(),
+      );
     } catch (error) {
       alert(error.message);
     }
