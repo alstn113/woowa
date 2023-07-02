@@ -7,12 +7,12 @@ class LottoList extends Component {
     const lottoList = lottos.map((lotto) => lotto.getNumbers());
 
     return `
+      <p>총 ${lottoCount}개를 구입하였습니다.</p>
       <div class="lotto-list">
-        <p>총 ${lottoCount}개를 구입하였습니다.<p/>
         ${lottoList
           ?.map(
             (lotto) => `
-              <div class="lotto">
+              <div class="lotto-item">
                 <span class="lotto-numbers">
                   ${lotto.join(',')}
                 </span>

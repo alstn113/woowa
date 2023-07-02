@@ -24,8 +24,8 @@ class App extends Component {
       <section>
         <div class="lotto-card">
           <div data-component="lotto-money-input" class="lotto-money-input"></div>
-          <div data-component="lotto-list" class="lotto-list"></div>
-        <div>
+          <div data-component="lotto-list" class="lotto-list-container"></div>
+        </div>
       </section>
       <footer class="footer">
         <p>&copy Copyright 2023 woowacourse</p>
