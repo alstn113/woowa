@@ -1,10 +1,9 @@
 import InputView from '../views/console/InputView.js';
 import OutputView from '../views/console/OutputView.js';
-import { COMMAND, LOTTO } from '../constants.js';
+import { COMMAND } from '../constants.js';
 import Lotto from '../domains/Lotto.js';
 import Bonus from '../domains/Bonus.js';
 import LottoResult from '../domains/LottoResult.js';
-import { pickUniqueNumbersInRange } from '../utils/Random.js';
 import getInputWithValidation from '../utils/getInputWithValidation.js';
 import {
   validateLottoNumbers,
@@ -12,6 +11,7 @@ import {
   validateCommand,
   validateBonusNumber,
 } from '../validators/index.js';
+import LottoStore from '../domains/LottoStore.js';
 
 class LottoController {
   #lottos;
@@ -29,8 +29,8 @@ class LottoController {
       InputView.readPurchaseAmount,
       validatePurchaseAmount,
     );
-    const lottoCount = parseInt(purchaseAmount / LOTTO.PRICE);
-    this.#lottos = this.#generateLottos(lottoCount);
+    const lottoStore = new LottoStore();
+    this.lottos = lottoStore.buyLottos(purchaseAmount);
     OutputView.printLottos(this.#lottos);
   }
 
@@ -71,18 +71,6 @@ class LottoController {
       this.#bonusNumber,
     );
     OutputView.printLottoResult(lottoResult);
-  }
-
-  #generateLottos(lottoCount) {
-    return Array.from({ length: lottoCount }).map(() => {
-      const numbers = pickUniqueNumbersInRange(
-        LOTTO.MIN_NUMBER,
-        LOTTO.MAX_NUMBER,
-        LOTTO.COUNT,
-      );
-
-      return new Lotto(numbers);
-    });
   }
 
   exit() {
