@@ -1,16 +1,16 @@
+// I/O: InputView, OutputView
 import InputView from '../views/console/InputView.js';
 import OutputView from '../views/console/OutputView.js';
-import { COMMAND } from '../constants.js';
+// domais
 import Lotto from '../domains/Lotto.js';
 import Bonus from '../domains/Bonus.js';
 import LottoResult from '../domains/LottoResult.js';
-import {
-  validateLottoNumbers,
-  validatePurchaseAmount,
-  validateCommand,
-  validateBonusNumber,
-} from '../validators/index.js';
 import LottoStore from '../domains/LottoStore.js';
+// constants
+import { COMMAND } from '../constants.js';
+// validators
+import { validateCommand } from '../validators/index.js';
+// utils
 import handleAsyncError from '../utils/handleAsyncError.js';
 
 class LottoController {
