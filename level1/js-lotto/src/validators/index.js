@@ -21,7 +21,7 @@ export const validateLottoNumbers = (numbers) => {
     throw new InvalidInputException(ERRORS.LOTTO.DUPLICATED);
 };
 
-export const validateBonusNumber = (winningNumbers) => (bonusNumber) => {
+export const validateBonusNumber = (winningNumbers, bonusNumber) => {
   if (!isNumber(bonusNumber))
     throw new InvalidInputException(ERRORS.BONUS.WRONG_TYPE);
   if (!isInRange(bonusNumber, LOTTO.MIN_NUMBER, LOTTO.MAX_NUMBER))

@@ -1,12 +1,10 @@
 import InvalidInputException from '../exceptions/InvalidInputException';
 import OutputView from '../views/console/OutputView';
 
-const getInputWithValidation = async (resolve, ...validates) => {
+const handleAsyncError = async (asnycFn) => {
   while (true) {
     try {
-      const input = await resolve();
-      validates.forEach((validate) => validate(input));
-      return input;
+      await asnycFn();
     } catch (error) {
       if (error instanceof InvalidInputException) {
         OutputView.printError(error.message);
@@ -17,4 +15,4 @@ const getInputWithValidation = async (resolve, ...validates) => {
   }
 };
 
-export default getInputWithValidation;
+export default handleAsyncError;

@@ -4,7 +4,6 @@ import { COMMAND } from '../constants.js';
 import Lotto from '../domains/Lotto.js';
 import Bonus from '../domains/Bonus.js';
 import LottoResult from '../domains/LottoResult.js';
-import getInputWithValidation from '../utils/getInputWithValidation.js';
 import {
   validateLottoNumbers,
   validatePurchaseAmount,
@@ -12,6 +11,7 @@ import {
   validateBonusNumber,
 } from '../validators/index.js';
 import LottoStore from '../domains/LottoStore.js';
+import handleAsyncError from '../utils/handleAsyncError.js';
 
 class LottoController {
   #lottos;
@@ -25,43 +25,40 @@ class LottoController {
   }
 
   async readPurchaseAmount() {
-    const purchaseAmount = await getInputWithValidation(
-      InputView.readPurchaseAmount,
-      validatePurchaseAmount,
-    );
-    const lottoStore = new LottoStore();
-    this.lottos = lottoStore.buyLottos(purchaseAmount);
-    OutputView.printLottos(this.#lottos);
+    handleAsyncError(async () => {
+      const purchaseAmount = await InputView.readPurchaseAmount();
+      const lottoStore = new LottoStore();
+      this.lottos = lottoStore.buyLottos(purchaseAmount); // validatePurchaseAmount
+      OutputView.printLottos(this.#lottos);
+    });
   }
 
   async readWinningNumbers() {
-    const numbers = await getInputWithValidation(
-      InputView.readWinningNumbers,
-      validateLottoNumbers,
-    );
-    this.#winningNumbers = new Lotto(numbers);
+    handleAsyncError(async () => {
+      const numbers = await InputView.readWinningNumbers();
+      this.#winningNumbers = new Lotto(numbers); // validateLottoNumbers
+    });
   }
 
   async readBonusNumber() {
-    const number = await getInputWithValidation(
-      InputView.readBonusNumber,
-      validateBonusNumber(this.#winningNumbers),
-    );
-    this.#bonusNumber = new Bonus(this.#winningNumbers, number);
+    handleAsyncError(async () => {
+      const number = await InputView.readBonusNumber();
+      this.#bonusNumber = new Bonus(this.#winningNumbers, number); // validateBonusNumber
+    });
   }
 
   async readCommand() {
-    const command = await getInputWithValidation(
-      InputView.readCommand,
-      validateCommand,
-    );
+    handleAsyncError(async () => {
+      const command = await InputView.readCommand();
+      validateCommand(command);
 
-    switch (command) {
-      case COMMAND.RETRY:
-        return true;
-      case COMMAND.EXIT:
-        return false;
-    }
+      switch (command) {
+        case COMMAND.RETRY:
+          return true;
+        case COMMAND.EXIT:
+          return false;
+      }
+    });
   }
 
   printLottoResult() {
