@@ -1,8 +1,9 @@
 import Component from '../core/Component';
+import store from '../store';
 
 class LottoList extends Component {
   template() {
-    const { lottos } = this.$props;
+    const lottos = store.state.lottos;
     const lottoCount = lottos.length;
     const lottoList = lottos.map((lotto) => lotto.getNumbers());
 

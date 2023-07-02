@@ -1,3 +1,4 @@
+// core
 import Component from './core/Component.js';
 
 // domains
@@ -11,16 +12,12 @@ import LottoList from './components/LottoList.js';
 import LottoMoneyInput from './components/LottoMoneyInput.js';
 import WinningNumbersInput from './components/WinningNumbersInput.js';
 
+// store
+import store from './store.js';
+
 import './css';
 
 class App extends Component {
-  setup() {
-    this.$state = {
-      lottos: [],
-      lottoResult: null,
-    };
-  }
-
   template() {
     return `
       <header class="header">
@@ -50,13 +47,13 @@ class App extends Component {
     const $lottoList = this.$target.querySelector(
       '[data-component="lotto-list"]',
     );
-    new LottoList($lottoList, { lottos: this.$state.lottos });
+    new LottoList($lottoList, { lottos: store.state.lottos });
 
     const $WinningNumbersInput = this.$target.querySelector(
       '[data-component="winning-numbers-input"]',
     );
     new WinningNumbersInput($WinningNumbersInput, {
-      lottos: this.$state.lottos,
+      lottos: store.state.lottos,
       enterWinningNumbers: this.enterWinningNumbers.bind(this),
     });
   }
@@ -65,7 +62,8 @@ class App extends Component {
     try {
       const lottoStore = new LottoStore();
       const lottos = lottoStore.buyLottos(amount);
-      this.setState({ lottos });
+      console.log(lottos);
+      store.setState({ lottos });
     } catch (error) {
       alert(error.message);
     }
@@ -82,7 +80,7 @@ class App extends Component {
         bonus,
       );
 
-      this.setState({ lottoResult });
+      store.setState({ lottoResult });
       console.log(
         this.$state.lottoResult.getMatches(),
         this.$state.lottoResult.getProfitRate(),
