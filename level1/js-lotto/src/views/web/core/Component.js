@@ -33,10 +33,8 @@ class Component {
   // 자식 요소에서 이벤트가 발생했을 때 부모 요소에서 이벤트를 처리하는 방식
   addEvent(eventType, selector, callback) {
     const children = [...this.$target.querySelectorAll(selector)];
-    const isTarget = (target) =>
-      children.includes(target) || target.closest(selector);
     this.$target.addEventListener(eventType, (event) => {
-      if (!isTarget(event.target)) return false;
+      if (!event.target.closest(selector)) return false;
       callback(event);
     });
   }
