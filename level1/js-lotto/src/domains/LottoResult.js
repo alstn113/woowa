@@ -15,12 +15,14 @@ class LottoResult {
   #compareLottos(lottos, winningNumbers, bonusNumber) {
     lottos.forEach((lotto) => {
       const matchingCount = this.#getMatchingCount(winningNumbers, lotto);
+      const isBonusNumberMatching = lotto
+        .getNumbers()
+        .includes(bonusNumber.getNumber());
       switch (true) {
         case matchingCount === 6:
           this.#matches[4] += 1;
           break;
-        case matchingCount === 5 &&
-          lotto.getNumbers().includes(bonusNumber.getNumber()):
+        case matchingCount === 5 && isBonusNumberMatching:
           this.#matches[3] += 1;
           break;
         case matchingCount >= 3:
