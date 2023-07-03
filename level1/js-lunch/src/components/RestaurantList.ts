@@ -3,6 +3,7 @@ import Component from '../core/Component';
 class RestaurantList extends Component {
   template() {
     return `
+    <section class="restaurant-list-container">
       <ul class="restaurant-list">
         <li class="restaurant">
           <div class="restaurant__category">
@@ -124,6 +125,7 @@ class RestaurantList extends Component {
           </div>
         </li>
       </ul>
+    </section>
     `;
   }
 }

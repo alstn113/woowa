@@ -1,5 +1,5 @@
 class Component<P = {}> {
-  private $target: Element;
+  protected $target: Element;
   protected props: P;
 
   constructor($target: Element, props = {} as P) {
@@ -16,6 +16,8 @@ class Component<P = {}> {
     return '';
   }
   render() {
+    console.log(this.constructor.name, 'render');
+
     this.$target.innerHTML = this.template();
     this.mounted();
   }
