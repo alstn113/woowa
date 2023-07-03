@@ -4,11 +4,11 @@ import store from '../store';
 class LottoResultModal extends Component {
   template() {
     const { isModalOpen, lottoResult } = store.state;
-    const matches = lottoResult.getMatches();
-    const profitRate = lottoResult.getProfitRate();
 
     if (!isModalOpen) return ``;
 
+    const matches = lottoResult.getMatches();
+    const profitRate = lottoResult.getProfitRate();
     return `
     <div class="modal-overlay">
     <div class="modal-content">
@@ -53,6 +53,26 @@ class LottoResultModal extends Component {
     </div>
   </div>
   `;
+  }
+
+  setEvent() {
+    const { restartLottoGame } = this.$props;
+    this.addEvent('click', '.lotto-retry-button', (e) => {
+      if (e.target.tagName === 'BUTTON') {
+        store.setState({ isModalOpen: false });
+        restartLottoGame();
+      }
+    });
+
+    this.addEvent('click', '.modal-overlay', () => {
+      store.setState({ isModalOpen: false });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        store.setState({ isModalOpen: false });
+      }
+    });
   }
 }
 

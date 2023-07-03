@@ -62,7 +62,7 @@ class App extends Component {
       '[data-component="lotto-result-modal"]',
     );
     new LottoResultModal($lottoResultModal, {
-      closeModal: this.closeModal.bind(this),
+      restartLottoGame: this.restartLottoGame.bind(this),
     });
   }
 
@@ -93,14 +93,10 @@ class App extends Component {
     }
   }
 
-  closeModal() {
-    store.setState({ isModalOpen: false });
-  }
-
   restartLottoGame() {
     store.setState({
       lottos: [],
-      lottoResult: {},
+      lottoResult: null,
       isModalOpen: false,
     });
   }
