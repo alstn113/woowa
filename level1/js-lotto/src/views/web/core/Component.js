@@ -30,7 +30,6 @@ class Component {
     return '';
   }
   render() {
-    console.log(this.constructor.name, 'render');
     this.$target.innerHTML = this.template();
   }
   setEvent() {}
