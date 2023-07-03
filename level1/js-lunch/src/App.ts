@@ -1,31 +1,28 @@
-class App {
-  private $target: HTMLElement;
+import Header from './components/Header';
+import RestaurantAddModal from './components/RestaurantAddModal';
+import RestaurantFilter from './components/RestaurantFilter';
+import RestaurantList from './components/RestaurantList';
+import Component from './core/Component';
+import { $ } from './utils/dom';
 
-  constructor($target: HTMLElement) {
-    this.$target = $target;
-    this.setup();
-    this.setEvent();
-    this.render();
-  }
-
-  setup() {}
-  render() {
-    this.$target.innerHTML = this.template();
-    this.mounted();
-  }
-
+class App extends Component {
   template() {
     return `
-      <header class="header"></header>
+      <header class="gnb"></header>
       <main>
         <section class="restaurant-filter-container"></section>
         <section class="restaurant-list-container"></section>
+        <div class="modal modal__open"></div>
       </main>
-      <div class="modal"></div>
     `;
   }
 
-  mounted() {}
+  mounted() {
+    new Header($('.gnb'));
+    new RestaurantFilter($('.restaurant-filter-container'));
+    new RestaurantList($('.restaurant-list-container'));
+    new RestaurantAddModal($('.modal'));
+  }
 
   setEvent() {}
 }

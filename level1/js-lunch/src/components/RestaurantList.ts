@@ -1,9 +1,8 @@
-class RestaurantList {
+import Component from '../core/Component';
+
+class RestaurantList extends Component {
   template() {
     return `
-    
-    <!-- 음식점 목록 -->
-    <section class="restaurant-list-container">
       <ul class="restaurant-list">
         <li class="restaurant">
           <div class="restaurant__category">
@@ -125,7 +124,6 @@ class RestaurantList {
           </div>
         </li>
       </ul>
-    </section>
     `;
   }
 }

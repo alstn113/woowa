@@ -1,15 +1,12 @@
-class RestaurantAddDrawer {
-  constructor() {}
+import Component from '../core/Component';
 
+class RestaurantAddModal extends Component {
   template() {
     return `
-    <!-- 음식점 추가 모달 -->
-    <div class="modal modal--open">
       <div class="modal-backdrop"></div>
       <div class="modal-container">
         <h2 class="modal-title text-title">새로운 음식점</h2>
         <form>
-          <!-- 카테고리 -->
           <div class="form-item form-item--required">
             <label for="category text-caption">카테고리</label>
             <select name="category" id="category" required>
@@ -23,13 +20,11 @@ class RestaurantAddDrawer {
             </select>
           </div>
 
-          <!-- 음식점 이름 -->
           <div class="form-item form-item--required">
             <label for="name text-caption">이름</label>
             <input type="text" name="name" id="name" required />
           </div>
 
-          <!-- 거리 -->
           <div class="form-item form-item--required">
             <label for="distance text-caption">거리(도보 이동 시간) </label>
             <select name="distance" id="distance" required>
@@ -42,7 +37,6 @@ class RestaurantAddDrawer {
             </select>
           </div>
 
-          <!-- 설명 -->
           <div class="form-item">
             <label for="description text-caption">설명</label>
             <textarea
@@ -56,7 +50,6 @@ class RestaurantAddDrawer {
             >
           </div>
 
-          <!-- 링크 -->
           <div class="form-item">
             <label for="link text-caption">참고 링크</label>
             <input type="text" name="link" id="link" />
@@ -65,7 +58,6 @@ class RestaurantAddDrawer {
             >
           </div>
 
-          <!-- 취소/추가 버튼 -->
           <div class="button-container">
             <button
               type="button"
@@ -79,9 +71,8 @@ class RestaurantAddDrawer {
           </div>
         </form>
       </div>
-    </div>
 `;
   }
 }
 
-export default RestaurantAddDrawer;
+export default RestaurantAddModal;
