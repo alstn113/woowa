@@ -8,7 +8,7 @@ class WinningNumbersInput extends Component {
     if (isLoading) return '';
 
     return `
-    <form class="winning-numbers-input">
+    <form>
       <p>지난 주 당첨번호 6개와 보너스 번호 1개를 입력해주세요.</p>
       <div>
         <div>당첨 번호</div>
@@ -25,7 +25,7 @@ class WinningNumbersInput extends Component {
         <input type="number" class="bonus-number" />
       </div>
 
-      <button type="button">결과 확인하기</button>
+      <button class="result-button" type="button">결과 확인하기</button>
     </form>
     `;
   }

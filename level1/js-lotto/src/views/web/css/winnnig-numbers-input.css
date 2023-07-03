@@ -1,0 +1,61 @@
+.winning-numbers-input {
+  height: 25%;
+  width: 100%;
+}
+
+.winning-numbers-input form {
+  margin-top: 1rem;
+  height: 100%;
+}
+
+.winning-numbers-input form > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.winning-numbers-wrapper {
+  display: flex;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.winning-number {
+  display: block;
+
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+
+  border: 1px solid;
+  border-color: #000;
+  border-radius: 4px;
+}
+
+.bonus-number {
+  display: block;
+  margin-left: auto;
+  text-align: center;
+
+  width: 2rem;
+  height: 2rem;
+
+  border: 1px solid;
+  border-color: #000;
+  border-radius: 4px;
+}
+
+.result-button {
+  border: none;
+  width: 100%;
+  background-color: var(--lotto-primary);
+  transition: background-color 0.1s ease-in-out;
+  padding: 0.5rem;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.result-button form button:hover {
+  background-color: var(--lotto-primary-light);
+}

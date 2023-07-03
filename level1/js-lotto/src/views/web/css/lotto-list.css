@@ -1,0 +1,27 @@
+.lotto-list-container {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+}
+
+.lotto-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  height: 100%;
+  overflow-y: scroll;
+  gap: 0.5rem;
+}
+
+.lotto-item::before {
+  content: '🎟️';
+  font-size: 1.2rem;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.lotto-item {
+  display: flex;
+  align-items: center;
+}

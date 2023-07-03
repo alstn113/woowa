@@ -7,8 +7,8 @@ class LottoMoneyInput extends Component {
           <h2>🎱 내 번호 당첨 확인 🎱</h2>
         </div>
         <div class="lotto-money-input__money">
+          <div for="money">구입할 금액을 입력해주세요</div>
           <form class="lotto-money-input__form">
-            <label for="money">구입할 금액을 입력해주세요</label>
             <input type="number" id="money" placeholder="금액" />
             <button>구입</button>
           </form>

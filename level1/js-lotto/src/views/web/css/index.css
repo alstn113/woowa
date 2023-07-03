@@ -1,3 +1,7 @@
 @import './reset.css';
 @import './style.css';
+@import './lotto-card.css';
 @import './lotto-result-modal.css';
+@import './lotto-list.css';
+@import './lotto-money-input.css';
+@import './winnnig-numbers-input.css';
