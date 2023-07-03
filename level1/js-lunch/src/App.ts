@@ -3,19 +3,26 @@ import RestaurantAddModal from './components/RestaurantAddModal';
 import RestaurantFilter from './components/RestaurantFilter';
 import RestaurantList from './components/RestaurantList';
 import Component from './core/Component';
+import { $ } from './utils/dom';
 
 class App extends Component {
   template() {
     return `
-      ${new Header(this.$target).template()}
-      <main class="main">
-        ${new RestaurantFilter(this.$target).template()}
-        ${new RestaurantList(this.$target).template()}
-        ${new RestaurantAddModal(this.$target).template()}
+      <header class="gnb"></header>
+      <main>
+        <section class="restaurant-filter-container"></section>
+        <section class="restaurant-list-container"></section>
+        <div class="modal modal__open"></div>
       </main>
     `;
   }
-  mounted() {}
+
+  mounted() {
+    new Header($('.gnb'));
+    new RestaurantFilter($('.restaurant-filter-container'));
+    new RestaurantList($('.restaurant-list-container'));
+    new RestaurantAddModal($('.modal'));
+  }
 }
 
 export default App;

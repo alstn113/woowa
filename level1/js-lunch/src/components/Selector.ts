@@ -11,21 +11,16 @@ interface SelectorProps {
 
 class Selector extends Component<SelectorProps> {
   template() {
-    return `
-      <select name="${this.props.data.name}" id="#${
-      this.props.data.id
-    }-filter" class="restaurant-filter">
-        ${this.props.data.options
-          .map(
-            (option) =>
-              `<option value="${option.value}">${option.name}</option>`,
-          )
-          .join('')}
-      </select>
-      `;
+    return this.props.data.options
+      .map(
+        (option) => `<option value="${option.value}">${option.name}</option>`,
+      )
+      .join('');
   }
 
-  setEvent() {}
+  setEvent() {
+    this.addEvent('change', `#${this.props.data.id}`, this.props.onChange);
+  }
 }
 
 export default Selector;
