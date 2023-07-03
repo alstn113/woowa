@@ -16,7 +16,7 @@
   - [x] javascript-racingcar (2단계 - 자동차 경주 리팩토링)
 
   - [x] javascript-lotto (1단계 - 콘솔 기반 로또 게임)
-  - [ ] javascript-lotto (2단계 - 웹 기반 로또 게임)
+  - [x] javascript-lotto (2단계 - 웹 기반 로또 게임)
 
   - [ ] javascript-lunch (1단계 - 음식점 목록)
   - [ ] javascript-lunch (2단계 - 자주 가는 음식점)
