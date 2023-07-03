@@ -3,9 +3,31 @@ class App {
 
   constructor($target: HTMLElement) {
     this.$target = $target;
+    this.setup();
+    this.setEvent();
+    this.render();
   }
 
-  // rerender();
+  setup() {}
+  render() {
+    this.$target.innerHTML = this.template();
+    this.mounted();
+  }
+
+  template() {
+    return `
+      <header class="header"></header>
+      <main>
+        <section class="restaurant-filter-container"></section>
+        <section class="restaurant-list-container"></section>
+      </main>
+      <div class="modal"></div>
+    `;
+  }
+
+  mounted() {}
+
+  setEvent() {}
 }
 
 export default App;
