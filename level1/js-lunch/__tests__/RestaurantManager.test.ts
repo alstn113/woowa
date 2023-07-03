@@ -53,9 +53,9 @@ describe('RestaurantManager', () => {
       restaurant3,
     ]);
 
-    restaurantManager.filterByCategory('중식');
+    const filted = restaurantManager.filterByCategory('중식');
 
-    expect(restaurantManager.getRestaurants()).toEqual([]);
+    expect(filted).toEqual([]);
   });
 
   it('sortRestaurants 메소드는 레스토랑을 정렬할 수 있다.', () => {
@@ -64,20 +64,12 @@ describe('RestaurantManager', () => {
     restaurantManager.addRestaurant(restaurant2);
     restaurantManager.addRestaurant(restaurant3);
 
-    restaurantManager.sortRestaurants('distance');
+    const sortedByDistance = restaurantManager.sortRestaurants('distance');
 
-    expect(restaurantManager.getRestaurants()).toEqual([
-      restaurant3,
-      restaurant2,
-      restaurant1,
-    ]);
+    expect(sortedByDistance).toEqual([restaurant3, restaurant2, restaurant1]);
 
-    restaurantManager.sortRestaurants('name');
+    const sortedByName = restaurantManager.sortRestaurants('name');
 
-    expect(restaurantManager.getRestaurants()).toEqual([
-      restaurant3,
-      restaurant2,
-      restaurant1,
-    ]);
+    expect(sortedByName).toEqual([restaurant3, restaurant2, restaurant1]);
   });
 });

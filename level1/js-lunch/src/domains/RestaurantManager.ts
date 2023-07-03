@@ -30,12 +30,14 @@ class RestaurantManager {
     }
   }
 
-  filterByCategory(category: Category): void {
+  filterByCategory(category: Category): Restaurant[] {
     this.filteredCategory = category;
+    return this.getRestaurants();
   }
 
-  sortRestaurants(sortedBy: SortedBy): void {
+  sortRestaurants(sortedBy: SortedBy): Restaurant[] {
     this.sortedBy = sortedBy;
+    return this.getRestaurants();
   }
 }
 
