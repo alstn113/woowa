@@ -16,3 +16,5 @@ export type Category =
   | '기타';
 
 export type Distance = 5 | 10 | 15 | 20 | 30;
+
+export type SortedBy = 'distance' | 'name';

@@ -1,110 +1,83 @@
 import { Restaurant } from '../src/types';
 import RestaurantManager from '../src/domains/RestaurantManager';
 
-describe('RestaurantManager 클래스', () => {
-  let restaurantManager: RestaurantManager;
+const restaurant1: Restaurant = {
+  category: '한식',
+  name: '다라나',
+  distance: 15,
+  description: '김밥이 맛있는 집',
+  link: 'https://www.naver.com',
+};
 
-  beforeEach(() => {
-    restaurantManager = new RestaurantManager();
-  });
+const restaurant2: Restaurant = {
+  category: '한식',
+  name: '나다가',
+  distance: 10,
+  description: '김밥이 맛있는 집',
+  link: 'https://www.naver.com',
+};
 
-  it('getRestaurants 메서드는 레스토랑 목록을 반환한다.', () => {
-    const restaurant: Restaurant = {
-      name: '마법사주방',
-      category: '기타',
-      distance: 5,
-      link: 'https://place.map.kakao.com/20873649',
-      description: '마술사가 운영하는 주방',
-    };
+const restaurant3: Restaurant = {
+  category: '한식',
+  name: '가나다',
+  distance: 5,
+  description: '김밥이 맛있는 집',
+  link: 'https://www.naver.com',
+};
 
-    restaurantManager.addRestaurant(restaurant);
-
-    expect(restaurantManager.getRestaurants()).toEqual([restaurant]);
-  });
-
-  it('addRestaurant 메서드는 레스토랑을 추가한다.', () => {
-    const restaurant: Restaurant = {
-      name: '마법사주방',
-      category: '기타',
-      distance: 5,
-      link: 'https://place.map.kakao.com/20873649',
-      description: '마술사가 운영하는 주방',
-    };
-
-    restaurantManager.addRestaurant(restaurant);
-
-    expect(restaurantManager.getRestaurants()).toEqual([restaurant]);
-  });
-
-  it('filteredByCategory 메서드는 카테고리에 해당하는 레스토랑을 반환한다.', () => {
-    const restaurant1: Restaurant = {
-      name: '마법사주방',
-      category: '기타',
-      distance: 5,
-      link: 'https://place.map.kakao.com/20873649',
-      description: '마술사가 운영하는 주방',
-    };
-
-    const restaurant2: Restaurant = {
-      name: '마법사주방2',
-      category: '양식',
-      distance: 5,
-      link: 'https://place.map.kakao.com/20873649',
-      description: '마술사가 운영하는 주방',
-    };
-
+describe('RestaurantManager', () => {
+  it('addRestaurant 메소드는 레스토랑을 추가할 수 있다.', () => {
+    const restaurantManager = new RestaurantManager();
     restaurantManager.addRestaurant(restaurant1);
     restaurantManager.addRestaurant(restaurant2);
+    restaurantManager.addRestaurant(restaurant3);
 
-    expect(restaurantManager.filteredByCategory('기타')).toEqual([restaurant1]);
-  });
-
-  it('sortByDistance 메서드는 거리순으로 정렬된 레스토랑을 반환한다.', () => {
-    const restaurant1: Restaurant = {
-      name: '마법사주방',
-      category: '기타',
-      distance: 20,
-      link: 'https://place.map.kakao.com/20873649',
-      description: '마술사가 운영하는 주방',
-    };
-
-    const restaurant2: Restaurant = {
-      name: '마법사주방2',
-      category: '양식',
-      distance: 15,
-      link: 'https://place.map.kakao.com/20873649',
-      description: '마술사가 운영하는 주방',
-    };
-
-    restaurantManager.addRestaurant(restaurant1);
-    restaurantManager.addRestaurant(restaurant2);
-
-    expect(restaurantManager.sortByDistance()).toEqual([
-      restaurant2,
+    expect(restaurantManager.getRestaurants()).toEqual([
       restaurant1,
+      restaurant2,
+      restaurant3,
     ]);
   });
 
-  it('sortByName 메서드는 이름순으로 정렬된 레스토랑을 반환한다.', () => {
-    const restaurant1: Restaurant = {
-      name: '나다라',
-      category: '기타',
-      distance: 20,
-      link: 'https://place.map.kakao.com/20873649',
-      description: '마술사가 운영하는 주방',
-    };
-
-    const restaurant2: Restaurant = {
-      name: '가나다',
-      category: '양식',
-      distance: 15,
-      link: 'https://place.map.kakao.com/20873649',
-      description: '마술사가 운영하는 주방',
-    };
-
+  it('filterByCategory 메소드는 카테고리를 기준으로 레스토랑을 필터링할 수 있다.', () => {
+    const restaurantManager = new RestaurantManager();
     restaurantManager.addRestaurant(restaurant1);
     restaurantManager.addRestaurant(restaurant2);
+    restaurantManager.addRestaurant(restaurant3);
 
-    expect(restaurantManager.sortByName()).toEqual([restaurant2, restaurant1]);
+    restaurantManager.filterByCategory('한식');
+
+    expect(restaurantManager.getRestaurants()).toEqual([
+      restaurant1,
+      restaurant2,
+      restaurant3,
+    ]);
+
+    restaurantManager.filterByCategory('중식');
+
+    expect(restaurantManager.getRestaurants()).toEqual([]);
+  });
+
+  it('sortRestaurants 메소드는 레스토랑을 정렬할 수 있다.', () => {
+    const restaurantManager = new RestaurantManager();
+    restaurantManager.addRestaurant(restaurant1);
+    restaurantManager.addRestaurant(restaurant2);
+    restaurantManager.addRestaurant(restaurant3);
+
+    restaurantManager.sortRestaurants('distance');
+
+    expect(restaurantManager.getRestaurants()).toEqual([
+      restaurant3,
+      restaurant2,
+      restaurant1,
+    ]);
+
+    restaurantManager.sortRestaurants('name');
+
+    expect(restaurantManager.getRestaurants()).toEqual([
+      restaurant3,
+      restaurant2,
+      restaurant1,
+    ]);
   });
 });
