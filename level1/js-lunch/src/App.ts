@@ -23,8 +23,6 @@ class App extends Component {
     new RestaurantList($('.restaurant-list-container'));
     new RestaurantAddModal($('.modal'));
   }
-
-  setEvent() {}
 }
 
 export default App;

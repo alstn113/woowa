@@ -1,8 +1,11 @@
-class Component {
+class Component<P = {}> {
   private $target: Element;
+  protected props: P;
 
-  constructor($target: Element) {
+  constructor($target: Element, props = {} as P) {
     this.$target = $target;
+    this.props = props;
+
     this.setup();
     this.render();
     this.setEvent();
