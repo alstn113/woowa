@@ -1,3 +1,5 @@
+import './css';
+
 // core
 import Component from './core/Component.js';
 
@@ -11,11 +13,10 @@ import LottoResult from '../../domains/LottoResult.js';
 import LottoList from './components/LottoList.js';
 import LottoMoneyInput from './components/LottoMoneyInput.js';
 import WinningNumbersInput from './components/WinningNumbersInput.js';
+import LottoResultModal from './components/LottoResultModal.js';
 
 // store
 import store from './store.js';
-
-import './css';
 
 class App extends Component {
   template() {
@@ -33,6 +34,7 @@ class App extends Component {
       <footer class="footer">
         <p>&copy Copyright 2023 woowacourse</p>
       </footer>
+      <div data-component="lotto-result-modal"></div>
     `;
   }
 
@@ -47,14 +49,20 @@ class App extends Component {
     const $lottoList = this.$target.querySelector(
       '[data-component="lotto-list"]',
     );
-    new LottoList($lottoList, { lottos: store.state.lottos });
+    new LottoList($lottoList);
 
     const $WinningNumbersInput = this.$target.querySelector(
       '[data-component="winning-numbers-input"]',
     );
     new WinningNumbersInput($WinningNumbersInput, {
-      lottos: store.state.lottos,
       enterWinningNumbers: this.enterWinningNumbers.bind(this),
+    });
+
+    const $lottoResultModal = this.$target.querySelector(
+      '[data-component="lotto-result-modal"]',
+    );
+    new LottoResultModal($lottoResultModal, {
+      closeModal: this.closeModal.bind(this),
     });
   }
 
@@ -62,7 +70,6 @@ class App extends Component {
     try {
       const lottoStore = new LottoStore();
       const lottos = lottoStore.buyLottos(amount);
-      console.log(lottos);
       store.setState({ lottos });
     } catch (error) {
       alert(error.message);
@@ -75,19 +82,27 @@ class App extends Component {
       const bonus = new Bonus(winnnigLottos, bonusNumber);
 
       const lottoResult = new LottoResult(
-        this.$state.lottos,
+        store.state.lottos,
         winnnigLottos,
         bonus,
       );
 
-      store.setState({ lottoResult });
-      console.log(
-        this.$state.lottoResult.getMatches(),
-        this.$state.lottoResult.getProfitRate(),
-      );
+      store.setState({ lottoResult, isModalOpen: true });
     } catch (error) {
       alert(error.message);
     }
+  }
+
+  closeModal() {
+    store.setState({ isModalOpen: false });
+  }
+
+  restartLottoGame() {
+    store.setState({
+      lottos: [],
+      lottoResult: {},
+      isModalOpen: false,
+    });
   }
 }
 

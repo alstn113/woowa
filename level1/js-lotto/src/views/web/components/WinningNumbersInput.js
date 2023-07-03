@@ -1,10 +1,12 @@
 import Component from '../core/Component';
+import store from '../store';
 
 class WinningNumbersInput extends Component {
   template() {
-    const { lottos } = this.$props;
+    const { lottos } = store.state;
     const isLoading = lottos.length === 0;
     if (isLoading) return '';
+
     return `
     <form class="winning-numbers-input">
       <p>지난 주 당첨번호 6개와 보너스 번호 1개를 입력해주세요.</p>
