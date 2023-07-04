@@ -1,6 +1,11 @@
 import Component from '../core/Component';
 import RestaurantManager from '../domains/RestaurantManager';
-import { FilterCategory, Restaurant, SortedBy } from '../types';
+import {
+  CreateRestaurant,
+  FilterCategory,
+  Restaurant,
+  SortedBy,
+} from '../types';
 import { getFromLocalStorage, setToLocalStorage } from '../utils/localStorage';
 
 class RestaurantStore {
@@ -29,9 +34,9 @@ class RestaurantStore {
     this.observers.push(observer);
   }
 
-  private saveDataToLocalStorage(restaurant: Restaurant): void {
+  private saveDataToLocalStorage(): void {
     const restaurants = this.restaurantManager.getRestaurants();
-    setToLocalStorage('restaurants', [...restaurants, restaurant]);
+    setToLocalStorage('restaurants', restaurants);
   }
 
   private loadDataFromLocalStorage(): void {
@@ -51,9 +56,9 @@ class RestaurantStore {
     return this.restaurantManager.getRestaurants();
   }
 
-  addRestaurant(restaurant: Restaurant): void {
+  addRestaurant(restaurant: CreateRestaurant): void {
     this.restaurantManager.addRestaurant(restaurant);
-    this.saveDataToLocalStorage(restaurant);
+    this.saveDataToLocalStorage();
     this.notify();
   }
 
@@ -64,6 +69,12 @@ class RestaurantStore {
 
   filterRestaurantsByCategory(category: FilterCategory) {
     this.restaurantManager.filterByCategory(category);
+    this.notify();
+  }
+
+  removeRestaurant(id: number) {
+    this.restaurantManager.removeRestaurant(id);
+    this.saveDataToLocalStorage();
     this.notify();
   }
 }

@@ -8,7 +8,7 @@ export interface Restaurant {
   favorite: boolean;
 }
 
-export type CreateRestaurant = Omit<Restaurant, 'id'>;
+export type CreateRestaurant = Omit<Restaurant, 'id' | 'favorite'>;
 
 export type Category = '한식' | '중식' | '일식' | '아시안' | '양식' | '기타';
 

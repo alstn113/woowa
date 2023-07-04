@@ -1,4 +1,9 @@
-import { FilterCategory, Restaurant, SortedBy } from '../types';
+import {
+  CreateRestaurant,
+  FilterCategory,
+  Restaurant,
+  SortedBy,
+} from '../types';
 
 class RestaurantManager {
   private restaurants: Restaurant[];
@@ -10,8 +15,8 @@ class RestaurantManager {
     this.restaurants = [];
   }
 
-  addRestaurant(restaurant: Omit<Restaurant, 'id'>): void {
-    this.restaurants.push({ id: this.id++, ...restaurant });
+  addRestaurant(restaurant: CreateRestaurant): void {
+    this.restaurants.push({ id: this.id++, favorite: false, ...restaurant });
   }
 
   getRestaurants(): Restaurant[] {

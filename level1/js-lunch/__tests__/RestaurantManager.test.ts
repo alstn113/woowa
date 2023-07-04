@@ -7,7 +7,6 @@ const restaurant1: CreateRestaurant = {
   distance: 15,
   description: '김밥이 맛있는 집',
   link: 'https://www.naver.com',
-  favorite: true,
 };
 
 const restaurant2: CreateRestaurant = {
@@ -16,7 +15,6 @@ const restaurant2: CreateRestaurant = {
   distance: 10,
   description: '김밥이 맛있는 집',
   link: 'https://www.naver.com',
-  favorite: false,
 };
 
 const restaurant3: CreateRestaurant = {
@@ -25,7 +23,6 @@ const restaurant3: CreateRestaurant = {
   distance: 5,
   description: '김밥이 맛있는 집',
   link: 'https://www.naver.com',
-  favorite: false,
 };
 
 describe('RestaurantManager', () => {
@@ -36,9 +33,9 @@ describe('RestaurantManager', () => {
     restaurantManager.addRestaurant(restaurant3);
 
     expect(restaurantManager.getRestaurants()).toEqual([
-      { id: 2, ...restaurant3 },
-      { id: 1, ...restaurant2 },
-      { id: 0, ...restaurant1 },
+      { id: 2, favorite: false, ...restaurant3 },
+      { id: 1, favorite: false, ...restaurant2 },
+      { id: 0, favorite: false, ...restaurant1 },
     ]);
   });
 
@@ -51,9 +48,9 @@ describe('RestaurantManager', () => {
     restaurantManager.filterByCategory('한식');
 
     expect(restaurantManager.getRestaurants()).toEqual([
-      { id: 2, ...restaurant3 },
-      { id: 1, ...restaurant2 },
-      { id: 0, ...restaurant1 },
+      { id: 2, favorite: false, ...restaurant3 },
+      { id: 1, favorite: false, ...restaurant2 },
+      { id: 0, favorite: false, ...restaurant1 },
     ]);
 
     restaurantManager.filterByCategory('중식');
@@ -70,17 +67,17 @@ describe('RestaurantManager', () => {
     restaurantManager.sortRestaurantsBy('distance');
 
     expect(restaurantManager.getRestaurants()).toEqual([
-      { id: 2, ...restaurant3 },
-      { id: 1, ...restaurant2 },
-      { id: 0, ...restaurant1 },
+      { id: 2, favorite: false, ...restaurant3 },
+      { id: 1, favorite: false, ...restaurant2 },
+      { id: 0, favorite: false, ...restaurant1 },
     ]);
 
     restaurantManager.sortRestaurantsBy('name');
 
     expect(restaurantManager.getRestaurants()).toEqual([
-      { id: 2, ...restaurant3 },
-      { id: 1, ...restaurant2 },
-      { id: 0, ...restaurant1 },
+      { id: 2, favorite: false, ...restaurant3 },
+      { id: 1, favorite: false, ...restaurant2 },
+      { id: 0, favorite: false, ...restaurant1 },
     ]);
   });
 
@@ -93,12 +90,12 @@ describe('RestaurantManager', () => {
     restaurantManager.toggleFavorite(0);
 
     expect(restaurantManager.getRestaurants()).toEqual([
-      { id: 2, ...restaurant3 },
-      { id: 1, ...restaurant2 },
+      { id: 2, favorite: false, ...restaurant3 },
+      { id: 1, favorite: false, ...restaurant2 },
       {
         id: 0,
+        favorite: true,
         ...restaurant1,
-        favorite: false,
       },
     ]);
   });
@@ -112,8 +109,8 @@ describe('RestaurantManager', () => {
     restaurantManager.removeRestaurant(0);
 
     expect(restaurantManager.getRestaurants()).toEqual([
-      { id: 2, ...restaurant3 },
-      { id: 1, ...restaurant2 },
+      { id: 2, favorite: false, ...restaurant3 },
+      { id: 1, favorite: false, ...restaurant2 },
     ]);
   });
 
@@ -123,8 +120,10 @@ describe('RestaurantManager', () => {
     restaurantManager.addRestaurant(restaurant2);
     restaurantManager.addRestaurant(restaurant3);
 
+    restaurantManager.toggleFavorite(0);
+
     expect(restaurantManager.getFavoriteRestaurants()).toEqual([
-      { id: 0, ...restaurant1 },
+      { id: 0, favorite: true, ...restaurant1 },
     ]);
   });
 });
