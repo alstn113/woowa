@@ -6,14 +6,9 @@ export interface Restaurant {
   link: string;
 }
 
-export type Category =
-  | '전체'
-  | '한식'
-  | '중식'
-  | '일식'
-  | '아시안'
-  | '양식'
-  | '기타';
+export type Category = '한식' | '중식' | '일식' | '아시안' | '양식' | '기타';
+
+export type FilterCategory = '전체' | Category;
 
 export type Distance = 5 | 10 | 15 | 20 | 30;
 

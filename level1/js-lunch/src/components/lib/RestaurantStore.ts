@@ -1,5 +1,5 @@
 import RestaurantManager from '../../domains/RestaurantManager';
-import { Category, Restaurant } from '../../types';
+import { FilterCategory, Restaurant } from '../../types';
 import {
   getFromLocalStorage,
   setToLocalStorage,
@@ -27,9 +27,7 @@ class RestaurantStore {
   }
 
   private loadDataFromLocalStorage(): void {
-    const data = getFromLocalStorage('restaurants');
-    if (data) return;
-    const restaurants = JSON.parse(data);
+    const restaurants = getFromLocalStorage('restaurants') ?? [];
     restaurants.forEach((restaurant: Restaurant) => {
       this.restaurantManager.addRestaurant(restaurant);
     });
@@ -52,7 +50,7 @@ class RestaurantStore {
     return this.restaurantManager.sortRestaurantsBy('name');
   }
 
-  filterRestaurantsByCategory(category: Category) {
+  filterRestaurantsByCategory(category: FilterCategory) {
     return this.restaurantManager.filterByCategory(category);
   }
 }

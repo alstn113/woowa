@@ -1,8 +1,8 @@
-import { Category, Restaurant, SortedBy } from '../types';
+import { FilterCategory, Restaurant, SortedBy } from '../types';
 
 class RestaurantManager {
   private restaurants: Restaurant[];
-  private filteredCategory: Category = '전체';
+  private filteredCategory: FilterCategory = '전체';
   private sortedBy: SortedBy | null = null;
 
   constructor() {
@@ -30,7 +30,7 @@ class RestaurantManager {
     }
   }
 
-  filterByCategory(category: Category): Restaurant[] {
+  filterByCategory(category: FilterCategory): Restaurant[] {
     this.filteredCategory = category;
     return this.getRestaurants();
   }
