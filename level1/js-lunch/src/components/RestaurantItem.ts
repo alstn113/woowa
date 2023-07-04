@@ -3,6 +3,7 @@ import Component from '../core/Component';
 import restaurantStore from '../lib/RestaurantStore';
 import { Restaurant } from '../types';
 import { $ } from '../utils/dom';
+import RestaurantDetailModal from './RestaurantDetailModal';
 
 interface RestaurantItemProps {
   restaurant: Restaurant;
@@ -50,14 +51,28 @@ class RestaurantItem extends Component<RestaurantItemProps> {
   }
 
   setEvent(): void {
-    this.addEvent('click', '.restaurant__favorite-button', (e) => {
-      const restaurantId = (e.target as HTMLElement).closest('.restaurant')?.id;
-      restaurantStore.toggleFavorite(Number(restaurantId));
-    });
+    this.$target.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('.restaurant__favorite-button')) {
+        const restaurantId = Number(
+          (e.target as HTMLElement).closest('.restaurant')?.id,
+        );
+        if (!restaurantId) return;
+        if (restaurantId !== this.props.restaurant.id) return;
 
-    this.addEvent('click', '.restaurant', (e) => {
-      const restaurantId = (e.target as HTMLElement).closest('.restaurant')?.id;
-      $('#restaurant-detail-modal').classList.add('modal--open');
+        restaurantStore.toggleFavorite(Number(restaurantId));
+        return;
+      }
+
+      if ((e.target as HTMLElement).closest('.restaurant')) {
+        const restaurantId = Number(
+          (e.target as HTMLElement).closest('.restaurant')?.id,
+        );
+        if (!restaurantId) return;
+        if (restaurantId !== this.props.restaurant.id) return;
+
+        new RestaurantDetailModal($('#restaurant-detail-modal'));
+        $('#restaurant-detail-modal').classList.add('modal--open');
+      }
     });
   }
 }

@@ -1,5 +1,6 @@
 import Component from '../../core/Component';
 import { $ } from '../../utils/dom';
+import RestaurantAddModal from '../RestaurantAddModal';
 
 class Header extends Component {
   template() {
@@ -13,6 +14,7 @@ class Header extends Component {
 
   setEvent() {
     this.addEvent('click', '.gnb__button', () => {
+      new RestaurantAddModal($('#restaurant-add-modal'));
       $('#restaurant-add-modal').classList.add('modal--open');
     });
   }

@@ -26,11 +26,8 @@ class Component<P = {}> {
     selector: string,
     callback: (event: Event) => void,
   ) {
-    const children = [...this.$target.querySelectorAll(selector)];
-    const isTarget = (target: HTMLElement) =>
-      children.includes(target) || target.closest(selector);
     this.$target.addEventListener(eventType, (event) => {
-      if (!isTarget(event.target as HTMLElement)) return false;
+      if (!(event.target as HTMLElement).closest(selector)) return;
       callback(event);
     });
   }

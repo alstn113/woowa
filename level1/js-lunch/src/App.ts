@@ -23,8 +23,6 @@ class App extends Component {
     new Header($('.gnb'));
     new RestaurantFilter($('.restaurant-filter-container'));
     new RestaurantList($('.restaurant-list-container'));
-    new RestaurantAddModal($('#restaurant-add-modal'));
-    new RestaurantDetailModal($('#restaurant-detail-modal'));
   }
 }
 
