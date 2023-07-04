@@ -8,7 +8,13 @@ interface RestaurantItemProps {
 
 class RestaurantItem extends Component<RestaurantItemProps> {
   template() {
-    const { name, category, description, distance } = this.props.restaurant;
+    const { name, category, description, distance, favorite } =
+      this.props.restaurant;
+
+    const FavoriteIcon = favorite
+      ? './favorite-icon-filled.png'
+      : './favorite-icon-lined.png';
+
     return `
     <li class="restaurant">
       <div class="restaurant__category">
@@ -19,7 +25,12 @@ class RestaurantItem extends Component<RestaurantItemProps> {
         />
       </div>
       <div class="restaurant__info">
-        <h3 class="restaurant__name text-subtitle">${name}</h3>
+        <div>
+          <h3 class="restaurant__name text-subtitle">${name}</h3>
+          <button class="restaurant__favorite-button">
+            <img src="${FavoriteIcon}" alt="즐겨찾기" />
+          </button> 
+        </div>
         <span class="restaurant__distance text-body"
           >캠퍼스부터 ${distance}분 내</span
         >
