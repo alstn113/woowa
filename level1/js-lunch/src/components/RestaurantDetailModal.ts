@@ -32,7 +32,8 @@ class RestaurantDetailModal extends Component<RestaurantDetailModalProps> {
           <div class="restaurant__info">
             <h3 class="restaurant__name text-subtitle">${name}</h3>
             <span class="restaurant__distance text-body">캠퍼스부터 ${distance}분 내</span>
-            <p class="restaurant__description--not-overflow" text-body">${description}</p>
+            <div class="restaurant__detail__description" text-body">${description}</p>
+            <div class="restaurant__link">참고 링크: <a href="${link}" class="text-body">${link}</a></div>
           </div>
         </div>
       </div>
