@@ -33,7 +33,18 @@ class RestaurantDetailModal extends Component<RestaurantDetailModalProps> {
             <h3 class="restaurant__name text-subtitle">${name}</h3>
             <span class="restaurant__distance text-body">캠퍼스부터 ${distance}분 내</span>
             <div class="restaurant__detail__description" text-body">${description}</p>
-            <div class="restaurant__link">참고 링크: <a href="${link}" class="text-body">${link}</a></div>
+            ${
+              link
+                ? `
+                <div class="restaurant__link">
+                  참고 링크:
+                  <a href="${link}" class="text-body">
+                    ${link}
+                  </a>
+                </div>
+                `
+                : ''
+            }
           </div>
         </div>
       </div>
@@ -42,10 +53,10 @@ class RestaurantDetailModal extends Component<RestaurantDetailModalProps> {
           type="button"
           class="button button--secondary text-caption"
         >
-          취소하기
+          삭제
         </button>
         <button class="button button--primary text-caption">
-          추가하기
+          닫기
         </button>
       </div>
     </div>
@@ -53,16 +64,28 @@ class RestaurantDetailModal extends Component<RestaurantDetailModalProps> {
   }
 
   setEvent() {
+    // 닫기 버튼
     this.addEvent('click', '.modal-backdrop', () => {
       this.$target.classList.remove('modal--open');
     });
 
-    this.addEvent('click', '.button--secondary', () => {
+    // 닫기 버튼
+    this.addEvent('click', '.button--primary', () => {
       this.$target.classList.remove('modal--open');
     });
 
-    this.addEvent('click', '.button--primary', () => {
+    // 삭제 버튼
+    this.addEvent('click', '.button--secondary', () => {
+      const { restaurantId } = this.props;
+      restaurantStore.removeRestaurant(restaurantId);
       this.$target.classList.remove('modal--open');
+    });
+
+    // 즐겨찾기 버튼
+    this.addEvent('click', '.restaurant__favorite-button', () => {
+      const { restaurantId } = this.props;
+      restaurantStore.toggleFavorite(restaurantId);
+      this.render();
     });
   }
 }

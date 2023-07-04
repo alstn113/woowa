@@ -207,7 +207,6 @@ body {
   padding-top: 8px;
   width: 100%;
 
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
@@ -216,10 +215,11 @@ body {
 
 .restaurant__detail__description {
   display: block;
-  word-wrap: break-word;
 
   padding-top: 8px;
   width: 100%;
+  word-wrap: break-word;
+
   height: 100%;
 }
 
