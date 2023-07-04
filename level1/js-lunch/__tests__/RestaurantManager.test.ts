@@ -1,28 +1,31 @@
-import { Restaurant } from '../src/types';
+import { CreateRestaurant } from '../src/types';
 import RestaurantManager from '../src/domains/RestaurantManager';
 
-const restaurant1: Restaurant = {
+const restaurant1: CreateRestaurant = {
   category: '한식',
   name: '다라나',
   distance: 15,
   description: '김밥이 맛있는 집',
   link: 'https://www.naver.com',
+  favorite: true,
 };
 
-const restaurant2: Restaurant = {
+const restaurant2: CreateRestaurant = {
   category: '한식',
   name: '나다가',
   distance: 10,
   description: '김밥이 맛있는 집',
   link: 'https://www.naver.com',
+  favorite: false,
 };
 
-const restaurant3: Restaurant = {
+const restaurant3: CreateRestaurant = {
   category: '한식',
   name: '가나다',
   distance: 5,
   description: '김밥이 맛있는 집',
   link: 'https://www.naver.com',
+  favorite: false,
 };
 
 describe('RestaurantManager', () => {
@@ -33,9 +36,9 @@ describe('RestaurantManager', () => {
     restaurantManager.addRestaurant(restaurant3);
 
     expect(restaurantManager.getRestaurants()).toEqual([
-      restaurant1,
-      restaurant2,
-      restaurant3,
+      { id: 2, ...restaurant3 },
+      { id: 1, ...restaurant2 },
+      { id: 0, ...restaurant1 },
     ]);
   });
 
@@ -48,14 +51,14 @@ describe('RestaurantManager', () => {
     restaurantManager.filterByCategory('한식');
 
     expect(restaurantManager.getRestaurants()).toEqual([
-      restaurant1,
-      restaurant2,
-      restaurant3,
+      { id: 2, ...restaurant3 },
+      { id: 1, ...restaurant2 },
+      { id: 0, ...restaurant1 },
     ]);
 
-    const filted = restaurantManager.filterByCategory('중식');
+    restaurantManager.filterByCategory('중식');
 
-    expect(filted).toEqual([]);
+    expect(restaurantManager.getRestaurants()).toEqual([]);
   });
 
   it('sortRestaurants 메소드는 레스토랑을 정렬할 수 있다.', () => {
@@ -64,12 +67,64 @@ describe('RestaurantManager', () => {
     restaurantManager.addRestaurant(restaurant2);
     restaurantManager.addRestaurant(restaurant3);
 
-    const sortedByDistance = restaurantManager.sortRestaurantsBy('distance');
+    restaurantManager.sortRestaurantsBy('distance');
 
-    expect(sortedByDistance).toEqual([restaurant3, restaurant2, restaurant1]);
+    expect(restaurantManager.getRestaurants()).toEqual([
+      { id: 2, ...restaurant3 },
+      { id: 1, ...restaurant2 },
+      { id: 0, ...restaurant1 },
+    ]);
 
-    const sortedByName = restaurantManager.sortRestaurantsBy('name');
+    restaurantManager.sortRestaurantsBy('name');
 
-    expect(sortedByName).toEqual([restaurant3, restaurant2, restaurant1]);
+    expect(restaurantManager.getRestaurants()).toEqual([
+      { id: 2, ...restaurant3 },
+      { id: 1, ...restaurant2 },
+      { id: 0, ...restaurant1 },
+    ]);
+  });
+
+  it('toggleFavorite 메소드는 레스토랑의 즐겨찾기 상태를 변경할 수 있다.', () => {
+    const restaurantManager = new RestaurantManager();
+    restaurantManager.addRestaurant(restaurant1);
+    restaurantManager.addRestaurant(restaurant2);
+    restaurantManager.addRestaurant(restaurant3);
+
+    restaurantManager.toggleFavorite(0);
+
+    expect(restaurantManager.getRestaurants()).toEqual([
+      { id: 2, ...restaurant3 },
+      { id: 1, ...restaurant2 },
+      {
+        id: 0,
+        ...restaurant1,
+        favorite: false,
+      },
+    ]);
+  });
+
+  it('removeRestaurant 메소드는 레스토랑을 삭제할 수 있다.', () => {
+    const restaurantManager = new RestaurantManager();
+    restaurantManager.addRestaurant(restaurant1);
+    restaurantManager.addRestaurant(restaurant2);
+    restaurantManager.addRestaurant(restaurant3);
+
+    restaurantManager.removeRestaurant(0);
+
+    expect(restaurantManager.getRestaurants()).toEqual([
+      { id: 2, ...restaurant3 },
+      { id: 1, ...restaurant2 },
+    ]);
+  });
+
+  it('getFavoriteRestaurants 메소드는 즐겨찾기한 레스토랑을 가져올 수 있다.', () => {
+    const restaurantManager = new RestaurantManager();
+    restaurantManager.addRestaurant(restaurant1);
+    restaurantManager.addRestaurant(restaurant2);
+    restaurantManager.addRestaurant(restaurant3);
+
+    expect(restaurantManager.getFavoriteRestaurants()).toEqual([
+      { id: 0, ...restaurant1 },
+    ]);
   });
 });
