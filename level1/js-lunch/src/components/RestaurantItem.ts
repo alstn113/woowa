@@ -13,7 +13,7 @@ class RestaurantItem extends Component<RestaurantItemProps> {
     <li class="restaurant">
       <div class="restaurant__category">
         <img
-          src="${CATEGORY_ICON_PATH[category]}}"
+          src="${CATEGORY_ICON_PATH[category]}"
           alt="한식" 
           class="category-icon"
         />
