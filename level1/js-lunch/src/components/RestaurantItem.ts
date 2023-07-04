@@ -1,7 +1,8 @@
-import { CATEGORY_ICON_PATH } from '../constants';
+import { CATEGORY_ICON_PATH, FAVORITE_ICON_PATH } from '../constants';
 import Component from '../core/Component';
 import restaurantStore from '../lib/RestaurantStore';
 import { Restaurant } from '../types';
+import { $ } from '../utils/dom';
 
 interface RestaurantItemProps {
   restaurant: Restaurant;
@@ -13,8 +14,8 @@ class RestaurantItem extends Component<RestaurantItemProps> {
       this.props.restaurant;
 
     const FavoriteIcon = favorite
-      ? './favorite-icon-filled.png'
-      : './favorite-icon-lined.png';
+      ? FAVORITE_ICON_PATH['filled']
+      : FAVORITE_ICON_PATH['lined'];
 
     return `
     <li id="${id}" class="restaurant">
@@ -52,6 +53,11 @@ class RestaurantItem extends Component<RestaurantItemProps> {
     this.addEvent('click', '.restaurant__favorite-button', (e) => {
       const restaurantId = (e.target as HTMLElement).closest('.restaurant')?.id;
       restaurantStore.toggleFavorite(Number(restaurantId));
+    });
+
+    this.addEvent('click', '.restaurant', (e) => {
+      const restaurantId = (e.target as HTMLElement).closest('.restaurant')?.id;
+      $('#restaurant-detail-modal').classList.add('modal--open');
     });
   }
 }

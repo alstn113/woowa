@@ -6,3 +6,8 @@ export const CATEGORY_ICON_PATH = {
   아시안: './category-asian.png',
   기타: './category-etc.png',
 } as const;
+
+export const FAVORITE_ICON_PATH = {
+  filled: './favorite-icon-filled.png',
+  lined: './favorite-icon-lined.png',
+};

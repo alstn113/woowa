@@ -1,5 +1,6 @@
 import Header from './components/base/Header';
 import RestaurantAddModal from './components/RestaurantAddModal';
+import RestaurantDetailModal from './components/RestaurantDetailModal';
 import RestaurantFilter from './components/RestaurantFilter';
 import RestaurantList from './components/RestaurantList';
 import Component from './core/Component';
@@ -12,7 +13,8 @@ class App extends Component {
       <main>
         <section class="restaurant-filter-container"></section>
         <section class="restaurant-list-container"></section>
-        <div class="modal"></div>
+        <div id="restaurant-add-modal" class="modal"></div>
+        <div id="restaurant-detail-modal" class="modal"></div>
       </main>
     `;
   }
@@ -21,7 +23,8 @@ class App extends Component {
     new Header($('.gnb'));
     new RestaurantFilter($('.restaurant-filter-container'));
     new RestaurantList($('.restaurant-list-container'));
-    new RestaurantAddModal($('.modal'));
+    new RestaurantAddModal($('#restaurant-add-modal'));
+    new RestaurantDetailModal($('#restaurant-detail-modal'));
   }
 }
 

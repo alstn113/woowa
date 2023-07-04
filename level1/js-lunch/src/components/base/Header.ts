@@ -13,7 +13,7 @@ class Header extends Component {
 
   setEvent() {
     this.addEvent('click', '.gnb__button', () => {
-      $('.modal').classList.add('modal--open');
+      $('#restaurant-add-modal').classList.add('modal--open');
     });
   }
 }
