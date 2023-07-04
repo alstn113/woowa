@@ -1,5 +1,4 @@
 import Component from '../core/Component';
-import RestaurantManager from '../domains/RestaurantManager';
 import { $ } from '../utils/dom';
 import RestaurantItem from './RestaurantItem';
 import restaurantStore from '../lib/RestaurantStore';

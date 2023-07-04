@@ -93,7 +93,6 @@ body {
   justify-content: space-between;
 
   padding: 0 16px;
-  margin-top: 24px;
 }
 
 .restaurant-filter-container select {
@@ -351,4 +350,45 @@ input[name='link'] {
 
 .restaurant__link {
   margin-top: 8px;
+}
+
+.restaurant-taps {
+  width: 100%;
+}
+
+.tabs {
+  margin-top: 1rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+.tab {
+  width: 50%;
+  height: 2rem;
+
+  color: var(--grey-300);
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid;
+  border-color: var(--grey-200);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.tab--active {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.filter-hidden {
+  display: none;
 }

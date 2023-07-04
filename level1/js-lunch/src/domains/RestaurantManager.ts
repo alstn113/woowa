@@ -10,6 +10,7 @@ class RestaurantManager {
   private filteredCategory: FilterCategory = '전체';
   private sortedBy: SortedBy = 'name';
   private id = 0;
+  private isAllorFavorite: 'all' | 'favorite' = 'all';
 
   constructor() {
     this.restaurants = [];
@@ -20,6 +21,9 @@ class RestaurantManager {
   }
 
   getRestaurants(): Restaurant[] {
+    if (this.isAllorFavorite == 'favorite')
+      return this.getFavoriteRestaurants();
+
     const restaurants = this.restaurants.filter(
       (restaurant) =>
         restaurant.category === this.filteredCategory ||
@@ -69,6 +73,10 @@ class RestaurantManager {
    */
   setStartId(id: number): void {
     this.id = id;
+  }
+
+  setAllorFavorite(allorFavorite: 'all' | 'favorite'): void {
+    this.isAllorFavorite = allorFavorite;
   }
 }
 

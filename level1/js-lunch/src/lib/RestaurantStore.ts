@@ -94,6 +94,10 @@ class RestaurantStore {
     this.saveDataToLocalStorage();
     this.notify();
   }
+
+  setAllorFavorite(allorFavorite: 'all' | 'favorite') {
+    this.restaurantManager.setAllorFavorite(allorFavorite);
+  }
 }
 
 const restaurantStore = RestaurantStore.getInstance();
