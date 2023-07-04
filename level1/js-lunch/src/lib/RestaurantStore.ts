@@ -11,6 +11,7 @@ class RestaurantStore {
   private constructor() {
     this.restaurantManager = new RestaurantManager();
     this.loadDataFromLocalStorage();
+    this.setStartId();
   }
 
   static getInstance(): RestaurantStore {
@@ -38,6 +39,12 @@ class RestaurantStore {
     restaurants.forEach((restaurant: Restaurant) => {
       this.restaurantManager.addRestaurant(restaurant);
     });
+  }
+
+  private setStartId() {
+    const restaurants = this.restaurantManager.getRestaurants();
+    const maxId = Math.max(...restaurants.map((restaurant) => restaurant.id));
+    this.restaurantManager.setStartId(maxId + 1);
   }
 
   getRestaurants(): Restaurant[] {
