@@ -75,6 +75,12 @@ class RestaurantStore {
     this.notify();
   }
 
+  toggleFavorite(id: number) {
+    this.restaurantManager.toggleFavorite(id);
+    this.saveDataToLocalStorage();
+    this.notify();
+  }
+
   removeRestaurant(id: number) {
     this.restaurantManager.removeRestaurant(id);
     this.saveDataToLocalStorage();

@@ -1,5 +1,6 @@
 import { CATEGORY_ICON_PATH } from '../constants';
 import Component from '../core/Component';
+import restaurantStore from '../lib/RestaurantStore';
 import { Restaurant } from '../types';
 
 interface RestaurantItemProps {
@@ -8,7 +9,7 @@ interface RestaurantItemProps {
 
 class RestaurantItem extends Component<RestaurantItemProps> {
   template() {
-    const { name, category, description, distance, favorite } =
+    const { id, name, category, description, distance, favorite } =
       this.props.restaurant;
 
     const FavoriteIcon = favorite
@@ -16,7 +17,7 @@ class RestaurantItem extends Component<RestaurantItemProps> {
       : './favorite-icon-lined.png';
 
     return `
-    <li class="restaurant">
+    <li id="${id}" class="restaurant">
       <div class="restaurant__category">
         <img
           src="${CATEGORY_ICON_PATH[category]}"
@@ -45,6 +46,13 @@ class RestaurantItem extends Component<RestaurantItemProps> {
   render() {
     this.$target.innerHTML += this.template();
     this.mounted();
+  }
+
+  setEvent(): void {
+    this.addEvent('click', '.restaurant__favorite-button', (e) => {
+      const restaurantId = (e.target as HTMLElement).closest('.restaurant')?.id;
+      restaurantStore.toggleFavorite(Number(restaurantId));
+    });
   }
 }
 

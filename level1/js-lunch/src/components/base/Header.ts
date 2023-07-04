@@ -12,8 +12,7 @@ class Header extends Component {
   }
 
   setEvent() {
-    const addButton = $('.gnb__button');
-    addButton.addEventListener('click', () => {
+    this.addEvent('click', '.gnb__button', () => {
       $('.modal').classList.add('modal--open');
     });
   }
