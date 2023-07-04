@@ -43,14 +43,14 @@ class RestaurantStore {
     });
   }
 
+  getRestaurants(): Restaurant[] {
+    return this.restaurantManager.getRestaurants();
+  }
+
   addRestaurant(restaurant: Restaurant): void {
     this.restaurantManager.addRestaurant(restaurant);
     this.saveDataToLocalStorage(restaurant);
     this.notify();
-  }
-
-  getRestaurants(): Restaurant[] {
-    return this.restaurantManager.getRestaurants();
   }
 
   sortRestaurantsBy(sortBy: SortedBy) {
