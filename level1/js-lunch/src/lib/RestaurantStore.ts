@@ -46,6 +46,9 @@ class RestaurantStore {
     });
   }
 
+  /**
+   * @description localStorage에 있는 id의 최댓값을 가져와서 시작점으로 설정한다.
+   */
   private setStartId() {
     const restaurants = this.restaurantManager.getRestaurants();
     const maxId = Math.max(...restaurants.map((restaurant) => restaurant.id));

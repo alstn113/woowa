@@ -1,5 +1,6 @@
 import Component from '../core/Component';
 import restaurantStore from '../lib/RestaurantStore';
+import { Distance } from '../types';
 
 class RestaurantAddModal extends Component {
   template() {
@@ -93,7 +94,7 @@ class RestaurantAddModal extends Component {
       const newRestaurant = {
         category: category.value,
         name: restaurantName.value,
-        distance: distance.value,
+        distance: Number(distance.value) as Distance,
         description: description.value,
         link: link.value,
       };
