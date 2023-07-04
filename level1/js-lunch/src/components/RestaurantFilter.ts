@@ -2,6 +2,7 @@ import Component from '../core/Component';
 import { FilterCategory, SortedBy } from '../types';
 import { $ } from '../utils/dom';
 import Selector from './common/Selector';
+import restaurantStore from './lib/RestaurantStore';
 
 class RestaurantFilter extends Component {
   template() {
@@ -43,12 +44,12 @@ class RestaurantFilter extends Component {
   filterCategory(event: Event) {
     const category = (event.target as HTMLSelectElement)
       .value as FilterCategory;
-    // this.store.filterCategory(category);
+    restaurantStore.filterRestaurantsByCategory(category);
   }
 
   sortRestaurants(event: Event) {
     const sortBy = (event.target as HTMLSelectElement).value as SortedBy;
-    // this.store.sortRestaurants(sortBy);
+    restaurantStore.sortRestaurantsBy(sortBy);
   }
 }
 

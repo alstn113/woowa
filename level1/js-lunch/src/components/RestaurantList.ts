@@ -5,6 +5,9 @@ import RestaurantItem from './RestaurantItem';
 import restaurantStore from './lib/RestaurantStore';
 
 class RestaurantList extends Component {
+  setup() {
+    restaurantStore.subscribe(this);
+  }
   template() {
     return `
       <ul class="restaurant-list"></ul>
