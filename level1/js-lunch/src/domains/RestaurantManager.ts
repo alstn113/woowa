@@ -3,7 +3,7 @@ import { FilterCategory, Restaurant, SortedBy } from '../types';
 class RestaurantManager {
   private restaurants: Restaurant[];
   private filteredCategory: FilterCategory = '전체';
-  private sortedBy: SortedBy | null = null;
+  private sortedBy: SortedBy = 'name';
 
   constructor() {
     this.restaurants = [];

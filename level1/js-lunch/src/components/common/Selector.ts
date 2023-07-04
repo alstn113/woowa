@@ -1,12 +1,14 @@
 import Component from '../../core/Component';
 
+interface SelectorInfo {
+  name: string;
+  id: string;
+  className: string;
+  options: { value: string; name: string }[];
+}
+
 interface SelectorProps {
-  info: {
-    name: string;
-    id: string;
-    className: string;
-    options: { value: string; name: string }[];
-  };
+  info: SelectorInfo;
   onChange: (event: Event) => void;
 }
 

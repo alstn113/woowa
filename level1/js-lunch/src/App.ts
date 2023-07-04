@@ -12,7 +12,7 @@ class App extends Component {
       <main>
         <section class="restaurant-filter-container"></section>
         <section class="restaurant-list-container"></section>
-        <div class="modal modal__open"></div>
+        <div class="modal"></div>
       </main>
     `;
   }
@@ -26,11 +26,3 @@ class App extends Component {
 }
 
 export default App;
-
-// restaurant list - restaurant item
-
-// modal
-
-// store에 bind(this)를 해서 rerender를 만들고 적용하자!
-
-// store을 싱글톤과 옵저버 패턴으로 작성해보자

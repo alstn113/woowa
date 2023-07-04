@@ -1,4 +1,5 @@
 import Component from '../core/Component';
+import restaurantStore from './lib/RestaurantStore';
 
 class RestaurantAddModal extends Component {
   template() {
@@ -21,8 +22,8 @@ class RestaurantAddModal extends Component {
           </div>
 
           <div class="form-item form-item--required">
-            <label for="name text-caption">이름</label>
-            <input type="text" name="name" id="name" required />
+            <label for="restaurantName text-caption">이름</label>
+            <input type="text" name="restaurantName" id="restaurantName" required />
           </div>
 
           <div class="form-item form-item--required">
@@ -71,7 +72,36 @@ class RestaurantAddModal extends Component {
           </div>
         </form>
       </div>
-`;
+    `;
+  }
+
+  setEvent() {
+    this.addEvent('click', '.modal-backdrop', () => {
+      this.$target.classList.remove('modal--open');
+    });
+
+    this.addEvent('click', '.button--secondary', () => {
+      this.$target.classList.remove('modal--open');
+    });
+
+    this.addEvent('submit', 'form', (e) => {
+      e.preventDefault();
+
+      const $form = this.$target.querySelector('form') as HTMLFormElement;
+      const { category, restaurantName, distance, description, link } = $form;
+
+      const newRestaurant = {
+        category: category.value,
+        name: restaurantName.value,
+        distance: distance.value,
+        description: description.value,
+        link: link.value,
+      };
+
+      restaurantStore.addRestaurant(newRestaurant);
+
+      this.$target.classList.remove('modal--open');
+    });
   }
 }
 
