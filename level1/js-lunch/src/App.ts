@@ -27,10 +27,6 @@ class App extends Component {
 
 export default App;
 
-// header
-
-// filter
-
 // restaurant list - restaurant item
 
 // modal

@@ -1,4 +1,5 @@
 import Component from '../core/Component';
+import RestaurantManager from '../domains/RestaurantManager';
 
 class RestaurantList extends Component {
   template() {

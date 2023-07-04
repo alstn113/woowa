@@ -35,7 +35,7 @@ class RestaurantManager {
     return this.getRestaurants();
   }
 
-  sortRestaurants(sortedBy: SortedBy): Restaurant[] {
+  sortRestaurantsBy(sortedBy: SortedBy): Restaurant[] {
     this.sortedBy = sortedBy;
     return this.getRestaurants();
   }

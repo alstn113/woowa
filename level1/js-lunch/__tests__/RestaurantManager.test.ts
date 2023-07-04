@@ -64,11 +64,11 @@ describe('RestaurantManager', () => {
     restaurantManager.addRestaurant(restaurant2);
     restaurantManager.addRestaurant(restaurant3);
 
-    const sortedByDistance = restaurantManager.sortRestaurants('distance');
+    const sortedByDistance = restaurantManager.sortRestaurantsBy('distance');
 
     expect(sortedByDistance).toEqual([restaurant3, restaurant2, restaurant1]);
 
-    const sortedByName = restaurantManager.sortRestaurants('name');
+    const sortedByName = restaurantManager.sortRestaurantsBy('name');
 
     expect(sortedByName).toEqual([restaurant3, restaurant2, restaurant1]);
   });
