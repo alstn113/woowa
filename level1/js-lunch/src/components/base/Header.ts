@@ -1,5 +1,5 @@
-import Component from '../core/Component';
-import { $ } from '../utils/dom';
+import Component from '../../core/Component';
+import { $ } from '../../utils/dom';
 
 class Header extends Component {
   template() {

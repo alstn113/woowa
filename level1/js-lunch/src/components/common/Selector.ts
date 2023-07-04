@@ -1,7 +1,7 @@
-import Component from '../core/Component';
+import Component from '../../core/Component';
 
 interface SelectorProps {
-  data: {
+  info: {
     name: string;
     id: string;
     options: { value: string; name: string }[];
@@ -11,7 +11,9 @@ interface SelectorProps {
 
 class Selector extends Component<SelectorProps> {
   template() {
-    return this.props.data.options
+    const { options } = this.props.info;
+
+    return options
       .map(
         (option) => `<option value="${option.value}">${option.name}</option>`,
       )
@@ -19,7 +21,8 @@ class Selector extends Component<SelectorProps> {
   }
 
   setEvent() {
-    this.addEvent('change', `#${this.props.data.id}`, this.props.onChange);
+    const { info, onChange } = this.props;
+    this.addEvent('change', `#${info.id}`, onChange);
   }
 }
 

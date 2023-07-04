@@ -1,7 +1,7 @@
 import Component from '../core/Component';
 import { Category, SortedBy } from '../types';
 import { $ } from '../utils/dom';
-import Selector from './Selector';
+import Selector from './common/Selector';
 
 class RestaurantFilter extends Component {
   template() {
@@ -13,7 +13,7 @@ class RestaurantFilter extends Component {
 
   mounted() {
     new Selector($('#category-filter'), {
-      data: {
+      info: {
         name: 'category',
         id: 'category-filter',
         options: [
@@ -29,7 +29,7 @@ class RestaurantFilter extends Component {
       onChange: this.filterCategory.bind(this),
     });
     new Selector($('#sorting-filter'), {
-      data: {
+      info: {
         name: 'sorting',
         id: 'sorting-filter',
         options: [
@@ -42,7 +42,7 @@ class RestaurantFilter extends Component {
   }
 
   filterCategory(event: Event) {
-    console.log(event);
+    console.log((event.target as HTMLSelectElement).value);
 
     const category = (event.target as HTMLSelectElement).value as Category;
     // this.store.filterCategory(category);
