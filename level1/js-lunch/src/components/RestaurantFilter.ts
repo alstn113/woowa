@@ -5,17 +5,15 @@ import Selector from './common/Selector';
 
 class RestaurantFilter extends Component {
   template() {
-    return `
-        <select name="category" id="category-filter" class="restaurant-filter"></select>
-        <select name="sorting" id="sorting-filter" class="restaurant-filter"></select>
-  `;
+    return ``;
   }
 
   mounted() {
-    new Selector($('#category-filter'), {
+    new Selector($('.restaurant-filter-container'), {
       info: {
         name: 'category',
         id: 'category-filter',
+        className: 'restaurant-filter',
         options: [
           { value: '전체', name: '전체' },
           { value: '한식', name: '한식' },
@@ -28,10 +26,11 @@ class RestaurantFilter extends Component {
       },
       onChange: this.filterCategory.bind(this),
     });
-    new Selector($('#sorting-filter'), {
+    new Selector($('.restaurant-filter-container'), {
       info: {
         name: 'sorting',
         id: 'sorting-filter',
+        className: 'restaurant-filter',
         options: [
           { value: 'name', name: '이름순' },
           { value: 'distance', name: '거리순' },

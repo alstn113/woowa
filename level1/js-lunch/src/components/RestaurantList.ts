@@ -126,6 +126,8 @@ class RestaurantList extends Component {
       </ul>
     `;
   }
+
+  mounted() {}
 }
 
 export default RestaurantList;
