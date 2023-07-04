@@ -1,10 +1,7 @@
-import Component from '../../core/Component';
-import RestaurantManager from '../../domains/RestaurantManager';
-import { FilterCategory, Restaurant, SortedBy } from '../../types';
-import {
-  getFromLocalStorage,
-  setToLocalStorage,
-} from '../../utils/localStorage';
+import Component from '../core/Component';
+import RestaurantManager from '../domains/RestaurantManager';
+import { FilterCategory, Restaurant, SortedBy } from '../types';
+import { getFromLocalStorage, setToLocalStorage } from '../utils/localStorage';
 
 class RestaurantStore {
   private static instance: RestaurantStore;

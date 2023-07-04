@@ -2,7 +2,7 @@ import Component from '../core/Component';
 import { FilterCategory, SortedBy } from '../types';
 import { $ } from '../utils/dom';
 import Selector from './common/Selector';
-import restaurantStore from './lib/RestaurantStore';
+import restaurantStore from '../lib/RestaurantStore';
 
 class RestaurantFilter extends Component {
   template() {

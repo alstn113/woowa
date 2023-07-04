@@ -1,5 +1,5 @@
 import Component from '../core/Component';
-import restaurantStore from './lib/RestaurantStore';
+import restaurantStore from '../lib/RestaurantStore';
 
 class RestaurantAddModal extends Component {
   template() {
