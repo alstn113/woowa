@@ -59,6 +59,14 @@ class RestaurantStore {
     return this.restaurantManager.getRestaurants();
   }
 
+  getRestaurant(id: number): Restaurant {
+    const restaurant = this.restaurantManager
+      .getRestaurants()
+      .find((restaurant) => restaurant.id === id);
+    if (!restaurant) throw new Error('존재하지 않는 레스토랑입니다.');
+    return restaurant;
+  }
+
   addRestaurant(restaurant: CreateRestaurant): void {
     this.restaurantManager.addRestaurant(restaurant);
     this.saveDataToLocalStorage();

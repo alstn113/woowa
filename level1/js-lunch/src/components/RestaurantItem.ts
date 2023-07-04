@@ -53,27 +53,32 @@ class RestaurantItem extends Component<RestaurantItemProps> {
   setEvent(): void {
     this.$target.addEventListener('click', (e) => {
       if ((e.target as HTMLElement).closest('.restaurant__favorite-button')) {
-        const restaurantId = Number(
-          (e.target as HTMLElement).closest('.restaurant')?.id,
-        );
+        const restaurantId = this.getRestaurantId(e);
         if (!restaurantId) return;
-        if (restaurantId !== this.props.restaurant.id) return;
 
         restaurantStore.toggleFavorite(Number(restaurantId));
         return;
       }
 
       if ((e.target as HTMLElement).closest('.restaurant')) {
-        const restaurantId = Number(
-          (e.target as HTMLElement).closest('.restaurant')?.id,
-        );
+        const restaurantId = this.getRestaurantId(e);
         if (!restaurantId) return;
-        if (restaurantId !== this.props.restaurant.id) return;
 
-        new RestaurantDetailModal($('#restaurant-detail-modal'));
+        new RestaurantDetailModal($('#restaurant-detail-modal'), {
+          restaurantId: restaurantId,
+        });
         $('#restaurant-detail-modal').classList.add('modal--open');
       }
     });
+  }
+
+  getRestaurantId(e: Event): number | null {
+    const restaurantId = Number(
+      (e.target as HTMLElement).closest('.restaurant')?.id,
+    );
+    if (!restaurantId) return null;
+    if (restaurantId !== this.props.restaurant.id) return null;
+    return restaurantId;
   }
 }
 

@@ -129,6 +129,24 @@ body {
   border-bottom: 1px solid #e9eaed;
 }
 
+.restaurant__detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-start;
+  padding: 16px 8px;
+  border-bottom: 1px solid #e9eaed;
+  gap: 8px;
+}
+
+.restaurant__detail > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
 .restaurant__category {
   display: flex;
   justify-content: center;
@@ -156,7 +174,7 @@ body {
   justify-content: flex-start;
 }
 
-.restaurant__info > div {
+.restaurant__info > div:first-child {
   width: 100%;
   display: flex;
   align-items: center;
@@ -218,8 +236,7 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
-  max-height: 80%;
-  height: 800px;
+  max-height: 90vh;
   overflow: scroll;
 
   padding: 32px 16px;
