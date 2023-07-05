@@ -1,3 +1,9 @@
+/**
+ * Component
+ *
+ * @template P: props
+ * @template S: state
+ */
 abstract class Component<P = {}, S = {}> {
   readonly $target: HTMLElement;
   readonly props: P;
@@ -6,6 +12,7 @@ abstract class Component<P = {}, S = {}> {
   constructor($taregt: HTMLElement, props: P = {} as P) {
     this.$target = $taregt;
     this.props = props;
+    this.setup();
     this.render();
     this.componentDidMount();
     this.setEvent();

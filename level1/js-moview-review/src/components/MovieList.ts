@@ -11,10 +11,12 @@ interface MovieListState {
 }
 
 class MovieList extends Component<{}, MovieListState> {
-  state: MovieListState = {
-    isLoading: false,
-    movieList: null,
-  };
+  setup() {
+    this.state = {
+      isLoading: false,
+      movieList: null,
+    };
+  }
 
   template() {
     return `<ul class="item-list"></ul>`;
