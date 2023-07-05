@@ -6,11 +6,11 @@ import { $ } from './utils/dom';
 class App extends Component {
   template() {
     return `
-    <header data-component="header"></header>
+    <div data-component="header"></div>
     <main>
       <section class="item-view">
         <h2>지금 인기 있는 영화</h2>
-        <ul data-component="movie-list" class="item-list"></ul>
+        <div data-component="movie-list"></div>
         <button class="btn primary full-width">더 보기</button>
       </section>
     </main>

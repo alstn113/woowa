@@ -5,21 +5,19 @@ import { $ } from '../utils/dom';
 import MovieItem from './MovieItem';
 import MovieListSkeleton from './MovieItemSkeleton';
 
-// interface State {
-//   isLoading: boolean;
-//   movieList: MovieResponse[] | null;
-// }
+interface MovieListState {
+  isLoading: boolean;
+  movieList: MovieResponse[] | null;
+}
 
-class MovieList extends Component {
-  setup() {
-    this.state = {
-      isLoading: false,
-      movieList: null,
-    };
-  }
+class MovieList extends Component<{}, MovieListState> {
+  state: MovieListState = {
+    isLoading: false,
+    movieList: null,
+  };
 
   template() {
-    return ``;
+    return `<ul class="item-list"></ul>`;
   }
 
   async componentDidMount() {

@@ -1,12 +1,11 @@
-abstract class Component<P = {}> {
-  protected readonly $target: HTMLElement;
-  protected readonly props: P;
-  protected state: any;
+abstract class Component<P = {}, S = {}> {
+  readonly $target: HTMLElement;
+  readonly props: P;
+  state: S = {} as S;
 
   constructor($taregt: HTMLElement, props: P = {} as P) {
     this.$target = $taregt;
     this.props = props;
-    this.setup();
     this.render();
     this.componentDidMount();
     this.setEvent();
