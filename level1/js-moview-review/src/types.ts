@@ -22,14 +22,14 @@
 //   "total_results": 779835
 // }
 
-export interface Response {
+export interface MovieListResponse {
   page: number;
-  results: Result[];
+  results: MovieResponse[];
   total_pages: number;
   total_results: number;
 }
 
-export interface Result {
+export interface MovieResponse {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
