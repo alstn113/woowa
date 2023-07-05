@@ -1,5 +1,4 @@
 import Component from '../core/Component';
-import restaurantStore from '../lib/RestaurantStore';
 import { $ } from '../utils/dom';
 import RestaurantList from './RestaurantList';
 

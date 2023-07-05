@@ -1,6 +1,4 @@
 import Header from './components/base/Header';
-import RestaurantAddModal from './components/RestaurantAddModal';
-import RestaurantDetailModal from './components/RestaurantDetailModal';
 import RestaurantFilter from './components/RestaurantFilter';
 import RestaurantList from './components/RestaurantList';
 import RestaurantTabs from './components/RestaurantTabs';

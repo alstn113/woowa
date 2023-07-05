@@ -1,5 +1,5 @@
-import { CreateRestaurant } from '../src/types';
-import RestaurantManager from '../src/domains/RestaurantManager';
+import { CreateRestaurant } from '../../src/types';
+import RestaurantManager from '../../src/domains/RestaurantManager';
 
 const restaurant1: CreateRestaurant = {
   category: '한식',
@@ -25,7 +25,7 @@ const restaurant3: CreateRestaurant = {
   link: 'https://www.naver.com',
 };
 
-describe('RestaurantManager', () => {
+describe('RestaurantManager 클래스', () => {
   it('addRestaurant 메소드는 레스토랑을 추가할 수 있다.', () => {
     const restaurantManager = new RestaurantManager();
     restaurantManager.addRestaurant(restaurant1);
