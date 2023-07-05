@@ -19,7 +19,7 @@ class RestaurantDetailModal extends Component<RestaurantDetailModalProps> {
     return `
     <div class="modal-backdrop"></div>
     <div class="modal-container">
-      <div id=${id}>
+      <div class="restaurant-detail" id=${id}>
         <div class="restaurant__detail">
           <div>
             <div class="restaurant__category">
@@ -82,8 +82,12 @@ class RestaurantDetailModal extends Component<RestaurantDetailModalProps> {
     });
 
     // 즐겨찾기 버튼
-    this.addEvent('click', '.restaurant__favorite-button', () => {
-      const { restaurantId } = this.props;
+    this.addEvent('click', '.restaurant__favorite-button', (e) => {
+      const restaurantId = Number(
+        (e.target as HTMLElement).closest('.restaurant-detail')?.id,
+      );
+      if (restaurantId !== this.props.restaurantId) return;
+
       restaurantStore.toggleFavorite(restaurantId);
       this.render();
     });

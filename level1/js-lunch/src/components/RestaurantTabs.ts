@@ -24,16 +24,18 @@ class RestaurantTabs extends Component {
       $target.classList.add('tab--active');
 
       if ($target.closest('#all-restaurants')) {
-        restaurantStore.setAllorFavorite('all');
         $('.restaurant-filter-container').classList.remove('filter-hidden');
-        new RestaurantList($('.restaurant-list-container')).render();
+        new RestaurantList($('.restaurant-list-container'), {
+          isAllorFavorite: 'all',
+        }).render();
         return;
       }
 
       if ($target.closest('#favorite-restaurants')) {
-        restaurantStore.setAllorFavorite('favorite');
         $('.restaurant-filter-container').classList.add('filter-hidden');
-        new RestaurantList($('.restaurant-list-container')).render();
+        new RestaurantList($('.restaurant-list-container'), {
+          isAllorFavorite: 'favorite',
+        }).render();
       }
     });
   }

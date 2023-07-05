@@ -95,8 +95,8 @@ class RestaurantStore {
     this.notify();
   }
 
-  setAllorFavorite(allorFavorite: 'all' | 'favorite') {
-    this.restaurantManager.setAllorFavorite(allorFavorite);
+  getFavoriteRestaurants(): Restaurant[] {
+    return this.restaurantManager.getFavoriteRestaurants();
   }
 }
 

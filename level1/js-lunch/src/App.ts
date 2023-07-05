@@ -25,7 +25,9 @@ class App extends Component {
     new Header($('.gnb'));
     new RestaurantTabs($('.restaurant-taps'));
     new RestaurantFilter($('.restaurant-filter-container'));
-    new RestaurantList($('.restaurant-list-container'));
+    new RestaurantList($('.restaurant-list-container'), {
+      isAllorFavorite: 'all',
+    });
   }
 }
 

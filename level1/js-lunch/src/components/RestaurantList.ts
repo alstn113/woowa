@@ -3,7 +3,11 @@ import { $ } from '../utils/dom';
 import RestaurantItem from './RestaurantItem';
 import restaurantStore from '../lib/RestaurantStore';
 
-class RestaurantList extends Component {
+interface RestaurantListProps {
+  isAllorFavorite: 'all' | 'favorite';
+}
+
+class RestaurantList extends Component<RestaurantListProps> {
   setup() {
     restaurantStore.subscribe(this);
   }
@@ -14,11 +18,24 @@ class RestaurantList extends Component {
   }
 
   mounted() {
-    restaurantStore.getRestaurants().forEach((restaurant) => {
-      new RestaurantItem($('.restaurant-list'), {
-        restaurant,
+    const { isAllorFavorite } = this.props;
+
+    if (isAllorFavorite === 'all') {
+      restaurantStore.getRestaurants().forEach((restaurant) => {
+        new RestaurantItem($('.restaurant-list'), {
+          restaurant,
+        });
       });
-    });
+      return;
+    }
+
+    if (isAllorFavorite === 'favorite') {
+      restaurantStore.getFavoriteRestaurants().forEach((restaurant) => {
+        new RestaurantItem($('.restaurant-list'), {
+          restaurant,
+        });
+      });
+    }
   }
 }
 
