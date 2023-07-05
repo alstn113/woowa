@@ -19,6 +19,10 @@ class RestaurantManager {
     this.restaurants.push({ id: this.id++, favorite: false, ...restaurant });
   }
 
+  getRealRestaurants(): Restaurant[] {
+    return this.restaurants;
+  }
+
   getRestaurants(): Restaurant[] {
     const restaurants = this.restaurants.filter(
       (restaurant) =>

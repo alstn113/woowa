@@ -35,7 +35,7 @@ class RestaurantStore {
   }
 
   private saveDataToLocalStorage(): void {
-    const restaurants = this.restaurantManager.getRestaurants();
+    const restaurants = this.restaurantManager.getRealRestaurants();
     setToLocalStorage('restaurants', restaurants);
   }
 
