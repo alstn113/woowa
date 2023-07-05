@@ -1,13 +1,21 @@
 abstract class Component<P = {}> {
   protected readonly $target: HTMLElement;
   protected readonly props: P;
+  protected state: any;
 
   constructor($taregt: HTMLElement, props: P = {} as P) {
     this.$target = $taregt;
     this.props = props;
     this.setup();
     this.render();
+    this.componentDidMount();
     this.setEvent();
+  }
+
+  setState(nextState: any): void {
+    this.state = { ...this.state, ...nextState };
+    this.render();
+    this.componentDidUpdate();
   }
 
   setup(): void {}
@@ -18,10 +26,19 @@ abstract class Component<P = {}> {
 
   render(): void {
     this.$target.innerHTML = this.template();
-    this.mounted();
   }
 
-  mounted(): void {}
+  /**
+   * 마운트: 아래 메서드들은 컴포넌트의 인스턴스가 생성되어 DOM 상에 삽입될 때에 순서대로 호출됩니다.
+   * constructor -> render -> componentDidMount
+   */
+  componentDidMount(): void {}
+
+  /**
+   * 업데이트: props 또는 state가 변경되면 갱신이 발생합니다.
+   * render -> componentDidUpdate
+   */
+  componentDidUpdate(): void {}
 
   setEvent(): void {}
 }

@@ -25,7 +25,6 @@ class MovieItem extends Component<MovieItemProps> {
 
   render() {
     this.$target.innerHTML += this.template();
-    this.mounted();
   }
 }
 
