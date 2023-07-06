@@ -35,14 +35,14 @@ abstract class Component<P = {}, S = {}> {
   }
 
   /**
-   * 마운트: 아래 메서드들은 컴포넌트의 인스턴스가 생성되어 DOM 상에 삽입될 때에 순서대로 호출됩니다.
-   * constructor -> render -> componentDidMount
+   * @description 마운트: 아래 메서드들은 컴포넌트의 인스턴스가 생성되어 DOM 상에 삽입될 때에 순서대로 호출됩니다.
+   * @cycle constructor -> render -> componentDidMount
    */
   componentDidMount(): void {}
 
   /**
-   * 업데이트: props 또는 state가 변경되면 갱신이 발생합니다.
-   * render -> componentDidUpdate
+   * @descriton 업데이트: props 또는 state가 변경되면 갱신이 발생합니다.
+   * @cycle render -> componentDidUpdate
    */
   componentDidUpdate(): void {}
 

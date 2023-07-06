@@ -1,9 +1,9 @@
-import MovieClient from '../api/movieClient';
-import Component from '../core/Component';
-import { MovieResponse } from '../types';
-import { $ } from '../utils/dom';
+import MovieClient from '../../api/movieClient';
+import Component from '../../core/Component';
+import { MovieResponse } from '../../types';
+import { $ } from '../../utils/dom';
 import MovieItem from './MovieItem';
-import MovieListSkeleton from './MovieItemSkeleton';
+import MovieListSkeleton from './MovieListSkeleton';
 
 interface MovieListState {
   isLoading: boolean;
@@ -33,9 +33,10 @@ class MovieList extends Component<{}, MovieListState> {
 
     return movieList?.forEach((movie: MovieResponse) => {
       new MovieItem($('.item-list'), {
+        id: movie.id,
+        PosterURL: movie.poster_path,
         title: movie.title,
         score: movie.vote_average,
-        thumbnail: movie.poster_path,
       });
     });
   }
