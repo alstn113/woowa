@@ -19,7 +19,11 @@ class MovieList extends Component<{}, MovieListState> {
   }
 
   template() {
-    return `<ul class="item-list"></ul>`;
+    return `
+      <h2>지금 인기 있는 영화</h2>
+      <ul class="item-list"></ul>
+      <button class="btn primary full-width">더 보기</button>
+    `;
   }
 
   async componentDidMount() {
@@ -44,7 +48,7 @@ class MovieList extends Component<{}, MovieListState> {
   async getPopularMoviesWithLoading() {
     try {
       this.setState({ isLoading: true });
-      const movieList = await new MovieClient().getPopularMovies();
+      const movieList = await new MovieClient().getPopularMovies(1);
       this.setState({ movieList: movieList.results });
     } catch (error) {
       console.error('Error fetching data:', error);

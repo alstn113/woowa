@@ -1,5 +1,6 @@
 import { TMDB } from '../contants';
-import { MovieListResponse } from '../types';
+import { MovieListResponse, MovieResponse } from '../types';
+import { buildQueryString } from '../utils/buildQuerystring';
 
 class MovieClient {
   private readonly baseURL;
@@ -10,38 +11,59 @@ class MovieClient {
     this.apiKey = `${TMDB.API_KEY}`;
   }
 
-  async getPopularMovies(): Promise<MovieListResponse> {
+  async getPopularMovies(page: number): Promise<MovieListResponse> {
+    const params = {
+      api_key: this.apiKey,
+      language: 'ko-KR',
+      page,
+    };
+
+    const querystring = buildQueryString(params);
+
     const response = await fetch(
-      `${this.baseURL}/movie/popular?api_key=${this.apiKey}`,
+      `${this.baseURL}/movie/popular?${querystring}`,
     );
     if (!response.ok) throw new Error('API 호출에 실패했습니다.');
     return await response.json();
   }
 
-  // async getPopularMovies(
-  //   url: string,
-  //   setLoading: Function,
-  //   finishLoading: Function,
-  // ) {
-  //   try {
-  //     setLoading();
-  //     const response = await this.fetchData(url);
-  //     return response;
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     finishLoading();
-  //   }
-  // }
+  async getInfiniteMovies() {
+    const movies: MovieResponse[] = [];
+    let currentPage = 1;
+    let hasNextPage = true;
+    let isLoading = false;
 
-  // async fetchData(url: string) {
-  //   try {
-  //     const response = await fetch(`${this.baseURL}/${url}`);
-  //     return response;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+    const loadNextPage = async (): Promise<void> => {
+      if (isLoading || !hasNextPage) {
+        return;
+      }
+
+      isLoading = true;
+
+      try {
+        const { results, total_pages } = await this.getPopularMovies(
+          currentPage,
+        );
+
+        if (results.length > 0) {
+          movies.push(...results);
+          currentPage++;
+          hasNextPage = currentPage < total_pages;
+        }
+      } catch (error) {
+        // 오류 처리
+      } finally {
+        isLoading = false;
+      }
+    };
+
+    return {
+      movies,
+      loadNextPage,
+      hasNextPage,
+      isLoading,
+    };
+  }
 }
 
 export default MovieClient;
