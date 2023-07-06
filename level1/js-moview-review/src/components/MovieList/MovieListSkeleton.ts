@@ -19,6 +19,10 @@ class MovieListSkeleton extends Component {
       )
       .join('')}`;
   }
+
+  render() {
+    this.$target.innerHTML += this.template();
+  }
 }
 
 export default MovieListSkeleton;

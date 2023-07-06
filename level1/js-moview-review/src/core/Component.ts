@@ -31,6 +31,8 @@ abstract class Component<P = {}, S = {}> {
   }
 
   render(): void {
+    console.log(this.constructor.name, 'render');
+
     this.$target.innerHTML = this.template();
   }
 

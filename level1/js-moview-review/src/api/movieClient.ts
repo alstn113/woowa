@@ -1,6 +1,6 @@
 import { TMDB } from '../contants';
 import { MovieListResponse, MovieResponse } from '../types';
-import { buildQueryString } from '../utils/buildQuerystring';
+import qsStringify from '../utils/querystring';
 
 class MovieClient {
   private readonly baseURL;
@@ -12,17 +12,16 @@ class MovieClient {
   }
 
   async getPopularMovies(page: number): Promise<MovieListResponse> {
-    const params = {
-      api_key: this.apiKey,
-      language: 'ko-KR',
-      page,
-    };
-
-    const querystring = buildQueryString(params);
-
-    const response = await fetch(
-      `${this.baseURL}/movie/popular?${querystring}`,
+    const querystring = qsStringify(
+      {
+        api_key: this.apiKey,
+        language: 'ko-KR',
+        page,
+      },
+      true,
     );
+
+    const response = await fetch(`${this.baseURL}/movie/popular${querystring}`);
     if (!response.ok) throw new Error('API 호출에 실패했습니다.');
     return await response.json();
   }
@@ -66,4 +65,5 @@ class MovieClient {
   }
 }
 
-export default MovieClient;
+const movieClient = new MovieClient();
+export default movieClient;

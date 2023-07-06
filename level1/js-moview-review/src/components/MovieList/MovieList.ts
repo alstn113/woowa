@@ -1,4 +1,4 @@
-import MovieClient from '../../api/movieClient';
+import movieClient from '../../api/movieClient';
 import Component from '../../core/Component';
 import { MovieResponse } from '../../types';
 import { $ } from '../../utils/dom';
@@ -7,14 +7,18 @@ import MovieListSkeleton from './MovieListSkeleton';
 
 interface MovieListState {
   isLoading: boolean;
-  movieList: MovieResponse[] | null;
+  movieList: MovieResponse[];
+  hasNextPage: boolean;
+  currentPage: number;
 }
 
 class MovieList extends Component<{}, MovieListState> {
   setup() {
     this.state = {
       isLoading: false,
-      movieList: null,
+      movieList: [],
+      hasNextPage: true,
+      currentPage: 0,
     };
   }
 
@@ -22,20 +26,18 @@ class MovieList extends Component<{}, MovieListState> {
     return `
       <h2>지금 인기 있는 영화</h2>
       <ul class="item-list"></ul>
-      <button class="btn primary full-width">더 보기</button>
+      <button id="more-button" class="btn primary full-width">더 보기</button>
     `;
   }
 
   async componentDidMount() {
-    await this.getPopularMoviesWithLoading();
+    await this.getInfiniteMovies();
   }
 
   componentDidUpdate() {
     const { isLoading, movieList } = this.state;
 
-    if (isLoading) return new MovieListSkeleton($('.item-list'));
-
-    return movieList?.forEach((movie: MovieResponse) => {
+    movieList.forEach((movie: MovieResponse) => {
       new MovieItem($('.item-list'), {
         id: movie.id,
         PosterURL: movie.poster_path,
@@ -43,18 +45,43 @@ class MovieList extends Component<{}, MovieListState> {
         score: movie.vote_average,
       });
     });
+
+    if (isLoading) new MovieListSkeleton($('.item-list'));
   }
 
-  async getPopularMoviesWithLoading() {
+  setEvent() {
+    this.$target.addEventListener('click', (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('#more-button')) return;
+
+      this.handleLoadMore();
+    });
+  }
+
+  async getInfiniteMovies() {
+    const { currentPage, isLoading, hasNextPage } = this.state;
+    const nextPage = currentPage + 1;
+
+    if (isLoading || !hasNextPage) return;
+
+    this.setState({ isLoading: true });
+
     try {
-      this.setState({ isLoading: true });
-      const movieList = await new MovieClient().getPopularMovies(1);
-      this.setState({ movieList: movieList.results });
+      const movies = await movieClient.getPopularMovies(nextPage);
+      this.setState({
+        isLoading: false,
+        movieList: [...this.state.movieList, ...movies.results],
+        currentPage: nextPage,
+        hasNextPage: currentPage < movies.total_pages,
+      });
     } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      this.setState({ isLoading: false });
+      console.error('Failed to fetch movies:', error);
+      this.setState({ loading: false });
     }
+  }
+
+  async handleLoadMore() {
+    await this.getInfiniteMovies();
   }
 }
 
