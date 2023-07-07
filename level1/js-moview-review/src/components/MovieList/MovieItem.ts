@@ -48,6 +48,7 @@ class MovieItem extends Component<MovieItemProps> {
       const movieId = target.closest('li')?.dataset.id;
       if (this.props.id !== Number(movieId)) return;
 
+      e.preventDefault();
       new MovieDetailModal($('[data-component="modal"]'), {
         id,
         posterURL,
