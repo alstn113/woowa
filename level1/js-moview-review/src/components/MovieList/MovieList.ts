@@ -45,14 +45,14 @@ class MovieList extends Component<MovieListProps, MovieListState> {
     return {
       htmlTemplate,
       renderComponents: () => {
-        console.log($('.item-list'));
-
         movieList.forEach((movie: MovieResponse) => {
           new MovieItem($('.item-list'), {
             id: movie.id,
-            PosterURL: movie.poster_path,
+            posterURL: movie.poster_path,
             title: movie.title,
             score: movie.vote_average,
+            ganreIds: movie.genre_ids,
+            description: movie.overview,
           });
         });
 
