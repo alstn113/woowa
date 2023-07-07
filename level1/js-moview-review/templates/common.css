@@ -329,3 +329,21 @@ header .search-box > .search-button {
   height: 100px;
   bottom: 100px;
 }
+
+/* rating */
+
+.rating-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  background-color: #414141;
+  padding: 1rem;
+}
+
+.rating {
+  border: none;
+  outline: none;
+  background: none;
+}

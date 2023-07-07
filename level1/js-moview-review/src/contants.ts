@@ -6,7 +6,7 @@ export const TMDB = {
 
 export const MOVIE_RATING_LOCAL_STORAGE_KEY = 'MOVIE_RATING';
 
-export const MOVIE_RATING_MESSAGE = {
+export const MOVIE_RATING_MESSAGE: { [key: number]: string } = {
   2: '별로에요',
   4: '그저 그래요',
   6: '보통이에요',
