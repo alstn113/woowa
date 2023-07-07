@@ -33,6 +33,7 @@ class Header extends Component<HeaderProps> {
       const target = e.target as HTMLInputElement;
       if (!target.classList.contains('search-input')) return;
       if (e.key !== 'Enter') return;
+      if (!target.value) return;
       this.props.viewSearchMovieList(target.value);
     });
 
@@ -43,6 +44,7 @@ class Header extends Component<HeaderProps> {
       const input = this.$target.querySelector(
         '.search-input',
       ) as HTMLInputElement;
+      if (!input.value) return;
       this.props.viewSearchMovieList(input.value);
     });
   }
