@@ -2,6 +2,7 @@ import Component from '../core/Component';
 import StarFilled from '../assets/star_filled.png';
 import StarEmpty from '../assets/star_empty.png';
 import { GENRE_MAP, MOVIE_RATING_MESSAGE, TMDB } from '../contants';
+import { getMovieRating, rateMovie } from '../lib/rateMovie';
 
 interface MovieDetailModalProps {
   id: number;
@@ -84,6 +85,15 @@ class MovieDetailModal extends Component<
     };
   }
 
+  componentDidMount() {
+    const { id } = this.props;
+    const rating = getMovieRating();
+    if (!rating) return;
+
+    const movieRating = rating[id];
+    this.setState({ rating: movieRating });
+  }
+
   setEvent() {
     this.$target.addEventListener('click', (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -125,6 +135,7 @@ class MovieDetailModal extends Component<
       this.setState({
         rating,
       });
+      rateMovie(id, rating);
     });
   }
 }
