@@ -1,15 +1,26 @@
 import MovieList from './components/MovieList/MovieList';
 import Header from './components/base/Header';
 import Component from './core/Component';
+import { PageType } from './types';
 import { $ } from './utils/dom';
 
-class App extends Component {
+interface AppProps {
+  pageType: PageType;
+  searchKeyword: string | null;
+}
+
+class App extends Component<{}, AppProps> {
+  setup() {
+    this.state = {
+      pageType: 'popularMovieList',
+      searchKeyword: null,
+    };
+  }
   template() {
     return `
     <div data-component="header"></div>
     <main>
       <section class="item-view">
-        <h2>지금 인기 있는 영화</h2>
         <div data-component="movie-list"></div>
       </section>
     </main>
@@ -17,8 +28,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    new Header($('[data-component="header"]'));
+    new Header($('[data-component="header"]'), {
+      viewPopularMovieList: this.viewPopularMovieList.bind(this),
+      viewSearchMovieList: this.viewSearchMovieList.bind(this),
+    });
     new MovieList($('[data-component="movie-list"]'));
+  }
+
+  viewPopularMovieList() {
+    this.setState({ pageType: 'popularMovieList', searchKeyword: null });
+  }
+
+  viewSearchMovieList(searchKeyword: string) {
+    this.setState({ pageType: 'searchMovieList', searchKeyword });
   }
 }
 

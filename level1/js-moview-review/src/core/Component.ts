@@ -18,7 +18,7 @@ abstract class Component<P = {}, S = {}> {
     this.setEvent();
   }
 
-  setState(nextState: any): void {
+  setState(nextState: Partial<S>): void {
     this.state = { ...this.state, ...nextState };
     this.render();
     this.componentDidUpdate();
