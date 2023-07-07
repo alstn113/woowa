@@ -27,6 +27,10 @@ button {
 .item-view,
 .item-test {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .item-view {
@@ -44,13 +48,6 @@ button {
 }
 
 /* https://andrew.hedges.name/experiments/aspect_ratio/ */
-
-.movie-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 
 .item-list {
   display: grid;

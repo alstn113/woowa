@@ -24,11 +24,8 @@ class MovieList extends Component<{}, MovieListState> {
 
   template() {
     return `
-      <div class="movie-list">
-        <h2>지금 인기 있는 영화</h2>
-        <ul class="item-list"></ul>
-        <button id="more-button" class="btn primary full-width">더 보기</button>
-      </div>
+      <ul class="item-list"></ul>
+      <button id="more-button" class="btn primary full-width">더 보기</button>
     `;
   }
 
