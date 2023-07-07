@@ -6,14 +6,14 @@ import { $ } from './utils/dom';
 
 interface AppProps {
   pageType: PageType;
-  searchKeyword: string | null;
+  searchKeyword: string;
 }
 
 class App extends Component<{}, AppProps> {
   setup() {
     this.state = {
       pageType: 'popularMovieList',
-      searchKeyword: null,
+      searchKeyword: '',
     };
   }
 
@@ -43,7 +43,7 @@ class App extends Component<{}, AppProps> {
   }
 
   viewPopularMovieList() {
-    this.setState({ pageType: 'popularMovieList', searchKeyword: null });
+    this.setState({ pageType: 'popularMovieList', searchKeyword: '' });
   }
 
   viewSearchMovieList(searchKeyword: string) {

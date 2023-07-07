@@ -7,7 +7,7 @@ import MovieListSkeleton from './MovieListSkeleton';
 
 interface MovieListProps {
   pageType: PageType;
-  searchKeyword: string | null;
+  searchKeyword: string;
 }
 
 interface MovieListState {
@@ -82,7 +82,13 @@ class MovieList extends Component<MovieListProps, MovieListState> {
     this.setState({ isLoading: true });
 
     try {
-      const movies = await movieClient.getPopularMovieList(nextPage);
+      const getMovieList =
+        this.props.pageType === 'popularMovieList'
+          ? movieClient.getPopularMovieList(nextPage)
+          : movieClient.getSearchMovieList(this.props.searchKeyword, nextPage);
+      this.props.searchKeyword, nextPage;
+
+      const movies = await getMovieList;
       this.setState({
         isLoading: false,
         movieList: [...this.state.movieList, ...movies.results],
