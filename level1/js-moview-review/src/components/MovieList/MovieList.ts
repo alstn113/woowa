@@ -67,7 +67,7 @@ class MovieList extends Component<{}, MovieListState> {
     this.setState({ isLoading: true });
 
     try {
-      const movies = await movieClient.getPopularMovies(nextPage);
+      const movies = await movieClient.getPopularMovieList(nextPage);
       this.setState({
         isLoading: false,
         movieList: [...this.state.movieList, ...movies.results],
