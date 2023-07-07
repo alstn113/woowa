@@ -319,3 +319,13 @@ header .search-box > .search-button {
     flex-direction: column;
   }
 }
+
+/* more item */
+
+.more-item {
+  visibility: hidden;
+  position: relative;
+  width: 100%;
+  height: 800px;
+  bottom: 800px;
+}

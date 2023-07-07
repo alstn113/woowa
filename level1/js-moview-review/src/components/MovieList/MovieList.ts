@@ -2,6 +2,7 @@ import movieClient from '../../api/movieClient';
 import Component from '../../core/Component';
 import { MovieResponse, PageType } from '../../types';
 import { $ } from '../../utils/dom';
+import infiniteScroll from '../../utils/infiniteScroll';
 import MovieItem from './MovieItem';
 import MovieListSkeleton from './MovieListSkeleton';
 
@@ -39,7 +40,7 @@ class MovieList extends Component<MovieListProps, MovieListState> {
     const htmlTemplate = `
       <h2 class="item-title">${title}</h2>
       <ul class="item-list"></ul>
-      <button id="more-button" class="btn primary full-width">더 보기</button>
+      <div class="more-item"></div>
     `;
 
     return {
@@ -69,12 +70,8 @@ class MovieList extends Component<MovieListProps, MovieListState> {
     await this.getInfiniteMovies();
   }
 
-  setEvent() {
-    this.$target.addEventListener('click', (e: Event) => {
-      const target = e.target as HTMLElement;
-      if (!(target.id === 'more-button')) return;
-      this.handleLoadMore();
-    });
+  async componentDidUpdate() {
+    infiniteScroll($('.more-item'), () => this.getInfiniteMovies(), 0.5);
   }
 
   async getInfiniteMovies() {
@@ -104,10 +101,6 @@ class MovieList extends Component<MovieListProps, MovieListState> {
     return this.props.pageType === 'popularMovieList'
       ? movieClient.getPopularMovieList(nextPage)
       : movieClient.getSearchMovieList(this.props.searchKeyword, nextPage);
-  }
-
-  async handleLoadMore() {
-    await this.getInfiniteMovies();
   }
 }
 
