@@ -25,3 +25,5 @@ export const GENRE_MAP: { [key: number]: string } = {
   10752: '전쟁',
   37: '서부',
 };
+
+export const MOVIE_RATING_LOCAL_STORAGE_KEY = 'MOVIE_RATING';
