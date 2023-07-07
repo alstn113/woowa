@@ -41,6 +41,14 @@ class MovieDetailModal extends Component<MovieDetailModalProps> {
       htmlTemplate,
     };
   }
+
+  setEvent() {
+    this.$target.addEventListener('keyup', (e) => {
+      if (e.key === 'Escape') {
+        this.$target.classList.remove('active');
+      }
+    });
+  }
 }
 
 export default MovieDetailModal;

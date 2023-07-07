@@ -56,11 +56,11 @@ class MovieList extends Component<MovieListProps, MovieListState> {
           });
         });
 
+        if (isLoading) return new MovieListSkeleton($('.item-list'));
+
         if (!movieList.length)
           $('.item-list').innerHTML =
             '<p class="empty">검색 결과가 없습니다.</p>';
-
-        if (isLoading) new MovieListSkeleton($('.item-list'));
       },
     };
   }
