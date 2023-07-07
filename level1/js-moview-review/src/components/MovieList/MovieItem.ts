@@ -9,7 +9,7 @@ interface MovieItemProps {
   title: string;
   score: number;
   posterURL: string;
-  ganreIds: number[];
+  genreIds: number[];
   description: string;
 }
 
@@ -23,7 +23,7 @@ class MovieItem extends Component<MovieItemProps> {
           <div class="item-card">
             <img
               class="item-thumbnail"
-              src="${TMDB.POSTER_URL(posterURL)}"
+              src="${TMDB.POSTER_BASE_URL}/${posterURL}"
               loading="lazy"
               alt="${title}"
             />
@@ -41,7 +41,7 @@ class MovieItem extends Component<MovieItemProps> {
   }
 
   setEvent() {
-    const { description, ganreIds, id, posterURL, score, title } = this.props;
+    const { description, genreIds, id, posterURL, score, title } = this.props;
 
     this.$target.addEventListener('click', (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -53,7 +53,7 @@ class MovieItem extends Component<MovieItemProps> {
         posterURL,
         title,
         score,
-        ganreIds,
+        genreIds,
         description,
       });
     });

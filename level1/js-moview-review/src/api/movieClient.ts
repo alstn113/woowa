@@ -7,7 +7,7 @@ class MovieClient {
   private readonly apiKey;
 
   constructor() {
-    this.baseURL = `${TMDB.BASE_URL}`;
+    this.baseURL = `${TMDB.API_BASE_URL}`;
     this.apiKey = `${TMDB.API_KEY}`;
   }
 

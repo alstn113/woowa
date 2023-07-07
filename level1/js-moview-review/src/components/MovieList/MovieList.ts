@@ -51,7 +51,7 @@ class MovieList extends Component<MovieListProps, MovieListState> {
             posterURL: movie.poster_path,
             title: movie.title,
             score: movie.vote_average,
-            ganreIds: movie.genre_ids,
+            genreIds: movie.genre_ids,
             description: movie.overview,
           });
         });
