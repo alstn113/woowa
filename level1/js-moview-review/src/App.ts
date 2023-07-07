@@ -26,6 +26,7 @@ class App extends Component<{}, AppProps> {
           <div data-component="movie-list"></div>
         </section>
       </main>
+      <div data-component="modal" class="modal modal--open"></div>
     `;
 
     return {
