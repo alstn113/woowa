@@ -13,26 +13,27 @@ class MovieItem extends Component<MovieItemProps> {
   template() {
     const { id, PosterURL, title, score } = this.props;
 
-    return `
-    <li data-id="${id}">
-      <a href="#">
-        <div class="item-card">
-          <img
-            class="item-thumbnail"
-            src="${TMDB.POSTER_URL(PosterURL)}"
-            loading="lazy"
-            alt="${title}"
-          />
-          <p class="item-title">${title}</p>
-          <p class="item-score"><img src="${StarFilled}" alt="별점" />${score}</p>
-        </div>
-      </a>
-    </li>
-  `;
+    const htmlTemplate = `
+      <li data-id="${id}">
+        <a href="#">
+          <div class="item-card">
+            <img
+              class="item-thumbnail"
+              src="${TMDB.POSTER_URL(PosterURL)}"
+              loading="lazy"
+              alt="${title}"
+            />
+            <p class="item-title">${title}</p>
+            <p class="item-score"><img src="${StarFilled}" alt="별점" />${score}</p>
+          </div>
+        </a>
+      </li>
+    `;
+    return { htmlTemplate };
   }
 
   render() {
-    this.$target.innerHTML += this.template();
+    this.$target.innerHTML += this.template().htmlTemplate;
   }
 }
 

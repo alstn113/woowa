@@ -29,35 +29,40 @@ class MovieList extends Component<MovieListProps, MovieListState> {
 
   template() {
     const { pageType, searchKeyword } = this.props;
+    const { isLoading, movieList } = this.state;
+
     const title =
       pageType === 'popularMovieList'
         ? '지금 인기 있는 영화'
         : `"${searchKeyword}" 검색 결과`;
 
-    return `
+    const htmlTemplate = `
       <h2 class="item-title">${title}</h2>
       <ul class="item-list"></ul>
       <button id="more-button" class="btn primary full-width">더 보기</button>
     `;
+
+    return {
+      htmlTemplate,
+      renderComponents: () => {
+        console.log($('.item-list'));
+
+        if (isLoading) return new MovieListSkeleton($('.item-list'));
+
+        movieList.forEach((movie: MovieResponse) => {
+          new MovieItem($('.item-list'), {
+            id: movie.id,
+            PosterURL: movie.poster_path,
+            title: movie.title,
+            score: movie.vote_average,
+          });
+        });
+      },
+    };
   }
 
   async componentDidMount() {
     await this.getInfiniteMovies();
-  }
-
-  componentDidUpdate() {
-    const { isLoading, movieList } = this.state;
-
-    movieList.forEach((movie: MovieResponse) => {
-      new MovieItem($('.item-list'), {
-        id: movie.id,
-        PosterURL: movie.poster_path,
-        title: movie.title,
-        score: movie.vote_average,
-      });
-    });
-
-    if (isLoading) new MovieListSkeleton($('.item-list'));
   }
 
   setEvent() {

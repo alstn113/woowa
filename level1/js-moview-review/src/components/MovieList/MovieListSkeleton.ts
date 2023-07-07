@@ -2,7 +2,7 @@ import Component from '../../core/Component';
 
 class MovieListSkeleton extends Component {
   template() {
-    return `
+    const htmlTemplate = `
     ${Array.from({ length: 20 })
       .map(() =>
         `
@@ -18,10 +18,12 @@ class MovieListSkeleton extends Component {
           `.trim(),
       )
       .join('')}`;
+
+    return { htmlTemplate };
   }
 
   render() {
-    this.$target.innerHTML += this.template();
+    this.$target.innerHTML += this.template().htmlTemplate;
   }
 }
 

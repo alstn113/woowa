@@ -18,7 +18,7 @@ class App extends Component<{}, AppProps> {
   }
 
   template() {
-    return `
+    const htmlTemplate = `
       <div data-component="header"></div>
       <main>
         <section class="item-view">
@@ -26,28 +26,20 @@ class App extends Component<{}, AppProps> {
         </section>
       </main>
     `;
-  }
 
-  componentDidUpdate() {
-    new Header($('[data-component="header"]'), {
-      viewPopularMovieList: this.viewPopularMovieList.bind(this),
-      viewSearchMovieList: this.viewSearchMovieList.bind(this),
-    });
-    new MovieList($('[data-component="movie-list"]'), {
-      pageType: this.state.pageType,
-      searchKeyword: this.state.searchKeyword,
-    });
-  }
-
-  componentDidMount() {
-    new Header($('[data-component="header"]'), {
-      viewPopularMovieList: this.viewPopularMovieList.bind(this),
-      viewSearchMovieList: this.viewSearchMovieList.bind(this),
-    });
-    new MovieList($('[data-component="movie-list"]'), {
-      pageType: this.state.pageType,
-      searchKeyword: this.state.searchKeyword,
-    });
+    return {
+      htmlTemplate,
+      renderComponents: () => {
+        new Header($('[data-component="header"]'), {
+          viewPopularMovieList: this.viewPopularMovieList.bind(this),
+          viewSearchMovieList: this.viewSearchMovieList.bind(this),
+        });
+        new MovieList($('[data-component="movie-list"]'), {
+          pageType: this.state.pageType,
+          searchKeyword: this.state.searchKeyword,
+        });
+      },
+    };
   }
 
   viewPopularMovieList() {

@@ -8,7 +8,7 @@ interface HeaderProps {
 
 class Header extends Component<HeaderProps> {
   template() {
-    return `
+    const htmlTemplate = `
       <header>
         <h1><img class="home-logo" src="${Logo}" alt="MovieList 로고" /></h1>
         <div class="search-box">
@@ -17,6 +17,7 @@ class Header extends Component<HeaderProps> {
         </div>
       </header>
     `;
+    return { htmlTemplate };
   }
 
   setEvent() {
