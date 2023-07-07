@@ -47,8 +47,6 @@ class MovieList extends Component<MovieListProps, MovieListState> {
       renderComponents: () => {
         console.log($('.item-list'));
 
-        if (isLoading) return new MovieListSkeleton($('.item-list'));
-
         movieList.forEach((movie: MovieResponse) => {
           new MovieItem($('.item-list'), {
             id: movie.id,
@@ -57,6 +55,8 @@ class MovieList extends Component<MovieListProps, MovieListState> {
             score: movie.vote_average,
           });
         });
+
+        if (isLoading) new MovieListSkeleton($('.item-list'));
       },
     };
   }
@@ -82,13 +82,8 @@ class MovieList extends Component<MovieListProps, MovieListState> {
     this.setState({ isLoading: true });
 
     try {
-      const getMovieList =
-        this.props.pageType === 'popularMovieList'
-          ? movieClient.getPopularMovieList(nextPage)
-          : movieClient.getSearchMovieList(this.props.searchKeyword, nextPage);
-      this.props.searchKeyword, nextPage;
+      const movies = await this.getMovieList(nextPage);
 
-      const movies = await getMovieList;
       this.setState({
         isLoading: false,
         movieList: [...this.state.movieList, ...movies.results],
@@ -99,6 +94,12 @@ class MovieList extends Component<MovieListProps, MovieListState> {
       console.error('Failed to fetch movies:', error);
       this.setState({ isLoading: false });
     }
+  }
+
+  async getMovieList(nextPage: number) {
+    return this.props.pageType === 'popularMovieList'
+      ? movieClient.getPopularMovieList(nextPage)
+      : movieClient.getSearchMovieList(this.props.searchKeyword, nextPage);
   }
 
   async handleLoadMore() {
