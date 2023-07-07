@@ -1,3 +1,5 @@
+import debounce from './debounce';
+
 const infiniteScroll = (
   element: HTMLElement,
   callback: () => void,
@@ -7,7 +9,7 @@ const infiniteScroll = (
     entries.forEach(
       (entry) => {
         if (entry.isIntersecting) {
-          callback();
+          debounce(() => callback(), 500)();
         }
       },
       {
