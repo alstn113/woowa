@@ -24,9 +24,11 @@ class MovieList extends Component<{}, MovieListState> {
 
   template() {
     return `
-      <h2>지금 인기 있는 영화</h2>
-      <ul class="item-list"></ul>
-      <button id="more-button" class="btn primary full-width">더 보기</button>
+      <div class="movie-list">
+        <h2>지금 인기 있는 영화</h2>
+        <ul class="item-list"></ul>
+        <button id="more-button" class="btn primary full-width">더 보기</button>
+      </div>
     `;
   }
 
@@ -52,8 +54,7 @@ class MovieList extends Component<{}, MovieListState> {
   setEvent() {
     this.$target.addEventListener('click', (e: Event) => {
       const target = e.target as HTMLElement;
-      if (!target.closest('#more-button')) return;
-
+      if (!(target.id === 'more-button')) return;
       this.handleLoadMore();
     });
   }
