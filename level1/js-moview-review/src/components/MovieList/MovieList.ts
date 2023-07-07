@@ -1,9 +1,14 @@
 import movieClient from '../../api/movieClient';
 import Component from '../../core/Component';
-import { MovieResponse } from '../../types';
+import { MovieResponse, PageType } from '../../types';
 import { $ } from '../../utils/dom';
 import MovieItem from './MovieItem';
 import MovieListSkeleton from './MovieListSkeleton';
+
+interface MovieListProps {
+  pageType: PageType;
+  searchKeyword: string | null;
+}
 
 interface MovieListState {
   isLoading: boolean;
@@ -12,7 +17,7 @@ interface MovieListState {
   currentPage: number;
 }
 
-class MovieList extends Component<{}, MovieListState> {
+class MovieList extends Component<MovieListProps, MovieListState> {
   setup() {
     this.state = {
       isLoading: false,
@@ -23,8 +28,14 @@ class MovieList extends Component<{}, MovieListState> {
   }
 
   template() {
+    const { pageType, searchKeyword } = this.props;
+    const title =
+      pageType === 'popularMovieList'
+        ? '지금 인기 있는 영화'
+        : `"${searchKeyword}" 검색 결과`;
+
     return `
-      <h2 class="item-title">지금 인기 있는 영화</h2>
+      <h2 class="item-title">${title}</h2>
       <ul class="item-list"></ul>
       <button id="more-button" class="btn primary full-width">더 보기</button>
     `;

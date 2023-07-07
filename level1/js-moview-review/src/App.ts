@@ -16,15 +16,27 @@ class App extends Component<{}, AppProps> {
       searchKeyword: null,
     };
   }
+
   template() {
     return `
-    <div data-component="header"></div>
-    <main>
-      <section class="item-view">
-        <div data-component="movie-list"></div>
-      </section>
-    </main>
+      <div data-component="header"></div>
+      <main>
+        <section class="item-view">
+          <div data-component="movie-list"></div>
+        </section>
+      </main>
     `;
+  }
+
+  componentDidUpdate() {
+    new Header($('[data-component="header"]'), {
+      viewPopularMovieList: this.viewPopularMovieList.bind(this),
+      viewSearchMovieList: this.viewSearchMovieList.bind(this),
+    });
+    new MovieList($('[data-component="movie-list"]'), {
+      pageType: this.state.pageType,
+      searchKeyword: this.state.searchKeyword,
+    });
   }
 
   componentDidMount() {
@@ -32,7 +44,10 @@ class App extends Component<{}, AppProps> {
       viewPopularMovieList: this.viewPopularMovieList.bind(this),
       viewSearchMovieList: this.viewSearchMovieList.bind(this),
     });
-    new MovieList($('[data-component="movie-list"]'));
+    new MovieList($('[data-component="movie-list"]'), {
+      pageType: this.state.pageType,
+      searchKeyword: this.state.searchKeyword,
+    });
   }
 
   viewPopularMovieList() {
