@@ -4,6 +4,16 @@ export const TMDB = {
   POSTER_BASE_URL: `https://image.tmdb.org/t/p/w220_and_h330_face`,
 };
 
+export const MOVIE_RATING_LOCAL_STORAGE_KEY = 'MOVIE_RATING';
+
+export const MOVIE_RATING_MESSAGE = {
+  2: '별로에요',
+  4: '그저 그래요',
+  6: '보통이에요',
+  8: '좋아요',
+  10: '최고에요',
+};
+
 export const GENRE_MAP: { [key: number]: string } = {
   28: '액션',
   12: '모험',
@@ -25,5 +35,3 @@ export const GENRE_MAP: { [key: number]: string } = {
   10752: '전쟁',
   37: '서부',
 };
-
-export const MOVIE_RATING_LOCAL_STORAGE_KEY = 'MOVIE_RATING';

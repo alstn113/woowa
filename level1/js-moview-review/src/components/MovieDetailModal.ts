@@ -39,7 +39,7 @@ class MovieDetailModal extends Component<MovieDetailModalProps> {
             <div>줄거리</div>
             <div class="modal-description">${description}</div>
             <div>
-            <p>내 별점></p>
+            <p>내 평점</p>
           </div>
           </div>
         </div>
