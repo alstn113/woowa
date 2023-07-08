@@ -52,43 +52,33 @@ button {
 .item-list {
   display: grid;
   margin: 50px 0;
-}
-
-@media screen and (min-width: 230px) {
-  .item-list {
-    grid-template-columns: repeat(1, 180px);
-    grid-column-gap: 50px;
-    grid-row-gap: 50px;
-  }
+  grid-row-gap: 50px;
+  grid-column-gap: 50px;
 }
 
 @media screen and (min-width: 460px) {
   .item-list {
     grid-template-columns: repeat(2, 180px);
-    grid-column-gap: 50px;
-    grid-row-gap: 50px;
   }
 }
 
 @media screen and (min-width: 690px) {
   .item-list {
     grid-template-columns: repeat(3, 180px);
-    grid-column-gap: 50px;
-    grid-row-gap: 50px;
   }
 }
 
 @media screen and (min-width: 920px) {
   .item-list {
     grid-template-columns: repeat(4, 180px);
-    grid-column-gap: 50px;
-    grid-row-gap: 50px;
   }
 }
 
 .item-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .item-thumbnail {

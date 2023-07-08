@@ -20,7 +20,6 @@ abstract class Component<P = {}, S = {}> {
 
   setState(nextState: Partial<S>): void {
     this.state = { ...this.state, ...nextState };
-    console.log(this.state);
 
     this.render();
     this.componentDidUpdate();
@@ -36,8 +35,6 @@ abstract class Component<P = {}, S = {}> {
   }
 
   render(): void {
-    console.log(this.constructor.name, 'render');
-
     this.$target.innerHTML = this.template().htmlTemplate;
     this.template().renderComponents?.();
   }

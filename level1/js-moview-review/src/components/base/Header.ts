@@ -44,6 +44,8 @@ class Header extends Component<HeaderProps> {
       const input = this.$target.querySelector(
         '.search-input',
       ) as HTMLInputElement;
+      input.focus();
+
       if (!input.value) return;
       this.props.viewSearchMovieList(input.value);
     });
