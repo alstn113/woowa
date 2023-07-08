@@ -1,4 +1,3 @@
-import MovieDetailModal from './components/MovieDetailModal';
 import MovieList from './components/MovieList/MovieList';
 import Header from './components/base/Header';
 import Component from './core/Component';
