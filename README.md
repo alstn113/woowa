@@ -22,7 +22,7 @@
   - [x] javascript-lunch (2단계 - 자주 가는 음식점)
 
   - [x] javascript-movie-review (1단계 - 영화 목록 불러오기)
-  - [ ] javascript-movie-review (2단계 - 상세 정보 & UI/UX 개선하기)
+  - [x] javascript-movie-review (2단계 - 상세 정보 & UI/UX 개선하기)
 
 - ## 레벨 2
 
