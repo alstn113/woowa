@@ -1,3 +1,5 @@
+import { HttpErrorStatus } from './types';
+
 export const TMDB = {
   API_KEY: '0824ed77efa71b5efa0d52a34af6475b',
   API_BASE_URL: 'https://api.themoviedb.org/3',
@@ -5,6 +7,13 @@ export const TMDB = {
 };
 
 export const MOVIE_RATING_LOCAL_STORAGE_KEY = 'MOVIE_RATING';
+
+export const ERROR_MESSAGES: { [key in HttpErrorStatus]: string } = {
+  401: '인증에 실패했습니다.',
+  404: '요청하신 페이지를 찾을 수 없습니다.',
+  429: '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.',
+  500: '서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
+};
 
 export const MOVIE_RATING_MESSAGE: { [key: number]: string } = {
   2: '최악이예요',

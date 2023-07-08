@@ -1,6 +1,8 @@
-import { TMDB } from '../contants';
+import { ERROR_MESSAGES, TMDB } from '../contants';
 import { MovieListResponse } from '../types';
 import qsStringify from '../utils/querystring';
+import fetchData from './fetchData';
+import { HttpErrorStatus } from '../types';
 
 class MovieClient {
   private readonly baseURL;
@@ -21,9 +23,16 @@ class MovieClient {
       true,
     );
 
-    const response = await fetch(`${this.baseURL}/movie/popular${querystring}`);
-    if (!response.ok) throw new Error('API 호출에 실패했습니다.');
-    return await response.json();
+    const { data, ok, status } = await fetchData<MovieListResponse>(
+      `${this.baseURL}/movie/popular${querystring}`,
+    );
+
+    if (!ok) {
+      if (!(status in ERROR_MESSAGES)) throw new Error(ERROR_MESSAGES[500]);
+      throw new Error(ERROR_MESSAGES[status as HttpErrorStatus]);
+    }
+
+    return data;
   }
 
   async getSearchMovieList(
@@ -40,9 +49,16 @@ class MovieClient {
       true,
     );
 
-    const response = await fetch(`${this.baseURL}/search/movie${querystring}`);
-    if (!response.ok) throw new Error('API 호출에 실패했습니다.');
-    return await response.json();
+    const { data, ok, status } = await fetchData<MovieListResponse>(
+      `${this.baseURL}/search/movie${querystring}`,
+    );
+
+    if (!ok) {
+      if (!(status in ERROR_MESSAGES)) throw new Error(ERROR_MESSAGES[500]);
+      throw new Error(ERROR_MESSAGES[status as HttpErrorStatus]);
+    }
+
+    return data;
   }
 }
 
