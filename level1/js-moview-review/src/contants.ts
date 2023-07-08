@@ -7,11 +7,11 @@ export const TMDB = {
 export const MOVIE_RATING_LOCAL_STORAGE_KEY = 'MOVIE_RATING';
 
 export const MOVIE_RATING_MESSAGE: { [key: number]: string } = {
-  2: '별로에요',
-  4: '그저 그래요',
+  2: '최악이예요',
+  4: '별로예요',
   6: '보통이에요',
-  8: '좋아요',
-  10: '최고에요',
+  8: '재미있어요',
+  10: '명작이에요',
 };
 
 export const GENRE_MAP: { [key: number]: string } = {
