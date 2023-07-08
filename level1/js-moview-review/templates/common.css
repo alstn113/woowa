@@ -171,9 +171,12 @@ header h1 {
 }
 
 header > .search-box {
+  position: absolute;
+  right: 20px;
   background: #fff;
   padding: 8px;
   border-radius: 4px;
+  display: flex;
 }
 
 header .search-box > input {
@@ -186,6 +189,23 @@ header .search-box > .search-button {
   text-indent: -1000rem;
   background: url('./search_button.png') transparent no-repeat 0 1px;
   background-size: contain;
+}
+
+@media screen and (max-width: 460px) {
+  .search-box > input {
+    padding: 0;
+    width: 0;
+    transition: width 0.3s;
+  }
+
+  .search-box > .search-button {
+    width: 20px;
+    padding: 0;
+  }
+
+  .search-box input:focus {
+    width: 200px;
+  }
 }
 
 /* 모달 */
