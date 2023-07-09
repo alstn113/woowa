@@ -14,6 +14,14 @@ const Modal = ({ isOpen, children, onCancel }: ModalProps) => {
   const el = usePortal('modal');
 
   useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onCancel();
