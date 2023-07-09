@@ -78,4 +78,5 @@ class RestaurantManager {
   }
 }
 
-export default RestaurantManager;
+const restaurantManager = new RestaurantManager();
+export default restaurantManager;
