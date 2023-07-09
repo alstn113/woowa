@@ -1,3 +1,4 @@
+import mockRestaurants from '../data/mockData.json';
 import {
   Category,
   CreateRestaurant,
@@ -6,7 +7,6 @@ import {
   SortedBy,
 } from '../types';
 import { getFromLocalStorage } from '../utils/localStorage';
-import mockRestaurants from '../data/mockData.json';
 
 class RestaurantManager {
   private restaurants: Restaurant[];

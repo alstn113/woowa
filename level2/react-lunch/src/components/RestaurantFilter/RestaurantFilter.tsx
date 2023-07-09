@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 
+import * as S from './RestaurantFilter.styles';
+import RestaurantContext from '../../contexts/Restaurant/RestaurantContext';
 import { Category, SortedBy } from '../../types';
 import Selector from '../common/Selector';
-import RestaurantContext from '../../contexts/Restaurant/RestaurantContext';
-
-import * as S from './RestaurantFilter.styles';
 
 const RestaurantFilter = () => {
   const { filterByCategory, sortBy } = useContext(RestaurantContext);

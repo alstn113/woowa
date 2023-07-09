@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 
+import * as S from './RestaurantDetailModal.styles';
+import ModalContext from '../../contexts/Modal/ModalContext';
 import { Restaurant } from '../../types';
 import RestaurantCategoryIcon from '../RestaurantCategoryIcon/RestaurantCategoryIcon';
-import ModalContext from '../../contexts/Modal/ModalContext';
-
-import * as S from './RestaurantDetailModal.styles';
 
 interface RestaurantDetailModalProps {
   restaurant: Restaurant;

@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
+import RestaurantContext from './RestaurantContext';
 import restaurantManager from '../../lib/restaurantManager';
 import { Category, Restaurant, SortedBy } from '../../types';
-
-import RestaurantContext from './RestaurantContext';
 
 interface RestaurantProviderProps {
   children: React.ReactNode;

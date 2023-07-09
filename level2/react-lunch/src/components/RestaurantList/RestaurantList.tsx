@@ -1,9 +1,8 @@
 import { useContext } from 'react';
 
+import * as S from './RestaurantList.styles';
 import RestaurantContext from '../../contexts/Restaurant/RestaurantContext';
 import RestaurantItem from '../RestaurantItem/RestaurantItem';
-
-import * as S from './RestaurantList.styles';
 
 const RestaurantList = () => {
   const { restaurants } = useContext(RestaurantContext);

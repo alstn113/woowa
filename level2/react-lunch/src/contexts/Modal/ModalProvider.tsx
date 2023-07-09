@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
-import Modal from '../../components/common/Modal';
-
 import ModalContext from './ModalContext';
+import Modal from '../../components/common/Modal';
 
 interface ModalProviderProps {
   children: React.ReactNode;
@@ -32,7 +31,9 @@ const ModalProvider = ({ children }: ModalProviderProps) => {
         closeModal,
       }}
     >
-      <Modal isOpen={isOpen} onCancel={closeModal} children={modalComponent} />
+      <Modal isOpen={isOpen} onCancel={closeModal}>
+        {modalComponent}
+      </Modal>
       {children}
     </ModalContext.Provider>
   );

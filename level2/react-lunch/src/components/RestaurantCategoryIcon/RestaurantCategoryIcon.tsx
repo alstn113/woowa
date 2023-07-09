@@ -1,10 +1,10 @@
-import { Category } from '../../types';
-import 한식 from '../../assets/category-korean.png';
-import 중식 from '../../assets/category-chinese.png';
-import 양식 from '../../assets/category-western.png';
-import 일식 from '../../assets/category-japanese.png';
 import 아시안 from '../../assets/category-asian.png';
+import 중식 from '../../assets/category-chinese.png';
 import 기타 from '../../assets/category-etc.png';
+import 일식 from '../../assets/category-japanese.png';
+import 한식 from '../../assets/category-korean.png';
+import 양식 from '../../assets/category-western.png';
+import { Category } from '../../types';
 
 interface RestaurantCategoryIconProps {
   category: Category;
