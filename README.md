@@ -26,8 +26,8 @@
 
 - ## 레벨 2
 
-  - [ ] react-lunch (1단계)
-  - [ ] react-lunch (2단계)
+  - [x] react-lunch (1단계 - class component)
+  - [x] react-lunch (2단계 - functional component)
 
   - [ ] react-payments (1단계)
   - [ ] react-payments (2단계)
