@@ -1,5 +1,5 @@
-import { CATEGORY_ICON_PATH } from '../../contants';
 import { Restaurant } from '../../types';
+import RestaurantCategoryIcon from '../RestaurantCategoryIcon/RestaurantCategoryIcon';
 
 import * as S from './RestaurantItem.styles';
 
@@ -12,9 +12,9 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
 
   return (
     <S.RestaurantItemContainer>
-      <S.RestaurantCategoryIcon>
-        <img src={CATEGORY_ICON_PATH[category]} alt="한식" />
-      </S.RestaurantCategoryIcon>
+      <S.RestaurantCategoryIconWrapper>
+        <RestaurantCategoryIcon category={category} />
+      </S.RestaurantCategoryIconWrapper>
       <S.RestaurantInfo>
         <S.RestaurantName>{name}</S.RestaurantName>
         <S.RestaurantDistance>캠퍼스부터 {distance}분 내</S.RestaurantDistance>

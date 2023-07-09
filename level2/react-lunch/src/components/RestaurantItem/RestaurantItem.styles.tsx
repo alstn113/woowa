@@ -9,7 +9,7 @@ export const RestaurantItemContainer = styled.li`
   border-bottom: 1px solid #e9eaed;
 `;
 
-export const RestaurantCategoryIcon = styled.div`
+export const RestaurantCategoryIconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
