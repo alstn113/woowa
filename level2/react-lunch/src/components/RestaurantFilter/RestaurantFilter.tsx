@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { Category, SortedBy } from '../../types';
 import Selector from '../common/Selector';
-import RestaurantContext from '../../contexts/RestaurantContext';
+import RestaurantContext from '../../contexts/Restaurant/RestaurantContext';
 
 import * as S from './RestaurantFilter.styles';
 

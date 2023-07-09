@@ -1,12 +1,10 @@
 import ReactDOM from 'react-dom/client';
 
 import App from './App.tsx';
-import GlobalStyle from './styles/GlobalStyle.tsx';
-import RestaurantProvider from './contexts/RestaurantProvider.tsx';
+import AppProvider from './AppProvider.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <RestaurantProvider>
-    <GlobalStyle />
+  <AppProvider>
     <App />
-  </RestaurantProvider>,
+  </AppProvider>,
 );

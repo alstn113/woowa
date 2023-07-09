@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { Category, Restaurant, SortedBy } from '../types';
+import { Category, Restaurant, SortedBy } from '../../types';
 
 interface RestaurantContextProps {
   restaurants: Restaurant[];

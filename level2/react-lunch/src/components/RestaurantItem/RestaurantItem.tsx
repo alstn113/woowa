@@ -1,5 +1,9 @@
+import { useContext } from 'react';
+
 import { Restaurant } from '../../types';
 import RestaurantCategoryIcon from '../RestaurantCategoryIcon/RestaurantCategoryIcon';
+import ModalContext from '../../contexts/Modal/ModalContext';
+import RestaurantDetailModal from '../RestaurantDetailModal/RestaurantDetailModal';
 
 import * as S from './RestaurantItem.styles';
 
@@ -9,9 +13,14 @@ interface RestaurantItemProps {
 
 const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
   const { category, description, distance, name } = restaurant;
+  const { openModal } = useContext(ModalContext);
+
+  const handleOpenDetailModal = () => {
+    openModal(<RestaurantDetailModal restaurant={restaurant} />);
+  };
 
   return (
-    <S.RestaurantItemContainer>
+    <S.RestaurantItemContainer onClick={handleOpenDetailModal}>
       <S.RestaurantCategoryIconWrapper>
         <RestaurantCategoryIcon category={category} />
       </S.RestaurantCategoryIconWrapper>

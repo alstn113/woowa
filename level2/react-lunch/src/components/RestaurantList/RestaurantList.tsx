@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import RestaurantContext from '../../contexts/RestaurantContext';
+import RestaurantContext from '../../contexts/Restaurant/RestaurantContext';
 import RestaurantItem from '../RestaurantItem/RestaurantItem';
 
 import * as S from './RestaurantList.styles';
