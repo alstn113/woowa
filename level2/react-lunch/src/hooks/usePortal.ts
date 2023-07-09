@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const createPortalElement = (id: string) => {
   const el = document.createElement('div');
