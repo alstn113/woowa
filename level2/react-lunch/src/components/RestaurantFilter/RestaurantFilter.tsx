@@ -1,8 +1,14 @@
+import { useContext } from 'react';
+
+import { Category, SortedBy } from '../../types';
 import Selector from '../common/Selector';
+import RestaurantContext from '../../contexts/RestaurantContext';
 
 import * as S from './RestaurantFilter.styles';
 
 const RestaurantFilter = () => {
+  const { filterByCategory, sortBy } = useContext(RestaurantContext);
+
   const categorySelector = {
     name: 'category',
     options: [
@@ -24,10 +30,20 @@ const RestaurantFilter = () => {
     ],
   };
 
+  const handleFilterByCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const category = e.target.value as Category;
+    filterByCategory(category);
+  };
+
+  const handleSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const sort = e.target.value as SortedBy;
+    sortBy(sort);
+  };
+
   return (
     <S.RestaurantFilterContainer>
-      <Selector {...categorySelector} />
-      <Selector {...sortSelector} />
+      <Selector {...categorySelector} onChange={handleFilterByCategory} />
+      <Selector {...sortSelector} onChange={handleSortBy} />
     </S.RestaurantFilterContainer>
   );
 };
