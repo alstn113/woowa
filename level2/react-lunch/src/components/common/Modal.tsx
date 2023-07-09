@@ -39,7 +39,7 @@ const Modal = ({ isOpen, children, onCancel }: ModalProps) => {
     <>
       {isOpen && (
         <>
-          <Overlay />
+          <Overlay onClick={onCancel} />
           {children}
         </>
       )}
