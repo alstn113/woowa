@@ -1,7 +1,11 @@
 import * as S from './RestaurantList.styles';
 
 const RestaurantList = () => {
-  return <S.RestauratnListContainer></S.RestauratnListContainer>;
+  return (
+    <section>
+      <S.RestauratnListContainer></S.RestauratnListContainer>
+    </section>
+  );
 };
 
 export default RestaurantList;
