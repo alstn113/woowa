@@ -64,13 +64,14 @@ class RestaurantManager {
 
     restaurants.forEach((restaurant) =>
       this.addRestaurant({
-        ...restaurant,
         id: this.id++,
+        ...restaurant,
       }),
     );
   }
 
   private setStartId() {
+    if (this.restaurants.length === 0) return;
     const maxId = Math.max(
       ...this.restaurants.map((restaurant) => restaurant.id),
     );

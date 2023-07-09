@@ -8,8 +8,7 @@ interface RestaurantItemProps {
 }
 
 const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
-  const { category, description, distance, favorite, id, link, name } =
-    restaurant;
+  const { category, description, distance, name } = restaurant;
 
   return (
     <S.RestaurantItemContainer>

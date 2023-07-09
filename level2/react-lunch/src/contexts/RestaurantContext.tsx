@@ -8,6 +8,14 @@ interface RestaurantContextProps {
   sortBy: (sortBy: SortedBy) => void;
 }
 
-const RestaurantContext = createContext<RestaurantContextProps | null>(null);
+const RestaurantContext = createContext<RestaurantContextProps>({
+  restaurants: [],
+  filterByCategory: () => {
+    throw new Error('filterByCategory() not implemented');
+  },
+  sortBy: () => {
+    throw new Error('sortBy() not implemented');
+  },
+});
 
 export default RestaurantContext;
