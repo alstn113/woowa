@@ -18,8 +18,8 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
       </S.RestaurantCategoryIcon>
       <S.RestaurantInfo>
         <S.RestaurantName>{name}</S.RestaurantName>
-        <S.RestaurantDistance>캠퍼스부터 ${distance}분 내</S.RestaurantDistance>
-        <S.RestaurantDescription>${description}</S.RestaurantDescription>
+        <S.RestaurantDistance>캠퍼스부터 {distance}분 내</S.RestaurantDistance>
+        <S.RestaurantDescription>{description}</S.RestaurantDescription>
       </S.RestaurantInfo>
     </S.RestaurantItemContainer>
   );
