@@ -1,5 +1,7 @@
+import * as S from './RestaurantList.styles';
+
 const RestaurantList = () => {
-  return <div>RestaurantList</div>;
+  return <S.RestauratnListContainer></S.RestauratnListContainer>;
 };
 
 export default RestaurantList;

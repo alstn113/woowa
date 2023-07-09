@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import { palette, typography } from '../../styles/theme';
 
-export const Header = styled.header`
+export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
