@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import * as S from './RestaurantFilter.styles';
 import useRestaurantsActions from '../../hooks/restaurants/useRestaurantsActions';
 import { Category, SortedBy } from '../../types';
@@ -27,15 +29,21 @@ const RestaurantFilter = () => {
     ],
   };
 
-  const handleFilterByCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const category = e.target.value as Category;
-    dispatch({ type: 'FILTER_BY_CATEGORY', payload: category });
-  };
+  const handleFilterByCategory = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const category = e.target.value as Category;
+      dispatch({ type: 'FILTER_BY_CATEGORY', payload: category });
+    },
+    [],
+  );
 
-  const handleSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const sort = e.target.value as SortedBy;
-    dispatch({ type: 'SORT_BY', payload: sort });
-  };
+  const handleSortBy = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const sort = e.target.value as SortedBy;
+      dispatch({ type: 'SORT_BY', payload: sort });
+    },
+    [],
+  );
 
   return (
     <S.RestaurantFilterContainer>

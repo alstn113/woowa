@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useMemo } from 'react';
 
 import RestaurantsDispatchContext from './RestaurantsDispatchContext';
 import RestaurantsStateContext from './RestaurantsStateContext';
@@ -11,15 +11,20 @@ interface RestaurantsProviderProps {
 }
 
 const RestaurantsProvider = ({ children }: RestaurantsProviderProps) => {
-  const initialState: RestaurantsState = {
-    restaurants: restaurantManager.getRestaurants(),
-  };
+  const initialState: RestaurantsState = useMemo(() => {
+    return {
+      restaurants: restaurantManager.getRestaurants(),
+    };
+  }, []);
 
   const [state, dispatch] = useReducer(restaurantsReducer, initialState);
 
+  const memoizedState = useMemo(() => state, [state]);
+  const memoizedDispatch = useMemo(() => dispatch, [dispatch]);
+
   return (
-    <RestaurantsStateContext.Provider value={state}>
-      <RestaurantsDispatchContext.Provider value={dispatch}>
+    <RestaurantsStateContext.Provider value={memoizedState}>
+      <RestaurantsDispatchContext.Provider value={memoizedDispatch}>
         {children}
       </RestaurantsDispatchContext.Provider>
     </RestaurantsStateContext.Provider>

@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useMemo } from 'react';
 
 import ModalDispatchContext from './ModalDispatchContext';
 import ModalStateContext from './ModalStateContext';
@@ -11,21 +11,27 @@ interface ModalProviderProps {
 }
 
 const ModalProvider = ({ children }: ModalProviderProps) => {
-  const initialState: ModalState = {
-    isOpen: false,
-    modalComponent: null,
-  };
+  const initialState: ModalState = useMemo(
+    () => ({
+      isOpen: false,
+      modalComponent: null,
+    }),
+    [],
+  );
 
   const [state, dispatch] = useReducer(modalReducer, initialState);
 
+  const memoizedState = useMemo(() => state, [state]);
+  const memoizedDispatch = useMemo(() => dispatch, [dispatch]);
+
   return (
-    <ModalStateContext.Provider value={state}>
-      <ModalDispatchContext.Provider value={dispatch}>
+    <ModalStateContext.Provider value={memoizedState}>
+      <ModalDispatchContext.Provider value={memoizedDispatch}>
         <Modal
-          isOpen={state.isOpen}
-          onCancel={() => dispatch({ type: 'CLOSE_MODAL' })}
+          isOpen={memoizedState.isOpen}
+          onCancel={() => memoizedDispatch({ type: 'CLOSE_MODAL' })}
         >
-          {state.modalComponent}
+          {memoizedState.modalComponent}
         </Modal>
         {children}
       </ModalDispatchContext.Provider>

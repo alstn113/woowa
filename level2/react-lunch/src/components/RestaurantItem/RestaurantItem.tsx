@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import * as S from './RestaurantItem.styles';
 import useModalAcitons from '../../hooks/modal/useModalAcitons';
 import { Restaurant } from '../../types';
@@ -12,12 +14,12 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
   const { category, description, distance, name } = restaurant;
   const dispatch = useModalAcitons();
 
-  const handleOpenDetailModal = () => {
+  const handleOpenDetailModal = useCallback(() => {
     dispatch({
       type: 'OPEN_MODAL',
       payload: <RestaurantDetailModal restaurant={restaurant} />,
     });
-  };
+  }, []);
 
   return (
     <S.RestaurantItemContainer onClick={handleOpenDetailModal}>

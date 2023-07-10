@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import * as S from './RestaurantDetailModal.styles';
 import useModalAcitons from '../../hooks/modal/useModalAcitons';
 import { Restaurant } from '../../types';
@@ -11,9 +13,9 @@ const RestaurantDetailModal = ({ restaurant }: RestaurantDetailModalProps) => {
   const { category, description, distance, link, name } = restaurant;
   const dispatch = useModalAcitons();
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     dispatch({ type: 'CLOSE_MODAL' });
-  };
+  }, []);
 
   return (
     <>
