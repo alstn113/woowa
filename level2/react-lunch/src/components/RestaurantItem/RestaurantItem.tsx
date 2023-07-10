@@ -19,7 +19,7 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
       type: 'OPEN_MODAL',
       payload: <RestaurantDetailModal restaurant={restaurant} />,
     });
-  }, []);
+  }, [dispatch, restaurant]);
 
   return (
     <S.RestaurantItemContainer onClick={handleOpenDetailModal}>

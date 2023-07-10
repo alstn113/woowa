@@ -34,7 +34,7 @@ const RestaurantFilter = () => {
       const category = e.target.value as Category;
       dispatch({ type: 'FILTER_BY_CATEGORY', payload: category });
     },
-    [],
+    [dispatch],
   );
 
   const handleSortBy = useCallback(
@@ -42,7 +42,7 @@ const RestaurantFilter = () => {
       const sort = e.target.value as SortedBy;
       dispatch({ type: 'SORT_BY', payload: sort });
     },
-    [],
+    [dispatch],
   );
 
   return (

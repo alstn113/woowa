@@ -15,7 +15,7 @@ const RestaurantDetailModal = ({ restaurant }: RestaurantDetailModalProps) => {
 
   const handleCloseModal = useCallback(() => {
     dispatch({ type: 'CLOSE_MODAL' });
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

@@ -11,6 +11,9 @@ module.exports = {
     'plugin:import/recommended',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
+    'plugin:jest/recommended',
+    'plugin:testing-library/react',
+    'plugin:cypress/recommended',
     // prettier는 항상 마지막에
     'plugin:prettier/recommended',
   ],
