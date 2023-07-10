@@ -1,5 +1,5 @@
-import ModalProvider from './contexts/Modal/ModalProvider.tsx';
-import RestaurantProvider from './contexts/Restaurant/RestaurantProvider.tsx';
+import ModalProvider from './state/contexts/modal/ModalProvider.tsx';
+import RestaurantsProvider from './state/contexts/restaurants/RestaurantsProvider.tsx';
 import GlobalStyle from './styles/GlobalStyle.tsx';
 
 interface AppProviderProps {
@@ -8,12 +8,12 @@ interface AppProviderProps {
 
 const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <RestaurantProvider>
+    <RestaurantsProvider>
       <ModalProvider>
         <GlobalStyle />
         {children}
       </ModalProvider>
-    </RestaurantProvider>
+    </RestaurantsProvider>
   );
 };
 

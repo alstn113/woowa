@@ -1,12 +1,10 @@
-import { useContext } from 'react';
-
 import * as S from './RestaurantFilter.styles';
-import RestaurantContext from '../../contexts/Restaurant/RestaurantContext';
+import useRestaurantsActions from '../../hooks/restaurants/useRestaurantsActions';
 import { Category, SortedBy } from '../../types';
 import Selector from '../common/Selector';
 
 const RestaurantFilter = () => {
-  const { filterByCategory, sortBy } = useContext(RestaurantContext);
+  const dispatch = useRestaurantsActions();
 
   const categorySelector = {
     name: 'category',
@@ -31,12 +29,12 @@ const RestaurantFilter = () => {
 
   const handleFilterByCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const category = e.target.value as Category;
-    filterByCategory(category);
+    dispatch({ type: 'FILTER_BY_CATEGORY', payload: category });
   };
 
   const handleSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const sort = e.target.value as SortedBy;
-    sortBy(sort);
+    dispatch({ type: 'SORT_BY', payload: sort });
   };
 
   return (

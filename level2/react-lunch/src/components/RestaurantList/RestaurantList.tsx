@@ -1,11 +1,9 @@
-import { useContext } from 'react';
-
 import * as S from './RestaurantList.styles';
-import RestaurantContext from '../../contexts/Restaurant/RestaurantContext';
+import useRestaurantsStates from '../../hooks/restaurants/useRestaurantsStates';
 import RestaurantItem from '../RestaurantItem/RestaurantItem';
 
 const RestaurantList = () => {
-  const { restaurants } = useContext(RestaurantContext);
+  const { restaurants } = useRestaurantsStates();
 
   return (
     <section>
