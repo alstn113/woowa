@@ -1,4 +1,5 @@
-/* eslint-disable jest/expect-expect */
+/// <reference types="cypress" />
+
 describe('js-lunch E2E', () => {
   beforeEach(() => {
     cy.visit('/');
