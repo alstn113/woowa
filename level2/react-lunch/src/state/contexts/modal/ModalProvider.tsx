@@ -2,7 +2,7 @@ import { useReducer, useMemo } from 'react';
 
 import ModalDispatchContext from './ModalDispatchContext';
 import ModalStateContext from './ModalStateContext';
-import Modal from '../../../components/common/Modal';
+import Modal from '../../../components/common/Modal/Modal';
 import modalReducer from '../../reducers/modalReducer';
 import { ModalState } from '../../types/modal.types';
 

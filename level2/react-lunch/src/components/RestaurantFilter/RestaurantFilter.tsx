@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import * as S from './RestaurantFilter.styles';
 import useRestaurantsActions from '../../hooks/restaurants/useRestaurantsActions';
 import { Category, SortedBy } from '../../types';
-import Selector from '../common/Selector';
+import Selector from '../common/Selector/Selector';
 
 const RestaurantFilter = () => {
   const dispatch = useRestaurantsActions();

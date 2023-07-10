@@ -1,8 +1,8 @@
-import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import usePortal from '../../hooks/usePortal';
+import * as S from './Modal.styles';
+import usePortal from '../../../hooks/usePortal';
 
 interface ModalProps {
   isOpen: boolean;
@@ -39,7 +39,7 @@ const Modal = ({ isOpen, children, onCancel }: ModalProps) => {
     <>
       {isOpen && (
         <>
-          <Overlay onClick={onCancel} />
+          <S.Overlay onClick={onCancel} />
           {children}
         </>
       )}
@@ -47,15 +47,5 @@ const Modal = ({ isOpen, children, onCancel }: ModalProps) => {
     el,
   );
 };
-
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  background: rgba(0, 0, 0, 0.35);
-`;
 
 export default Modal;
