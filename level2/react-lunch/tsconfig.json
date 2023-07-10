@@ -23,6 +23,6 @@
     "esModuleInterop": true, // CommonJS 모듈과의 상호 운용성을 허용합니다.
     "allowSyntheticDefaultImports": true // 모듈에서 default import를 합성할 수 있도록 허용합니다.
   },
-  "include": ["src"],
+  "include": ["src", "cypress"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
