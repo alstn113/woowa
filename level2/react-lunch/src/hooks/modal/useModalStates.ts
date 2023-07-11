@@ -4,7 +4,7 @@ import ModalStateContext from '../../state/contexts/modal/ModalStateContext';
 
 const useModalStates = () => {
   const value = useContext(ModalStateContext);
-  if (value === undefined)
+  if (!value)
     throw new Error(
       'useModalState must be used within a ModalStateContextProvider',
     );

@@ -4,7 +4,7 @@ import RestaurantsDispatchContext from '../../state/contexts/restaurants/Restaur
 
 const useRestaurantsActions = () => {
   const value = useContext(RestaurantsDispatchContext);
-  if (value === undefined)
+  if (!value)
     throw new Error(
       'useRestaurantsActions must be used within a RestaurantsProvider',
     );

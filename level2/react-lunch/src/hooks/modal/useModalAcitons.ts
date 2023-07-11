@@ -4,7 +4,7 @@ import ModalDispatchContext from '../../state/contexts/modal/ModalDispatchContex
 
 const useModalAcitons = () => {
   const value = useContext(ModalDispatchContext);
-  if (value === undefined)
+  if (!value)
     throw new Error(
       'useModalActions must be used within a ModalDispatchContextProvider',
     );

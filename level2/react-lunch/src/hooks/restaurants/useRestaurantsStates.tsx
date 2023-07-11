@@ -4,7 +4,7 @@ import RestaurantsStateContext from '../../state/contexts/restaurants/Restaurant
 
 const useRestaurantsStates = () => {
   const value = useContext(RestaurantsStateContext);
-  if (value === undefined)
+  if (!value)
     throw new Error(
       'useRestaurantsStates must be used within a RestaurantsProvider',
     );
