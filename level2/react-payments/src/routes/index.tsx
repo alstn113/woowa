@@ -13,11 +13,11 @@ const router = createBrowserRouter([
     path: '/card',
     children: [
       {
-        path: '/create',
+        path: 'create',
         element: <CardCreationPage />,
       },
       {
-        path: '/naming',
+        path: 'naming',
         element: <CardNamingPage />,
       },
     ],
