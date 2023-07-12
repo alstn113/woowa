@@ -1,4 +1,4 @@
-import Header from './components/base/Header';
+import Header from './components/base/Header/Header';
 import RestaurantFilter from './components/RestaurantFilter/RestaurantFilter';
 import RestaurantList from './components/RestaurantList/RestaurantList';
 
