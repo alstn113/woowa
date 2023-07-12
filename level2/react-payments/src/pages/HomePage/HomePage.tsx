@@ -1,5 +1,7 @@
+import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
+
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return <BaseLayout title="보유 카드">HomePage</BaseLayout>;
 };
 
 export default HomePage;

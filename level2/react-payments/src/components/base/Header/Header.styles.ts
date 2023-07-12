@@ -7,6 +7,8 @@ export const HeaderContainer = styled.header`
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
+  height: 80px;
+  padding: 20px;
 `;
 
 export const HeaderTitle = styled.h1``;

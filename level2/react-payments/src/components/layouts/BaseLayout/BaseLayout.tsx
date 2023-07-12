@@ -1,3 +1,4 @@
+import * as S from './BaseLayout.styles';
 import Header from '../../base/Header/Header';
 
 interface BaseLayoutProps {
@@ -8,10 +9,10 @@ interface BaseLayoutProps {
 
 const BaseLayout = ({ children, title, withBackButton }: BaseLayoutProps) => {
   return (
-    <>
+    <S.Container>
       <Header title={title} withBackButton={withBackButton} />
       <main>{children}</main>
-    </>
+    </S.Container>
   );
 };
 
