@@ -27,8 +27,8 @@ const CreditCardWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  height: 10rem;
-  width: 20rem;
+  height: 8rem;
+  width: 16rem;
   margin-bottom: 1rem;
   background-color: #f2f2f2;
   border-radius: 0.5rem;

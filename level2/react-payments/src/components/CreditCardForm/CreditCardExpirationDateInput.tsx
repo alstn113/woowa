@@ -1,40 +1,39 @@
 import styled from '@emotion/styled';
 
+import { SpaceBetween } from '../../styles/shared';
 import Input from '../common/Input/Input';
 
 const CreditCardExpirationDateInput = () => {
+  const inputProps = {
+    type: 'text',
+    isCenter: true,
+    required: true,
+    minLength: 2,
+    maxLength: 2,
+    letterSpacing: 'medium',
+  } as const;
+
   return (
-    <div>
+    <section>
       <label htmlFor="credit-card-expiration-date">만료일</label>
-      <InputWrapper id="credit-card-expiration-date">
+      <InputWrapper gap={1} id="credit-card-expiration-date">
         <Input
-          type="text"
-          isCenter
-          required
-          minLength={2}
-          maxLength={2}
+          {...inputProps}
           placeholder="MM"
           data-form-id="credit-card-expiration-date-months"
         />
         <Input
-          type="text"
-          isCenter
-          required
-          minLength={2}
-          maxLength={2}
+          {...inputProps}
           placeholder="YY"
           data-form-id="credit-card-expiration-date-years"
         />
       </InputWrapper>
-    </div>
+    </section>
   );
 };
 
-const InputWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  align-items: center;
+const InputWrapper = styled(SpaceBetween)`
+  width: 50%;
 `;
 
 export default CreditCardExpirationDateInput;
