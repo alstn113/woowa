@@ -1,13 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import CardCreationPage from '../pages/CardCreationPage/CardCreationPage';
+import CardListPage from '../pages/CardListPage/CardListPage';
 import CardNamingPage from '../pages/CardNamingPage/CardNamingPage';
-import HomePage from '../pages/HomePage/HomePage';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: <CardListPage />,
   },
   {
     path: '/card',
