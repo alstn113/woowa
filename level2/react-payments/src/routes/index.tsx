@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <CardListPage />,
   },
   {
-    path: '/card',
+    path: '/credit-card',
     children: [
       {
         path: 'create',
