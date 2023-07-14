@@ -20,7 +20,6 @@ const HomePage = () => {
         <InputNumber.Field />
         <InputNumber.Field maxLength={2} />
         <InputNumber.Field maxLength={1} />
-        <div></div>
         <InputNumber.Field maxLength={3} />
       </InputNumber>
     </BaseLayout>
