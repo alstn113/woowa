@@ -9,11 +9,11 @@ const ValidationMessage = {
 type ValitionType = keyof typeof ValidationMessage;
 
 class Validator<T> {
-  private value: T | undefined;
+  private value: T;
   private errors: Record<ValitionType, string>;
 
-  constructor() {
-    this.value = undefined;
+  constructor(value: T) {
+    this.value = value;
     this.errors = {
       required: ValidationMessage.required,
       minLength: ValidationMessage.minLength(3),
@@ -28,11 +28,6 @@ class Validator<T> {
 
   getErrors(): Record<ValitionType, string> {
     return this.errors;
-  }
-
-  setValue(value: T): this {
-    this.value = value;
-    return this;
   }
 
   required(errorMessage?: string): this {

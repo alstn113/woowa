@@ -1,8 +1,10 @@
+import Input from '../common/Input/Input';
+
 const CreditCardExpirationDateInput = () => {
   return (
     <div>
       <label htmlFor="credit-card-expiration-date">만료일</label>
-      <input type="text" id="credit-card-expiration-date" />
+      <Input type="text" id="credit-card-expiration-date" />
     </div>
   );
 };
