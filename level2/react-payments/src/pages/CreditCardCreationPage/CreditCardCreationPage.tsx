@@ -1,21 +1,21 @@
+import CreditCardCVCInput from '../../components/CreditCardForm/CreditCardCVCInput';
 import CreditCardExpirationDateInput from '../../components/CreditCardForm/CreditCardExpirationDateInput';
 import CreditCardNumberInput from '../../components/CreditCardForm/CreditCardNumberInput';
 import CreditCardOwnerNameInput from '../../components/CreditCardForm/CreditCardOwnerNameInput';
 import CreditCardPasswordInput from '../../components/CreditCardForm/CreditCardPasswordInput';
-import CreditCardSecurityCodeInput from '../../components/CreditCardForm/CreditCardSecurityCodeInput';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 
 const CreditCardCreationPage = () => {
   return (
     <BaseLayout title="카드 추가" withBackButton>
       <div>카드 표시</div>
-      <div>
+      <form>
         <CreditCardNumberInput />
         <CreditCardExpirationDateInput />
         <CreditCardOwnerNameInput />
-        <CreditCardSecurityCodeInput />
+        <CreditCardCVCInput />
         <CreditCardPasswordInput />
-      </div>
+      </form>
     </BaseLayout>
   );
 };

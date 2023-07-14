@@ -1,7 +1,10 @@
-import React from 'react';
-
 const CreditCardNumberInput = () => {
-  return <div>CreditCardNumberInput</div>;
+  return (
+    <div>
+      <label htmlFor="credit-card-number">카드 번호</label>
+      <input type="text" id="credit-card-number" />
+    </div>
+  );
 };
 
 export default CreditCardNumberInput;

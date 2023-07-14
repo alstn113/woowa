@@ -1,7 +1,10 @@
-import React from 'react';
-
 const CreditCardPasswordInput = () => {
-  return <div>CreditCardPasswordInput</div>;
+  return (
+    <div>
+      <label htmlFor="credit-card-password">카드 비밀번호</label>
+      <input type="password" id="credit-card-password" />
+    </div>
+  );
 };
 
 export default CreditCardPasswordInput;

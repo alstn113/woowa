@@ -23,20 +23,20 @@ const creditCardFormReducer = (
         ...state,
         creditCardNumber: action.payload,
       };
-    case 'SET_CREDIT_EXPIRATION_DATE':
+    case 'SET_CREDIT_CARD_EXPIRATION_DATE':
       return {
         ...state,
-        creditExpirationDate: action.payload,
+        creditCardExpirationDate: action.payload,
       };
     case 'SET_CREDIT_CARD_OWNER_NAME':
       return {
         ...state,
         creditCardOwnerName: action.payload,
       };
-    case 'SET_CREDIT_SECURITY_CODE':
+    case 'SET_CREDIT_CARD_CVC':
       return {
         ...state,
-        creditSecurityCode: action.payload,
+        creditCardCVC: action.payload,
       };
     case 'SET_CREDIT_CARD_PASSWORD':
       return {
