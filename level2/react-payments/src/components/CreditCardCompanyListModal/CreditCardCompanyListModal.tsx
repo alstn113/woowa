@@ -11,7 +11,6 @@ const CreditCardCompanyListModal = () => {
   const handleClick = () => {
     navigate(`/credit-card/create`);
     dispatch({ type: 'CLOSE_MODAL' });
-    r;
   };
 
   return (

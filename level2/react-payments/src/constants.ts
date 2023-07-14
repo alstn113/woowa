@@ -4,7 +4,7 @@ export const PAGE_ROUTES = {
     CREATE: '/credit-card/create',
     NAMING: '/credit-card/naming',
   },
-  NOT_FOUND: '/404',
+  NOT_FOUND: '*',
 };
 
 export const CREDIT_CARD_COMPANY = [
