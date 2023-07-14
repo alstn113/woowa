@@ -10,7 +10,6 @@ export const InputContainer = styled.input<{
 }>`
   width: 100%;
   padding: 0.5rem;
-  margin-top: 0.5rem;
   border-bottom: 2px solid;
   border-color: ${({ isInvalid }) =>
     isInvalid ? theme.colors.warning : theme.colors.gray};

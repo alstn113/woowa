@@ -18,6 +18,9 @@ const CreditCardCreationPage = () => {
         <CreditCardOwnerNameInput />
         <CreditCardCVCInput />
         <CreditCardPasswordInput />
+        <ButtonWrapper>
+          <NextButton type="submit">다음</NextButton>
+        </ButtonWrapper>
       </Form>
     </BaseLayout>
   );
@@ -41,7 +44,23 @@ const CreditCardWrapper = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
+
+  label {
+    font-size: 0.8rem;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const NextButton = styled.button`
+  font-size: 1rem;
+  font-weight: 700;
 `;
 
 export default CreditCardCreationPage;
