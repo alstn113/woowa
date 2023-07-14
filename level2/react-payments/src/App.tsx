@@ -1,22 +1,25 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { PAGE_ROUTES } from './constants';
-import CardCreationPage from './pages/CardCreationPage/CardCreationPage';
-import CardListPage from './pages/CardListPage/CardListPage';
-import CardNamingPage from './pages/CardNamingPage/CardNamingPage';
+import CreditCardCreationPage from './pages/CreditCardCreationPage/CreditCardCreationPage';
+import CreditCardListPage from './pages/CreditCardListPage/CreditCardListPage';
+import CreditCardNamingPage from './pages/CreditCreditCardNamingPage/CreditCardNamingPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 const App = () => {
   return (
     <Routes>
-      <Route path={PAGE_ROUTES.CREDIT_CARD_LIST} element={<CardListPage />} />
+      <Route
+        path={PAGE_ROUTES.CREDIT_CARD_LIST}
+        element={<CreditCardListPage />}
+      />
       <Route
         path={PAGE_ROUTES.CREDIT_CARD.CREATE}
-        element={<CardCreationPage />}
+        element={<CreditCardCreationPage />}
       />
       <Route
         path={PAGE_ROUTES.CREDIT_CARD.NAMING}
-        element={<CardNamingPage />}
+        element={<CreditCardNamingPage />}
       />
       <Route path={PAGE_ROUTES.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>

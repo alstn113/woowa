@@ -1,24 +1,24 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import CardCreationPage from '../pages/CardCreationPage/CardCreationPage';
-import CardListPage from '../pages/CardListPage/CardListPage';
-import CardNamingPage from '../pages/CardNamingPage/CardNamingPage';
+import CreditCardCreationPage from '../pages/CreditCardCreationPage/CreditCardCreationPage';
+import CreditCardListPage from '../pages/CreditCardListPage/CreditCardListPage';
+import CreditCardNamingPage from '../pages/CreditCreditCardNamingPage/CreditCardNamingPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <CardListPage />,
+    element: <CreditCardListPage />,
   },
   {
     path: '/credit-card',
     children: [
       {
         path: 'create',
-        element: <CardCreationPage />,
+        element: <CreditCardCreationPage />,
       },
       {
         path: 'naming',
-        element: <CardNamingPage />,
+        element: <CreditCardNamingPage />,
       },
     ],
   },

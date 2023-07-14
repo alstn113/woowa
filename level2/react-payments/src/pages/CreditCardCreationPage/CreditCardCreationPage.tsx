@@ -1,11 +1,11 @@
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 
-const CardCreationPage = () => {
+const CreditCardCreationPage = () => {
   return (
     <BaseLayout title="카드 추가" withBackButton>
-      CardCreationPage
+      CreditCardCreationPage
     </BaseLayout>
   );
 };
 
-export default CardCreationPage;
+export default CreditCardCreationPage;
