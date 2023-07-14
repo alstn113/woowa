@@ -10,6 +10,7 @@ import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 const CreditCardCreationPage = () => {
   return (
     <BaseLayout title="카드 추가" withBackButton>
+      {/* 임시 카드 표시 */}
       <CreditCardWrapper>카드 표시</CreditCardWrapper>
       <Form>
         <CreditCardNumberInput />

@@ -1,8 +1,20 @@
 import styled from '@emotion/styled';
 
+import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import Input from '../common/Input/Input';
 
 const CreditCardCVCInput = () => {
+  const dispatch = useCreditCardFormActions();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+
+    dispatch({
+      type: 'SET_CREDIT_CARD_CVC',
+      payload: value,
+    });
+  };
+
   const inputProps = {
     type: 'text',
     isCenter: true,
@@ -10,13 +22,14 @@ const CreditCardCVCInput = () => {
     minLength: 3,
     maxLength: 3,
     letterSpacing: 'medium',
+    onChange: handleChange,
   } as const;
 
   return (
     <section>
       <label htmlFor="credit-card-cvc">보안 코드(CVC/CVV)</label>
       <InputWrapper>
-        <Input {...inputProps} data-form-id="credit-card-cvc" />
+        <Input {...inputProps} />
       </InputWrapper>
     </section>
   );
