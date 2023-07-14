@@ -15,6 +15,10 @@ export const InputContainer = styled.input<{
   text-align: ${({ isCenter }) => (isCenter ? 'center' : 'left')};
   outline: none;
   transition: border-color 0.1s ease-in-out;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 1rem;
+
   &:focus {
     border-color: ${({ isInvalid }) =>
       isInvalid ? theme.colors.warning : theme.colors.primary};
