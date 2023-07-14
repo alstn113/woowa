@@ -1,3 +1,4 @@
+import CreditCardFormProvider from './state/contexts/creditCardForm/CreditCardFormProvider';
 import ModalProvider from './state/contexts/modal/ModalProvider';
 import GlobalStyle from './styles/GlobalStyle';
 
@@ -8,8 +9,10 @@ interface AppProviderProps {
 const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <ModalProvider>
-      <GlobalStyle />
-      {children}
+      <CreditCardFormProvider>
+        <GlobalStyle />
+        {children}
+      </CreditCardFormProvider>
     </ModalProvider>
   );
 };

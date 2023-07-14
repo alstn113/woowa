@@ -13,7 +13,7 @@ const CreditCardNumberInput = () => {
           required
           minLength={4}
           maxLength={4}
-          data-form-id={0}
+          data-form-id="credit-card-number-0"
         />
         <Input
           type="text"
@@ -21,7 +21,7 @@ const CreditCardNumberInput = () => {
           required
           minLength={4}
           maxLength={4}
-          data-form-id={1}
+          data-form-id="credit-card-number-1"
         />
         <Input
           type="password"
@@ -29,7 +29,7 @@ const CreditCardNumberInput = () => {
           required
           minLength={4}
           maxLength={4}
-          data-form-id={2}
+          data-form-id="credit-card-number-2"
         />
         <Input
           type="password"
@@ -37,7 +37,7 @@ const CreditCardNumberInput = () => {
           required
           minLength={4}
           maxLength={4}
-          data-form-id={3}
+          data-form-id="credit-card-number-3"
         />
       </InputWrapper>
     </div>

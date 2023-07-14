@@ -17,7 +17,6 @@ export const InputContainer = styled.input<{
   transition: border-color 0.1s ease-in-out;
   font-size: 16px;
   line-height: 1.5;
-  letter-spacing: 1rem;
 
   &:focus {
     border-color: ${({ isInvalid }) =>
