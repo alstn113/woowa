@@ -19,7 +19,7 @@ const CreditCardCreationPage = () => {
         <CreditCardCVCInput />
         <CreditCardPasswordInput />
         <ButtonWrapper>
-          <NextButton type="submit">다음</NextButton>
+          <NextButton type="button">다음</NextButton>
         </ButtonWrapper>
       </Form>
     </BaseLayout>
