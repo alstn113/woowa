@@ -75,7 +75,10 @@ const CreditCardView = ({
           {creditCardOwnerName}
         </CreditCardOwnerNameWrapper>
         <CreditCardExpirationDateWrapper>
-          {creditCardExpirationDate[0]}/{creditCardExpirationDate[1]}
+          {creditCardExpirationDate[0]}
+          {(creditCardExpirationDate[0] || creditCardExpirationDate[1]) &&
+            ' / '}
+          {creditCardExpirationDate[1]}
         </CreditCardExpirationDateWrapper>
       </OwnerNameExpirationDateSpaceBetween>
     </CreditCardWrapper>
