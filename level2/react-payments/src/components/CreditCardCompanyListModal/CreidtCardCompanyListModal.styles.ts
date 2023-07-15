@@ -14,9 +14,11 @@ export const Container = styled.div`
   align-items: center;
 `;
 export const IconWrapper = styled.div`
+  padding: 30px 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 5px;
+  grid-column-gap: 5px;
+  grid-row-gap: 20px;
 `;
 
 export const IconButton = styled.button`

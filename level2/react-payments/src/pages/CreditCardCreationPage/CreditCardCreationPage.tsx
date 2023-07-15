@@ -6,20 +6,43 @@ import CreditCardNumberInput from '../../components/CreditCardForm/CreditCardNum
 import CreditCardOwnerNameInput from '../../components/CreditCardForm/CreditCardOwnerNameInput';
 import CreditCardPasswordInput from '../../components/CreditCardForm/CreditCardPasswordInput';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
+import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
 
 const CreditCardCreationPage = () => {
+  const {
+    creditCardCVC,
+    creditCardCompany,
+    creditCardExpirationDate,
+    creditCardName,
+    creditCardNumber,
+    creditCardOwnerName,
+    creditCardPassword,
+  } = useCreditCardFormStates();
+
+  const handleNexpStep = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(
+      creditCardCVC,
+      creditCardCompany,
+      creditCardExpirationDate,
+      creditCardName,
+      creditCardNumber,
+      creditCardOwnerName,
+      creditCardPassword,
+    );
+  };
+
   return (
     <BaseLayout title="카드 추가" withBackButton>
-      {/* 임시 카드 표시 */}
       <CreditCardWrapper>카드 표시</CreditCardWrapper>
-      <Form>
+      <Form onSubmit={handleNexpStep}>
         <CreditCardNumberInput />
         <CreditCardExpirationDateInput />
         <CreditCardOwnerNameInput />
         <CreditCardCVCInput />
         <CreditCardPasswordInput />
         <ButtonWrapper>
-          <NextButton type="button">다음</NextButton>
+          <NextButton type="submit">다음</NextButton>
         </ButtonWrapper>
       </Form>
     </BaseLayout>

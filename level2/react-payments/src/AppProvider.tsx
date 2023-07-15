@@ -8,12 +8,12 @@ interface AppProviderProps {
 
 const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <ModalProvider>
-      <CreditCardFormProvider>
+    <CreditCardFormProvider>
+      <ModalProvider>
         <GlobalStyle />
         {children}
-      </CreditCardFormProvider>
-    </ModalProvider>
+      </ModalProvider>
+    </CreditCardFormProvider>
   );
 };
 
