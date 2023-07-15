@@ -33,7 +33,7 @@ const CreditCardWrapper = styled.div`
   margin: 0 auto;
   height: 8rem;
   width: 16rem;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   background-color: #f2f2f2;
   border-radius: 0.5rem;
   font-size: 2rem;
