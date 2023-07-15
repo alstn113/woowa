@@ -15,10 +15,10 @@ const CreditCardFormProvider = ({ children }: CreditCardFormProviderProps) => {
       creditCardCompany: '카카오뱅크',
       creditCardName: '',
       creditCardNumber: ['', '', '', ''],
-      creditCardExpirationDate: [11, 11],
+      creditCardExpirationDate: ['', ''],
       creditCardOwnerName: '',
-      creditCardCVC: 111,
-      creditCardPassword: [1, 1],
+      creditCardCVC: '',
+      creditCardPassword: ['', ''],
     }),
     [],
   );

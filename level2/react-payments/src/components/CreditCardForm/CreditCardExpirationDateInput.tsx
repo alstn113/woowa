@@ -22,7 +22,7 @@ const CreditCardExpirationDateInput = () => {
         if (index === formId) return value;
         return date;
       },
-    ) as [number, number];
+    ) as [string, string];
 
     dispatch({
       type: 'SET_CREDIT_CARD_EXPIRATION_DATE',

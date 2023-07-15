@@ -20,7 +20,7 @@ const CreditCardPasswordInput = () => {
     const newCreditCardPassword = creditCardPassword.map((password, index) => {
       if (index === formId) return value;
       return password;
-    }) as [number, number];
+    }) as [string, string];
 
     dispatch({
       type: 'SET_CREDIT_CARD_PASSWORD',

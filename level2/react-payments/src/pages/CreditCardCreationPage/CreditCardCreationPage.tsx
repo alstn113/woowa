@@ -36,7 +36,13 @@ const CreditCardCreationPage = () => {
 
   return (
     <BaseLayout title="카드 추가" withBackButton>
-      <CreditCardView />
+      <CreditCardView
+        creditCardCompanyName={creditCardCompany}
+        creditCardNumber={creditCardNumber}
+        creditCardExpirationDate={creditCardExpirationDate}
+        creditCardOwnerName={creditCardOwnerName}
+      />
+
       <Spacing y={2} />
       <Form onSubmit={handleNexpStep}>
         <CreditCardNumberInput />

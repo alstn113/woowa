@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import BC카드 from '../../assets/images/BC카드.png';
@@ -8,7 +9,9 @@ import 우리카드 from '../../assets/images/우리카드.png';
 import 카카오뱅크 from '../../assets/images/카카오뱅크.png';
 import 하나카드 from '../../assets/images/하나카드.png';
 import 현대카드 from '../../assets/images/현대카드.png';
+import { CREDIT_CARD_COMPANY_COLOR } from '../../constants';
 import { SpaceBetween } from '../../styles/shared';
+import theme from '../../styles/theme';
 import type {
   CreditCardCompany,
   CreditCardExpirationDate,
@@ -24,9 +27,9 @@ interface CreditCardCompanyNameProps {
 }
 
 const CreditCardView = ({
-  creditCardCompanyName = 'BC카드',
+  creditCardCompanyName = '카카오뱅크',
   creditCardNumber = ['', '', '', ''],
-  creditCardExpirationDate = [0, 0],
+  creditCardExpirationDate = ['', ''],
   creditCardOwnerName = '',
 }: CreditCardCompanyNameProps) => {
   const cardIcon = {
@@ -41,43 +44,63 @@ const CreditCardView = ({
   } satisfies Record<CreditCardCompany, string>;
 
   return (
-    <CreditCardWrapper>
-      <SpaceBetween>
+    <CreditCardWrapper
+      cardColor={CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName]}
+    >
+      <NameIconSpaceBetween>
         <CreidtCardCompanyName>{creditCardCompanyName}</CreidtCardCompanyName>
         <CreditCardCompanyIcon
           src={cardIcon[creditCardCompanyName]}
           alt={creditCardCompanyName}
         />
-      </SpaceBetween>
+      </NameIconSpaceBetween>
       <GoldChip />
       <CreditCardNumberWrapper>
         <div>{creditCardNumber[0]}</div>
         <div>{creditCardNumber[1]}</div>
-        <div>{'•'.repeat(creditCardNumber[2].length)}</div>
-        <div>{'•'.repeat(creditCardNumber[3].length)}</div>
+        <div>
+          {Array.from({ length: creditCardNumber[2].length }, (_, i) => (
+            <CreditCardNumberMasking key={i} />
+          ))}
+        </div>
+        <div>
+          {Array.from({ length: creditCardNumber[3].length }, (_, i) => (
+            <CreditCardNumberMasking key={i} />
+          ))}
+        </div>
       </CreditCardNumberWrapper>
-      <SpaceBetween>
+      <OwnerNameExpirationDateSpaceBetween>
         <CreditCardOwnerNameWrapper>
           {creditCardOwnerName}
         </CreditCardOwnerNameWrapper>
         <CreditCardExpirationDateWrapper>
           {creditCardExpirationDate[0]}/{creditCardExpirationDate[1]}
         </CreditCardExpirationDateWrapper>
-      </SpaceBetween>
+      </OwnerNameExpirationDateSpaceBetween>
     </CreditCardWrapper>
   );
 };
 
-const CreditCardWrapper = styled.div`
+const CreditCardWrapper = styled.div<{ cardColor: string }>`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   height: 140px;
   width: 220px;
-  padding: 20px;
-  background-color: #f2f2f2;
+  padding: 15px;
+
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 5px;
+  color: ${theme.colors.white};
+  background-color: ${({ cardColor }) => cardColor};
+`;
+
+const NameIconSpaceBetween = styled(SpaceBetween)`
+  align-items: flex-start;
+`;
+
+const OwnerNameExpirationDateSpaceBetween = styled(SpaceBetween)`
+  margin-top: 10px;
 `;
 
 const CreidtCardCompanyName = styled.span``;
@@ -91,17 +114,36 @@ const GoldChip = styled.div`
   height: 25px;
   border-radius: 5px;
   background-color: #d6bc2a;
+  margin-bottom: 15px;
 `;
 
 const CreditCardNumberWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  div {
-    flex: 1;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    letter-spacing: 2px;
   }
 `;
+
+const CreditCardNumberMasking = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: ${theme.colors.white};
+  & + & {
+    margin-left: 6px;
+  }
+`;
+
 const CreditCardOwnerNameWrapper = styled.span``;
 const CreditCardExpirationDateWrapper = styled.span``;
 

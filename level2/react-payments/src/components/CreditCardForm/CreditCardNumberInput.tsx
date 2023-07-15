@@ -20,7 +20,7 @@ const CreditCardNumberInput = () => {
     const newCreditCardNumber = creditCardNumber.map((number, index) => {
       if (index === formId) return value;
       return number;
-    });
+    }) as [string, string, string, string];
 
     dispatch({
       type: 'SET_CREDIT_CARD_NUMBER',
