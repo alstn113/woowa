@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import BC카드 from '../../assets/images/BC카드.png';
@@ -11,7 +10,6 @@ import 하나카드 from '../../assets/images/하나카드.png';
 import 현대카드 from '../../assets/images/현대카드.png';
 import { CREDIT_CARD_COMPANY_COLOR } from '../../constants';
 import { SpaceBetween } from '../../styles/shared';
-import theme from '../../styles/theme';
 import type {
   CreditCardCompany,
   CreditCardExpirationDate,
@@ -43,10 +41,13 @@ const CreditCardView = ({
     현대카드: 현대카드,
   } satisfies Record<CreditCardCompany, string>;
 
+  const cardBackground = CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName]
+    .background as string;
+  const cardColor = CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName]
+    .color as string;
+
   return (
-    <CreditCardWrapper
-      cardColor={CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName]}
-    >
+    <CreditCardWrapper cardBackground={cardBackground} cardColor={cardColor}>
       <NameIconSpaceBetween>
         <CreidtCardCompanyName>{creditCardCompanyName}</CreidtCardCompanyName>
         <CreditCardCompanyIcon
@@ -60,12 +61,12 @@ const CreditCardView = ({
         <div>{creditCardNumber[1]}</div>
         <div>
           {Array.from({ length: creditCardNumber[2].length }, (_, i) => (
-            <CreditCardNumberMasking key={i} />
+            <CreditCardNumberMasking cardColor={cardColor} key={i} />
           ))}
         </div>
         <div>
           {Array.from({ length: creditCardNumber[3].length }, (_, i) => (
-            <CreditCardNumberMasking key={i} />
+            <CreditCardNumberMasking cardColor={cardColor} key={i} />
           ))}
         </div>
       </CreditCardNumberWrapper>
@@ -81,7 +82,10 @@ const CreditCardView = ({
   );
 };
 
-const CreditCardWrapper = styled.div<{ cardColor: string }>`
+const CreditCardWrapper = styled.div<{
+  cardBackground: string;
+  cardColor: string;
+}>`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -91,8 +95,8 @@ const CreditCardWrapper = styled.div<{ cardColor: string }>`
 
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 5px;
-  color: ${theme.colors.white};
-  background-color: ${({ cardColor }) => cardColor};
+  background-color: ${({ cardBackground }) => cardBackground};
+  color: ${({ cardColor }) => cardColor};
 `;
 
 const NameIconSpaceBetween = styled(SpaceBetween)`
@@ -115,6 +119,15 @@ const GoldChip = styled.div`
   border-radius: 5px;
   background-color: #d6bc2a;
   margin-bottom: 15px;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size:
+    10px 100%,
+    100% 10px;
 `;
 
 const CreditCardNumberWrapper = styled.div`
@@ -131,14 +144,14 @@ const CreditCardNumberWrapper = styled.div`
   }
 `;
 
-const CreditCardNumberMasking = styled.div`
+const CreditCardNumberMasking = styled.div<{ cardColor: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background-color: ${theme.colors.white};
+  background-color: ${({ cardColor }) => cardColor};
   & + & {
     margin-left: 6px;
   }
