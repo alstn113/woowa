@@ -24,7 +24,6 @@ const GlobalStyle = () => {
         }
         button {
           border: none;
-          outline: none;
           background: none;
           cursor: pointer;
         }

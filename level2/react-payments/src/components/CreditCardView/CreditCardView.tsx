@@ -129,8 +129,8 @@ const GoldChip = styled.div`
     ),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size:
-    10px 100%,
-    100% 10px;
+    30% 100%,
+    100% 30%;
 `;
 
 const CreditCardNumberWrapper = styled.div`
