@@ -9,17 +9,22 @@ import 우리카드 from '../../assets/images/우리카드.png';
 import 카카오뱅크 from '../../assets/images/카카오뱅크.png';
 import 하나카드 from '../../assets/images/하나카드.png';
 import 현대카드 from '../../assets/images/현대카드.png';
-import { CREDIT_CARD_COMPANY } from '../../constants';
+import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useModalAcitons from '../../hooks/modal/useModalAcitons';
 import { CreditCardCompany } from '../../types';
 
 const CreditCardCompanyListModal = () => {
   const navigate = useNavigate();
-  const dispatch = useModalAcitons();
+  const modalDispatch = useModalAcitons();
+  const creditCardFormDispatch = useCreditCardFormActions();
 
-  const handleClick = () => {
+  const handleClick = (cardName: CreditCardCompany) => {
+    creditCardFormDispatch({
+      type: 'SET_CREDIT_CARD_COMPANY',
+      payload: cardName,
+    });
+    modalDispatch({ type: 'CLOSE_MODAL' });
     navigate(`/credit-card/create`);
-    dispatch({ type: 'CLOSE_MODAL' });
   };
 
   interface CardIcon {
@@ -42,9 +47,13 @@ const CreditCardCompanyListModal = () => {
     <S.Container>
       <S.IconWrapper>
         {cardIcons.map((cardIcon: CardIcon) => (
-          <S.IconButton key={cardIcon.name} onClick={handleClick}>
+          <S.IconButton
+            key={cardIcon.name}
+            onClick={() => handleClick(cardIcon.name)}
+            data-id={cardIcon.name}
+          >
             <S.Icon src={cardIcon.src} alt={cardIcon.name} />
-            <span>{cardIcon.name}</span>
+            <S.IconLabel>{cardIcon.name}</S.IconLabel>
           </S.IconButton>
         ))}
       </S.IconWrapper>

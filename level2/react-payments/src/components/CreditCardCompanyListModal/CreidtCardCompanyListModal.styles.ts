@@ -13,6 +13,11 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+export const IconWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+`;
 
 export const IconButton = styled.button`
   display: flex;
@@ -22,13 +27,12 @@ export const IconButton = styled.button`
   gap: 10px;
 `;
 
-export const IconWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
+export const IconLabel = styled.span`
+  font-size: 12px;
+  color: #333;
 `;
 
 export const Icon = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 `;

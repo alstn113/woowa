@@ -9,4 +9,8 @@ export const Container = styled.div`
   main {
     padding: 20px;
   }
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
