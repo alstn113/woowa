@@ -41,10 +41,9 @@ const CreditCardView = ({
     현대카드: 현대카드,
   } satisfies Record<CreditCardCompany, string>;
 
-  const cardBackground = CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName]
-    .background as string;
-  const cardColor = CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName]
-    .color as string;
+  const cardBackground =
+    CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName].background;
+  const cardColor = CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName].color;
 
   return (
     <CreditCardWrapper cardBackground={cardBackground} cardColor={cardColor}>
@@ -106,10 +105,6 @@ const NameIconSpaceBetween = styled(SpaceBetween)`
   align-items: flex-start;
 `;
 
-const OwnerNameExpirationDateSpaceBetween = styled(SpaceBetween)`
-  margin-top: 10px;
-`;
-
 const CreidtCardCompanyName = styled.span``;
 const CreditCardCompanyIcon = styled.img`
   width: 30px;
@@ -121,7 +116,7 @@ const GoldChip = styled.div`
   height: 25px;
   border-radius: 5px;
   background-color: #d6bc2a;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   background-image: linear-gradient(
       to right,
       rgba(0, 0, 0, 0.1) 1px,
@@ -138,6 +133,7 @@ const CreditCardNumberWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 16px;
   > div {
     display: flex;
     align-items: center;
@@ -158,6 +154,11 @@ const CreditCardNumberMasking = styled.div<{ cardColor: string }>`
   & + & {
     margin-left: 6px;
   }
+`;
+
+const OwnerNameExpirationDateSpaceBetween = styled(SpaceBetween)`
+  margin-top: 10px;
+  height: 16px;
 `;
 
 const CreditCardOwnerNameWrapper = styled.span``;
