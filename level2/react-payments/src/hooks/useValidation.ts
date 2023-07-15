@@ -4,7 +4,7 @@ type FieldValues<T> = {
   [Key in keyof T]: T[Key];
 };
 
-type ValidationFn<T> = (value: T) => string | boolean;
+type ValidationFn<T> = (value: T) => boolean;
 
 type FieldValidators<T> = {
   [Key in keyof T]: ValidationFn<T[Key]>;
@@ -15,41 +15,59 @@ type FieldErrors<T> = {
 };
 
 interface UseValidationResult<T> {
-  values: FieldValues<T>;
-  errors: FieldErrors<T>;
-  validateField: <K extends keyof T>(fieldName: K) => void;
-  validateAllFields: () => void;
-  isValid: boolean;
+  validationResult: FieldErrors<T>;
+  validateField: <K extends keyof T>(fieldName: K, value: T[K]) => boolean;
+  validateAllFields: (values: FieldValues<T>) => boolean;
 }
 
 const useValidation = <T>(
-  initialValues: FieldValues<T>,
   validators: FieldValidators<T>,
 ): UseValidationResult<T> => {
-  const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<FieldErrors<T>>({} as FieldErrors<T>);
 
-  const validateField = <K extends keyof T>(fieldName: K) => {
-    const error = validators[fieldName](values[fieldName]);
-    setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: error }));
+  const validateField = <K extends keyof T>(fieldName: K, value: T[K]) => {
+    try {
+      validators[fieldName](value);
+      setErrors((prevErrors) => {
+        const newErrors = { ...prevErrors };
+        delete newErrors[fieldName];
+        return newErrors;
+      });
+
+      return true;
+    } catch (error) {
+      const e = error as Error;
+
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [fieldName]: e.message,
+      }));
+    }
+    return false;
   };
 
-  const validateAllFields = () => {
-    const fieldErrors: FieldErrors<T> = {} as FieldErrors<T>;
-
+  const validateAllFields = (values: FieldValues<T>): boolean => {
     for (const fieldName in validators) {
-      const result = validators[fieldName](values[fieldName]);
-      if (typeof result === 'string') {
-        fieldErrors[fieldName] = result;
+      try {
+        validators[fieldName](values[fieldName]);
+        setErrors((prevErrors) => {
+          const newErrors = { ...prevErrors };
+          delete newErrors[fieldName];
+          return newErrors;
+        });
+      } catch (error) {
+        const e = error as Error;
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [fieldName]: e.message,
+        }));
       }
     }
 
-    setErrors(fieldErrors);
+    return Object.keys(errors).length === 0;
   };
 
-  const isValid = Object.values(errors).every((error) => !error);
-
-  return { validateField, errors, isValid, validateAllFields, values };
+  return { validationResult: errors, validateField, validateAllFields };
 };
 
 export default useValidation;

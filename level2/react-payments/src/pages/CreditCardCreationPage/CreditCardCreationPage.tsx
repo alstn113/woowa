@@ -8,8 +8,14 @@ import CreditCardPasswordInput from '../../components/CreditCardForm/CreditCardP
 import CreditCardView from '../../components/CreditCardView/CreditCardView';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
-import useValidation from '../../hooks/useValidation';
 import { Spacing } from '../../styles/shared';
+import useValidation from '../../hooks/useValidation';
+import {
+  CreditCardCVC,
+  CreditCardExpirationDate,
+  CreditCardNumber,
+  CreditCardPassword,
+} from '../../types';
 
 const CreditCardCreationPage = () => {
   const {
@@ -22,32 +28,32 @@ const CreditCardCreationPage = () => {
     creditCardPassword,
   } = useCreditCardFormStates();
 
-  const {} = useValidation<{
-    creditCardCVC: string;
-  }>(
-    { creditCardCVC },
-    {
-      creditCardCVC: (value) => {
-        if (value.length !== 3) {
-          return 'CVC는 3자리입니다.';
-        }
-        return '';
-      },
-    },
-  );
-
   const handleNexpStep = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(
-      creditCardCVC,
-      creditCardCompany,
-      creditCardExpirationDate,
-      creditCardName,
-      creditCardNumber,
-      creditCardOwnerName,
-      creditCardPassword,
-    );
   };
+
+  interface CreditCardValidation {
+    creditCardNumber: CreditCardNumber;
+    creditCardExpirationDate: CreditCardExpirationDate;
+    creditCardCVC: CreditCardCVC;
+    creditCardPassword: CreditCardPassword;
+  }
+
+  const { validateAllFields, validateField, validationResult } =
+    useValidation<CreditCardValidation>({
+      creditCardNumber: () => {
+        return true;
+      },
+      creditCardExpirationDate: () => {
+        return true;
+      },
+      creditCardCVC: () => {
+        return true;
+      },
+      creditCardPassword: () => {
+        return true;
+      },
+    });
 
   return (
     <BaseLayout title="카드 추가" withBackButton>

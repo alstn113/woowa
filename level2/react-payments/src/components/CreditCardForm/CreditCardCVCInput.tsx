@@ -13,7 +13,7 @@ const CreditCardCVCInput = () => {
 
     dispatch({
       type: 'SET_CREDIT_CARD_CVC',
-      payload: Number(value),
+      payload: value,
     });
   };
 
