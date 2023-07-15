@@ -27,6 +27,7 @@ const CreditCardOwnerNameInput = () => {
       <Input
         id="credit-card-owner-name"
         isCenter={false}
+        letterSpacing="small"
         required
         minLength={0}
         maxLength={30}

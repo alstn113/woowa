@@ -3,6 +3,7 @@ import { useRef } from 'react';
 
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
+import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
 import { SpaceBetween } from '../../styles/shared';
 import NumberInput from '../common/NumberInput/NumberInput';
 
@@ -10,6 +11,7 @@ const CreditCardExpirationDateInput = () => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const { creditCardExpirationDate } = useCreditCardFormStates();
   const dispatch = useCreditCardFormActions();
+  const { validateField, validationResult } = useCreditCardFormValidation();
   const inputType = ['MM', 'YY'];
 
   const handleChange =
@@ -20,6 +22,8 @@ const CreditCardExpirationDateInput = () => {
         ...creditCardExpirationDate,
       ];
       newCreditCardExpirationDate[index] = value;
+
+      validateField('creditCardExpirationDate', newCreditCardExpirationDate);
 
       dispatch({
         type: 'SET_CREDIT_CARD_EXPIRATION_DATE',
@@ -61,6 +65,7 @@ const CreditCardExpirationDateInput = () => {
             />
           );
         })}
+        {validationResult.creditCardExpirationDate}
       </InputWrapper>
     </section>
   );

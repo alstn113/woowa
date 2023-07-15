@@ -3,24 +3,29 @@ import { useRef } from 'react';
 
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
+import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
 import { SpaceBetween } from '../../styles/shared';
 import NumberInput from '../common/NumberInput/NumberInput';
 
 const CreditCardPasswordInput = () => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const { creditCardPassword } = useCreditCardFormStates();
+  const { validateField, validationResult } = useCreditCardFormValidation();
   const dispatch = useCreditCardFormActions();
 
   const handleChange =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
-      const newCreditCardPassword = [...creditCardPassword];
-      newCreditCardPassword[index] = value;
+      const creditCardPasswordArray = [...creditCardPassword];
+      creditCardPasswordArray[index] = value;
+      const newCreditCardPassword = creditCardPasswordArray.join('');
+
+      validateField('creditCardPassword', newCreditCardPassword);
 
       dispatch({
         type: 'SET_CREDIT_CARD_PASSWORD',
-        payload: newCreditCardPassword.join(''),
+        payload: newCreditCardPassword,
       });
 
       if (value.length === 1 && index < 1) {
@@ -62,6 +67,7 @@ const CreditCardPasswordInput = () => {
         <PasswordMasking />
         <PasswordMasking />
       </InputWrapper>
+      {validationResult.creditCardPassword}
     </section>
   );
 };

@@ -1,13 +1,16 @@
 import styled from '@emotion/styled';
 
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
+import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
 import NumberInput from '../common/NumberInput/NumberInput';
 
 const CreditCardCVCInput = () => {
   const dispatch = useCreditCardFormActions();
+  const { validationResult, validateField } = useCreditCardFormValidation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    validateField('creditCardCVC', value);
 
     dispatch({
       type: 'SET_CREDIT_CARD_CVC',
@@ -26,6 +29,7 @@ const CreditCardCVCInput = () => {
           maxLength={3}
           onChange={handleChange}
         />
+        {validationResult.creditCardCVC}
       </InputWrapper>
     </section>
   );

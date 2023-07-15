@@ -2,12 +2,14 @@ import React, { useRef } from 'react';
 
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
+import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
 import { SpaceBetween } from '../../styles/shared';
 import NumberInput from '../common/NumberInput/NumberInput';
 
 const CreditCardNumberInput = () => {
   const dispatch = useCreditCardFormActions();
   const { creditCardNumber } = useCreditCardFormStates();
+  const { validateField, validationResult } = useCreditCardFormValidation();
   const masked = [false, false, true, true];
 
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -22,10 +24,13 @@ const CreditCardNumberInput = () => {
 
       const creditCardNumberParts = creditCardNumber.split('-');
       creditCardNumberParts[index] = value;
+      const newCreditCardNumber = creditCardNumberParts.join('-');
+
+      validateField('creditCardNumber', newCreditCardNumber);
 
       dispatch({
         type: 'SET_CREDIT_CARD_NUMBER',
-        payload: creditCardNumberParts.join('-'),
+        payload: newCreditCardNumber,
       });
 
       if (value.length === 4 && index < 3) {
@@ -68,6 +73,7 @@ const CreditCardNumberInput = () => {
           );
         })}
       </SpaceBetween>
+      {validationResult.creditCardNumber}
     </section>
   );
 };

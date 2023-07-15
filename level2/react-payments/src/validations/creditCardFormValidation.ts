@@ -21,7 +21,7 @@ export const validateCreditCardExpirationDate = (
     throw new Error('01-12 사이의 월을 입력해주세요.');
   }
 
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear() % 100;
   const currentMonth = new Date().getMonth() + 1;
 
   const YYNumber = parseInt(YY, 10);
@@ -29,7 +29,7 @@ export const validateCreditCardExpirationDate = (
     YYNumber < currentYear ||
     (YYNumber === currentYear && parseInt(MM, 10) < currentMonth)
   ) {
-    throw new Error('유효하지 않은 유효 기간입니다.');
+    throw new Error('유효기간은 현재 날짜보다 이후여야 합니다.');
   }
 
   return true;
