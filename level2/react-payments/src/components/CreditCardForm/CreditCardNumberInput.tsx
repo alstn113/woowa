@@ -20,8 +20,6 @@ const CreditCardNumberInput = () => {
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
-      if (!/^[0-9]{0,4}$/.test(value)) return;
-
       const creditCardNumberParts = creditCardNumber.split('-');
       creditCardNumberParts[index] = value;
 
@@ -56,17 +54,13 @@ const CreditCardNumberInput = () => {
           return (
             <Input
               type={isMasked ? 'password' : 'text'}
-              autoComplete="off"
-              isCenter
               required
               minLength={4}
               maxLength={4}
-              letterSpacing="medium"
               onChange={handleChange(index)}
               onKeyDown={handleKeyDown(index)}
               key={index}
               value={value}
-              data-form-id={index}
               ref={(el: HTMLInputElement) => {
                 inputRefs.current[index] = el;
               }}

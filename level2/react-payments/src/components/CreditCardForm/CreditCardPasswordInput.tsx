@@ -15,8 +15,6 @@ const CreditCardPasswordInput = () => {
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
-      if (!/^[0-9]{0,1}$/.test(value)) return;
-
       const newCreditCardPassword = [...creditCardPassword];
       newCreditCardPassword[index] = value;
 
@@ -49,11 +47,9 @@ const CreditCardPasswordInput = () => {
             <Input
               key={index}
               type="password"
-              isCenter
               required
               minLength={1}
               maxLength={1}
-              autoComplete="off"
               onChange={handleChange(index)}
               onKeyDown={handleKeyDown(index)}
               ref={(el: HTMLInputElement) => {

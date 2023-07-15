@@ -9,8 +9,6 @@ const CreditCardCVCInput = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    if (!/^[0-9]{0,3}$/.test(value)) return;
-
     dispatch({
       type: 'SET_CREDIT_CARD_CVC',
       payload: value,
@@ -23,12 +21,9 @@ const CreditCardCVCInput = () => {
       <InputWrapper>
         <Input
           type="password"
-          autoComplete="off"
-          isCenter
           required
           minLength={3}
           maxLength={3}
-          letterSpacing="medium"
           onChange={handleChange}
         />
       </InputWrapper>

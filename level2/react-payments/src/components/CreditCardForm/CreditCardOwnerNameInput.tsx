@@ -25,7 +25,6 @@ const CreditCardOwnerNameInput = () => {
         <span>{ownerNameLength} / 30</span>
       </SpaceBetween>
       <Input
-        type="text"
         id="credit-card-owner-name"
         required
         minLength={0}

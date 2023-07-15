@@ -16,8 +16,6 @@ const CreditCardExpirationDateInput = () => {
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
-      if (!/^[0-9]{0,2}$/.test(value)) return;
-
       const newCreditCardExpirationDate: [string, string] = [
         ...creditCardExpirationDate,
       ];
@@ -51,12 +49,9 @@ const CreditCardExpirationDateInput = () => {
           return (
             <Input
               key={index}
-              type="text"
-              isCenter
               required
               minLength={2}
               maxLength={2}
-              letterSpacing="medium"
               onChange={handleChange(index)}
               onKeyDown={handleKeyDown(index)}
               placeholder={inputType[index]}
