@@ -31,9 +31,8 @@ const CreditCardCreationPage = () => {
         creditCardOwnerName,
         creditCardPassword,
       })
-    ) {
+    )
       return;
-    }
   };
 
   return (
