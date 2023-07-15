@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
 import { SpaceBetween } from '../../styles/shared';
-import Input from '../common/Input/Input';
+import NumberInput from '../common/NumberInput/NumberInput';
 
 const CreditCardNumberInput = () => {
   const dispatch = useCreditCardFormActions();
@@ -52,7 +52,7 @@ const CreditCardNumberInput = () => {
           const isMasked = masked[index];
 
           return (
-            <Input
+            <NumberInput
               type={isMasked ? 'password' : 'text'}
               required
               minLength={4}

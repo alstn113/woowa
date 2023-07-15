@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
-import Input from '../common/Input/Input';
+import NumberInput from '../common/NumberInput/NumberInput';
 
 const CreditCardCVCInput = () => {
   const dispatch = useCreditCardFormActions();
@@ -19,7 +19,7 @@ const CreditCardCVCInput = () => {
     <section>
       <label htmlFor="credit-card-cvc">보안 코드(CVC/CVV)</label>
       <InputWrapper>
-        <Input
+        <NumberInput
           type="password"
           required
           minLength={3}

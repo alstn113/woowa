@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
 import { SpaceBetween } from '../../styles/shared';
-import Input from '../common/Input/Input';
+import NumberInput from '../common/NumberInput/NumberInput';
 
 const CreditCardExpirationDateInput = () => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -47,7 +47,7 @@ const CreditCardExpirationDateInput = () => {
       <InputWrapper gap={1} id="credit-card-expiration-date">
         {[0, 1].map((index) => {
           return (
-            <Input
+            <NumberInput
               key={index}
               required
               minLength={2}
