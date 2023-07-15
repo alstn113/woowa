@@ -33,8 +33,3 @@ export const IconLabel = styled.span`
   font-size: 12px;
   color: #333;
 `;
-
-export const Icon = styled.img`
-  width: 40px;
-  height: 40px;
-`;
