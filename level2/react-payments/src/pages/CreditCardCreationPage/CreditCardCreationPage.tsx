@@ -8,6 +8,7 @@ import CreditCardPasswordInput from '../../components/CreditCardForm/CreditCardP
 import CreditCardView from '../../components/CreditCardView/CreditCardView';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
+import useValidation from '../../hooks/useValidation';
 import { Spacing } from '../../styles/shared';
 
 const CreditCardCreationPage = () => {
@@ -20,6 +21,20 @@ const CreditCardCreationPage = () => {
     creditCardOwnerName,
     creditCardPassword,
   } = useCreditCardFormStates();
+
+  const {} = useValidation<{
+    creditCardCVC: string;
+  }>(
+    { creditCardCVC },
+    {
+      creditCardCVC: (value) => {
+        if (value.length !== 3) {
+          return 'CVC는 3자리입니다.';
+        }
+        return '';
+      },
+    },
+  );
 
   const handleNexpStep = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

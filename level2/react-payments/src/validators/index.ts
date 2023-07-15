@@ -22,7 +22,10 @@ class Validator<T> {
   }
 
   private check(validationFn: () => void): this {
-    validationFn();
+    const result = validationFn();
+    if (typeof result === 'string') {
+      throw new Error(result);
+    }
     return this;
   }
 
