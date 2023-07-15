@@ -5,6 +5,7 @@ import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFo
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
 import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
 import { SpaceBetween } from '../../styles/shared';
+import ErrorMesssage from '../common/ErrorMessage/ErrorMessage';
 import NumberInput from '../common/NumberInput/NumberInput';
 
 const CreditCardExpirationDateInput = () => {
@@ -46,14 +47,15 @@ const CreditCardExpirationDateInput = () => {
     };
 
   return (
-    <section>
+    <Section>
       <label htmlFor="credit-card-expiration-date">만료일</label>
-      <InputWrapper gap={1} id="credit-card-expiration-date">
+      <InputWrapper gap={0.5} id="credit-card-expiration-date">
         {[0, 1].map((index) => {
           return (
             <NumberInput
               key={index}
               required
+              isInValid={Boolean(validationResult.creditCardExpirationDate)}
               minLength={2}
               maxLength={2}
               onChange={handleChange(index)}
@@ -65,11 +67,16 @@ const CreditCardExpirationDateInput = () => {
             />
           );
         })}
-        {validationResult.creditCardExpirationDate}
       </InputWrapper>
-    </section>
+      <ErrorMesssage message={validationResult.creditCardExpirationDate} />
+    </Section>
   );
 };
+
+const Section = styled.section`
+  position: relative;
+  width: 100%;
+`;
 
 const InputWrapper = styled(SpaceBetween)`
   width: 50%;

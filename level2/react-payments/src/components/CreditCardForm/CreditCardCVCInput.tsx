@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
+import ErrorMesssage from '../common/ErrorMessage/ErrorMessage';
 import NumberInput from '../common/NumberInput/NumberInput';
 
 const CreditCardCVCInput = () => {
@@ -19,23 +20,30 @@ const CreditCardCVCInput = () => {
   };
 
   return (
-    <section>
+    <Section>
       <label htmlFor="credit-card-cvc">보안 코드(CVC/CVV)</label>
       <InputWrapper>
         <NumberInput
           type="password"
+          isInValid={Boolean(validationResult.creditCardCVC)}
           required
           minLength={3}
           maxLength={3}
           onChange={handleChange}
         />
-        {validationResult.creditCardCVC}
       </InputWrapper>
-    </section>
+      <ErrorMesssage message={validationResult.creditCardCVC} />
+    </Section>
   );
 };
 
+const Section = styled.section`
+  position: relative;
+  width: 100%;
+`;
+
 const InputWrapper = styled.div`
+  position: relative;
   width: 30%;
 `;
 

@@ -5,6 +5,7 @@ import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFo
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
 import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
 import { SpaceBetween } from '../../styles/shared';
+import ErrorMesssage from '../common/ErrorMessage/ErrorMessage';
 import NumberInput from '../common/NumberInput/NumberInput';
 
 const CreditCardPasswordInput = () => {
@@ -44,14 +45,15 @@ const CreditCardPasswordInput = () => {
     };
 
   return (
-    <section>
+    <Section>
       <label htmlFor="credit-card-password">카드 비밀번호</label>
-      <InputWrapper gap={1} id="credit-card-password">
+      <InputWrapper gap={0.5} id="credit-card-password">
         {[0, 1].map((index) => {
           return (
             <NumberInput
               key={index}
               type="password"
+              isInValid={Boolean(validationResult.creditCardPassword)}
               required
               minLength={1}
               maxLength={1}
@@ -67,10 +69,15 @@ const CreditCardPasswordInput = () => {
         <PasswordMasking />
         <PasswordMasking />
       </InputWrapper>
-      {validationResult.creditCardPassword}
-    </section>
+      <ErrorMesssage message={validationResult.creditCardPassword} />
+    </Section>
   );
 };
+
+const Section = styled.section`
+  position: relative;
+  width: 100%;
+`;
 
 const InputWrapper = styled(SpaceBetween)`
   width: 50%;
