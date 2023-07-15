@@ -33,9 +33,8 @@ const CreditCardCreationPage = () => {
         creditCardExpirationDate={creditCardExpirationDate}
         creditCardOwnerName={creditCardOwnerName}
       />
-
       <Spacing y={2} />
-      <Form onSubmit={handleNexpStep}>
+      <CreditCardFormGroup>
         <CreditCardNumberInput />
         <CreditCardExpirationDateInput />
         <CreditCardOwnerNameInput />
@@ -44,12 +43,12 @@ const CreditCardCreationPage = () => {
         <ButtonWrapper>
           <NextButton type="submit">다음</NextButton>
         </ButtonWrapper>
-      </Form>
+      </CreditCardFormGroup>
     </BaseLayout>
   );
 };
 
-const Form = styled.form`
+const CreditCardFormGroup = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
