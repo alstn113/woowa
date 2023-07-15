@@ -47,24 +47,21 @@ const useValidation = <T>(
   };
 
   const validateAllFields = (values: FieldValues<T>): boolean => {
-    for (const fieldName in validators) {
+    const allErrors = (
+      Object.keys(validators) as Array<keyof FieldValues<T>>
+    ).reduce((acc, fieldName) => {
       try {
         validators[fieldName](values[fieldName]);
-        setErrors((prevErrors) => {
-          const newErrors = { ...prevErrors };
-          delete newErrors[fieldName];
-          return newErrors;
-        });
+        return acc;
       } catch (error) {
         const e = error as Error;
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [fieldName]: e.message,
-        }));
+        return { ...acc, [fieldName]: e.message };
       }
-    }
+    }, {} as FieldErrors<T>);
 
-    return Object.keys(errors).length === 0;
+    setErrors(allErrors);
+
+    return Object.keys(allErrors).length === 0;
   };
 
   return { validationResult: errors, validateField, validateAllFields };

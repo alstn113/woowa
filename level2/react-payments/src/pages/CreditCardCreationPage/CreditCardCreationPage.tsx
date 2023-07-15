@@ -8,6 +8,7 @@ import CreditCardPasswordInput from '../../components/CreditCardForm/CreditCardP
 import CreditCardView from '../../components/CreditCardView/CreditCardView';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
+import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
 import { Spacing } from '../../styles/shared';
 
 const CreditCardCreationPage = () => {
@@ -15,14 +16,24 @@ const CreditCardCreationPage = () => {
     creditCardCVC,
     creditCardCompany,
     creditCardExpirationDate,
-    creditCardName,
     creditCardNumber,
     creditCardOwnerName,
     creditCardPassword,
   } = useCreditCardFormStates();
-
+  const { validateAllFields } = useCreditCardFormValidation();
   const handleNexpStep = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (
+      !validateAllFields({
+        creditCardCVC,
+        creditCardExpirationDate,
+        creditCardNumber,
+        creditCardOwnerName,
+        creditCardPassword,
+      })
+    ) {
+      return;
+    }
   };
 
   return (
@@ -34,7 +45,7 @@ const CreditCardCreationPage = () => {
         creditCardOwnerName={creditCardOwnerName}
       />
       <Spacing y={2} />
-      <CreditCardFormGroup>
+      <CreditCardFormGroup onSubmit={handleNexpStep}>
         <CreditCardNumberInput />
         <CreditCardExpirationDateInput />
         <CreditCardOwnerNameInput />
