@@ -5,8 +5,10 @@ import CreditCardExpirationDateInput from '../../components/CreditCardForm/Credi
 import CreditCardNumberInput from '../../components/CreditCardForm/CreditCardNumberInput';
 import CreditCardOwnerNameInput from '../../components/CreditCardForm/CreditCardOwnerNameInput';
 import CreditCardPasswordInput from '../../components/CreditCardForm/CreditCardPasswordInput';
+import CreditCardView from '../../components/CreditCardView/CreditCardView';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
+import { Spacing } from '../../styles/shared';
 
 const CreditCardCreationPage = () => {
   const {
@@ -34,7 +36,8 @@ const CreditCardCreationPage = () => {
 
   return (
     <BaseLayout title="카드 추가" withBackButton>
-      <CreditCardWrapper>카드 표시</CreditCardWrapper>
+      <CreditCardView />
+      <Spacing y={2} />
       <Form onSubmit={handleNexpStep}>
         <CreditCardNumberInput />
         <CreditCardExpirationDateInput />
@@ -48,21 +51,6 @@ const CreditCardCreationPage = () => {
     </BaseLayout>
   );
 };
-
-const CreditCardWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  height: 8rem;
-  width: 16rem;
-  margin-bottom: 3rem;
-  background-color: #f2f2f2;
-  border-radius: 0.5rem;
-  font-size: 2rem;
-  font-weight: 700;
-  box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 5px;
-`;
 
 const Form = styled.form`
   display: flex;
