@@ -11,66 +11,58 @@ const CreditCardPasswordInput = () => {
   const { creditCardPassword } = useCreditCardFormStates();
   const dispatch = useCreditCardFormActions();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, dataset } = e.target;
-    const formId = Number(dataset.formId);
+  const handleChange =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
 
-    if (!/^[0-9]{0,1}$/.test(value)) return;
+      if (!/^[0-9]{0,1}$/.test(value)) return;
 
-    const newCreditCardPassword = creditCardPassword.map((password, index) => {
-      if (index === formId) return value;
-      return password;
-    }) as [string, string];
+      const newCreditCardPassword = [...creditCardPassword];
+      newCreditCardPassword[index] = value;
 
-    dispatch({
-      type: 'SET_CREDIT_CARD_PASSWORD',
-      payload: newCreditCardPassword,
-    });
+      dispatch({
+        type: 'SET_CREDIT_CARD_PASSWORD',
+        payload: newCreditCardPassword.join(''),
+      });
 
-    if (value.length === 1 && formId < 1) {
-      inputRefs.current[formId + 1].focus();
-    }
-  };
+      if (value.length === 1 && index < 1) {
+        inputRefs.current[index + 1].focus();
+      }
+    };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const { key, target } = e;
-    const { value, dataset } = target as HTMLInputElement;
-    const formId = Number(dataset.formId);
+  const handleKeyDown =
+    (index: number) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const { key, target } = e;
+      const { value } = target as HTMLInputElement;
 
-    if (key === 'Backspace' && value.length === 0 && formId > 0) {
-      inputRefs.current[formId - 1].focus();
-    }
-  };
-
-  const inputProps = {
-    type: 'password',
-    isCenter: true,
-    required: true,
-    minLength: 1,
-    maxLength: 1,
-    autoComplete: 'off',
-    onChange: handleChange,
-    onKeyDown: handleKeyDown,
-  };
+      if (key === 'Backspace' && value.length === 0 && index > 0) {
+        inputRefs.current[index - 1].focus();
+      }
+    };
 
   return (
     <section>
       <label htmlFor="credit-card-password">카드 비밀번호</label>
       <InputWrapper gap={1} id="credit-card-password">
-        <Input
-          {...inputProps}
-          ref={(el: HTMLInputElement) => {
-            inputRefs.current[0] = el;
-          }}
-          data-form-id="0"
-        />
-        <Input
-          {...inputProps}
-          ref={(el: HTMLInputElement) => {
-            inputRefs.current[1] = el;
-          }}
-          data-form-id="1"
-        />
+        {[0, 1].map((index) => {
+          return (
+            <Input
+              key={index}
+              type="password"
+              isCenter
+              required
+              minLength={1}
+              maxLength={1}
+              autoComplete="off"
+              onChange={handleChange(index)}
+              onKeyDown={handleKeyDown(index)}
+              ref={(el: HTMLInputElement) => {
+                inputRefs.current[index] = el;
+              }}
+              data-form-id={index}
+            />
+          );
+        })}
         <PasswordMasking />
         <PasswordMasking />
       </InputWrapper>

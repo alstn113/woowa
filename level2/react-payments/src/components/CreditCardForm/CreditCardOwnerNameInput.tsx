@@ -18,23 +18,21 @@ const CreditCardOwnerNameInput = () => {
     });
   };
 
-  const inputProps = {
-    type: 'text',
-    id: 'credit-card-owner-name',
-    required: true,
-    minLength: 0,
-    maxLength: 30,
-    placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
-    onChange: handleChange,
-  } as const;
-
   return (
     <section>
       <SpaceBetween>
         <label htmlFor="credit-card-owner-name">카드 소유자 이름(선택)</label>
         <span>{ownerNameLength} / 30</span>
       </SpaceBetween>
-      <Input {...inputProps} />
+      <Input
+        type="text"
+        id="credit-card-owner-name"
+        required
+        minLength={0}
+        maxLength={30}
+        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        onChange={handleChange}
+      />
     </section>
   );
 };

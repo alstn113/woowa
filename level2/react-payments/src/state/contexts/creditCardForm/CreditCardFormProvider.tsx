@@ -13,12 +13,12 @@ const CreditCardFormProvider = ({ children }: CreditCardFormProviderProps) => {
   const initialState: CreditCardFormState = useMemo(
     () => ({
       creditCardCompany: '카카오뱅크',
-      creditCardName: '',
-      creditCardNumber: ['', '', '', ''],
+      creditCardNumber: '',
       creditCardExpirationDate: ['', ''],
       creditCardOwnerName: '',
       creditCardCVC: '',
-      creditCardPassword: ['', ''],
+      creditCardPassword: '',
+      creditCardName: '',
     }),
     [],
   );

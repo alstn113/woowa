@@ -4,11 +4,20 @@ import type {
   CreditCardExpirationDate,
   CreditCardCVC,
   CreditCardPassword,
+  CreditCardOwnerName,
 } from '../types';
+import {
+  validateCreditCardCVC,
+  validateCreditCardExpirationDate,
+  validateCreditCardNumber,
+  validateCreditCardOwnerName,
+  validateCreditCardPassword,
+} from '../validations/creditCardFormValidation';
 
 interface CreditCardFormValidation {
   creditCardNumber: CreditCardNumber;
   creditCardExpirationDate: CreditCardExpirationDate;
+  creditCardOwnerName: CreditCardOwnerName;
   creditCardCVC: CreditCardCVC;
   creditCardPassword: CreditCardPassword;
 }
@@ -16,18 +25,11 @@ interface CreditCardFormValidation {
 const useCreditCardFormValidation = () => {
   const { validateAllFields, validateField, validationResult } =
     useValidation<CreditCardFormValidation>({
-      creditCardNumber: () => {
-        return true;
-      },
-      creditCardExpirationDate: () => {
-        return true;
-      },
-      creditCardCVC: () => {
-        return true;
-      },
-      creditCardPassword: () => {
-        return true;
-      },
+      creditCardNumber: validateCreditCardNumber,
+      creditCardExpirationDate: validateCreditCardExpirationDate,
+      creditCardOwnerName: validateCreditCardOwnerName,
+      creditCardCVC: validateCreditCardCVC,
+      creditCardPassword: validateCreditCardPassword,
     });
 
   return {

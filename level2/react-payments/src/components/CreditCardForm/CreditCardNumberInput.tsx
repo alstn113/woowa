@@ -8,93 +8,71 @@ import Input from '../common/Input/Input';
 const CreditCardNumberInput = () => {
   const dispatch = useCreditCardFormActions();
   const { creditCardNumber } = useCreditCardFormStates();
+  const masked = [false, false, true, true];
 
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, dataset } = e.target;
-    const formId = Number(dataset.formId);
-
-    if (!/^[0-9]{0,4}$/.test(value)) return;
-
-    const newCreditCardNumber = creditCardNumber.map((number, index) => {
-      if (index === formId) return value;
-      return number;
-    }) as [string, string, string, string];
-
-    dispatch({
-      type: 'SET_CREDIT_CARD_NUMBER',
-      payload: newCreditCardNumber,
-    });
-
-    if (value.length === 4 && formId < 3) {
-      inputRefs.current[formId + 1].focus();
-    }
+  const getCreditCardNumberPartByIndex = (index: number) => {
+    return creditCardNumber.split('-')[index] ?? '';
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const { key, target } = e;
-    const { value, dataset } = target as HTMLInputElement;
-    const formId = Number(dataset.formId);
+  const handleChange =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
 
-    if (key === 'Backspace' && value.length === 0 && formId > 0) {
-      inputRefs.current[formId - 1].focus();
-    }
-  };
+      if (!/^[0-9]{0,4}$/.test(value)) return;
 
-  const inputProps = {
-    type: 'text',
-    isCenter: true,
-    required: true,
-    minLength: 4,
-    maxLength: 4,
-    letterSpacing: 'medium',
-    onChange: handleChange,
-    onKeyDown: handleKeyDown,
-  } as const;
+      const creditCardNumberParts = creditCardNumber.split('-');
+      creditCardNumberParts[index] = value;
 
-  const maskingInputProps = {
-    ...inputProps,
-    type: 'password',
-    autoComplete: 'off',
-  } as const;
+      dispatch({
+        type: 'SET_CREDIT_CARD_NUMBER',
+        payload: creditCardNumberParts.join('-'),
+      });
+
+      if (value.length === 4 && index < 3) {
+        inputRefs.current[index + 1].focus();
+      }
+    };
+
+  const handleKeyDown =
+    (index: number) => (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const { key, target } = e;
+      const { value } = target as HTMLInputElement;
+
+      if (key === 'Backspace' && value.length === 0 && index > 0) {
+        inputRefs.current[index - 1].focus();
+      }
+    };
 
   return (
     <section>
       <label htmlFor="credit-card-number">카드 번호</label>
       <SpaceBetween gap={1} className="credit-card-number">
-        <Input
-          {...inputProps}
-          value={creditCardNumber[0]}
-          data-form-id="0"
-          ref={(el: HTMLInputElement) => {
-            inputRefs.current[0] = el;
-          }}
-        />
-        <Input
-          {...inputProps}
-          value={creditCardNumber[1]}
-          data-form-id="1"
-          ref={(el: HTMLInputElement) => {
-            inputRefs.current[1] = el;
-          }}
-        />
-        <Input
-          {...maskingInputProps}
-          value={creditCardNumber[2]}
-          data-form-id="2"
-          ref={(el: HTMLInputElement) => {
-            inputRefs.current[2] = el;
-          }}
-        />
-        <Input
-          {...maskingInputProps}
-          value={creditCardNumber[3]}
-          data-form-id="3"
-          ref={(el: HTMLInputElement) => {
-            inputRefs.current[3] = el;
-          }}
-        />
+        {[0, 1, 2, 3].map((index) => {
+          const value = getCreditCardNumberPartByIndex(index);
+          const isMasked = masked[index];
+
+          return (
+            <Input
+              type={isMasked ? 'password' : 'text'}
+              autoComplete="off"
+              isCenter
+              required
+              minLength={4}
+              maxLength={4}
+              letterSpacing="medium"
+              onChange={handleChange(index)}
+              onKeyDown={handleKeyDown(index)}
+              key={index}
+              value={value}
+              data-form-id={index}
+              ref={(el: HTMLInputElement) => {
+                inputRefs.current[index] = el;
+              }}
+            />
+          );
+        })}
       </SpaceBetween>
     </section>
   );

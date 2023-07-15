@@ -26,7 +26,7 @@ interface CreditCardCompanyNameProps {
 
 const CreditCardView = ({
   creditCardCompanyName = '카카오뱅크',
-  creditCardNumber = ['', '', '', ''],
+  creditCardNumber = '',
   creditCardExpirationDate = ['', ''],
   creditCardOwnerName = '',
 }: CreditCardCompanyNameProps) => {
@@ -45,6 +45,11 @@ const CreditCardView = ({
     CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName].background;
   const cardColor = CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName].color;
 
+  const creditCardNumberParts = [0, 1, 2, 3].map((index) => {
+    const part = creditCardNumber.split('-')[index] ?? '';
+    return part;
+  });
+
   return (
     <CreditCardWrapper cardBackground={cardBackground} cardColor={cardColor}>
       <NameIconSpaceBetween>
@@ -56,27 +61,26 @@ const CreditCardView = ({
       </NameIconSpaceBetween>
       <GoldChip />
       <CreditCardNumberWrapper>
-        <div>{creditCardNumber[0]}</div>
-        <div>{creditCardNumber[1]}</div>
+        <div>{creditCardNumberParts[0]}</div>
+        <div>{creditCardNumberParts[1]}</div>
         <div>
-          {Array.from({ length: creditCardNumber[2].length }, (_, i) => (
+          {Array.from({ length: creditCardNumberParts[2].length }, (_, i) => (
             <CreditCardNumberMasking cardColor={cardColor} key={i} />
           ))}
         </div>
         <div>
-          {Array.from({ length: creditCardNumber[3].length }, (_, i) => (
+          {Array.from({ length: creditCardNumberParts[3].length }, (_, i) => (
             <CreditCardNumberMasking cardColor={cardColor} key={i} />
           ))}
         </div>
       </CreditCardNumberWrapper>
-      <OwnerNameExpirationDateSpaceBetween>
+      <OwnerNameExpirationDateSpaceBetween gap={1}>
         <CreditCardOwnerNameWrapper>
           {creditCardOwnerName}
         </CreditCardOwnerNameWrapper>
         <CreditCardExpirationDateWrapper>
           {creditCardExpirationDate[0]}
-          {(creditCardExpirationDate[0] || creditCardExpirationDate[1]) &&
-            ' / '}
+          {creditCardExpirationDate.some(Boolean) && ' / '}
           {creditCardExpirationDate[1]}
         </CreditCardExpirationDateWrapper>
       </OwnerNameExpirationDateSpaceBetween>
@@ -117,15 +121,6 @@ const GoldChip = styled.div`
   border-radius: 5px;
   background-color: #d6bc2a;
   margin-bottom: 10px;
-  background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.1) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-  background-size:
-    30% 100%,
-    100% 30%;
 `;
 
 const CreditCardNumberWrapper = styled.div`
@@ -161,7 +156,12 @@ const OwnerNameExpirationDateSpaceBetween = styled(SpaceBetween)`
   height: 16px;
 `;
 
-const CreditCardOwnerNameWrapper = styled.span``;
+const CreditCardOwnerNameWrapper = styled.span`
+  flex: 1 1 0%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 const CreditCardExpirationDateWrapper = styled.span``;
 
 export default CreditCardView;

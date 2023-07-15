@@ -17,21 +17,20 @@ const CreditCardCVCInput = () => {
     });
   };
 
-  const inputProps = {
-    type: 'password',
-    isCenter: true,
-    required: true,
-    minLength: 3,
-    maxLength: 3,
-    letterSpacing: 'medium',
-    onChange: handleChange,
-  } as const;
-
   return (
     <section>
       <label htmlFor="credit-card-cvc">보안 코드(CVC/CVV)</label>
       <InputWrapper>
-        <Input {...inputProps} />
+        <Input
+          type="password"
+          autoComplete="off"
+          isCenter
+          required
+          minLength={3}
+          maxLength={3}
+          letterSpacing="medium"
+          onChange={handleChange}
+        />
       </InputWrapper>
     </section>
   );
