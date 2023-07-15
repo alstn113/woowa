@@ -9,13 +9,6 @@ import CreditCardView from '../../components/CreditCardView/CreditCardView';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
 import { Spacing } from '../../styles/shared';
-import useValidation from '../../hooks/useValidation';
-import {
-  CreditCardCVC,
-  CreditCardExpirationDate,
-  CreditCardNumber,
-  CreditCardPassword,
-} from '../../types';
 
 const CreditCardCreationPage = () => {
   const {
@@ -31,29 +24,6 @@ const CreditCardCreationPage = () => {
   const handleNexpStep = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-
-  interface CreditCardValidation {
-    creditCardNumber: CreditCardNumber;
-    creditCardExpirationDate: CreditCardExpirationDate;
-    creditCardCVC: CreditCardCVC;
-    creditCardPassword: CreditCardPassword;
-  }
-
-  const { validateAllFields, validateField, validationResult } =
-    useValidation<CreditCardValidation>({
-      creditCardNumber: () => {
-        return true;
-      },
-      creditCardExpirationDate: () => {
-        return true;
-      },
-      creditCardCVC: () => {
-        return true;
-      },
-      creditCardPassword: () => {
-        return true;
-      },
-    });
 
   return (
     <BaseLayout title="카드 추가" withBackButton>
