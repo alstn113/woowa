@@ -13,4 +13,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {},
+  render: (args) => {
+    return (
+      <div style={{ width: '300px' }}>
+        <Input {...args} />
+        <Input {...args} />
+        <Input {...args} />
+        <Input {...args} />
+      </div>
+    );
+  },
 };

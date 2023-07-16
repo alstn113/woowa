@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
 
 import Modal from './Modal';
+import useDisclosure from '../../../hooks/useDisclosure';
 
 const meta = {
   title: 'components/common/Modal',
@@ -18,12 +18,12 @@ export const Default: Story = {
     isOpen: false,
   },
   render: (args) => {
-    const [isOpen, setIsOpen] = useState(args.isOpen);
+    const { close, isOpen, open } = useDisclosure();
 
     return (
       <>
-        <button onClick={() => setIsOpen(true)}>모달 열기</button>
-        <Modal isOpen={isOpen} onCancel={() => setIsOpen(false)}>
+        <button onClick={open}>모달 열기</button>
+        <Modal isOpen={isOpen} onCancel={close}>
           {args.children}
         </Modal>
       </>
