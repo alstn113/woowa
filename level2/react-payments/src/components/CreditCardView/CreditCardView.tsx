@@ -11,21 +11,21 @@ import type {
 import CreditCardCompanyIcon from '../CreditCardCompanyIcon/CreditCardCompanyIcon';
 
 interface CreditCardCompanyNameProps {
-  creditCardCompanyName: CreditCardCompany;
+  creditCardCompany: CreditCardCompany;
   creditCardNumber?: CreditCardNumber;
   creditCardOwnerName?: CreditCardOwnerName;
   creditCardExpirationDate?: CreditCardExpirationDate;
 }
 
 const CreditCardView = ({
-  creditCardCompanyName = '카카오뱅크',
+  creditCardCompany = '카카오뱅크',
   creditCardNumber = '',
   creditCardExpirationDate = ['', ''],
   creditCardOwnerName = '',
 }: CreditCardCompanyNameProps) => {
   const cardBackground =
-    CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName].background;
-  const cardColor = CREDIT_CARD_COMPANY_COLOR[creditCardCompanyName].color;
+    CREDIT_CARD_COMPANY_COLOR[creditCardCompany].background;
+  const cardColor = CREDIT_CARD_COMPANY_COLOR[creditCardCompany].color;
 
   const creditCardNumberParts = [0, 1, 2, 3].map((index) => {
     const part = creditCardNumber.split('-')[index] ?? '';
@@ -35,9 +35,9 @@ const CreditCardView = ({
   return (
     <CreditCardWrapper cardBackground={cardBackground} cardColor={cardColor}>
       <NameIconSpaceBetween>
-        <CreidtCardCompanyName>{creditCardCompanyName}</CreidtCardCompanyName>
+        <CreidtCardCompanyName>{creditCardCompany}</CreidtCardCompanyName>
         <CreditCardCompanyIcon
-          creditCardCompanyName={creditCardCompanyName}
+          creditCardCompanyName={creditCardCompany}
           size={30}
         />
       </NameIconSpaceBetween>

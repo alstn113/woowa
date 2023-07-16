@@ -21,12 +21,12 @@ const CreditCardList = ({ creditCardList }: CreditCardListProps) => {
         return (
           <S.ItemContainer key={index}>
             <CreditCardView
-              creditCardCompanyName={creditCardCompany}
+              creditCardCompany={creditCardCompany}
               creditCardExpirationDate={creditCardExpirationDate}
               creditCardNumber={creditCardNumber}
               creditCardOwnerName={creditCardOwnerName}
             />
-            <div>{creditCardName}</div>
+            <S.CardName>{creditCardName}</S.CardName>
           </S.ItemContainer>
         );
       })}

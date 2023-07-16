@@ -7,17 +7,20 @@ import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 import { PAGE_ROUTES } from '../../constants';
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
+import useCreditCardList from '../../hooks/useCreditCardList';
 
 const CreditCardNamingPage = () => {
+  const states = useCreditCardFormStates();
   const {
     creditCardCompany,
-    creditCardExpirationDate,
     creditCardNumber,
+    creditCardExpirationDate,
     creditCardOwnerName,
-  } = useCreditCardFormStates();
-  const navigate = useNavigate();
-
+  } = states;
   const dispatch = useCreditCardFormActions();
+  const { addCreditCard } = useCreditCardList();
+
+  const navigate = useNavigate();
 
   const handleCreditCardNameChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -28,7 +31,7 @@ const CreditCardNamingPage = () => {
 
   const handleConfirmButtonClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //TODO: 카드 생성
+    addCreditCard({ ...states });
     navigate(PAGE_ROUTES.CREDIT_CARD_LIST);
   };
 
@@ -37,7 +40,7 @@ const CreditCardNamingPage = () => {
       <Form onSubmit={handleConfirmButtonClick}>
         <Title>카드등록이 완료되었습니다.</Title>
         <CreditCardView
-          creditCardCompanyName={creditCardCompany}
+          creditCardCompany={creditCardCompany}
           creditCardNumber={creditCardNumber}
           creditCardExpirationDate={creditCardExpirationDate}
           creditCardOwnerName={creditCardOwnerName}

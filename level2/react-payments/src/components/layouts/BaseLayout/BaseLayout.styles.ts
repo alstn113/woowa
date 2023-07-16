@@ -8,7 +8,7 @@ export const Container = styled.div`
   min-height: 100vh;
 
   main {
-    min-height: 100vh;
+    height: 100%;
     padding: 20px;
   }
 

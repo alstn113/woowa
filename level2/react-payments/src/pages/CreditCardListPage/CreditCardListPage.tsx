@@ -5,11 +5,14 @@ import useCreditCardList from '../../hooks/useCreditCardList';
 
 const CreditCardListPage = () => {
   const { creditCardList } = useCreditCardList();
+  const isEmpty = creditCardList.length === 0;
 
   return (
     <BaseLayout title="보유 카드">
-      <CreditCardCreateButton message="새로운 카드를 등록해주세요." />
       <CreditCardList creditCardList={creditCardList} />
+      <CreditCardCreateButton
+        {...(isEmpty && { message: '새로운 카드를 등록해주세요.' })}
+      />
     </BaseLayout>
   );
 };

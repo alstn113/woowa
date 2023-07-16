@@ -51,7 +51,7 @@ const CreditCardCreatePage = () => {
   return (
     <BaseLayout title="카드 추가" withBackButton>
       <CreditCardView
-        creditCardCompanyName={creditCardCompany}
+        creditCardCompany={creditCardCompany}
         creditCardNumber={creditCardNumber}
         creditCardExpirationDate={creditCardExpirationDate}
         creditCardOwnerName={creditCardOwnerName}
