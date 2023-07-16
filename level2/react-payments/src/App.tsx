@@ -14,7 +14,7 @@ const App = () => {
         element={<CreditCardListPage />}
       />
       <Route
-        path={PAGE_ROUTES.CREDIT_CARD_CREATION}
+        path={PAGE_ROUTES.CREDIT_CARD_CREATE}
         element={<CreditCardCreationPage />}
       />
       <Route

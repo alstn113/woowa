@@ -1,4 +1,4 @@
-export const PAGE_ROUTES: { [key: string]: string } = {
+export const PAGE_ROUTES = {
   CREDIT_CARD_LIST: '/',
   CREDIT_CARD_CREATE: '/credit-card/create',
   CREDIT_CARD_NAMING: '/credit-card/naming',

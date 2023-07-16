@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import * as S from './CreidtCardCompanyListModal.styles';
+import { PAGE_ROUTES } from '../../constants';
 import { CREDIT_CARD_COMPANY } from '../../constants/creditCard';
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useModalAcitons from '../../hooks/modal/useModalAcitons';
@@ -18,7 +19,7 @@ const CreditCardCompanyListModal = () => {
       payload: cardName,
     });
     modalDispatch({ type: 'CLOSE_MODAL' });
-    navigate(`/credit-card/create`);
+    navigate(PAGE_ROUTES.CREDIT_CARD_CREATE);
   };
 
   return (
