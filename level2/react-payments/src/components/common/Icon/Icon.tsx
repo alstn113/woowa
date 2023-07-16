@@ -3,14 +3,15 @@ import { ImgHTMLAttributes } from 'react';
 import * as S from './Icon.styles';
 
 interface IconProps extends ImgHTMLAttributes<HTMLImageElement> {
-  size?: number;
+  w?: number;
+  h?: number;
   src: string;
   alt: string;
 }
 
-const Icon = ({ size = 20, src, alt, ...props }: IconProps) => {
+const Icon = ({ w = 20, h = 20, src, alt, ...props }: IconProps) => {
   return (
-    <S.Icon src={src} alt={alt} size={size} {...props}>
+    <S.Icon src={src} alt={alt} w={w} h={h} {...props}>
       Icon
     </S.Icon>
   );

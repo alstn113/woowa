@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Icon = styled.img<{ size: number }>`
-  ${({ size }) => `
-    width: ${size}px;
-    height: ${size}px;
-  `}
+export const Icon = styled.img<{ w: number; h: number }>`
+  width: ${({ w }) => w}px;
+  height: ${({ h }) => h}px;
 `;
