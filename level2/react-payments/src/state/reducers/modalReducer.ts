@@ -1,14 +1,9 @@
-import { useMemo } from 'react';
-
 import { ModalAction, ModalState } from '../types/modal.types';
 
-const modalInitialState: ModalState = useMemo(
-  () => ({
-    isOpen: false,
-    modalComponent: null,
-  }),
-  [],
-);
+const modalInitialState: ModalState = {
+  isOpen: false,
+  modalComponent: null,
+};
 
 const modalReducer = (state: ModalState, action: ModalAction): ModalState => {
   switch (action.type) {

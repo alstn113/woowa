@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import CreditCardCVCInput from '../../components/CreditCardForm/CreditCardCVCInput';
@@ -9,6 +10,7 @@ import CreditCardPasswordInput from '../../components/CreditCardForm/CreditCardP
 import CreditCardView from '../../components/CreditCardView/CreditCardView';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
 import { PAGE_ROUTES } from '../../constants';
+import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
 import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
 import { Spacing } from '../../styles/shared';
@@ -22,8 +24,13 @@ const CreditCardCreatePage = () => {
     creditCardOwnerName,
     creditCardPassword,
   } = useCreditCardFormStates();
+  const dispatch = useCreditCardFormActions();
   const { validateAllFields } = useCreditCardFormValidation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch({ type: 'RESET' });
+  }, [dispatch]);
 
   const handleNexpStep = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
