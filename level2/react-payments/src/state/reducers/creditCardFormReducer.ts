@@ -1,7 +1,22 @@
+import { useMemo } from 'react';
+
 import {
   CreditCardFormAction,
   CreditCardFormState,
 } from '../types/creditCardForm.types';
+
+const CreditCardFormInitialState: CreditCardFormState = useMemo(
+  () => ({
+    creditCardCompany: '카카오뱅크',
+    creditCardNumber: '',
+    creditCardExpirationDate: ['', ''],
+    creditCardOwnerName: '',
+    creditCardCVC: '',
+    creditCardPassword: '',
+    creditCardName: '',
+  }),
+  [],
+);
 
 const creditCardFormReducer = (
   state: CreditCardFormState,
@@ -43,9 +58,13 @@ const creditCardFormReducer = (
         ...state,
         creditCardPassword: action.payload,
       };
+    case 'RESET':
+      return {
+        ...CreditCardFormInitialState,
+      };
     default:
       return state;
   }
 };
 
-export default creditCardFormReducer;
+export { creditCardFormReducer, CreditCardFormInitialState };

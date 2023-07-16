@@ -3,23 +3,14 @@ import { useReducer, useMemo } from 'react';
 import ModalDispatchContext from './ModalDispatchContext';
 import ModalStateContext from './ModalStateContext';
 import Modal from '../../../components/common/Modal/Modal';
-import modalReducer from '../../reducers/modalReducer';
-import { ModalState } from '../../types/modal.types';
+import { modalReducer, modalInitialState } from '../../reducers/modalReducer';
 
 interface ModalProviderProps {
   children: React.ReactNode;
 }
 
 const ModalProvider = ({ children }: ModalProviderProps) => {
-  const initialState: ModalState = useMemo(
-    () => ({
-      isOpen: false,
-      modalComponent: null,
-    }),
-    [],
-  );
-
-  const [state, dispatch] = useReducer(modalReducer, initialState);
+  const [state, dispatch] = useReducer(modalReducer, modalInitialState);
 
   const memoizedState = useMemo(() => state, [state]);
   const memoizedDispatch = useMemo(() => dispatch, [dispatch]);

@@ -2,28 +2,20 @@ import { useMemo, useReducer } from 'react';
 
 import CreditCardFormDispatchContext from './CreditCardFormDispatchContext';
 import CreditCardFormStateContext from './CreditCardFormStateContext';
-import creditCardFormReducer from '../../reducers/creditCardFormReducer';
-import { CreditCardFormState } from '../../types/creditCardForm.types';
+import {
+  CreditCardFormInitialState,
+  creditCardFormReducer,
+} from '../../reducers/creditCardFormReducer';
 
 interface CreditCardFormProviderProps {
   children: React.ReactNode;
 }
 
 const CreditCardFormProvider = ({ children }: CreditCardFormProviderProps) => {
-  const initialState: CreditCardFormState = useMemo(
-    () => ({
-      creditCardCompany: '카카오뱅크',
-      creditCardNumber: '',
-      creditCardExpirationDate: ['', ''],
-      creditCardOwnerName: '',
-      creditCardCVC: '',
-      creditCardPassword: '',
-      creditCardName: '',
-    }),
-    [],
+  const [state, dispatch] = useReducer(
+    creditCardFormReducer,
+    CreditCardFormInitialState,
   );
-
-  const [state, dispatch] = useReducer(creditCardFormReducer, initialState);
 
   const memoizedState = useMemo(() => state, [state]);
   const memoizedDispatch = useMemo(() => dispatch, [dispatch]);

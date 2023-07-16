@@ -15,6 +15,7 @@ import {
   SET_CREDIT_CARD_PASSWORD,
   SET_CREDIT_CARD_CVC,
   SET_CREDIT_CARD_EXPIRATION_DATE,
+  RESET,
 } from '../actions/creditCardActions';
 
 export interface CreditCardFormState {
@@ -37,4 +38,5 @@ export type CreditCardFormAction =
     }
   | { type: typeof SET_CREDIT_CARD_OWNER_NAME; payload: CreditCardOwnerName }
   | { type: typeof SET_CREDIT_CARD_CVC; payload: CreditCardCVC }
-  | { type: typeof SET_CREDIT_CARD_PASSWORD; payload: CreditCardPassword };
+  | { type: typeof SET_CREDIT_CARD_PASSWORD; payload: CreditCardPassword }
+  | { type: typeof RESET };
