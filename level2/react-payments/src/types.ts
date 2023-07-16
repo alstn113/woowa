@@ -1,4 +1,4 @@
-import { CREDIT_CARD_COMPANY } from './constants';
+import { CREDIT_CARD_COMPANY } from './constants/creditCard';
 
 export type CreditCardCompany = (typeof CREDIT_CARD_COMPANY)[number];
 export type CreditCardNumber = string;

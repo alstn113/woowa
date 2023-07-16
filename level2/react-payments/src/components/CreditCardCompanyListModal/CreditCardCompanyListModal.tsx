@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import * as S from './CreidtCardCompanyListModal.styles';
-import { CREDIT_CARD_COMPANY } from '../../constants';
+import { CREDIT_CARD_COMPANY } from '../../constants/creditCard';
 import useCreditCardFormActions from '../../hooks/creditCardForm/useCreditCardFormActions';
 import useModalAcitons from '../../hooks/modal/useModalAcitons';
 import { CreditCardCompany } from '../../types';

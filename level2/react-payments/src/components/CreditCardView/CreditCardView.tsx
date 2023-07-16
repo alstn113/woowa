@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { CREDIT_CARD_COMPANY_COLOR } from '../../constants';
+import { CREDIT_CARD_COMPANY_COLOR } from '../../constants/creditCard';
 import { SpaceBetween } from '../../styles/shared';
 import type {
   CreditCardCompany,
