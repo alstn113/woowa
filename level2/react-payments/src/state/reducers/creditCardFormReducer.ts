@@ -4,7 +4,7 @@ import {
 } from '../types/creditCardForm.types';
 
 const CreditCardFormInitialState: CreditCardFormState = {
-  creditCardCompany: '카카오뱅크',
+  creditCardCompany: 'BC카드',
   creditCardNumber: '',
   creditCardExpirationDate: ['', ''],
   creditCardOwnerName: '',
@@ -56,6 +56,7 @@ const creditCardFormReducer = (
     case 'RESET':
       return {
         ...CreditCardFormInitialState,
+        creditCardCompany: state.creditCardCompany,
       };
     default:
       return state;
