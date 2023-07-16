@@ -1,14 +1,10 @@
+import CreditCardCreationButton from '../../components/CreditCardCreationButton/CreditCardCreationButton';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
-import useOpenCreditCardCompanyListModal from '../../hooks/useOpenCreditCardCompanyListModal';
 
 const CreditCardListPage = () => {
-  const openModal = useOpenCreditCardCompanyListModal();
-
   return (
     <BaseLayout title="보유 카드">
-      <div>
-        <button onClick={() => openModal()}>모달 오픈</button>
-      </div>
+      <CreditCardCreationButton message="새로운 카드를 등록해주세요." />
     </BaseLayout>
   );
 };
