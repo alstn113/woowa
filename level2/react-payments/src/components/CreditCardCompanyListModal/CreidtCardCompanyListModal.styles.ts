@@ -12,6 +12,8 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `;
 export const IconWrapper = styled.div`
   padding: 30px 0;
