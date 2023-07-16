@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 import CreditCardCVCInput from '../../components/CreditCardForm/CreditCardCVCInput';
 import CreditCardExpirationDateInput from '../../components/CreditCardForm/CreditCardExpirationDateInput';
@@ -7,11 +8,12 @@ import CreditCardOwnerNameInput from '../../components/CreditCardForm/CreditCard
 import CreditCardPasswordInput from '../../components/CreditCardForm/CreditCardPasswordInput';
 import CreditCardView from '../../components/CreditCardView/CreditCardView';
 import BaseLayout from '../../components/layouts/BaseLayout/BaseLayout';
+import { PAGE_ROUTES } from '../../constants';
 import useCreditCardFormStates from '../../hooks/creditCardForm/useCreditCardFormStates';
 import useCreditCardFormValidation from '../../hooks/useCreditCardFormValidation';
 import { Spacing } from '../../styles/shared';
 
-const CreditCardCreationPage = () => {
+const CreditCardCreatePage = () => {
   const {
     creditCardCVC,
     creditCardCompany,
@@ -21,18 +23,22 @@ const CreditCardCreationPage = () => {
     creditCardPassword,
   } = useCreditCardFormStates();
   const { validateAllFields } = useCreditCardFormValidation();
+  const navigate = useNavigate();
+
   const handleNexpStep = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (
-      !validateAllFields({
-        creditCardCVC,
-        creditCardExpirationDate,
-        creditCardNumber,
-        creditCardOwnerName,
-        creditCardPassword,
-      })
-    )
-      return;
+
+    const isValid = validateAllFields({
+      creditCardCVC,
+      creditCardExpirationDate,
+      creditCardNumber,
+      creditCardOwnerName,
+      creditCardPassword,
+    });
+
+    if (isValid) {
+      navigate(PAGE_ROUTES.CREDIT_CARD_NAMING);
+    }
   };
 
   return (
@@ -80,4 +86,4 @@ const NextButton = styled.button`
   font-weight: 700;
 `;
 
-export default CreditCardCreationPage;
+export default CreditCardCreatePage;

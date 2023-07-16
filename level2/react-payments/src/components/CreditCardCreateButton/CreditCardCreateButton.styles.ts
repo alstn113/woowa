@@ -8,7 +8,7 @@ export const Container = styled.div`
   gap: 10px;
 `;
 
-export const StyledCreditCardCreationButton = styled.button`
+export const StyledCreditCardCreateButton = styled.button`
   background-color: #e5e5e5;
   border: none;
   border-radius: 5px;

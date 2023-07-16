@@ -10,7 +10,9 @@ interface BaseLayoutProps {
 const BaseLayout = ({ children, title, withBackButton }: BaseLayoutProps) => {
   return (
     <S.Container>
-      <Header title={title} withBackButton={withBackButton} />
+      {(title || withBackButton) && (
+        <Header title={title} withBackButton={withBackButton} />
+      )}
       <main>{children}</main>
     </S.Container>
   );

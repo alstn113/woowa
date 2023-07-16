@@ -1,13 +1,11 @@
-import * as S from './CreditCardCreationButton.styles';
+import * as S from './CreditCardCreateButton.styles';
 import useOpenCreditCardCompanyListModal from '../../hooks/useOpenCreditCardCompanyListModal';
 
-interface CreditCardCreationButtonProps {
+interface CreditCardCreateButtonProps {
   message?: string;
 }
 
-const CreditCardCreationButton = ({
-  message,
-}: CreditCardCreationButtonProps) => {
+const CreditCardCreateButton = ({ message }: CreditCardCreateButtonProps) => {
   const openModal = useOpenCreditCardCompanyListModal();
 
   const handleClick = () => {
@@ -17,11 +15,11 @@ const CreditCardCreationButton = ({
   return (
     <S.Container>
       {message && <S.Message>{message}</S.Message>}
-      <S.StyledCreditCardCreationButton onClick={handleClick}>
+      <S.StyledCreditCardCreateButton onClick={handleClick}>
         +
-      </S.StyledCreditCardCreationButton>
+      </S.StyledCreditCardCreateButton>
     </S.Container>
   );
 };
 
-export default CreditCardCreationButton;
+export default CreditCardCreateButton;

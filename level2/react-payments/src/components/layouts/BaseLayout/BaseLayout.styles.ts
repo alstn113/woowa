@@ -5,8 +5,10 @@ export const Container = styled.div`
   flex-direction: column;
   width: 500px;
   margin: 0 auto;
+  min-height: 100vh;
 
   main {
+    min-height: 100vh;
     padding: 20px;
   }
 
