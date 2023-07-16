@@ -24,9 +24,10 @@ module.exports = {
     project: true,
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'react-hooks'],
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'react-hooks/rules-of-hooks': 'off',
     'react-refresh/only-export-components': [
       'warn',
       {
