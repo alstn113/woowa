@@ -29,9 +29,9 @@
   - [x] react-lunch (1단계 - class component)
   - [x] react-lunch (2단계 - functional component)
 
-  - [ ] react-payments (1단계)
-  - [ ] react-payments (2단계)
-  - [ ] react-payments (3단계)
+  - [x] react-payments (1단계)
+  - [x] react-payments (2단계)
+  - [x] react-payments (3단계)
 
   - [ ] react-shopping-cart (1단계)
   - [ ] react-shopping-cart (2단계)
