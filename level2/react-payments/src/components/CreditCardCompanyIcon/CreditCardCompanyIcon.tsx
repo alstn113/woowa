@@ -7,6 +7,7 @@ import 카카오뱅크 from '../../assets/images/카카오뱅크.png';
 import 하나카드 from '../../assets/images/하나카드.png';
 import 현대카드 from '../../assets/images/현대카드.png';
 import { CreditCardCompany } from '../../types';
+import Icon from '../common/Icon/Icon';
 
 interface CreditCardCompanyIconProps {
   creditCardCompanyName: CreditCardCompany;
@@ -29,9 +30,9 @@ const CreditCardCompanyIcon = ({
   } satisfies Record<CreditCardCompany, string>;
 
   return (
-    <img
-      width={`${size}px`}
-      height={`${size}px`}
+    <Icon
+      w={size}
+      h={size}
       src={creditCardCompanyIconMap[creditCardCompanyName]}
       alt={creditCardCompanyName}
     />

@@ -10,11 +10,7 @@ interface IconProps extends ImgHTMLAttributes<HTMLImageElement> {
 }
 
 const Icon = ({ w = 20, h = 20, src, alt, ...props }: IconProps) => {
-  return (
-    <S.Icon src={src} alt={alt} w={w} h={h} {...props}>
-      Icon
-    </S.Icon>
-  );
+  return <S.Icon src={src} alt={alt} w={w} h={h} {...props} />;
 };
 
 export default Icon;
