@@ -1,8 +1,6 @@
-export const PAGE_ROUTES = {
+export const PAGE_ROUTES: { [key: string]: string } = {
   CREDIT_CARD_LIST: '/',
-  CREDIT_CARD: {
-    CREATE: '/credit-card/create',
-    NAMING: '/credit-card/naming',
-  },
+  CREDIT_CARD_CREATE: '/credit-card/create',
+  CREDIT_CARD_NAMING: '/credit-card/naming',
   NOT_FOUND: '*',
-};
+} as const;

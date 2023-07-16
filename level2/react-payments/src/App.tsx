@@ -14,11 +14,11 @@ const App = () => {
         element={<CreditCardListPage />}
       />
       <Route
-        path={PAGE_ROUTES.CREDIT_CARD.CREATE}
+        path={PAGE_ROUTES.CREDIT_CARD_CREATION}
         element={<CreditCardCreationPage />}
       />
       <Route
-        path={PAGE_ROUTES.CREDIT_CARD.NAMING}
+        path={PAGE_ROUTES.CREDIT_CARD_NAMING}
         element={<CreditCardNamingPage />}
       />
       <Route path={PAGE_ROUTES.NOT_FOUND} element={<NotFoundPage />} />
