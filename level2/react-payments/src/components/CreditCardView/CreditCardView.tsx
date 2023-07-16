@@ -10,19 +10,19 @@ import type {
 } from '../../types';
 import CreditCardCompanyIcon from '../CreditCardCompanyIcon/CreditCardCompanyIcon';
 
-interface CreditCardCompanyNameProps {
+interface CreditCardViewProps {
   creditCardCompany: CreditCardCompany;
-  creditCardNumber?: CreditCardNumber;
-  creditCardOwnerName?: CreditCardOwnerName;
-  creditCardExpirationDate?: CreditCardExpirationDate;
+  creditCardNumber: CreditCardNumber;
+  creditCardOwnerName: CreditCardOwnerName;
+  creditCardExpirationDate: CreditCardExpirationDate;
 }
 
 const CreditCardView = ({
-  creditCardCompany = '카카오뱅크',
-  creditCardNumber = '',
-  creditCardExpirationDate = ['', ''],
-  creditCardOwnerName = '',
-}: CreditCardCompanyNameProps) => {
+  creditCardCompany,
+  creditCardNumber,
+  creditCardExpirationDate,
+  creditCardOwnerName,
+}: CreditCardViewProps) => {
   const cardBackground =
     CREDIT_CARD_COMPANY_COLOR[creditCardCompany].background;
   const cardColor = CREDIT_CARD_COMPANY_COLOR[creditCardCompany].color;
