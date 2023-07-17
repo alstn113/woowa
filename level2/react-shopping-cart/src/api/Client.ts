@@ -1,21 +1,20 @@
-import { HttpMethod } from './Http';
+import { HttpClient, HttpMethod } from './Http';
 
 interface ClientDefaultConfig {
   baseURL?: string;
 }
 
-class Client {
+class Client<THttpClient extends HttpClient> {
   private readonly defaultConfig: ClientDefaultConfig;
 
   constructor(defaultConfig: ClientDefaultConfig = {}) {
     this.defaultConfig = defaultConfig;
   }
 
-  private async fetchJson(
-    method: HttpMethod,
-    url: string,
-    init?: Omit<RequestInit, 'method'>,
-  ) {
+  private async fetchJson<
+    Method extends THttpClient['request']['method'],
+    URL extends THttpClient['request']['url'],
+  >(method: Method, url: URL, init?: Omit<RequestInit, 'method'>) {
     const response = await fetch(url, { method, ...init });
     if (!response.ok) {
       throw new Error('API 요청 실패');
@@ -24,11 +23,11 @@ class Client {
   }
 
   get(url: string) {
-    return this.fetchJson('GET', url);
+    return this.fetchJson('get', url);
   }
 
   post(url: string, data?: any) {
-    return this.fetchJson('POST', url, {
+    return this.fetchJson('post', url, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -37,7 +36,7 @@ class Client {
   }
 
   put(url: string, data?: any) {
-    return this.fetchJson('PUT', url, {
+    return this.fetchJson('put', url, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -46,7 +45,7 @@ class Client {
   }
 
   patch(url: string, data?: any) {
-    return this.fetchJson('PATCH', url, {
+    return this.fetchJson('patch', url, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -54,8 +53,8 @@ class Client {
     });
   }
 
-  delete() {
-    return;
+  delete(url: string) {
+    return this.fetchJson('delete', url);
   }
 }
 
