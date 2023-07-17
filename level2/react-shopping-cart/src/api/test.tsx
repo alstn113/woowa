@@ -1,3 +1,5 @@
+import Client from './Client';
+
 type PathParams<Path extends string> =
   Path extends `:${infer Param}/${infer Rest}`
     ? Param | PathParams<Rest>
@@ -7,10 +9,12 @@ type PathParams<Path extends string> =
     ? PathParams<`:${Rest}`>
     : never;
 
+type PathArgs<Path extends string> = null extends PathParams<Path>
+  ? { [K in Exclude<PathParams<Path>, null>]: string } | null
+  : { [K in PathParams<Path>]: string };
+
 type Params1 = PathParams<'/site/:siteId/user/:userId'>;
 type Params2 = PathParams<'/dashboard'>;
-
-type PathArgs<Path extends string> = { [K in PathParams<Path>]: string };
 
 type Result1 = PathArgs<'/dashboard/:siteId/user:userId'>;
 type Result2 = PathArgs<'/dashboard'>;

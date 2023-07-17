@@ -7,7 +7,7 @@ export interface HttpRequest<
   QueryParams extends Record<string, unknown> = Record<string, never>,
   Body extends object = object,
 > {
-  path: string;
+  path: Path;
   method: Method;
   params?: ExtractParamsFromPath<Path>;
   queryParams?: QueryParams;

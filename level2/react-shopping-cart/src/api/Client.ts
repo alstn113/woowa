@@ -1,4 +1,10 @@
-import { RestAPI, HttpMethod } from './Http';
+import {
+  RestAPI,
+  HttpMethod,
+  ExtractPathFromRestAPI,
+  ExtractParamsFromPath,
+  ExtractBodyFromRestAPI,
+} from './Http';
 
 interface ClientDefaultConfig {
   baseURL?: string;
@@ -22,12 +28,21 @@ class Client<TRestAPI extends RestAPI> {
     return response.json();
   }
 
-  get(url: string) {
-    return this.fetchJson('get', url);
+  get<Path extends ExtractPathFromRestAPI<TRestAPI, 'get'>>(url: {
+    path: Path;
+    params: ExtractParamsFromPath<Path>;
+  }) {
+    return this.fetchJson('get', url.path);
   }
 
-  post(url: string, data?: any) {
-    return this.fetchJson('post', url, {
+  post<Path extends ExtractPathFromRestAPI<TRestAPI, 'post'>>(
+    url: {
+      path: Path;
+      params: ExtractParamsFromPath<Path>;
+    },
+    data: ExtractBodyFromRestAPI<TRestAPI, 'post'>,
+  ) {
+    return this.fetchJson('post', url.path, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -35,8 +50,14 @@ class Client<TRestAPI extends RestAPI> {
     });
   }
 
-  put(url: string, data?: any) {
-    return this.fetchJson('put', url, {
+  put<Path extends ExtractPathFromRestAPI<TRestAPI, 'put'>>(
+    url: {
+      path: Path;
+      params?: ExtractParamsFromPath<Path>;
+    },
+    data: ExtractBodyFromRestAPI<TRestAPI, 'put'>,
+  ) {
+    return this.fetchJson('put', url.path, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -44,8 +65,14 @@ class Client<TRestAPI extends RestAPI> {
     });
   }
 
-  patch(url: string, data?: any) {
-    return this.fetchJson('patch', url, {
+  patch<Path extends ExtractPathFromRestAPI<TRestAPI, 'patch'>>(
+    url: {
+      path: Path;
+      params?: ExtractParamsFromPath<Path>;
+    },
+    data: ExtractBodyFromRestAPI<TRestAPI, 'patch'>,
+  ) {
+    return this.fetchJson('patch', url.path, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -53,8 +80,11 @@ class Client<TRestAPI extends RestAPI> {
     });
   }
 
-  delete(url: string) {
-    return this.fetchJson('delete', url);
+  delete<Path extends ExtractPathFromRestAPI<TRestAPI, 'delete'>>(url: {
+    path: Path;
+    params: ExtractParamsFromPath<Path>;
+  }) {
+    return this.fetchJson('delete', url.path);
   }
 }
 
