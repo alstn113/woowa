@@ -10,8 +10,8 @@ const Header = ({ onNavigate }: HeaderProps) => {
       <HeaderWrapper>
         <Logo onClick={() => onNavigate('/')}>SHOP</Logo>
         <CartButton onClick={() => onNavigate('/cart')}>
-          <span>장바구니</span>
-          <div>3</div>
+          <CartButtonText>장바구니</CartButtonText>
+          <CartCountBadge>3</CartCountBadge>
         </CartButton>
       </HeaderWrapper>
     </HeaderContainer>
@@ -33,9 +33,10 @@ const HeaderWrapper = styled.div`
   max-width: 800px;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled.button`
   font-size: 40px;
   font-weight: 900;
   color: #ffffff;
@@ -43,8 +44,29 @@ export const Logo = styled.div`
 
 export const CartButton = styled.button`
   display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px;
+  height: 32px;
+`;
+
+export const CartButtonText = styled.span`
+  font-size: 24px;
+  font-weight: 500;
+  color: #ffffff;
+`;
+
+export const CartCountBadge = styled.div`
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #04c09e;
+  display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
 `;
 
 export default Header;
