@@ -1,10 +1,10 @@
-import { HttpClient, HttpMethod } from './Http';
+import { RestAPI, HttpMethod } from './Http';
 
 interface ClientDefaultConfig {
   baseURL?: string;
 }
 
-class Client<THttpClient extends HttpClient> {
+class Client<TRestAPI extends RestAPI> {
   private readonly defaultConfig: ClientDefaultConfig;
 
   constructor(defaultConfig: ClientDefaultConfig = {}) {
@@ -12,8 +12,8 @@ class Client<THttpClient extends HttpClient> {
   }
 
   private async fetchJson<
-    Method extends THttpClient['request']['method'],
-    URL extends THttpClient['request']['url'],
+    Method extends TRestAPI['request']['method'],
+    URL extends TRestAPI['request']['path'],
   >(method: Method, url: URL, init?: Omit<RequestInit, 'method'>) {
     const response = await fetch(url, { method, ...init });
     if (!response.ok) {

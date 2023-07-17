@@ -3,13 +3,13 @@ export type HttpMethod = 'get' | 'post' | 'patch' | 'put' | 'delete';
 
 export interface HttpRequest<
   Method extends HttpMethod,
-  Params extends Record<string, string> = Record<string, never>,
+  Path extends `/${string}` = `/`,
   QueryParams extends Record<string, unknown> = Record<string, never>,
   Body extends object = object,
 > {
-  url: string;
+  path: string;
   method: Method;
-  params?: Params;
+  params?: ExtractParamsFromPath<Path>;
   queryParams?: QueryParams;
   body: Body;
   headers?: HttpHeaders;
@@ -24,15 +24,19 @@ export interface HttpResponse<
   headers?: HttpHeaders;
 }
 
-export interface HttpClient {
+export interface RestAPI {
   request: HttpRequest<HttpMethod>;
   response: HttpResponse;
 }
 
 /**
- * path로부터 params를 추출합니다.
+ * @description path로부터 params를 추출합니다.
+ *
+ * @example
+ * '/product/:productId'인 경우`ExtractParamsFromPath<'/product/:productId'>`는 `{ productId: string }`를 반환합니다.
+ *            '/product'인 경우 `ExtractParamsFromPath<'/'>`는 `{}`를 반환합니다. TODO: 이 경우만 문제될 것!!
  */
-type ExtractParamsFromPath<
+export type ExtractParamsFromPath<
   THttpPath extends string,
   // eslint-disable-next-line @typescript-eslint/ban-types
   TParams extends Record<string, string> = {},
@@ -46,15 +50,27 @@ type ExtractParamsFromPath<
   ? TParams & { [K in Param]: string }
   : TParams;
 
-const a: ExtractParamsFromPath<'/users'> = {};
+/**
+ * @description RestAPI에서 path를 추출합니다.
+ */
+export type ExtractPathFromRestAPI<
+  TRestAPI extends RestAPI,
+  Method extends TRestAPI['request']['method'] = TRestAPI['request']['method'],
+> = Extract<TRestAPI['request'], { method: Method }>['path'];
 
-const b: ExtractParamsFromPath<'/users/:id'> = {
-  id: '1',
-};
+/**
+ * @description RestAPI에서 params를 추출합니다.
+ */
+export type ExtractBodyFromRestAPI<
+  TRestAPI extends RestAPI,
+  Method extends TRestAPI['request']['method'] = TRestAPI['request']['method'],
+> = Extract<TRestAPI['request'], { method: Method }>['body'];
 
-const c: ExtractParamsFromPath<'/users/:id/posts/:postId'> = {
-  id: '1',
-  postId: '1',
-};
-
-console.log(a);
+/**
+ * @description RestAPI에서 response를 추출합니다.
+ */
+export type ExtractResponseFromRestAPI<
+  TRestAPI extends RestAPI,
+  Method extends TRestAPI['request']['method'] = TRestAPI['request']['method'],
+  Path extends TRestAPI['request']['path'] = TRestAPI['request']['path'],
+> = Extract<TRestAPI, { request: { method: Method; path: Path } }>['response'];
