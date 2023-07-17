@@ -33,13 +33,18 @@ export interface RestAPI {
  * @description path로부터 params를 추출합니다.
  *
  * @example
- * '/product/:productId'인 경우`ExtractParamsFromPath<'/product/:productId'>`는 `{ productId: string }`를 반환합니다.
- *            '/product'인 경우 `ExtractParamsFromPath<'/'>`는 `{}`를 반환합니다. TODO: 이 경우만 문제될 것!!
+ * type Params = ExtractParamsFromPath<'/users/:id'>;
+ * // type Params = { id: string };
+ *
+ * type Params = ExtractParamsFromPath<'/users/:id/posts/:postId'>;
+ * // type Params = { id: string; postId: string };
+ *
+ * type Params = ExtractParamsFromPath<'/users'>;
+ * // type Params = null;
  */
 export type ExtractParamsFromPath<
   THttpPath extends string,
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  TParams extends Record<string, string> = {},
+  TParams extends Record<string, string> = NonNullable<unknown>,
 > = THttpPath extends `/${infer Remain}`
   ? ExtractParamsFromPath<Remain, TParams>
   : THttpPath extends `:${infer Param}/${infer Remain}`
@@ -48,6 +53,8 @@ export type ExtractParamsFromPath<
   ? ExtractParamsFromPath<Remain, TParams>
   : THttpPath extends `:${infer Param}`
   ? TParams & { [K in Param]: string }
+  : TParams extends NonNullable<unknown>
+  ? null
   : TParams;
 
 /**
