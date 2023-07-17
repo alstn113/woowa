@@ -3,7 +3,7 @@ export type HttpMethod = 'get' | 'post' | 'patch' | 'put' | 'delete';
 
 export interface HttpRequest<
   Method extends HttpMethod,
-  Path extends `/${string}` = `/`,
+  Path extends string = string,
   QueryParams extends Record<string, unknown> = Record<string, never>,
   Body extends object = object,
 > {
@@ -18,10 +18,11 @@ export interface HttpRequest<
 export interface HttpResponse<
   StatusCode extends number = number,
   Data = unknown,
+  Headers extends HttpHeaders = HttpHeaders,
 > {
   statusCode: StatusCode;
   data: Data;
-  headers?: HttpHeaders;
+  headers: Headers;
 }
 
 export interface RestAPI {

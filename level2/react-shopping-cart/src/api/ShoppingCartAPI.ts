@@ -7,6 +7,8 @@ interface ProductResponse {
   imageUrl: string;
 }
 
+type ProductAddRequest = Omit<ProductResponse, 'id'>;
+
 export type ShoppingCartAPI =
   | {
       request: HttpRequest<'get', '/products'>;
@@ -15,4 +17,8 @@ export type ShoppingCartAPI =
   | {
       request: HttpRequest<'get', '/products/:productId'>;
       response: HttpResponse<200, ProductResponse> | HttpResponse<404>;
+    }
+  | {
+      request: HttpRequest<'post', '/products', never, ProductAddRequest>;
+      response: HttpResponse<201, never, { Location: string }>;
     };
