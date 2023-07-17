@@ -34,6 +34,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     // storybook play에서 await을 사용할 수 없어서 off
     '@typescript-eslint/await-thenable': 'off',
+    'import/no-unresolved': 'off',
     'import/order': [
       'error',
       {
@@ -53,16 +54,5 @@ module.exports = {
       },
     ],
   },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-    'import/resolver': {
-      node: {},
-      typescript: {
-        directory: './src',
-      },
-    },
-    'import/parsers': { '@typescript-eslint/parser': ['.ts', '.tsx'] },
-  },
+  settings: {},
 };

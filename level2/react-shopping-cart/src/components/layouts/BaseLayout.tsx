@@ -1,4 +1,5 @@
 import { Outlet, useNavigate } from 'react-router-dom';
+
 import Header from '../base/Header';
 
 const BaseLayout = () => {
