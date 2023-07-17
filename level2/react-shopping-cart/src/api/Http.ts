@@ -31,26 +31,30 @@ export interface HttpClient {
 
 /**
  * path로부터 params를 추출합니다.
- *
- * @example
- * type Params = ExtractHttpParamsFromPath<'/users/:id'>;
- * // Params = ['id']
- *
- * type Params = ExtractHttpParamsFromPath<'/users/:id/posts/:postId'>;
- * // Params = ['id', 'postId']
- *
- * type Params = ExtractHttpParamsFromPath<'/users'>;
- * // Params = []
  */
-export type ExtractHttpParamsFromPath<
+type ExtractParamsFromPath<
   THttpPath extends string,
-  TParams extends unknown[] = [],
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  TParams extends Record<string, string> = {},
 > = THttpPath extends `/${infer Remain}`
-  ? ExtractHttpParamsFromPath<Remain, TParams>
+  ? ExtractParamsFromPath<Remain, TParams>
   : THttpPath extends `:${infer Param}/${infer Remain}`
-  ? ExtractHttpParamsFromPath<Remain, [...TParams, unknown]>
+  ? ExtractParamsFromPath<Remain, TParams & { [K in Param]: string }>
   : THttpPath extends `${string}/${infer Remain}`
-  ? ExtractHttpParamsFromPath<Remain, TParams>
+  ? ExtractParamsFromPath<Remain, TParams>
   : THttpPath extends `:${infer Param}`
-  ? [...TParams, unknown]
+  ? TParams & { [K in Param]: string }
   : TParams;
+
+const a: ExtractParamsFromPath<'/users'> = {};
+
+const b: ExtractParamsFromPath<'/users/:id'> = {
+  id: '1',
+};
+
+const c: ExtractParamsFromPath<'/users/:id/posts/:postId'> = {
+  id: '1',
+  postId: '1',
+};
+
+console.log(a);
