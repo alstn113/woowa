@@ -1,14 +1,12 @@
-import { Route, Routes } from 'react-router-dom';
-
-import CartPage from './pages/CartPage';
-import ProductListPage from './pages/ProductListPage';
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
+import { RecoilRoot } from 'recoil';
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<ProductListPage />} />
-      <Route path="/cart" element={<CartPage />} />
-    </Routes>
+    <RecoilRoot>
+      <RouterProvider router={router} />
+    </RecoilRoot>
   );
 };
 
