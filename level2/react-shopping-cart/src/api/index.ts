@@ -25,4 +25,17 @@ const test2 = async () => {
   return response;
 };
 
+const test3 = async () => {
+  const response = await client.post({
+    path: '/products',
+    body: {
+      name: 'test',
+      price: 1000,
+      imageUrl: 'https://test.com',
+    },
+  });
+
+  return response;
+};
+
 export default client;

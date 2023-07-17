@@ -47,6 +47,7 @@ class Client<TRestAPI extends RestAPI> {
           params?: ExtractParamsFromPath<Path>;
         },
   ): Promise<ExtractResponseFromRestAPI<TRestAPI, 'get', Path>> {
+    const a = request.params;
     return this.fetchJson('get', request.path);
   }
 
