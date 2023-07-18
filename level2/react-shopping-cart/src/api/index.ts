@@ -7,14 +7,14 @@ const client = new Client<ShoppingCartAPI>({
 });
 
 const test = async () => {
-  const response = await client.get({
-    path: '/products/:productId',
-    params: {
-      productId: '1',
-    },
-  });
-
-  return response;
+  const a = await client
+    .get({
+      path: '/products/:productId',
+      params: {
+        productId: '1',
+      },
+    })
+    .acceptOkOrThrow();
 };
 
 const test2 = async () => {

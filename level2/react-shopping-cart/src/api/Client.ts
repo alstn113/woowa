@@ -1,3 +1,4 @@
+import ClientResponse from './ClientResponse';
 import {
   RestAPI,
   HttpMethod,
@@ -18,22 +19,23 @@ class Client<TRestAPI extends RestAPI> {
     this.defaultConfig = defaultConfig;
   }
 
-  private async fetchJson<
+  private fetchJson<
     Method extends TRestAPI['request']['method'],
     Path extends TRestAPI['request']['path'],
   >(method: Method, path: Path, init?: Omit<RequestInit, 'method'>) {
-    const response = await fetch(path, { method, ...init });
-    if (!response.ok) {
-      throw new Error('API 요청 실패');
-    }
-
-    return {
-      statusCode: response.status,
-      data: response.json() as Promise<
-        ExtractResponseFromRestAPI<TRestAPI, Method, Path>
-      >,
-      headers: Object.fromEntries(response.headers.entries()),
-    };
+    return new ClientResponse<ExtractResponseFromRestAPI<TRestAPI, Method>>(
+      async () => {
+        const response = await fetch(path, {
+          ...init,
+          method,
+        });
+        return {
+          statusCode: response.status,
+          data: await response.json(),
+          headers: Object.fromEntries(response.headers.entries()),
+        };
+      },
+    );
   }
 
   get<Path extends ExtractPathFromRestAPI<TRestAPI, 'get'>>(
@@ -46,7 +48,7 @@ class Client<TRestAPI extends RestAPI> {
           path: Path;
           params?: ExtractParamsFromPath<Path>;
         },
-  ): Promise<ExtractResponseFromRestAPI<TRestAPI, 'get', Path>> {
+  ) {
     const a = request.params;
     return this.fetchJson('get', request.path);
   }
