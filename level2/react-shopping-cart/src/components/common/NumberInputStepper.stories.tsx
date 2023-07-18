@@ -25,3 +25,41 @@ export const Default: Story = {
     );
   },
 };
+
+export const WithMinAndMax: Story = {
+  args: {
+    value: 5,
+    min: 5,
+    max: 10,
+  },
+  render: (args) => {
+    const [value, setValue] = useState(args.value);
+
+    return (
+      <NumberInputStepper
+        value={value}
+        onChange={(value) => setValue(value)}
+        min={args.min}
+        max={args.max}
+      />
+    );
+  },
+};
+
+export const WithSize: Story = {
+  args: {
+    value: 5,
+    size: 'lg',
+  },
+  render: (args) => {
+    const [value, setValue] = useState(args.value);
+
+    return (
+      <NumberInputStepper
+        value={value}
+        onChange={(value) => setValue(value)}
+        size={args.size}
+      />
+    );
+  },
+};

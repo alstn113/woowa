@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import ArrowDownSVG from '../vectors/ArrowDownSVG';
 import ArrowUpSVG from '../vectors/ArrowUpSVG';
@@ -21,17 +21,29 @@ const NumberInputStepper = ({
   size = 'sm',
 }: NumberInputStepperProps) => {
   const [numberInputValue, setNumberInputValue] = useState<number>(value);
+  const numberInputRef = useRef<HTMLInputElement>(null);
 
   const handleNumberInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (/\D/.test(e.target.value)) return;
 
-    let value = Number(e.target.value);
-
-    if (value > max) value = max;
-    else if (value < min) value = min;
+    const value = Number(e.target.value);
 
     setNumberInputValue(value);
     onChange(value);
+  };
+
+  const handleNumberInputFocus = () => {
+    numberInputRef.current?.select();
+  };
+
+  const handleNumberInputBlur = () => {
+    if (numberInputValue > max) {
+      setNumberInputValue(max);
+      onChange(max);
+    } else if (numberInputValue < min) {
+      setNumberInputValue(min);
+      onChange(min);
+    }
   };
 
   const handleNumberInputIncrement = () => {
@@ -49,12 +61,15 @@ const NumberInputStepper = ({
   };
 
   return (
-    <Container>
+    <Container size={size}>
       <NumberInputField
         type="text"
         inputMode="numeric"
         value={numberInputValue}
         onChange={handleNumberInputChange}
+        onFocus={handleNumberInputFocus}
+        onBlur={handleNumberInputBlur}
+        ref={numberInputRef}
       />
       <NumberInputStepperWrapper>
         <NumberInputIncrementStepper
@@ -74,24 +89,49 @@ const NumberInputStepper = ({
   );
 };
 
-const Container = styled.div`
-  width: 64px;
-  height: 28px;
+const Container = styled.div<Pick<Required<NumberInputStepperProps>, 'size'>>`
   display: flex;
   align-items: center;
   background-color: #ffffff;
+
+  ${(props) =>
+    props.size === 'sm' &&
+    css`
+      width: 64px;
+      height: 28px;
+      input {
+        font-size: 12px;
+      }
+      svg {
+        width: 6px;
+        height: 6px;
+      }
+    `}
+  ${(props) =>
+    props.size === 'lg' &&
+    css`
+      width: 114px;
+      height: 60px;
+      input {
+        font-size: 24px;
+      }
+      svg {
+        width: 8px;
+        height: 8px;
+      }
+    `}
 `;
 
 const NumberInputField = styled.input`
-  width: 42px;
+  width: 65%;
   height: 100%;
   text-align: center;
-  font-size: 12px;
   border: 1px solid #dddddd;
+  padding: 5px;
 `;
 
 const NumberInputStepperWrapper = styled.div`
-  width: 22px;
+  width: 35%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -104,10 +144,7 @@ const StepperButtonBase = styled.button`
   justify-content: center;
   align-items: center;
   height: 50%;
-  svg {
-    width: 5px;
-    height: 5px;
-  }
+  width: 100%;
 `;
 
 const NumberInputIncrementStepper = styled(StepperButtonBase)<{
