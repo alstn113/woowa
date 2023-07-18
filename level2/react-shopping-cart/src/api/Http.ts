@@ -3,16 +3,16 @@ export type HttpMethod = 'get' | 'post' | 'patch' | 'put' | 'delete';
 
 export interface HttpRequest<
   Method extends HttpMethod,
-  Path extends string = string,
+  Path extends `/${string}` = '/',
   QueryParams extends Record<string, unknown> = Record<string, never>,
   Body extends object = object,
 > {
   path: Path;
   method: Method;
-  params?: ExtractParamsFromPath<Path>;
-  queryParams?: QueryParams;
+  params: ExtractParamsFromPath<Path>;
+  queryParams: QueryParams;
   body: Body;
-  headers?: HttpHeaders;
+  headers: HttpHeaders;
 }
 
 export interface HttpResponse<
@@ -26,7 +26,7 @@ export interface HttpResponse<
 }
 
 export interface RestAPI {
-  request: HttpRequest<HttpMethod>;
+  request: HttpRequest<HttpMethod, `/${string}`>;
   response: HttpResponse;
 }
 
