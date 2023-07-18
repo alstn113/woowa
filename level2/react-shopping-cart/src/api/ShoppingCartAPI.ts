@@ -21,4 +21,13 @@ export type ShoppingCartAPI =
   | {
       request: HttpRequest<'post', '/products', never, ProductAddRequest>;
       response: HttpResponse<201, never, { Location: string }>;
+    }
+  | {
+      request: HttpRequest<
+        'patch',
+        '/cart-items/:cartItemId',
+        never,
+        { quantity: number }
+      >;
+      response: HttpResponse<200> | HttpResponse<400>;
     };

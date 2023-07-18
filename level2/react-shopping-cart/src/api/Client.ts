@@ -39,76 +39,56 @@ class Client<TRestAPI extends RestAPI> {
   }
 
   get<Path extends ExtractPathFromRestAPI<TRestAPI, 'get'>>(
-    request: Path extends `${infer PathPrefix}/:${string}`
-      ? {
-          path: Path;
-          params: ExtractParamsFromPath<Path>;
-        }
-      : {
-          path: Path;
-          params?: ExtractParamsFromPath<Path>;
-        },
+    path: Path,
+    params: ExtractParamsFromPath<Path>,
   ) {
-    const a = request.params;
-    return this.fetchJson('get', request.path);
+    return this.fetchJson('get', path);
   }
 
   post<Path extends ExtractPathFromRestAPI<TRestAPI, 'post'>>(
-    request: Path extends `${infer PathPrefix}/:${string}`
-      ? {
-          path: Path;
-          params: ExtractParamsFromPath<Path>;
-          body: ExtractBodyFromRestAPI<TRestAPI, 'post'>;
-        }
-      : {
-          path: Path;
-          params?: ExtractParamsFromPath<Path>;
-          body: ExtractBodyFromRestAPI<TRestAPI, 'post'>;
-        },
+    path: Path,
+    params: ExtractParamsFromPath<Path>,
+    body: ExtractBodyFromRestAPI<TRestAPI, 'post'>,
   ) {
-    return this.fetchJson('post', request.path, {
+    return this.fetchJson('post', path, {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(request.body),
+      body: JSON.stringify(body),
     });
   }
 
   put<Path extends ExtractPathFromRestAPI<TRestAPI, 'put'>>(
-    url: {
-      path: Path;
-      params?: ExtractParamsFromPath<Path>;
-    },
-    data: ExtractBodyFromRestAPI<TRestAPI, 'put'>,
+    path: Path,
+    params: ExtractParamsFromPath<Path>,
+    body: ExtractBodyFromRestAPI<TRestAPI, 'put'>,
   ) {
-    return this.fetchJson('put', url.path, {
+    return this.fetchJson('put', path, {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(body),
     });
   }
 
   patch<Path extends ExtractPathFromRestAPI<TRestAPI, 'patch'>>(
-    url: {
-      path: Path;
-      params?: ExtractParamsFromPath<Path>;
-    },
-    data: ExtractBodyFromRestAPI<TRestAPI, 'patch'>,
+    path: Path,
+    params: ExtractParamsFromPath<Path>,
+    body: ExtractBodyFromRestAPI<TRestAPI, 'patch'>,
   ) {
-    return this.fetchJson('patch', url.path, {
+    return this.fetchJson('patch', path, {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(body),
     });
   }
 
-  delete<Path extends ExtractPathFromRestAPI<TRestAPI, 'delete'>>(url: {
-    path: Path;
-    params: ExtractParamsFromPath<Path>;
-  }) {
-    return this.fetchJson('delete', url.path);
+  delete<Path extends ExtractPathFromRestAPI<TRestAPI, 'delete'>>(
+    path: Path,
+    params: ExtractParamsFromPath<Path>,
+  ) {
+    return this.fetchJson('delete', path);
   }
 }
 

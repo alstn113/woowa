@@ -8,34 +8,38 @@ const client = new Client<ShoppingCartAPI>({
 
 const test = async () => {
   const a = await client
-    .get({
-      path: '/products/:productId',
-      params: {
-        productId: '1',
-      },
+    .get('/products/:productId', {
+      productId: '1',
     })
     .acceptOkOrThrow();
 };
 
 const test2 = async () => {
-  const response = await client.get({
-    path: '/products',
-  });
-
-  return response;
+  const response = await client.get('/products', null).acceptOkOrThrow();
 };
 
 const test3 = async () => {
-  const response = await client.post({
-    path: '/products',
-    body: {
+  const response = await client
+    .post('/products', null, {
       name: 'test',
       price: 1000,
       imageUrl: 'https://test.com',
-    },
-  });
+    })
+    .acceptOrThrow(201);
+};
 
-  return response;
+const test4 = async () => {
+  const response = await client
+    .patch(
+      '/cart-items/:cartItemId',
+      {
+        cartItemId: '1',
+      },
+      {
+        quantity: 10,
+      },
+    )
+    .acceptOkOrThrow();
 };
 
 export default client;
