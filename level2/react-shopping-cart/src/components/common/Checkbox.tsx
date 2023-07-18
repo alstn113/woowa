@@ -39,6 +39,7 @@ const CheckboxInput = styled.input`
   width: 28px;
   height: 28px;
   border: 1px solid #22a6a2;
+  background-color: #ffffff;
   border-radius: 2px;
   position: relative;
   outline: none;
