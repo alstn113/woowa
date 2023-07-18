@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import CartLogoSVG from '../vectors/CartLogoSVG';
+
 interface HeaderProps {
   onNavigate: (to: string) => void;
 }
@@ -8,7 +10,10 @@ const Header = ({ onNavigate }: HeaderProps) => {
   return (
     <HeaderContainer>
       <HeaderWrapper>
-        <Logo onClick={() => onNavigate('/')}>SHOP</Logo>
+        <Logo onClick={() => onNavigate('/')}>
+          <CartLogoSVG />
+          <span>SHOP</span>
+        </Logo>
         <CartButton onClick={() => onNavigate('/cart')}>
           <CartButtonText>장바구니</CartButtonText>
           <CartCountBadge>3</CartCountBadge>
@@ -37,9 +42,19 @@ const HeaderWrapper = styled.div`
 `;
 
 export const Logo = styled.button`
-  font-size: 40px;
-  font-weight: 900;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
   color: #ffffff;
+  svg {
+    width: 45px;
+    height: 45px;
+  }
+  span {
+    font-size: 40px;
+    font-weight: 900;
+  }
 `;
 
 export const CartButton = styled.button`

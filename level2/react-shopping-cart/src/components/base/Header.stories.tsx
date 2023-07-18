@@ -12,4 +12,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {},
+  render: (args) => (
+    <div style={{ width: '50%' }}>
+      <Header {...args} />
+    </div>
+  ),
+};
