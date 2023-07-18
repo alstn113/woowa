@@ -34,6 +34,8 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     // storybook play에서 await을 사용할 수 없어서 off
     '@typescript-eslint/await-thenable': 'off',
+    // storybook에서 useState를 사용할 수 없어서 off
+    'react-hooks/rules-of-hooks': 'off',
     'import/no-unresolved': 'off',
     'import/order': [
       'error',
