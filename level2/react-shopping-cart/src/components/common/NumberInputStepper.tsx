@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
@@ -58,13 +59,13 @@ const NumberInputStepper = ({
       <NumberInputStepperWrapper>
         <NumberInputIncrementStepper
           onClick={handleNumberInputIncrement}
-          disabled={numberInputValue === min}
+          disabled={numberInputValue === max}
         >
           <ArrowUpSVG />
         </NumberInputIncrementStepper>
         <NumberInputDecrementStepper
           onClick={handleNumberInputDecrement}
-          disabled={numberInputValue === max}
+          disabled={numberInputValue === min}
         >
           <ArrowDownSVG />
         </NumberInputDecrementStepper>
@@ -88,6 +89,7 @@ const NumberInputField = styled.input`
   font-size: 12px;
   border: 1px solid #dddddd;
 `;
+
 const NumberInputStepperWrapper = styled.div`
   width: 22px;
   height: 100%;
@@ -95,31 +97,43 @@ const NumberInputStepperWrapper = styled.div`
   flex-direction: column;
 `;
 
-const NumberInputIncrementStepper = styled.button`
+const StepperButtonBase = styled.button`
   border: 1px solid #dddddd;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50%;
-  border-collapse: collapse;
   svg {
     width: 5px;
     height: 5px;
   }
 `;
 
-const NumberInputDecrementStepper = styled.button`
-  border: 1px solid #dddddd;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50%;
-  svg {
-    width: 5px;
-    height: 5px;
-  }
+const NumberInputIncrementStepper = styled(StepperButtonBase)<{
+  disabled: boolean;
+}>`
+  ${(props) =>
+    props.disabled &&
+    css`
+      svg {
+        color: #b1b3b5;
+      }
+      cursor: not-allowed;
+    `}
+`;
+
+const NumberInputDecrementStepper = styled(StepperButtonBase)<{
+  disabled: boolean;
+}>`
+  ${(props) =>
+    props.disabled &&
+    css`
+      svg {
+        color: #b1b3b5;
+      }
+      cursor: not-allowed;
+    `}
 `;
 
 export default NumberInputStepper;
