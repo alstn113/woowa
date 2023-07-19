@@ -1,16 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import Checkbox from '../components/common/Checkbox';
+import ProductAPI, { ProductEntity } from '../api/product';
 
 const ProductListPage = () => {
-  const [checked, setChecked] = useState(false);
-  const handleChange = (checked: boolean) => {
-    setChecked(checked);
+  const [products, setProducts] = useState<ProductEntity[]>([]);
+
+  const fetchProducts = async () => {
+    const { data } = await ProductAPI.getProductList();
+    setProducts(data);
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <div>
-      <Checkbox checked={checked} onChange={handleChange} />
-      <div>{checked ? 'true' : 'false'}</div>
+      {products.map((product) => (
+        <div key={product.id}>
+          {product.id} {product.name} {product.price}
+        </div>
+      ))}
     </div>
   );
 };

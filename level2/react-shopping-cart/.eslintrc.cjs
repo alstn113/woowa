@@ -38,6 +38,8 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'off',
     // any 타입 사용
     '@typescript-eslint/no-unsafe-assignment': 'off',
+    // void 함수 이렇게 쓰라길래 끔
+    '@typescript-eslint/no-floating-promises': 'off',
     'import/no-unresolved': 'off',
     'import/order': [
       'error',
