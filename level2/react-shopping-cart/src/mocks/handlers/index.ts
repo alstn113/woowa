@@ -1,3 +1,4 @@
-const handlers = [];
+import { cartHandlers } from './cart';
+import { productHandlers } from './product';
 
-export default handlers;
+export const handlers = [...cartHandlers, ...productHandlers];
