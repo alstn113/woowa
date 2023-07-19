@@ -36,6 +36,8 @@ module.exports = {
     '@typescript-eslint/await-thenable': 'off',
     // storybook에서 useState를 사용할 수 없어서 off
     'react-hooks/rules-of-hooks': 'off',
+    // any 타입 사용을 허용
+    '@typescript-eslint/no-unsafe-assignment': 'off',
     'import/no-unresolved': 'off',
     'import/order': [
       'error',
