@@ -2,16 +2,14 @@ import { ClientResponse } from './Client';
 
 import client from '.';
 
-interface ProductEntity {
+export interface ProductEntity {
   id: number;
   name: string;
   price: number;
   imageUrl: string;
 }
 
-type ProductListResponse = ProductEntity[];
-
-type GetProductsResponse = ClientResponse<200, ProductListResponse>;
+type GetProductListResponse = ClientResponse<200, ProductEntity[]>;
 
 type GetProductResponse = ClientResponse<200, ProductEntity>;
 
@@ -32,8 +30,8 @@ const ProductAPI = {
   /**
    * 상품 목록 조회
    */
-  async getProducts() {
-    const response = await client.get<GetProductsResponse>('/products');
+  async getProductList() {
+    const response = await client.get<GetProductListResponse>('/products');
     return response;
   },
 
