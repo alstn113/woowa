@@ -66,6 +66,32 @@ class Client {
       body: JSON.stringify(body),
     });
   }
+
+  put<T extends ClientResponse, Body extends object = object>(
+    path: string,
+    body?: Body,
+    init?: RequestInit,
+  ) {
+    return this.fetch<T>('PUT', path, {
+      ...init,
+      body: JSON.stringify(body),
+    });
+  }
+
+  patch<T extends ClientResponse, Body extends object = object>(
+    path: string,
+    body?: Body,
+    init?: RequestInit,
+  ) {
+    return this.fetch<T>('PATCH', path, {
+      ...init,
+      body: JSON.stringify(body),
+    });
+  }
+
+  delete<T extends ClientResponse>(path: string, init?: RequestInit) {
+    return this.fetch<T>('DELETE', path, init);
+  }
 }
 
 export default Client;

@@ -2,19 +2,20 @@ import { ClientResponse } from './Client';
 
 import client from '.';
 
-interface ProductResponse {
+interface ProductEntity {
   id: number;
   name: string;
   price: number;
   imageUrl: string;
 }
 
-type ProductListResponse = ProductResponse[];
+type ProductListResponse = ProductEntity[];
 
 type GetProductsResponse = ClientResponse<200, ProductListResponse>;
 
-type GetProductResponse = ClientResponse<200, ProductResponse>;
+type GetProductResponse = ClientResponse<200, ProductEntity>;
 
+type AddProductRequest = Omit<ProductEntity, 'id'>;
 type AddProductResponse = ClientResponse<
   201,
   {
@@ -22,7 +23,10 @@ type AddProductResponse = ClientResponse<
   }
 >;
 
-type AddProductRequest = Omit<ProductResponse, 'id'>;
+type UpdateProductRequest = Omit<ProductEntity, 'id'>;
+type UpdateProductResponse = ClientResponse<200>;
+
+type DeleteProductResponse = ClientResponse<204>;
 
 const ProductAPI = {
   /**
@@ -50,6 +54,29 @@ const ProductAPI = {
     const response = await client.post<AddProductResponse, AddProductRequest>(
       '/products',
       body,
+    );
+
+    return response;
+  },
+
+  /**
+   * 상품 수정
+   */
+  async updateProduct(productId: number, body: AddProductRequest) {
+    const response = await client.put<
+      UpdateProductResponse,
+      UpdateProductRequest
+    >(`/products/${productId}`, body);
+
+    return response;
+  },
+
+  /**
+   * 상픔 삭제
+   */
+  async deleteProduct(productId: number) {
+    const response = await client.delete<DeleteProductResponse>(
+      `/products/${productId}`,
     );
 
     return response;
