@@ -6,15 +6,15 @@ import ArrowDownSVG from '../vectors/ArrowDownSVG';
 import ArrowUpSVG from '../vectors/ArrowUpSVG';
 
 interface NumberInputStepperProps {
-  value: number;
-  onChange: (value: number) => void;
+  value?: number;
+  onChange?: (value: number) => void;
   min?: number;
   max?: number;
   size?: 'sm' | 'lg';
 }
 
 const NumberInputStepper = ({
-  value,
+  value = 0,
   onChange,
   min = 1,
   max = 999,
@@ -29,7 +29,7 @@ const NumberInputStepper = ({
     const value = Number(e.target.value);
 
     setNumberInputValue(value);
-    onChange(value);
+    onChange?.(value);
   };
 
   const handleNumberInputFocus = () => {
@@ -39,10 +39,10 @@ const NumberInputStepper = ({
   const handleNumberInputBlur = () => {
     if (numberInputValue > max) {
       setNumberInputValue(max);
-      onChange(max);
+      onChange?.(max);
     } else if (numberInputValue < min) {
       setNumberInputValue(min);
-      onChange(min);
+      onChange?.(min);
     }
   };
 
@@ -50,14 +50,14 @@ const NumberInputStepper = ({
     if (numberInputValue >= max) return;
 
     setNumberInputValue(numberInputValue + 1);
-    onChange(numberInputValue + 1);
+    onChange?.(numberInputValue + 1);
   };
 
   const handleNumberInputDecrement = () => {
     if (numberInputValue <= min) return;
 
     setNumberInputValue(numberInputValue - 1);
-    onChange(numberInputValue - 1);
+    onChange?.(numberInputValue - 1);
   };
 
   return (

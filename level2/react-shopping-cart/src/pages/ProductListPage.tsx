@@ -1,6 +1,8 @@
+import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 
 import ProductAPI, { ProductEntity } from '../api/product';
+import ProductItem from '../components/ProductItem';
 
 const ProductListPage = () => {
   const [products, setProducts] = useState<ProductEntity[]>([]);
@@ -15,14 +17,19 @@ const ProductListPage = () => {
   }, []);
 
   return (
-    <div>
+    <ProductListContainer>
       {products.map((product) => (
-        <div key={product.id}>
-          {product.id} {product.name} {product.price}
-        </div>
+        <ProductItem key={product.id} product={product} />
       ))}
-    </div>
+    </ProductListContainer>
   );
 };
+
+const ProductListContainer = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 48px;
+  row-gap: 80px;
+`;
 
 export default ProductListPage;
