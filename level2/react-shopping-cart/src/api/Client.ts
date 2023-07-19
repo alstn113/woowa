@@ -4,6 +4,22 @@ interface ClientConfig {
   baseURL?: string;
 }
 
+export interface ClientResponse<
+  StatusCode extends number = number,
+  Data extends
+    | Record<string, unknown>
+    | string
+    | number
+    | undefined
+    | null
+    | unknown = any,
+  Headers extends Record<string, string> = Record<string, string>,
+> {
+  statusCode: StatusCode;
+  data: Data;
+  headers: Headers;
+}
+
 class Client {
   private readonly baseURL: string;
 
@@ -15,11 +31,11 @@ class Client {
     return `${this.baseURL}/${path}`.replace(/([^:]\/)\/+/g, '$1');
   }
 
-  private async fetch<T>(
+  private async fetch<T extends ClientResponse = ClientResponse>(
     method: HttpMethod,
     path: string,
-    init?: Omit<RequestInit, 'method'>,
-  ) {
+    init?: RequestInit,
+  ): Promise<T> {
     const response = await fetch(this.buildURL(path), {
       method,
       ...init,
@@ -31,13 +47,24 @@ class Client {
 
     return {
       statusCode: response.status,
-      data: (await response.json()) as T,
-      headers: response.headers,
-    };
+      data: await response.json(),
+      headers: Object.fromEntries(response.headers.entries()),
+    } as T;
   }
 
-  get<T>(path: string, init?: Omit<RequestInit, 'method'>) {
+  get<T extends ClientResponse>(path: string, init?: RequestInit) {
     return this.fetch<T>('GET', path, init);
+  }
+
+  post<T extends ClientResponse, Body extends object = object>(
+    path: string,
+    body?: Body,
+    init?: RequestInit,
+  ) {
+    return this.fetch<T>('POST', path, {
+      ...init,
+      body: JSON.stringify(body),
+    });
   }
 }
 

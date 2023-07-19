@@ -5,13 +5,4 @@ const client = new Client({
   baseURL: BASE_URL,
 });
 
-interface ProductResponse {
-  id: number;
-  name: string;
-  price: number;
-}
-
-const test = async () => {
-  const { data } = await client.get<ProductResponse[]>('/products');
-  return data;
-};
+export default client;
