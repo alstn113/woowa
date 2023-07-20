@@ -84,6 +84,7 @@ const CartButton = styled.button`
   align-items: center;
   justify-content: center;
   height: 28px; // stepper height
+  cursor: pointer;
 `;
 
 export default ProductItem;
