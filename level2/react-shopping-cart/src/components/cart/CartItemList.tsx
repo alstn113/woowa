@@ -9,12 +9,14 @@ const CartItemList = () => {
   return (
     <CartItemListContainer>
       <CartItemCount>배송 상품 ({3}개)</CartItemCount>
-      {cartItems.map((cartItem) => (
-        <CartItem key={cartItem.cartItemId} />
-      ))}
-      <CartItemContorlWrapper>
-        <Checkbox />
-      </CartItemContorlWrapper>
+      <CartItemWrapper>
+        {cartItems.map((cartItem) => (
+          <CartItem key={cartItem.cartItemId} cartItem={cartItem} />
+        ))}
+      </CartItemWrapper>
+      <CartItemListContorlWrapper>
+        <Checkbox label={`전체 선택 (${2}/${3})`} />
+      </CartItemListContorlWrapper>
     </CartItemListContainer>
   );
 };
@@ -32,6 +34,12 @@ const CartItemCount = styled.p`
   padding-bottom: 16px;
 `;
 
-const CartItemContorlWrapper = styled.div``;
+const CartItemWrapper = styled.ul`
+  li + li {
+    border-top: 1px solid #aaa;
+  }
+`;
+
+const CartItemListContorlWrapper = styled.div``;
 
 export default CartItemList;
