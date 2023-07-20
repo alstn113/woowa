@@ -23,7 +23,7 @@ const CartItem = ({ cartItem }: CartItemProps) => {
         <RemoveIconButton>
           <TrashSVG />
         </RemoveIconButton>
-        <NumberInputStepper size="lg" />
+        <NumberInputStepper size="lg" min={1} />
         <CartItemPrice>
           {cartItem.product.price.toLocaleString()}원
         </CartItemPrice>

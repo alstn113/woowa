@@ -13,13 +13,15 @@ interface NumberInputStepperProps {
   size?: 'sm' | 'lg';
 }
 const NumberInputStepper = ({
-  value = 0,
+  value,
   onChange,
   min = 1,
   max = 999,
   size = 'sm',
 }: NumberInputStepperProps) => {
-  const [numberInputValue, setNumberInputValue] = useState<number>(value);
+  const [numberInputValue, setNumberInputValue] = useState<number>(
+    value || min,
+  );
   const numberInputRef = useRef<HTMLInputElement>(null);
 
   const handleNumberInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
