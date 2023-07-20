@@ -12,7 +12,7 @@ export interface ClientResponse<
     | number
     | undefined
     | null
-    | unknown = any,
+    | unknown = unknown,
   Headers extends Record<string, string> = Record<string, string>,
 > {
   statusCode: StatusCode;

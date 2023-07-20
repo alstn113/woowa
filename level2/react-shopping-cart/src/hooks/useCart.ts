@@ -7,6 +7,17 @@ import cartState from '../recoil/atoms/cartState';
 const useCart = () => {
   const [cart, setCart] = useRecoilState(cartState);
 
+  const getCartItems = useCallback(async () => {
+    const { data } = await CartAPI.getCartItems();
+    setCart(
+      data.map((item) => ({
+        cartItemId: item.id,
+        quantity: item.quantity,
+        productId: item.product.id,
+      })),
+    );
+  }, [setCart]);
+
   const addToCart = useCallback(
     async (productId: number) => {
       const { headers } = await CartAPI.addCartItem(productId);
@@ -58,6 +69,7 @@ const useCart = () => {
 
   return {
     cart,
+    getCartItems,
     addToCart,
     updateCartItemQuantity,
     isProductInCart,

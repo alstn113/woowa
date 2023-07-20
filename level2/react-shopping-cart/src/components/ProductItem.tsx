@@ -36,6 +36,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
         </ProductInfo>
         {isProductInCart(id) ? (
           <NumberInputStepper
+            min={0}
             value={productCartQuantity(id)}
             onChange={handleQuantityChange}
           />

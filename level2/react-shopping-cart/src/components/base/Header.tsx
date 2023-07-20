@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 
+import useCart from '../../hooks/useCart';
+import cartItemCountSelector from '../../recoil/selectors/cartItemCountSelector';
 import CartLogoSVG from '../vectors/CartLogoSVG';
 
 interface HeaderProps {
@@ -7,6 +11,13 @@ interface HeaderProps {
 }
 
 const Header = ({ onNavigate }: HeaderProps) => {
+  const { getCartItems } = useCart();
+  const cartItemCount = useRecoilValue(cartItemCountSelector);
+
+  useEffect(() => {
+    getCartItems();
+  }, [getCartItems]);
+
   return (
     <HeaderContainer>
       <HeaderWrapper>
@@ -16,7 +27,7 @@ const Header = ({ onNavigate }: HeaderProps) => {
         </Logo>
         <CartButton onClick={() => onNavigate('/cart')}>
           <CartButtonText>장바구니</CartButtonText>
-          <CartCountBadge>3</CartCountBadge>
+          <CartCountBadge>{cartItemCount}</CartCountBadge>
         </CartButton>
       </HeaderWrapper>
     </HeaderContainer>
