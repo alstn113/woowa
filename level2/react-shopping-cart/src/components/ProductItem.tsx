@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
 import NumberInputStepper from './common/NumberInputStepper';
+import CartSVG from './vectors/CartSVG';
+import useCart from '../hooks/useCart';
 import { Product } from '../types';
 
 interface ProductItemProps {
@@ -8,15 +10,40 @@ interface ProductItemProps {
 }
 
 const ProductItem = ({ product }: ProductItemProps) => {
+  const { id, imageUrl, name, price } = product;
+  const {
+    isProductInCart,
+    updateCartItemQuantity,
+    addToCart,
+    productCartQuantity,
+  } = useCart();
+
+  const handleQuantityChange = (quantity: number) => {
+    updateCartItemQuantity(id, quantity);
+  };
+
+  const handleAddToCart = () => {
+    addToCart(id);
+  };
+
   return (
     <ProductListContainer>
-      <ProductImage src={product.imageUrl} alt={product.name} />
+      <ProductImage src={imageUrl} alt={name} />
       <ProductInfoContainer>
         <ProductInfo>
-          <ProductName>{product.name}</ProductName>
-          <ProductPrice>{product.price.toLocaleString()} 원</ProductPrice>
+          <ProductName>{name}</ProductName>
+          <ProductPrice>{price.toLocaleString()} 원</ProductPrice>
         </ProductInfo>
-        <NumberInputStepper />
+        {isProductInCart(id) ? (
+          <NumberInputStepper
+            value={productCartQuantity(id)}
+            onChange={handleQuantityChange}
+          />
+        ) : (
+          <CartButton onClick={handleAddToCart}>
+            <CartSVG />
+          </CartButton>
+        )}
       </ProductInfoContainer>
     </ProductListContainer>
   );
@@ -54,6 +81,13 @@ const ProductName = styled.span`
 
 const ProductPrice = styled.span`
   font-size: 20px;
+`;
+
+const CartButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px; // stepper height
 `;
 
 export default ProductItem;
