@@ -29,7 +29,7 @@ const ProductListContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 48px;
-  row-gap: 80px;
+  row-gap: 40px;
 `;
 
 export default ProductListPage;

@@ -17,6 +17,7 @@ const BaseLayout = () => {
 
 const Content = styled.main`
   padding-top: 140px;
+  padding-bottom: 80px;
   max-width: 1280px;
   margin: 0 auto;
 `;
