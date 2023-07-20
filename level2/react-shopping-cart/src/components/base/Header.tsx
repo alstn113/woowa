@@ -27,7 +27,9 @@ const Header = ({ onNavigate }: HeaderProps) => {
         </Logo>
         <CartButton onClick={() => onNavigate('/cart')}>
           <CartButtonText>장바구니</CartButtonText>
-          <CartCountBadge>{cartItemCount}</CartCountBadge>
+          {cartItemCount > 0 ? (
+            <CartCountBadge>{cartItemCount}</CartCountBadge>
+          ) : null}
         </CartButton>
       </HeaderWrapper>
     </HeaderContainer>
@@ -73,8 +75,8 @@ export const CartButton = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 8px;
   height: 32px;
+  width: 120px;
 `;
 
 export const CartButtonText = styled.span`
