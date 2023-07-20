@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 
 import ProductAPI, { ProductEntity } from '../api/product';
-import ProductListItem from '../components/ProductListItem';
+import ProductListItem from '../components/productList/ProductListItem';
 import useCart from '../hooks/useCart';
 
 const ProductListPage = () => {

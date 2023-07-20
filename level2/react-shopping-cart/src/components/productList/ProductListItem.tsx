@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-import NumberInputStepper from './common/NumberInputStepper';
-import CartSVG from './vectors/CartSVG';
-import { Product } from '../types';
+import { Product } from '../../types';
+import NumberInputStepper from '../common/NumberInputStepper';
+import CartSVG from '../vectors/CartSVG';
 
 interface ProductItemProps {
   product: Product;
