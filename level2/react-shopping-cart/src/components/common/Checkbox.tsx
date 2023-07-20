@@ -2,17 +2,18 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 
 interface CheckboxProps {
-  checked: boolean;
-  onChange: (checked: boolean) => void;
+  checked?: boolean;
+  onChange?: (checked: boolean) => void;
+  label?: string;
 }
 
-const Checkbox = ({ checked = false, onChange }: CheckboxProps) => {
+const Checkbox = ({ checked = false, onChange, label = '' }: CheckboxProps) => {
   const [isChecked, setIsChecked] = useState(checked);
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.target;
     setIsChecked(checked);
-    onChange(checked);
+    onChange?.(checked);
   };
 
   return (
@@ -22,14 +23,16 @@ const Checkbox = ({ checked = false, onChange }: CheckboxProps) => {
         checked={isChecked}
         onChange={handleCheckboxChange}
       />
+      {label && <CheckboxLabel>{label}</CheckboxLabel>}
     </CheckboxContainer>
   );
 };
 
 const CheckboxContainer = styled.div`
-  display: inline-flex;
+  display: flex;
   align-items: center;
   cursor: pointer;
+  gap: 8px;
 `;
 
 const CheckboxInput = styled.input`
@@ -61,6 +64,11 @@ const CheckboxInput = styled.input`
       height: 6px;
     }
   }
+`;
+
+const CheckboxLabel = styled.label`
+  font-size: 16px;
+  font-weight: 400;
 `;
 
 export default Checkbox;

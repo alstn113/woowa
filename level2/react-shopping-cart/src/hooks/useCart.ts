@@ -3,37 +3,38 @@ import { useRecoilState } from 'recoil';
 
 import CartAPI from '../api/cart';
 import cartState from '../recoil/atoms/cartState';
+import { Product } from '../types';
 
 const useCart = () => {
-  const [cart, setCart] = useRecoilState(cartState);
+  const [cartItems, setCartItems] = useRecoilState(cartState);
 
   const getCartItems = useCallback(async () => {
     const { data } = await CartAPI.getCartItems();
-    setCart(
+    setCartItems(
       data.map((item) => ({
         cartItemId: item.id,
         quantity: item.quantity,
-        productId: item.product.id,
+        product: item.product,
       })),
     );
-  }, [setCart]);
+  }, [setCartItems]);
 
   const addToCart = useCallback(
-    async (productId: number) => {
-      const { headers } = await CartAPI.addCartItem(productId);
+    async (product: Product) => {
+      const { headers } = await CartAPI.addCartItem(product.id);
       const cartItemId = Number(headers.location.split('/').pop());
-      setCart([...cart, { cartItemId, quantity: 1, productId }]);
+      setCartItems([...cartItems, { cartItemId, quantity: 1, product }]);
     },
-    [cart, setCart],
+    [cartItems, setCartItems],
   );
 
   const updateCartItemQuantity = useCallback(
-    async (productId: number, quantity: number) => {
-      const cartItem = cart.find((item) => item.productId === productId);
+    async (product: Product, quantity: number) => {
+      const cartItem = cartItems.find((item) => item.product.id === product.id);
 
       // 장바구니에 없는 상품이라면
       if (!cartItem) {
-        await addToCart(productId);
+        await addToCart(product);
         return;
       }
 
@@ -41,40 +42,44 @@ const useCart = () => {
       const { cartItemId } = cartItem;
       if (quantity > 0) {
         await CartAPI.updateCartItemQuantity(cartItemId, quantity);
-        setCart(
-          cart.map((item) =>
-            item.productId === productId ? { ...item, quantity } : item,
+        setCartItems(
+          cartItems.map((item) =>
+            item.product.id === product.id ? { ...item, quantity } : item,
           ),
         );
       } else {
         // 장바구니에 있는 상품이고 수량이 0이라면, 장바구니에서 삭제한다. - 낙관적 업데이트
-        const cartItem = cart.find((item) => item.productId === productId);
+        const cartItem = cartItems.find(
+          (item) => item.product.id === product.id,
+        );
         if (!cartItem) return;
-        setCart(cart.filter((item) => item.productId !== productId));
+        setCartItems(
+          cartItems.filter((item) => item.product.id !== product.id),
+        );
         try {
           await CartAPI.deleteCartItem(cartItemId);
         } catch (e) {
-          setCart([...cart, cartItem]);
+          setCartItems([...cartItems, cartItem]);
         }
       }
     },
-    [addToCart, cart, setCart],
+    [addToCart, cartItems, setCartItems],
   );
 
   const isProductInCart = useCallback(
     (productId: number) => {
-      return cart.some((item) => item.productId === productId);
+      return cartItems.some((item) => item.product.id === productId);
     },
-    [cart],
+    [cartItems],
   );
 
   const productCartQuantity = (productId: number) =>
     isProductInCart(productId)
-      ? cart.find((item) => item.productId === productId)?.quantity ?? 0
+      ? cartItems.find((item) => item.product.id === productId)?.quantity ?? 0
       : 0;
 
   return {
-    cart,
+    cartItems,
     getCartItems,
     addToCart,
     updateCartItemQuantity,

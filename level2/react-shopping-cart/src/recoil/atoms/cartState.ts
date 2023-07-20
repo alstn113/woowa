@@ -5,7 +5,7 @@ import { Product } from '../../types';
 export type CartState = {
   cartItemId: number;
   quantity: number;
-  productId: Product['id'];
+  product: Product;
 }[];
 
 const cartState = atom<CartState>({

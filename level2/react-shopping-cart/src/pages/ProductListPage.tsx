@@ -29,9 +29,9 @@ const ProductListPage = () => {
         <ProductItem
           key={product.id}
           product={product}
-          onAddToCart={() => addToCart(product.id)}
+          onAddToCart={() => addToCart(product)}
           onUpdateCartItemQuantity={(quantity) =>
-            updateCartItemQuantity(product.id, quantity)
+            updateCartItemQuantity(product, quantity)
           }
           isProductInCart={isProductInCart(product.id)}
           productCartQuantity={productCartQuantity(product.id)}
