@@ -47,9 +47,15 @@ const useCart = () => {
           ),
         );
       } else {
-        // 장바구니에 있는 상품이고 수량이 0이라면, 장바구니에서 삭제한다.
-        await CartAPI.deleteCartItem(cartItemId);
-        setCart(cart.filter((item) => item.cartItemId !== cartItemId));
+        // 장바구니에 있는 상품이고 수량이 0이라면, 장바구니에서 삭제한다. - 낙관적 업데이트
+        const cartItem = cart.find((item) => item.productId === productId);
+        if (!cartItem) return;
+        setCart(cart.filter((item) => item.productId !== productId));
+        try {
+          await CartAPI.deleteCartItem(cartItemId);
+        } catch (e) {
+          setCart([...cart, cartItem]);
+        }
       }
     },
     [addToCart, cart, setCart],

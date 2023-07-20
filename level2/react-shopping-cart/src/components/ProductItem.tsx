@@ -2,29 +2,24 @@ import styled from '@emotion/styled';
 
 import NumberInputStepper from './common/NumberInputStepper';
 import CartSVG from './vectors/CartSVG';
-import useCart from '../hooks/useCart';
 import { Product } from '../types';
 
 interface ProductItemProps {
   product: Product;
+  onAddToCart: () => void;
+  onUpdateCartItemQuantity: (quantity: number) => void;
+  isProductInCart: boolean;
+  productCartQuantity: number;
 }
 
-const ProductItem = ({ product }: ProductItemProps) => {
-  const { id, imageUrl, name, price } = product;
-  const {
-    isProductInCart,
-    updateCartItemQuantity,
-    addToCart,
-    productCartQuantity,
-  } = useCart();
-
-  const handleQuantityChange = (quantity: number) => {
-    updateCartItemQuantity(id, quantity);
-  };
-
-  const handleAddToCart = () => {
-    addToCart(id);
-  };
+const ProductItem = ({
+  product,
+  onAddToCart,
+  onUpdateCartItemQuantity,
+  isProductInCart,
+  productCartQuantity,
+}: ProductItemProps) => {
+  const { imageUrl, name, price } = product;
 
   return (
     <ProductListContainer>
@@ -34,14 +29,14 @@ const ProductItem = ({ product }: ProductItemProps) => {
           <ProductName>{name}</ProductName>
           <ProductPrice>{price.toLocaleString()} 원</ProductPrice>
         </ProductInfo>
-        {isProductInCart(id) ? (
+        {isProductInCart ? (
           <NumberInputStepper
             min={0}
-            value={productCartQuantity(id)}
-            onChange={handleQuantityChange}
+            value={productCartQuantity}
+            onChange={onUpdateCartItemQuantity}
           />
         ) : (
-          <CartButton onClick={handleAddToCart}>
+          <CartButton onClick={onAddToCart}>
             <CartSVG />
           </CartButton>
         )}

@@ -154,7 +154,6 @@ const NumberInputIncrementStepper = styled(StepperButtonBase)<{
       svg {
         color: #b1b3b5;
       }
-      cursor: not-allowed;
     `}
 `;
 
@@ -167,7 +166,6 @@ const NumberInputDecrementStepper = styled(StepperButtonBase)<{
       svg {
         color: #b1b3b5;
       }
-      cursor: not-allowed;
     `}
 `;
 

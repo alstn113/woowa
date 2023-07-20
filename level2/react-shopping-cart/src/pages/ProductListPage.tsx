@@ -3,9 +3,16 @@ import { useEffect, useState } from 'react';
 
 import ProductAPI, { ProductEntity } from '../api/product';
 import ProductItem from '../components/ProductItem';
+import useCart from '../hooks/useCart';
 
 const ProductListPage = () => {
   const [products, setProducts] = useState<ProductEntity[]>([]);
+  const {
+    isProductInCart,
+    updateCartItemQuantity,
+    addToCart,
+    productCartQuantity,
+  } = useCart();
 
   const fetchProducts = async () => {
     const { data } = await ProductAPI.getProductList();
@@ -19,7 +26,16 @@ const ProductListPage = () => {
   return (
     <ProductListContainer>
       {products.map((product) => (
-        <ProductItem key={product.id} product={product} />
+        <ProductItem
+          key={product.id}
+          product={product}
+          onAddToCart={() => addToCart(product.id)}
+          onUpdateCartItemQuantity={(quantity) =>
+            updateCartItemQuantity(product.id, quantity)
+          }
+          isProductInCart={isProductInCart(product.id)}
+          productCartQuantity={productCartQuantity(product.id)}
+        />
       ))}
     </ProductListContainer>
   );
