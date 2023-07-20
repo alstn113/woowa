@@ -26,7 +26,7 @@ const CartTitle = styled.h1`
   align-items: center;
   font-size: 32px;
   font-weight: 700;
-  padding: 20px 0;
+  padding-bottom: 20px;
   border-bottom: 4px solid #333;
 `;
 
