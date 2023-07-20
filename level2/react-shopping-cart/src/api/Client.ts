@@ -31,6 +31,14 @@ class Client {
     return `${this.baseURL}/${path}`.replace(/([^:]\/)\/+/g, '$1');
   }
 
+  private async parseJSON(response: Response) {
+    try {
+      return await response.json();
+    } catch (error) {
+      return null;
+    }
+  }
+
   private async fetch<T extends ClientResponse = ClientResponse>(
     method: HttpMethod,
     path: string,
@@ -47,7 +55,7 @@ class Client {
 
     return {
       statusCode: response.status,
-      data: await response.json(),
+      data: await this.parseJSON(response),
       headers: Object.fromEntries(response.headers.entries()),
     } as T;
   }

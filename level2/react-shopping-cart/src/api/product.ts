@@ -17,7 +17,7 @@ type AddProductRequest = Omit<ProductEntity, 'id'>;
 type AddProductResponse = ClientResponse<
   201,
   {
-    Location: `/products/${string}`;
+    location: `/products/${string}`;
   }
 >;
 

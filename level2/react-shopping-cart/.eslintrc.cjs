@@ -40,6 +40,8 @@ module.exports = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     // void 함수 이렇게 쓰라길래 끔
     '@typescript-eslint/no-floating-promises': 'off',
+    // any 타입 사용
+    '@typescript-eslint/no-unsafe-return': 'off',
     'import/no-unresolved': 'off',
     'import/order': [
       'error',

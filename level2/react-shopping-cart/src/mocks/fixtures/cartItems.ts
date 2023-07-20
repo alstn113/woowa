@@ -1,7 +1,7 @@
 import { CartItemEntity } from '../../api/cart';
 import { BASE_URL } from '../../constants';
 
-const cartItem: CartItemEntity[] = [
+const cartItems: CartItemEntity[] = [
   {
     id: 1,
     quantity: 5,
@@ -34,4 +34,4 @@ const cartItem: CartItemEntity[] = [
   },
 ];
 
-export default cartItem;
+export default cartItems;

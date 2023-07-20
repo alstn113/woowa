@@ -21,7 +21,7 @@ const useCart = () => {
   const addToCart = useCallback(
     async (productId: number) => {
       const { headers } = await CartAPI.addCartItem(productId);
-      const cartItemId = Number(headers.Location.split('/').pop());
+      const cartItemId = Number(headers.location.split('/').pop());
       setCart([...cart, { cartItemId, quantity: 1, productId }]);
     },
     [cart, setCart],

@@ -18,7 +18,7 @@ type AddCartItemResponse = ClientResponse<
   201,
   never,
   {
-    Location: `/cart-items/${string}`;
+    location: `/cart-items/${string}`;
   }
 >;
 
