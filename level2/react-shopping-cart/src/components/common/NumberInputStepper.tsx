@@ -12,7 +12,6 @@ interface NumberInputStepperProps {
   max?: number;
   size?: 'sm' | 'lg';
 }
-
 const NumberInputStepper = ({
   value = 0,
   onChange,
@@ -29,7 +28,6 @@ const NumberInputStepper = ({
     const value = Number(e.target.value);
 
     setNumberInputValue(value);
-    onChange?.(value);
   };
 
   const handleNumberInputFocus = () => {
@@ -37,13 +35,13 @@ const NumberInputStepper = ({
   };
 
   const handleNumberInputBlur = () => {
-    if (numberInputValue > max) {
-      setNumberInputValue(max);
-      onChange?.(max);
-    } else if (numberInputValue < min) {
-      setNumberInputValue(min);
-      onChange?.(min);
-    }
+    let value = numberInputValue;
+
+    if (numberInputValue > max) value = max;
+    if (numberInputValue < min) value = min;
+
+    setNumberInputValue(value);
+    onChange?.(value);
   };
 
   const handleNumberInputIncrement = () => {
