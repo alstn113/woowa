@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 
 import ProductAPI, { ProductEntity } from '../api/product';
-import ProductListItem from '../components/productList/ProductListItem';
+import ProductItem from '../components/productList/ProductItem';
 import useCart from '../hooks/useCart';
 
 const ProductListPage = () => {
@@ -26,7 +26,7 @@ const ProductListPage = () => {
   return (
     <ProductListContainer>
       {products.map((product) => (
-        <ProductListItem
+        <ProductItem
           key={product.id}
           product={product}
           onAddToCart={() => addToCart(product.id)}

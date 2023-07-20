@@ -12,7 +12,7 @@ interface ProductItemProps {
   productCartQuantity: number;
 }
 
-const ProductListItem = ({
+const ProductItem = ({
   product,
   onAddToCart,
   onUpdateCartItemQuantity,
@@ -22,7 +22,7 @@ const ProductListItem = ({
   const { imageUrl, name, price } = product;
 
   return (
-    <ProductListItemContainer>
+    <ProductItemContainer>
       <ProductImage src={imageUrl} alt={name} />
       <ProductInfoContainer>
         <ProductInfo>
@@ -41,11 +41,11 @@ const ProductListItem = ({
           </CartButton>
         )}
       </ProductInfoContainer>
-    </ProductListItemContainer>
+    </ProductItemContainer>
   );
 };
 
-const ProductListItemContainer = styled.li`
+const ProductItemContainer = styled.li`
   display: flex;
   flex-direction: column;
   width: 283px;
@@ -87,4 +87,4 @@ const CartButton = styled.button`
   cursor: pointer;
 `;
 
-export default ProductListItem;
+export default ProductItem;
