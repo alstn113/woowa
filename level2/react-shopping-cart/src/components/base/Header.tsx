@@ -44,6 +44,7 @@ const HeaderContainer = styled.header`
   justify-content: center;
   align-items: center;
   background-color: #333333;
+  z-index: 10;
 `;
 
 const HeaderWrapper = styled.div`
