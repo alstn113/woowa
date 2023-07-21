@@ -82,16 +82,28 @@ const useCart = () => {
       ? cartItems.find((item) => item.product.id === productId)?.quantity ?? 0
       : 0;
 
-  const checkCartItem = (cartItemId: number, checked: boolean) => {
+  const checkCartItems = (cartItemIds: number[], checked: boolean) => {
     setCartItems(
       cartItems.map((item) =>
-        item.cartItemId === cartItemId ? { ...item, checked } : item,
+        cartItemIds.includes(item.cartItemId)
+          ? { ...item, checked }
+          : { ...item },
       ),
     );
   };
 
-  const checkAllCartItems = (checked: boolean) => {
-    setCartItems(cartItems.map((item) => ({ ...item, checked })));
+  const removeSeletedCartItems = () => {
+    const cartItemIds = cartItems
+      .filter((item) => item.checked)
+      .map((item) => item.cartItemId);
+    setCartItems(cartItems.filter((item) => !item.checked));
+    try {
+      cartItemIds.forEach((cartItemId) => {
+        CartAPI.deleteCartItem(cartItemId);
+      });
+    } catch (error) {
+      setCartItems(cartItems);
+    }
   };
 
   return {
@@ -101,8 +113,8 @@ const useCart = () => {
     updateCartItemQuantity,
     isProductInCart,
     productCartQuantity,
-    checkCartItem,
-    checkAllCartItems,
+    checkCartItems,
+    removeSeletedCartItems,
   };
 };
 

@@ -15,7 +15,7 @@ interface CartItemListProps {
 }
 
 const CartItemList = ({ cartItems }: CartItemListProps) => {
-  const { checkAllCartItems, checkCartItem, updateCartItemQuantity } =
+  const { checkCartItems, updateCartItemQuantity, removeSeletedCartItems } =
     useCart();
   const isAllChecked = cartItems.every((cartItem) => cartItem.checked);
   const cartItemsCount = cartItems.length;
@@ -24,7 +24,14 @@ const CartItemList = ({ cartItems }: CartItemListProps) => {
   ).length;
 
   const handleCheckCartItem = (cartItemId: number) => (checked: boolean) => {
-    checkCartItem(cartItemId, checked);
+    checkCartItems([cartItemId], checked);
+  };
+
+  const handleCheckAllCartItems = (checked: boolean) => {
+    checkCartItems(
+      cartItems.map((cartItem) => cartItem.cartItemId),
+      checked,
+    );
   };
 
   const handleRemoveCartItem = (product: Product) => () => {
@@ -56,8 +63,11 @@ const CartItemList = ({ cartItems }: CartItemListProps) => {
         <Checkbox
           label={`전체 선택 (${checkedCartItemsCount}/${cartItemsCount})`}
           checked={isAllChecked}
-          onChange={checkAllCartItems}
+          onChange={handleCheckAllCartItems}
         />
+        <RemoveSeletedButton onClick={removeSeletedCartItems}>
+          선택 삭제
+        </RemoveSeletedButton>
       </CartItemListContorlWrapper>
     </CartItemListContainer>
   );
@@ -82,6 +92,19 @@ const CartItemWrapper = styled.ul`
   }
 `;
 
-const CartItemListContorlWrapper = styled.div``;
+const CartItemListContorlWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+`;
+
+const RemoveSeletedButton = styled.button`
+  border: 1px solid #bbb;
+  font-size: 16px;
+  color: #333;
+  font-weight: 400;
+  padding: 8px 16px;
+`;
 
 export default CartItemList;

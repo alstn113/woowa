@@ -9,10 +9,14 @@ const CartPage = () => {
   return (
     <CartContainer>
       <CartTitle>장바구니</CartTitle>
-      <ContentWrapper>
-        <CartItemList cartItems={cartItems} />
-        <PaymentSummary />
-      </ContentWrapper>
+      {cartItems.length === 0 ? (
+        <BlankMessage>장바구니에 담긴 상품이 없습니다.</BlankMessage>
+      ) : (
+        <ContentWrapper>
+          <CartItemList cartItems={cartItems} />
+          <PaymentSummary />
+        </ContentWrapper>
+      )}
     </CartContainer>
   );
 };
@@ -36,6 +40,16 @@ const ContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+`;
+
+const BlankMessage = styled.div`
+  font-size: 24px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  color: #999;
 `;
 
 export default CartPage;
