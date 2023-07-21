@@ -2,13 +2,15 @@ import styled from '@emotion/styled';
 
 import CartItemList from '../components/cart/CartItemList';
 import PaymentSummary from '../components/cart/PaymentSummary';
+import useCart from '../hooks/useCart';
 
 const CartPage = () => {
+  const { cartItems } = useCart();
   return (
     <CartContainer>
       <CartTitle>장바구니</CartTitle>
       <ContentWrapper>
-        <CartItemList />
+        <CartItemList cartItems={cartItems} />
         <PaymentSummary />
       </ContentWrapper>
     </CartContainer>

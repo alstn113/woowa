@@ -5,13 +5,18 @@ import useCart from '../../hooks/useCart';
 import { Product } from '../../types';
 import Checkbox from '../common/Checkbox';
 
-const CartItemList = () => {
-  const {
-    cartItems,
-    checkAllCartItems,
-    checkCartItem,
-    updateCartItemQuantity,
-  } = useCart();
+interface CartItemListProps {
+  cartItems: {
+    cartItemId: number;
+    quantity: number;
+    product: Product;
+    checked: boolean;
+  }[];
+}
+
+const CartItemList = ({ cartItems }: CartItemListProps) => {
+  const { checkAllCartItems, checkCartItem, updateCartItemQuantity } =
+    useCart();
   const isAllChecked = cartItems.every((cartItem) => cartItem.checked);
   const cartItemsCount = cartItems.length;
   const checkedCartItemsCount = cartItems.filter(
