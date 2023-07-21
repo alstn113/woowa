@@ -6,6 +6,14 @@ import useCart from '../hooks/useCart';
 
 const CartPage = () => {
   const { cartItems } = useCart();
+  const checkedItems = cartItems.filter((item) => item.checked);
+  const totalProductPrice = checkedItems.reduce(
+    (acc, cur) => acc + cur.product.price * cur.quantity,
+    0,
+  );
+  const totalDeliveryFee = 3000;
+  const totalPrice = totalProductPrice + totalDeliveryFee;
+
   return (
     <CartContainer>
       <CartTitle>장바구니</CartTitle>
@@ -14,7 +22,11 @@ const CartPage = () => {
       ) : (
         <ContentWrapper>
           <CartItemList cartItems={cartItems} />
-          <PaymentSummary />
+          <PaymentSummary
+            totalProductPrice={totalProductPrice}
+            totalDeliveryFee={totalDeliveryFee}
+            totalPrice={totalPrice}
+          />
         </ContentWrapper>
       )}
     </CartContainer>

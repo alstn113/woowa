@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import CartAPI from '../api/cart';
-import cartState, { CartState } from '../recoil/atoms/cartState';
+import cartState from '../recoil/atoms/cartState';
 import { Product } from '../types';
 
 const useCart = () => {

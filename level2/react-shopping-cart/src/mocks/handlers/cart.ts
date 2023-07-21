@@ -5,7 +5,7 @@ import products from '../fixtures/products';
 
 export const cartHandlers = [
   rest.get('/cart-items', (_req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(cartItems));
+    return res(ctx.delay(), ctx.status(200), ctx.json(cartItems));
   }),
 
   rest.post('/cart-items', async (req, res, ctx) => {
@@ -17,6 +17,7 @@ export const cartHandlers = [
 
     if (isProductInCart)
       return res(
+        ctx.delay(),
         ctx.status(409),
         ctx.json({ message: '이미 장바구니에 존재하는 상품입니다.' }),
       );
@@ -26,6 +27,7 @@ export const cartHandlers = [
     );
     if (!product)
       return res(
+        ctx.delay(),
         ctx.status(404),
         ctx.json({ message: '존재하지 않는 상품입니다.' }),
       );
@@ -37,7 +39,11 @@ export const cartHandlers = [
       quantity: 1,
       product,
     });
-    return res(ctx.status(201), ctx.set('location', `/cart-items/${newId}`));
+    return res(
+      ctx.delay(),
+      ctx.status(201),
+      ctx.set('location', `/cart-items/${newId}`),
+    );
   }),
 
   rest.patch('/cart-items/:cartItemId', async (req, res, ctx) => {
@@ -52,7 +58,7 @@ export const cartHandlers = [
       );
 
     cartItem.quantity = quantity;
-    return res(ctx.status(200));
+    return res(ctx.delay(), ctx.status(200));
   }),
 
   rest.delete('/cart-items/:cartItemId', async (req, res, ctx) => {
@@ -64,11 +70,12 @@ export const cartHandlers = [
 
     if (cartItemIndex === -1)
       return res(
+        ctx.delay(),
         ctx.status(404),
         ctx.json({ message: '존재하지 않는 장바구니 아이템입니다.' }),
       );
 
     cartItems.splice(cartItemIndex, 1);
-    return res(ctx.status(204));
+    return res(ctx.delay(), ctx.status(204));
   }),
 ];

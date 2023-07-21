@@ -4,7 +4,7 @@ import products from '../fixtures/products';
 
 export const productHandlers = [
   rest.get('/products', (_req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(products));
+    return res(ctx.delay(), ctx.status(200), ctx.json(products));
   }),
 
   rest.get('/products/:productId', (req, res, ctx) => {
@@ -16,6 +16,7 @@ export const productHandlers = [
 
     if (!product) {
       return res(
+        ctx.delay(),
         ctx.status(404),
         ctx.json({
           message: '상품 정보를 찾을 수 없습니다.',
@@ -23,6 +24,6 @@ export const productHandlers = [
       );
     }
 
-    return res(ctx.status(200), ctx.json(product));
+    return res(ctx.delay(), ctx.status(200), ctx.json(product));
   }),
 ];
