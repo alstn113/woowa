@@ -6,6 +6,7 @@ export type CartState = {
   cartItemId: number;
   quantity: number;
   product: Product;
+  checked: boolean;
 }[];
 
 const cartState = atom<CartState>({

@@ -15,6 +15,7 @@ const useCart = () => {
         cartItemId: item.id,
         quantity: item.quantity,
         product: item.product,
+        checked: true,
       })),
     );
   }, [setCartItems]);
@@ -23,7 +24,10 @@ const useCart = () => {
     async (product: Product) => {
       const { headers } = await CartAPI.addCartItem(product.id);
       const cartItemId = Number(headers.location.split('/').pop());
-      setCartItems([...cartItems, { cartItemId, quantity: 1, product }]);
+      setCartItems([
+        ...cartItems,
+        { cartItemId, quantity: 1, product, checked: true },
+      ]);
     },
     [cartItems, setCartItems],
   );

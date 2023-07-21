@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+import useCart from '../../hooks/useCart';
 import { Product } from '../../types';
 import Checkbox from '../common/Checkbox';
 import NumberInputStepper from '../common/NumberInputStepper';
@@ -14,19 +15,35 @@ interface CartItemProps {
 }
 
 const CartItem = ({ cartItem }: CartItemProps) => {
+  const { productCartQuantity, updateCartItemQuantity } = useCart();
+
+  const totalPrice = cartItem.product.price * cartItem.quantity;
+
+  const handleRemoveCartItem = () => {
+    updateCartItemQuantity(cartItem.product, 0);
+  };
+
   return (
     <CartItemContainer>
       <Checkbox />
-      <CartItemThumbnail src={cartItem.product.imageUrl} />
+      <CartItemThumbnail
+        src={cartItem.product.imageUrl}
+        alt={cartItem.product.name}
+      />
       <CartItemName>{cartItem.product.name}</CartItemName>
       <CartItemControlWrapper>
-        <RemoveIconButton>
+        <RemoveIconButton onClick={handleRemoveCartItem}>
           <TrashSVG />
         </RemoveIconButton>
-        <NumberInputStepper size="lg" min={1} />
-        <CartItemPrice>
-          {cartItem.product.price.toLocaleString()}원
-        </CartItemPrice>
+        <NumberInputStepper
+          size="lg"
+          min={1}
+          value={cartItem.quantity}
+          onChange={(quantity) =>
+            updateCartItemQuantity(cartItem.product, quantity)
+          }
+        />
+        <CartItemPrice>{totalPrice.toLocaleString()}원</CartItemPrice>
       </CartItemControlWrapper>
     </CartItemContainer>
   );
