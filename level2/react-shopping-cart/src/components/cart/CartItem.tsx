@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 
-import useCart from '../../hooks/useCart';
 import { Product } from '../../types';
 import Checkbox from '../common/Checkbox';
 import NumberInputStepper from '../common/NumberInputStepper';
@@ -13,39 +12,36 @@ interface CartItemProps {
     product: Product;
     checked: boolean;
   };
+  onCheckCartItem: (checked: boolean) => void;
+  onRemoveCartItem: () => void;
+  onUpdateCartItemQuantity: (quantity: number) => void;
 }
 
-const CartItem = ({ cartItem }: CartItemProps) => {
-  const { updateCartItemQuantity, checkCartItem } = useCart();
-
+const CartItem = ({
+  cartItem,
+  onCheckCartItem,
+  onRemoveCartItem,
+  onUpdateCartItemQuantity,
+}: CartItemProps) => {
   const totalPrice = cartItem.product.price * cartItem.quantity;
-
-  const handleRemoveCartItem = () => {
-    updateCartItemQuantity(cartItem.product, 0);
-  };
 
   return (
     <CartItemContainer>
-      <Checkbox
-        checked={cartItem.checked}
-        onChange={(checked) => checkCartItem(cartItem.cartItemId, checked)}
-      />
+      <Checkbox checked={cartItem.checked} onChange={onCheckCartItem} />
       <CartItemThumbnail
         src={cartItem.product.imageUrl}
         alt={cartItem.product.name}
       />
       <CartItemName>{cartItem.product.name}</CartItemName>
       <CartItemControlWrapper>
-        <RemoveIconButton onClick={handleRemoveCartItem}>
+        <RemoveIconButton onClick={onRemoveCartItem}>
           <TrashSVG />
         </RemoveIconButton>
         <NumberInputStepper
           size="lg"
           min={1}
           value={cartItem.quantity}
-          onChange={(quantity) =>
-            updateCartItemQuantity(cartItem.product, quantity)
-          }
+          onChange={onUpdateCartItemQuantity}
         />
         <CartItemPrice>{totalPrice.toLocaleString()}원</CartItemPrice>
       </CartItemControlWrapper>

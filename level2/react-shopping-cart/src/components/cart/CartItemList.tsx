@@ -2,22 +2,49 @@ import styled from '@emotion/styled';
 
 import CartItem from './CartItem';
 import useCart from '../../hooks/useCart';
+import { Product } from '../../types';
 import Checkbox from '../common/Checkbox';
 
 const CartItemList = () => {
-  const { cartItems, checkAllCartItems } = useCart();
+  const {
+    cartItems,
+    checkAllCartItems,
+    checkCartItem,
+    updateCartItemQuantity,
+  } = useCart();
   const isAllChecked = cartItems.every((cartItem) => cartItem.checked);
   const cartItemsCount = cartItems.length;
   const checkedCartItemsCount = cartItems.filter(
     (cartItem) => cartItem.checked,
   ).length;
 
+  const handleCheckCartItem = (cartItemId: number) => (checked: boolean) => {
+    checkCartItem(cartItemId, checked);
+  };
+
+  const handleRemoveCartItem = (product: Product) => () => {
+    updateCartItemQuantity(product, 0);
+  };
+
+  const handleUpdateCartItemQuantity =
+    (product: Product) => (quantity: number) => {
+      updateCartItemQuantity(product, quantity);
+    };
+
   return (
     <CartItemListContainer>
       <CartItemCount>배송 상품 ({cartItemsCount}개)</CartItemCount>
       <CartItemWrapper>
         {cartItems.map((cartItem) => (
-          <CartItem key={cartItem.cartItemId} cartItem={cartItem} />
+          <CartItem
+            key={cartItem.cartItemId}
+            cartItem={cartItem}
+            onCheckCartItem={handleCheckCartItem(cartItem.cartItemId)}
+            onRemoveCartItem={handleRemoveCartItem(cartItem.product)}
+            onUpdateCartItemQuantity={handleUpdateCartItemQuantity(
+              cartItem.product,
+            )}
+          />
         ))}
       </CartItemWrapper>
       <CartItemListContorlWrapper>
