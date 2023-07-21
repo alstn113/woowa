@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import CartAPI from '../api/cart';
-import cartState from '../recoil/atoms/cartState';
+import cartState, { CartState } from '../recoil/atoms/cartState';
 import { Product } from '../types';
 
 const useCart = () => {
@@ -82,6 +82,18 @@ const useCart = () => {
       ? cartItems.find((item) => item.product.id === productId)?.quantity ?? 0
       : 0;
 
+  const checkCartItem = (cartItemId: number, checked: boolean) => {
+    setCartItems(
+      cartItems.map((item) =>
+        item.cartItemId === cartItemId ? { ...item, checked } : item,
+      ),
+    );
+  };
+
+  const checkAllCartItems = (checked: boolean) => {
+    setCartItems(cartItems.map((item) => ({ ...item, checked })));
+  };
+
   return {
     cartItems,
     getCartItems,
@@ -89,6 +101,8 @@ const useCart = () => {
     updateCartItemQuantity,
     isProductInCart,
     productCartQuantity,
+    checkCartItem,
+    checkAllCartItems,
   };
 };
 

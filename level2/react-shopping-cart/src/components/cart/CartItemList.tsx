@@ -5,17 +5,27 @@ import useCart from '../../hooks/useCart';
 import Checkbox from '../common/Checkbox';
 
 const CartItemList = () => {
-  const { cartItems } = useCart();
+  const { cartItems, checkAllCartItems } = useCart();
+  const isAllChecked = cartItems.every((cartItem) => cartItem.checked);
+  const cartItemsCount = cartItems.length;
+  const checkedCartItemsCount = cartItems.filter(
+    (cartItem) => cartItem.checked,
+  ).length;
+
   return (
     <CartItemListContainer>
-      <CartItemCount>배송 상품 ({3}개)</CartItemCount>
+      <CartItemCount>배송 상품 ({cartItemsCount}개)</CartItemCount>
       <CartItemWrapper>
         {cartItems.map((cartItem) => (
           <CartItem key={cartItem.cartItemId} cartItem={cartItem} />
         ))}
       </CartItemWrapper>
       <CartItemListContorlWrapper>
-        <Checkbox label={`전체 선택 (${2}/${3})`} />
+        <Checkbox
+          label={`전체 선택 (${checkedCartItemsCount}/${cartItemsCount})`}
+          checked={isAllChecked}
+          onChange={checkAllCartItems}
+        />
       </CartItemListContorlWrapper>
     </CartItemListContainer>
   );

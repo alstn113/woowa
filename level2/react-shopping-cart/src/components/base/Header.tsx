@@ -27,9 +27,7 @@ const Header = ({ onNavigate }: HeaderProps) => {
         </Logo>
         <CartButton onClick={() => onNavigate('/cart')}>
           <CartButtonText>장바구니</CartButtonText>
-          {cartItemCount > 0 ? (
-            <CartCountBadge>{cartItemCount}</CartCountBadge>
-          ) : null}
+          {cartItemCount && <CartCountBadge>{cartItemCount}</CartCountBadge>}
         </CartButton>
       </HeaderWrapper>
     </HeaderContainer>

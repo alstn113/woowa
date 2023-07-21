@@ -11,11 +11,12 @@ interface CartItemProps {
     cartItemId: number;
     quantity: number;
     product: Product;
+    checked: boolean;
   };
 }
 
 const CartItem = ({ cartItem }: CartItemProps) => {
-  const { productCartQuantity, updateCartItemQuantity } = useCart();
+  const { updateCartItemQuantity, checkCartItem } = useCart();
 
   const totalPrice = cartItem.product.price * cartItem.quantity;
 
@@ -25,7 +26,10 @@ const CartItem = ({ cartItem }: CartItemProps) => {
 
   return (
     <CartItemContainer>
-      <Checkbox />
+      <Checkbox
+        checked={cartItem.checked}
+        onChange={(checked) => checkCartItem(cartItem.cartItemId, checked)}
+      />
       <CartItemThumbnail
         src={cartItem.product.imageUrl}
         alt={cartItem.product.name}

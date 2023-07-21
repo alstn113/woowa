@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
 
 interface CheckboxProps {
   checked?: boolean;
@@ -8,11 +7,8 @@ interface CheckboxProps {
 }
 
 const Checkbox = ({ checked = false, onChange, label = '' }: CheckboxProps) => {
-  const [isChecked, setIsChecked] = useState(checked);
-
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.target;
-    setIsChecked(checked);
     onChange?.(checked);
   };
 
@@ -20,7 +16,7 @@ const Checkbox = ({ checked = false, onChange, label = '' }: CheckboxProps) => {
     <CheckboxContainer>
       <CheckboxInput
         type="checkbox"
-        checked={isChecked}
+        checked={checked}
         onChange={handleCheckboxChange}
       />
       {label && <CheckboxLabel>{label}</CheckboxLabel>}
