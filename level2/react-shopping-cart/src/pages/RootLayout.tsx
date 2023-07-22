@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-import Header from '../base/Header';
+import Header from '../components/base/Header';
 
-const BaseLayout = () => {
+const RootLayout = () => {
   const onNavigate = useNavigate();
   return (
     <>
@@ -22,4 +22,4 @@ const Content = styled.main`
   margin: 0 auto;
 `;
 
-export default BaseLayout;
+export default RootLayout;
