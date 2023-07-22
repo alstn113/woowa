@@ -30,7 +30,7 @@ const ProductAPI = {
   /**
    * 상품 목록 조회
    */
-  async getProductList() {
+  getProductList: async () => {
     const response = await client.get<GetProductListResponse>('/products');
     return response;
   },
@@ -38,7 +38,7 @@ const ProductAPI = {
   /**
    * 상품 조회
    */
-  async getProduct(productId: number) {
+  getProduct: async (productId: number) => {
     const response = await client.get<GetProductResponse>(
       `/products/${productId}`,
     );
@@ -48,7 +48,7 @@ const ProductAPI = {
   /**
    * 상품 추가
    */
-  async addProduct(body: AddProductRequest) {
+  addProduct: async (body: AddProductRequest) => {
     const response = await client.post<AddProductResponse, AddProductRequest>(
       '/products',
       body,
@@ -60,7 +60,7 @@ const ProductAPI = {
   /**
    * 상품 수정
    */
-  async updateProduct(productId: number, body: AddProductRequest) {
+  updateProduct: async (productId: number, body: AddProductRequest) => {
     const response = await client.put<
       UpdateProductResponse,
       UpdateProductRequest
@@ -72,7 +72,7 @@ const ProductAPI = {
   /**
    * 상픔 삭제
    */
-  async deleteProduct(productId: number) {
+  deleteProduct: async (productId: number) => {
     const response = await client.delete<DeleteProductResponse>(
       `/products/${productId}`,
     );
