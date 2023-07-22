@@ -1,33 +1,39 @@
 import React, { Component } from 'react';
 
-interface ErrorBoundaryProps {
+interface ErrorBoundaryProps<ErrorType> {
   children?: React.ReactNode;
-  fallback: React.ReactNode;
+  renderFallback: (props: { error: ErrorType }) => React.ReactNode;
 }
 
-interface ErrorBoundaryState {
+interface ErrorBoundaryState<ErrorType> {
+  error: ErrorType | null;
   hasError: boolean;
 }
 
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+class ErrorBoundary<ErrorType extends Error = Error> extends Component<
+  ErrorBoundaryProps<ErrorType>,
+  ErrorBoundaryState<ErrorType>
+> {
+  constructor(props: ErrorBoundaryProps<ErrorType>) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, error: null };
   }
 
-  static getDerivedStateFromError(): ErrorBoundaryState {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('Uncaught error:', error, errorInfo);
   }
 
   render(): React.ReactNode {
-    const { children, fallback } = this.props;
-    const { hasError } = this.state;
+    const { children, renderFallback } = this.props;
+    const { error } = this.state;
 
-    if (hasError) return fallback;
+    if (error !== null) {
+      return renderFallback({ error });
+    }
     return children;
   }
 }

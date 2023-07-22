@@ -1,12 +1,24 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { Suspense } from 'react';
 
-import ProductAPI, { ProductEntity } from '../api/product';
+import ProductAPI from '../api/product';
 import ProductItem from '../components/productList/ProductItem';
 import useCart from '../hooks/useCart';
+import useQuery from '../hooks/useQuery';
 
 const ProductListPage = () => {
-  const [products, setProducts] = useState<ProductEntity[]>([]);
+  return (
+    <Suspense>
+      <ProductListContainer>
+        <ProductListPageContent />
+      </ProductListContainer>
+    </Suspense>
+  );
+};
+
+const ProductListPageContent = () => {
+  const { data: productList } = useQuery(ProductAPI.getProductList);
+
   const {
     isProductInCart,
     updateCartItemQuantity,
@@ -14,18 +26,9 @@ const ProductListPage = () => {
     productCartQuantity,
   } = useCart();
 
-  const fetchProducts = async () => {
-    const { data } = await ProductAPI.getProductList();
-    setProducts(data);
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return (
-    <ProductListContainer>
-      {products.map((product) => (
+    <>
+      {productList?.map((product) => (
         <ProductItem
           key={product.id}
           product={product}
@@ -37,7 +40,7 @@ const ProductListPage = () => {
           productCartQuantity={productCartQuantity(product.id)}
         />
       ))}
-    </ProductListContainer>
+    </>
   );
 };
 
