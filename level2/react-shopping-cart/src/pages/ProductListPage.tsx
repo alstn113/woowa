@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { Suspense } from 'react';
 
+import AsyncBoundary from './utils/AsyncBoundary';
 import ProductAPI from '../api/product';
 import ProductItem from '../components/productList/ProductItem';
 import useCart from '../hooks/useCart';
@@ -8,11 +8,14 @@ import useQuery from '../hooks/useQuery';
 
 const ProductListPage = () => {
   return (
-    <Suspense>
+    <AsyncBoundary
+      pending={<div>로딩</div>}
+      rejected={({ error }) => <div>{error.message}</div>}
+    >
       <ProductListContainer>
         <ProductListPageContent />
       </ProductListContainer>
-    </Suspense>
+    </AsyncBoundary>
   );
 };
 

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
-type QueryFn<T> = () => Promise<T>;
+type QueryFn<T> = () => Promise<{
+  data: T;
+}>;
 
 const useQuery = <T>(queryFn: QueryFn<T>) => {
   const [data, setData] = useState<T | undefined>(undefined);
@@ -11,7 +13,7 @@ const useQuery = <T>(queryFn: QueryFn<T>) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const data = await queryFn();
+        const { data } = await queryFn();
         setData(data);
       } catch (err) {
         if (err instanceof Error) setError(err);

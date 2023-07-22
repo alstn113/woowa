@@ -31,53 +31,53 @@ const ProductAPI = {
    * 상품 목록 조회
    */
   getProductList: async () => {
-    const { data } = await client.get<GetProductListResponse>('/products');
-    return data;
+    const response = await client.get<GetProductListResponse>('/products');
+    return response;
   },
 
   /**
    * 상품 조회
    */
   getProduct: async (productId: number) => {
-    const { data } = await client.get<GetProductResponse>(
+    const response = await client.get<GetProductResponse>(
       `/products/${productId}`,
     );
-    return data;
+    return response;
   },
 
   /**
    * 상품 추가
    */
   addProduct: async (body: AddProductRequest) => {
-    const { data } = await client.post<AddProductResponse, AddProductRequest>(
+    const response = await client.post<AddProductResponse, AddProductRequest>(
       '/products',
       body,
     );
 
-    return data;
+    return response;
   },
 
   /**
    * 상품 수정
    */
   updateProduct: async (productId: number, body: AddProductRequest) => {
-    const { data } = await client.put<
+    const response = await client.put<
       UpdateProductResponse,
       UpdateProductRequest
     >(`/products/${productId}`, body);
 
-    return data;
+    return response;
   },
 
   /**
    * 상픔 삭제
    */
   deleteProduct: async (productId: number) => {
-    const { data } = await client.delete<DeleteProductResponse>(
+    const response = await client.delete<DeleteProductResponse>(
       `/products/${productId}`,
     );
 
-    return data;
+    return response;
   },
 };
 

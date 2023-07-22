@@ -36,9 +36,9 @@ const CartAPI = {
    * Authorization 헤더에 JWT 토큰을 담아서 요청해야 함
    */
   getCartItems: async () => {
-    const { data } = await client.get<GetCartItemsResponse>('/cart-items');
+    const response = await client.get<GetCartItemsResponse>('/cart-items');
 
-    return data;
+    return response;
   },
 
   /**
@@ -47,14 +47,14 @@ const CartAPI = {
    * Authorization 헤더에 JWT 토큰을 담아서 요청해야 함
    */
   addCartItem: async (productId: number) => {
-    const { data } = await client.post<AddCartItemResponse, AddCartItemRequest>(
+    const response = await client.post<AddCartItemResponse, AddCartItemRequest>(
       '/cart-items',
       {
         productId,
       },
     );
 
-    return data;
+    return response;
   },
 
   /**
@@ -63,14 +63,14 @@ const CartAPI = {
    * Authorization 헤더에 JWT 토큰을 담아서 요청해야 함
    */
   updateCartItemQuantity: async (cartItemId: number, quantity: number) => {
-    const { data } = await client.patch<
+    const response = await client.patch<
       UpdateCartItemQuantityResponse,
       UpdateCartItemQuantityRequest
     >(`/cart-items/${cartItemId}`, {
       quantity,
     });
 
-    return data;
+    return response;
   },
 
   /**
@@ -79,11 +79,11 @@ const CartAPI = {
    * Authorization 헤더에 JWT 토큰을 담아서 요청해야 함
    */
   deleteCartItem: async (cartItemId: number) => {
-    const { data } = await client.delete<DeleteCartItemResponse>(
+    const response = await client.delete<DeleteCartItemResponse>(
       `/cart-items/${cartItemId}`,
     );
 
-    return data;
+    return response;
   },
 };
 
