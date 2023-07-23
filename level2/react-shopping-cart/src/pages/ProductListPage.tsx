@@ -1,27 +1,13 @@
 import styled from '@emotion/styled';
 
-import AsyncBoundary from './utils/AsyncBoundary';
 import ProductAPI from '../api/product';
 import ProductItem from '../components/productList/ProductItem';
+import ProductItemSkeleton from '../components/productList/ProductItemSkeleton';
 import useCart from '../hooks/useCart';
 import useQuery from '../hooks/useQuery';
 
 const ProductListPage = () => {
-  return (
-    <AsyncBoundary
-      pending={<div>로딩</div>}
-      rejected={({ error }) => <div>{error.message}</div>}
-    >
-      <ProductListContainer>
-        <ProductListPageContent />
-      </ProductListContainer>
-    </AsyncBoundary>
-  );
-};
-
-const ProductListPageContent = () => {
-  const { data: productList } = useQuery(ProductAPI.getProductList);
-
+  const { data: productList, isLoading } = useQuery(ProductAPI.getProductList);
   const {
     isProductInCart,
     updateCartItemQuantity,
@@ -29,8 +15,18 @@ const ProductListPageContent = () => {
     productCartQuantity,
   } = useCart();
 
+  if (isLoading) {
+    return (
+      <ProductListContainer>
+        {Array.from({ length: 12 }).map((_, index) => (
+          <ProductItemSkeleton key={index} />
+        ))}
+      </ProductListContainer>
+    );
+  }
+
   return (
-    <>
+    <ProductListContainer>
       {productList?.map((product) => (
         <ProductItem
           key={product.id}
@@ -43,7 +39,7 @@ const ProductListPageContent = () => {
           productCartQuantity={productCartQuantity(product.id)}
         />
       ))}
-    </>
+    </ProductListContainer>
   );
 };
 
