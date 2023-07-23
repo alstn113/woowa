@@ -48,22 +48,6 @@ const ProductListContainer = styled.ul`
   grid-template-columns: repeat(4, 1fr);
   column-gap: 48px;
   row-gap: 40px;
-
-  /* @media screen and (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media screen and (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 24px;
-    row-gap: 24px;
-  }
-
-  @media screen and (max-width: 480px) {
-    grid-template-columns: repeat(1, 1fr);
-    column-gap: 0;
-    row-gap: 24px;
-  } */
 `;
 
 export default ProductListPage;
