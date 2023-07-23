@@ -24,6 +24,7 @@ const CartItem = ({
   onUpdateCartItemQuantity,
 }: CartItemProps) => {
   const totalPrice = cartItem.product.price * cartItem.quantity;
+  const isMobile = window.innerWidth <= 500;
 
   return (
     <CartItemContainer>
@@ -38,7 +39,7 @@ const CartItem = ({
           <TrashSVG />
         </RemoveIconButton>
         <NumberInputStepper
-          size="lg"
+          size={isMobile ? 'sm' : 'lg'}
           min={1}
           value={cartItem.quantity}
           onChange={onUpdateCartItemQuantity}
@@ -60,12 +61,20 @@ const CartItemContainer = styled.li`
 const CartItemThumbnail = styled.img`
   width: 144px;
   height: 100%;
+
+  @media screen and (max-width: 500px) {
+    width: 72px;
+  }
 `;
 
 const CartItemName = styled.div`
   flex: 1;
   font-size: 20px;
   font-weight: 400;
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+  }
 `;
 
 const CartItemControlWrapper = styled.div`

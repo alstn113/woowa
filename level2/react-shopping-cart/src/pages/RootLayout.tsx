@@ -16,8 +16,7 @@ const RootLayout = () => {
 };
 
 const Content = styled.main`
-  padding-top: 140px;
-  padding-bottom: 80px;
+  padding: 140px 20px 80px 20px;
   max-width: 1280px;
   margin: 0 auto;
 `;

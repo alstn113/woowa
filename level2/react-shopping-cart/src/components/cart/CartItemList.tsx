@@ -76,7 +76,7 @@ const CartItemList = ({ cartItems }: CartItemListProps) => {
 const CartItemListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 736px;
+  width: 100%;
 `;
 
 const CartItemCount = styled.p`

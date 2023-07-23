@@ -52,6 +52,13 @@ const ContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  gap: 30px;
+
+  @media screen and (max-width: 1024px) {
+    align-items: center;
+    flex-direction: column;
+    gap: 0;
+  }
 `;
 
 const BlankMessage = styled.div`

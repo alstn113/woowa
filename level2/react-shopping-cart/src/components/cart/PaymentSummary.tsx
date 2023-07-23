@@ -34,10 +34,14 @@ const PaymentSummary = ({
 };
 
 const PaymentSummaryContainer = styled.div`
-  width: 448px;
+  min-width: 448px;
   margin-top: 40px;
   border: 1px solid #ddd;
   height: fit-content;
+
+  @media screen and (max-width: 1024px) {
+    min-width: 100%;
+  }
 `;
 
 const PaymentSummaryTitle = styled.h2`
