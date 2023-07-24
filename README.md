@@ -34,10 +34,10 @@
   - [x] react-payments (3단계)
 
   - [x] react-shopping-cart (1단계)
-  - [ ] react-shopping-cart (2단계)
+  - [x] react-shopping-cart (2단계)
 
-  - [ ] react-shopping-cart-prod (1단계)
-  - [ ] react-shopping-cart-prod (2단계)
+  - [] react-shopping-cart-prod (1단계)
+  - [] react-shopping-cart-prod (2단계)
 
 - ## 레벨 3, 4
 
