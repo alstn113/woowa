@@ -51,6 +51,10 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     // import/no-extraneous-dependencies off는 storybook 관련 설정
     'import/no-extraneous-dependencies': 'off',
+    // 위에서 선언된 변수명 사용 가능하게 하기 위해 off
+    '@typescript-eslint/no-shadow': 'off',
+    // no-use-before-define off는 typescript 사용으로 인해 off
+    '@typescript-eslint/no-use-before-define': 'off',
     // import 순서 관련
     'import/order': [
       'error',
