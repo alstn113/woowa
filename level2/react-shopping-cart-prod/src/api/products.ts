@@ -7,7 +7,7 @@ export interface ProductEntity {
   imageUrl: string;
 }
 
-type GetProductsResult = ProductEntity[];
+type GetProductListResult = ProductEntity[];
 type GetProductResult = ProductEntity;
 type AddProductParams = Omit<ProductEntity, 'id'>;
 type AddProductResult = {
@@ -19,9 +19,9 @@ type UpdateProductParams = AddProductParams;
 
 const ProductsAPI = {
   getProductList: async () => {
-    const response = await apiClient.get<GetProductsResult>('/products');
+    const response = await apiClient.get<GetProductListResult>('/products');
 
-    return response;
+    return response.data;
   },
 
   getProduct: async (productId: number) => {
@@ -29,7 +29,7 @@ const ProductsAPI = {
       `/products/${productId}`,
     );
 
-    return response;
+    return response.data;
   },
 
   addProduct: async (params: AddProductParams) => {
@@ -38,19 +38,15 @@ const ProductsAPI = {
       AddProductResult
     >('/products', params);
 
-    return response;
+    return response.headers.location;
   },
 
   updateProduct: async (productId: number, params: UpdateProductParams) => {
-    const response = await apiClient.put(`/products/${productId}`, params);
-
-    return response;
+    await apiClient.put(`/products/${productId}`, params);
   },
 
   deleteProduct: async (productId: number) => {
-    const response = await apiClient.delete(`/products/${productId}`);
-
-    return response;
+    await apiClient.delete(`/products/${productId}`);
   },
 };
 

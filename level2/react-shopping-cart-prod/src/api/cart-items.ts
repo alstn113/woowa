@@ -21,7 +21,7 @@ const CartItemsAPI = {
   getCartItemList: async () => {
     const response = await apiClient.get<GetCartItemListResult>('/cart-items');
 
-    return response;
+    return response.data;
   },
 
   addCartItem: async (productId: number) => {
@@ -32,22 +32,18 @@ const CartItemsAPI = {
       productId,
     });
 
-    return response;
+    return response.headers.location;
   },
 
   updateCartItemQuantity: async (
     cartItemId: number,
     params: UpdateCartItemQuantityParams,
   ) => {
-    const response = await apiClient.patch(`/cart-items/${cartItemId}`, params);
-
-    return response;
+    await apiClient.patch(`/cart-items/${cartItemId}`, params);
   },
 
   deleteCartItem: async (cartItemId: number) => {
-    const response = await apiClient.delete(`/cart-items/${cartItemId}`);
-
-    return response;
+    await apiClient.delete(`/cart-items/${cartItemId}`);
   },
 };
 
