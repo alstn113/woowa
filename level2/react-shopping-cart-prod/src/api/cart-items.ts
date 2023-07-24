@@ -25,12 +25,12 @@ const CartItemsAPI = {
   },
 
   addCartItem: async (productId: number) => {
-    const response = await apiClient.post<never, AddCartItemResult>(
-      '/cart-items',
-      {
-        productId,
-      },
-    );
+    const response = await apiClient.post<
+      Record<string, never>,
+      AddCartItemResult
+    >('/cart-items', {
+      productId,
+    });
 
     return response;
   },

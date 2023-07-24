@@ -1,5 +1,8 @@
+import {} from '@tanstack/react-query';
+import PageRoutes from './route';
+
 const App = () => {
-  return <div>App</div>;
+  return <PageRoutes />;
 };
 
 export default App;

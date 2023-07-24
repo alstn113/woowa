@@ -33,10 +33,10 @@ const ProductsAPI = {
   },
 
   addProduct: async (params: AddProductParams) => {
-    const response = await apiClient.post<never, AddProductResult>(
-      '/products',
-      params,
-    );
+    const response = await apiClient.post<
+      Record<string, never>,
+      AddProductResult
+    >('/products', params);
 
     return response;
   },
