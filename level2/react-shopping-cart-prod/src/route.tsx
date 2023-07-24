@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 
-import CartPage from './pages/CartPage';
-import ProductListPage from './pages/ProductListPage';
-import RootErrorBoundary from './pages/RootErrorBoundary';
 import RootLayout from './pages/RootLayout';
+import RootErrorBoundary from './pages/RootErrorBoundary';
+import ProductListPage from './pages/ProductListPage';
+import CartPage from './pages/CartPage';
 
 const PageRoutes = () => {
   return (

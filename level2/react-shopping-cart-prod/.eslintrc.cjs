@@ -58,14 +58,14 @@ module.exports = {
         groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
         pathGroups: [
           {
-            pattern: 'react*',
+            pattern: '{react*,react*/**}',
             group: 'external',
             position: 'before',
           },
         ],
         pathGroupsExcludedImportTypes: ['react*'],
         alphabetize: {
-          order: 'asc',
+          order: 'desc',
           caseInsensitive: true,
         },
         'newlines-between': 'always',

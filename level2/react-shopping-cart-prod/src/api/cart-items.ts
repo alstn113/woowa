@@ -1,5 +1,5 @@
-import apiClient from './apiClient';
 import { ProductEntity } from './products';
+import apiClient from './apiClient';
 
 export interface CartItemEntity {
   id: number;
