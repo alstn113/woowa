@@ -1,7 +1,7 @@
 import apiClient from './apiClient';
 import { ProductEntity } from './products';
 
-interface CartItemEntity {
+export interface CartItemEntity {
   id: number;
   quantity: number;
   product: ProductEntity;
