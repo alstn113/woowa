@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
 import { Outlet, useNavigate } from 'react-router-dom';
+
+import styled from '@emotion/styled';
 
 import Header from '../components/base/Header';
 

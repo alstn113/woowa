@@ -51,11 +51,12 @@ module.exports = {
         groups: ['builtin', 'external', ['parent', 'sibling'], 'index'],
         pathGroups: [
           {
-            pattern: 'angular',
+            pattern: 'react*',
             group: 'external',
             position: 'before',
           },
         ],
+        pathGroupsExcludedImportTypes: ['react*'],
         alphabetize: {
           order: 'asc',
           caseInsensitive: true,
