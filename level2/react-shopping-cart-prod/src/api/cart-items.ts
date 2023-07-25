@@ -35,10 +35,13 @@ const CartItemsAPI = {
     return response.headers.location;
   },
 
-  updateCartItemQuantity: async (
-    cartItemId: number,
-    params: UpdateCartItemQuantityParams,
-  ) => {
+  updateCartItemQuantity: async ({
+    cartItemId,
+    params,
+  }: {
+    cartItemId: number;
+    params: UpdateCartItemQuantityParams;
+  }) => {
     await apiClient.patch(`/cart-items/${cartItemId}`, params);
   },
 

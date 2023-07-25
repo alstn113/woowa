@@ -41,7 +41,13 @@ const ProductsAPI = {
     return response.headers.location;
   },
 
-  updateProduct: async (productId: number, params: UpdateProductParams) => {
+  updateProduct: async ({
+    productId,
+    params,
+  }: {
+    productId: number;
+    params: UpdateProductParams;
+  }) => {
     await apiClient.put(`/products/${productId}`, params);
   },
 

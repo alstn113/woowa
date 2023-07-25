@@ -55,6 +55,8 @@ module.exports = {
     '@typescript-eslint/no-shadow': 'off',
     // no-use-before-define off는 typescript 사용으로 인해 off
     '@typescript-eslint/no-use-before-define': 'off',
+    // index로 배열 key 사용 가능
+    'react/no-array-index-key': 'off',
     // import 순서 관련
     'import/order': [
       'error',

@@ -1,35 +1,60 @@
 import { Suspense } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
+import styled from '@emotion/styled';
 
 import { QUERY_KEYS } from '../constants';
+import ProductItemSkeleton from '../components/product-list/ProductItemSkeleton';
+import ProductItem from '../components/product-list/ProductItem';
 import ProductsAPI from '../api/products';
 
 const ProductListPage = () => {
   return (
-    <Suspense>
+    <Suspense
+      fallback={
+        <ProductListContainer>
+          {Array.from({ length: 12 }).map((_, index) => (
+            <ProductItemSkeleton key={index} />
+          ))}
+        </ProductListContainer>
+      }
+    >
       <ProductListPageContent />
     </Suspense>
   );
 };
 
 const ProductListPageContent = () => {
-  const { data } = useQuery(
+  const { data: productListSuspense } = useQuery(
     QUERY_KEYS.getProductList,
     ProductsAPI.getProductList,
     {
       suspense: true,
     },
   );
-  const productList = data!; // suspense
+  const productList = productListSuspense!; // suspense
 
   return (
-    <div>
+    <ProductListContainer>
       {productList.map((product) => (
-        <div key={product.id}>{product.name}</div>
+        <ProductItem
+          key={product.id}
+          product={product}
+          onAddToCart={}
+          onUpdateCartItemQuantity={}
+          isProductInCart={}
+          productCartQuantity={}
+        />
       ))}
-    </div>
+    </ProductListContainer>
   );
 };
+
+const ProductListContainer = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 48px;
+  row-gap: 40px;
+`;
 
 export default ProductListPage;
