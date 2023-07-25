@@ -57,7 +57,7 @@ const ProductListPageContent = () => {
 
   useEffect(() => {
     setCartItems(data);
-  }, []);
+  }, [cartItemListSuspense]);
 
   const {
     addToCart,

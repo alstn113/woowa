@@ -6,7 +6,14 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import GlobalStyle from './styles/GlobalStyle';
+import { worker } from './mocks/browser';
 import App from './App';
+
+if (process.env.NODE_ENV === 'development') {
+  worker.start({
+    onUnhandledRequest: 'bypass',
+  });
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {

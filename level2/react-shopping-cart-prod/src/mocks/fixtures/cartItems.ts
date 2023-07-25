@@ -1,4 +1,3 @@
-import { BASE_URL } from '../../constants';
 import { CartItemEntity } from '../../api/cart-items';
 
 const cartItems: CartItemEntity[] = [
@@ -9,7 +8,7 @@ const cartItems: CartItemEntity[] = [
       id: 2,
       name: 'PET보틀-밀크티(370ml)',
       price: 73400,
-      imageUrl: `${BASE_URL}/images/products/2.png`,
+      imageUrl: `/images/products/2.png`,
     },
   },
   {
@@ -19,7 +18,7 @@ const cartItems: CartItemEntity[] = [
       id: 8,
       name: 'PET보틀-원형(600ml)',
       price: 44500,
-      imageUrl: `${BASE_URL}/images/products/8.png`,
+      imageUrl: `/images/products/8.png`,
     },
   },
   {
@@ -29,7 +28,7 @@ const cartItems: CartItemEntity[] = [
       id: 10,
       name: 'PET보틀-밀크티(370ml)',
       price: 73400,
-      imageUrl: `${BASE_URL}/images/products/10.png`,
+      imageUrl: `/images/products/10.png`,
     },
   },
 ];
