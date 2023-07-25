@@ -5,7 +5,7 @@ import cartItems from '../fixtures/cartItems';
 
 export const cartItemsHandlers = [
   rest.get('/cart-items', (_req, res, ctx) => {
-    return res(ctx.delay(), ctx.status(200), ctx.json(cartItems));
+    return res(ctx.status(200), ctx.json(cartItems));
   }),
 
   rest.post('/cart-items', async (req, res, ctx) => {
@@ -58,7 +58,7 @@ export const cartItemsHandlers = [
       );
 
     cartItem.quantity = quantity;
-    return res(ctx.delay(), ctx.status(200));
+    return res(ctx.status(200));
   }),
 
   rest.delete('/cart-items/:cartItemId', async (req, res, ctx) => {
@@ -76,6 +76,6 @@ export const cartItemsHandlers = [
       );
 
     cartItems.splice(cartItemIndex, 1);
-    return res(ctx.delay(), ctx.status(204));
+    return res(ctx.status(204));
   }),
 ];

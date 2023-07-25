@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 
 import CartLogoSVG from '../vectors/CartLogoSVG';
+import cartItemCountSelector from '../../recoil/selectors/cartItemCountSelector';
 import cartItemsState from '../../recoil/atoms/cartItemsState';
 import { QUERY_KEYS } from '../../constants';
 import CartItemsAPI from '../../api/cart-items';
@@ -15,12 +16,12 @@ interface HeaderProps {
 
 const Header = ({ onNavigate }: HeaderProps) => {
   const setCartItems = useSetRecoilState(cartItemsState);
+  const cartItemCount = useRecoilValue(cartItemCountSelector);
+
   const { data } = useQuery(
     QUERY_KEYS.getCartItemList,
     CartItemsAPI.getCartItemList,
   );
-
-  const cartItemCount = data?.length;
 
   useEffect(() => {
     const cartItems =

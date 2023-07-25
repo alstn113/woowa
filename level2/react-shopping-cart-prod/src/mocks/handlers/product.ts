@@ -4,7 +4,7 @@ import products from '../fixtures/products';
 
 export const productHandlers = [
   rest.get('/products', (_req, res, ctx) => {
-    return res(ctx.delay(), ctx.status(200), ctx.json(products));
+    return res(ctx.status(200), ctx.json(products));
   }),
 
   rest.get('/products/:productId', (req, res, ctx) => {
@@ -24,6 +24,6 @@ export const productHandlers = [
       );
     }
 
-    return res(ctx.delay(), ctx.status(200), ctx.json(product));
+    return res(ctx.status(200), ctx.json(product));
   }),
 ];
