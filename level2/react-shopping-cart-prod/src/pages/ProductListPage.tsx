@@ -1,12 +1,16 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 
+import { useSetRecoilState } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 
+import cartItemsState from '../recoil/atoms/cartItemsState';
+import useCart from '../hooks/useCart';
 import { QUERY_KEYS } from '../constants';
 import ProductItemSkeleton from '../components/product-list/ProductItemSkeleton';
 import ProductItem from '../components/product-list/ProductItem';
 import ProductsAPI from '../api/products';
+import CartItemsAPI from '../api/cart-items';
 
 const ProductListPage = () => {
   return (
@@ -32,7 +36,35 @@ const ProductListPageContent = () => {
       suspense: true,
     },
   );
+  const { data: cartItemListSuspense } = useQuery(
+    QUERY_KEYS.getCartItemList,
+    CartItemsAPI.getCartItemList,
+    {
+      suspense: true,
+    },
+  );
   const productList = productListSuspense!; // suspense
+  const cartItemList = cartItemListSuspense!; // suspense
+
+  const setCartItems = useSetRecoilState(cartItemsState);
+
+  const data = cartItemList.map((item) => ({
+    id: item.id,
+    quantity: item.quantity,
+    product: item.product,
+    checked: true,
+  }));
+
+  useEffect(() => {
+    setCartItems(data);
+  }, []);
+
+  const {
+    addToCart,
+    updateCartItemQuantity,
+    isProductInCart,
+    productQuantityInCart,
+  } = useCart();
 
   return (
     <ProductListContainer>
@@ -40,10 +72,12 @@ const ProductListPageContent = () => {
         <ProductItem
           key={product.id}
           product={product}
-          onAddToCart={}
-          onUpdateCartItemQuantity={}
-          isProductInCart={}
-          productCartQuantity={}
+          onAddToCart={() => addToCart(product)}
+          onUpdateCartItemQuantity={(quantity) =>
+            updateCartItemQuantity(product, quantity)
+          }
+          isProductInCart={isProductInCart(product.id)}
+          productQuantityInCart={productQuantityInCart(product.id)}
         />
       ))}
     </ProductListContainer>

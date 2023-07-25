@@ -9,7 +9,7 @@ interface ProductItemProps {
   onAddToCart: () => void;
   onUpdateCartItemQuantity: (quantity: number) => void;
   isProductInCart: boolean;
-  productCartQuantity: number;
+  productQuantityInCart: number;
 }
 
 const ProductItem = ({
@@ -17,7 +17,7 @@ const ProductItem = ({
   onAddToCart,
   onUpdateCartItemQuantity,
   isProductInCart,
-  productCartQuantity,
+  productQuantityInCart,
 }: ProductItemProps) => {
   const { imageUrl, name, price } = product;
 
@@ -32,7 +32,7 @@ const ProductItem = ({
         {isProductInCart ? (
           <NumberInputStepper
             min={0}
-            value={productCartQuantity}
+            value={productQuantityInCart}
             onChange={onUpdateCartItemQuantity}
           />
         ) : (

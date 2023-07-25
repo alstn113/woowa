@@ -7,6 +7,7 @@ import CartItemsAPI from '../api/cart-items';
 
 const useCart = () => {
   const [cartItems, setCartItems] = useRecoilState(cartItemsState);
+
   const { mutate: addCartItemMutate } = useMutation(CartItemsAPI.addCartItem);
   const { mutate: deleteCartItemMutate } = useMutation(
     CartItemsAPI.deleteCartItem,
@@ -114,6 +115,7 @@ const useCart = () => {
   return {
     addToCart,
     updateCartItemQuantity,
+    isProductInCart,
     productQuantityInCart,
     checkCartItems,
     removeCheckedCartItems,

@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
+
+import { useSetRecoilState } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 
 import CartLogoSVG from '../vectors/CartLogoSVG';
+import cartItemsState from '../../recoil/atoms/cartItemsState';
 import { QUERY_KEYS } from '../../constants';
 import CartItemsAPI from '../../api/cart-items';
 
@@ -10,12 +14,25 @@ interface HeaderProps {
 }
 
 const Header = ({ onNavigate }: HeaderProps) => {
+  const setCartItems = useSetRecoilState(cartItemsState);
   const { data } = useQuery(
-    QUERY_KEYS.getProductList,
+    QUERY_KEYS.getCartItemList,
     CartItemsAPI.getCartItemList,
   );
 
   const cartItemCount = data?.length;
+
+  useEffect(() => {
+    const cartItems =
+      data?.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+        product: item.product,
+        checked: true,
+      })) ?? [];
+
+    setCartItems(cartItems);
+  }, []);
 
   return (
     <HeaderContainer>
