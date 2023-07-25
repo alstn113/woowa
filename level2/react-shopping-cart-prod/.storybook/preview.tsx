@@ -2,6 +2,9 @@ import React from 'react';
 import type { Preview } from '@storybook/react';
 import { RecoilRoot } from 'recoil';
 import GlobalStyle from '../src/styles/GlobalStyle';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const preview: Preview = {
   parameters: {
@@ -15,10 +18,12 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <RecoilRoot>
-        <GlobalStyle />
-        <Story />
-      </RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <GlobalStyle />
+          <Story />
+        </RecoilRoot>
+      </QueryClientProvider>
     ),
   ],
 };
