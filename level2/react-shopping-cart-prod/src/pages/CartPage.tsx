@@ -1,12 +1,45 @@
-import { useRecoilValue } from 'recoil';
+import { Suspense, useEffect } from 'react';
+
+import { useRecoilState } from 'recoil';
+import { useQuery } from '@tanstack/react-query';
 import styled from '@emotion/styled';
 
 import cartItemsState from '../recoil/atoms/cartItemsState';
+import { QUERY_KEYS } from '../constants';
 import PaymentSummary from '../components/cart/PaymentSummary';
 import CartItemList from '../components/cart/CartItemList';
+import CartItemsAPI from '../api/cart-items';
 
 const CartPage = () => {
-  const cartItems = useRecoilValue(cartItemsState);
+  return (
+    <Suspense fallback={<div>loading...</div>}>
+      <CartPageContent />
+    </Suspense>
+  );
+};
+
+const CartPageContent = () => {
+  const { data: cartItemListSuspense } = useQuery(
+    QUERY_KEYS.getCartItemList,
+    CartItemsAPI.getCartItemList,
+    {
+      suspense: true,
+    },
+  );
+  const cartItemList = cartItemListSuspense!; // suspense
+
+  const [cartItems, setCartItems] = useRecoilState(cartItemsState);
+
+  const data = cartItemList.map((item) => ({
+    id: item.id,
+    quantity: item.quantity,
+    product: item.product,
+    checked: true,
+  }));
+
+  useEffect(() => {
+    setCartItems(data);
+  }, [cartItemListSuspense]);
 
   const checkedItems = cartItems.filter((item) => item.checked);
   const totalProductPrice = checkedItems.reduce(

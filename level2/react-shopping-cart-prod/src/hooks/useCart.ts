@@ -1,13 +1,15 @@
 import { useRecoilState } from 'recoil';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { CartItem, Product } from '../types';
 import cartItemsState from '../recoil/atoms/cartItemsState';
+import { QUERY_KEYS } from '../constants';
 import CartItemsAPI from '../api/cart-items';
 
 const useCart = () => {
   const [cartItems, setCartItems] = useRecoilState(cartItemsState);
 
+  const queryClient = useQueryClient();
   const { mutate: addCartItemMutate } = useMutation(CartItemsAPI.addCartItem);
   const { mutate: deleteCartItemMutate } = useMutation(
     CartItemsAPI.deleteCartItem,
@@ -18,12 +20,13 @@ const useCart = () => {
 
   const addToCart = (product: Product) => {
     addCartItemMutate(product.id, {
-      onSuccess: (location) => {
+      onSuccess: async (location) => {
         const cartItemId = Number(location.split('/').pop());
         setCartItems([
           ...cartItems,
           { id: cartItemId, product, quantity: 1, checked: false },
         ]);
+        await queryClient.refetchQueries(QUERY_KEYS.getCartItemList);
       },
       onError: () => {
         // TODO: error 처리
@@ -53,12 +56,13 @@ const useCart = () => {
           params: { quantity },
         },
         {
-          onSuccess: () => {
+          onSuccess: async () => {
             setCartItems(
               cartItems.map((item) =>
                 item.product.id === product.id ? { ...item, quantity } : item,
               ),
             );
+            await queryClient.refetchQueries(QUERY_KEYS.getCartItemList);
           },
           onError: () => {
             // TODO: error 처리
@@ -70,8 +74,9 @@ const useCart = () => {
 
     // 수량이 0이면 장바구니에서 삭제한다.
     deleteCartItemMutate(cartItem.id, {
-      onSuccess: () => {
+      onSuccess: async () => {
         setCartItems(cartItems.filter((item) => item.id !== cartItem.id));
+        await queryClient.refetchQueries(QUERY_KEYS.getCartItemList);
       },
       onError: () => {
         // TODO: error 처리
@@ -97,7 +102,7 @@ const useCart = () => {
     );
   };
 
-  const removeCheckedCartItems = () => {
+  const removeCheckedCartItems = async () => {
     const checkedCartItemIds = cartItems
       .filter((item) => item.checked)
       .map((item) => item.id);
@@ -106,6 +111,7 @@ const useCart = () => {
       checkedCartItemIds.forEach((cartItemId) => {
         CartItemsAPI.deleteCartItem(cartItemId);
       });
+      await queryClient.refetchQueries(QUERY_KEYS.getCartItemList);
     } catch (error) {
       // TODO: 수정을 여러 번에 나눠서 요청하면 문제가 생길 수 있음
       setCartItems(cartItems);
