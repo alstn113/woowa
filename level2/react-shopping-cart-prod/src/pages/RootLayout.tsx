@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 import styled from '@emotion/styled';
 
+import ErrorBoundary from '../components/utils/ErrorBoundary';
 import Header from '../components/base/Header';
 
 const RootLayout = () => {
@@ -11,7 +12,9 @@ const RootLayout = () => {
     <>
       <Header onNavigate={onNavigate} />
       <Content>
-        <Outlet />
+        <ErrorBoundary catchStatus={[500]} fallback={<div>500 Error</div>}>
+          <Outlet />
+        </ErrorBoundary>
       </Content>
     </>
   );
