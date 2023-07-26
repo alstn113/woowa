@@ -57,6 +57,8 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     // index로 배열 key 사용 가능
     'react/no-array-index-key': 'off',
+    // error boundary fallbackRender 사용 가능하게 하기 위해 off
+    'react/no-unstable-nested-components': 'off',
     // import 순서 관련
     'import/order': [
       'error',

@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import cartItemsState from '../recoil/atoms/cartItemsState';
 import useCart from '../hooks/useCart';
 import { QUERY_KEYS } from '../constants';
+import ErrorBoundary from '../components/utils/ErrorBoundary';
 import ProductItemSkeleton from '../components/product-list/ProductItemSkeleton';
 import ProductItem from '../components/product-list/ProductItem';
 import ProductsAPI from '../api/products';
@@ -14,17 +15,24 @@ import CartItemsAPI from '../api/cart-items';
 
 const ProductListPage = () => {
   return (
-    <Suspense
-      fallback={
-        <ProductListContainer>
-          {Array.from({ length: 12 }).map((_, index) => (
-            <ProductItemSkeleton key={index} />
-          ))}
-        </ProductListContainer>
-      }
+    <ErrorBoundary
+      catchStatus={400}
+      fallbackRenderer={({ error }) => {
+        return <div>error: {error.message}</div>;
+      }}
     >
-      <ProductListPageContent />
-    </Suspense>
+      <Suspense
+        fallback={
+          <ProductListContainer>
+            {Array.from({ length: 12 }).map((_, index) => (
+              <ProductItemSkeleton key={index} />
+            ))}
+          </ProductListContainer>
+        }
+      >
+        <ProductListPageContent />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
