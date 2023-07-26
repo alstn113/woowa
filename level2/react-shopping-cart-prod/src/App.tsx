@@ -1,5 +1,5 @@
 import {} from '@tanstack/react-query';
-import PageRoutes from './route';
+import PageRoutes from './PageRoutes';
 
 const App = () => {
   return <PageRoutes />;
