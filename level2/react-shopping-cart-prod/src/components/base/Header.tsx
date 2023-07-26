@@ -21,6 +21,9 @@ const Header = ({ onNavigate }: HeaderProps) => {
   const { data } = useQuery(
     QUERY_KEYS.getCartItemList,
     CartItemsAPI.getCartItemList,
+    {
+      suspense: true,
+    },
   );
 
   useEffect(() => {
