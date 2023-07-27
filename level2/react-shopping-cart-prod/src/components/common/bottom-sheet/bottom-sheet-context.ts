@@ -1,4 +1,4 @@
-import createReactContext from './utils/createReactContext';
+import createReactContext from './hooks/use-create-context';
 
 export interface BottomSheetConfig {
   close?: () => void;
