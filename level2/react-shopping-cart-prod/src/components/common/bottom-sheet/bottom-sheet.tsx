@@ -32,7 +32,9 @@ const BottomSheet = ({ children }: BottomSheetProps) => {
   );
 };
 
-BottomSheet.Header = BottomSheetHeader;
-BottomSheet.Content = BottomSheetContent;
+type BottomSheetComponent = typeof BottomSheet & {
+  Header: typeof BottomSheetHeader;
+  Content: typeof BottomSheetContent;
+};
 
-export default BottomSheet;
+export default BottomSheet as BottomSheetComponent;

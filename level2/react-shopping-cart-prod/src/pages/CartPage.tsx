@@ -40,6 +40,7 @@ const CartPageContent = () => {
 
   useEffect(() => {
     setCartItems(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItemListSuspense]);
 
   const checkedItems = cartItems.filter((item) => item.checked);

@@ -36,6 +36,7 @@ const Header = ({ onNavigate }: HeaderProps) => {
       })) ?? [];
 
     setCartItems(cartItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

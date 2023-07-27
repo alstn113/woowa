@@ -26,12 +26,7 @@ module.exports = {
   },
   plugins: ['react-refresh'],
   rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      {
-        allowConstantExport: true,
-      },
-    ],
+    'no-console': 'off',
     // import React from 'react' 없이 사용 가능
     'react/react-in-jsx-scope': 'off',
     // 컴포넌트 arrow function
