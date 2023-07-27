@@ -10,7 +10,7 @@ import CartPage from './pages/CartPage';
 const PageRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<RootLayout />} errorElement={<NotFoundPage />}>
+      <Route path="/" element={<RootLayout />}>
         <Route index element={<ProductListPage />} />
         <Route path="cart" element={<CartPage />} />
         <Route path="orders">
@@ -18,6 +18,7 @@ const PageRoutes = () => {
           <Route path=":orderId" element={<OrderDetailPage />} />
         </Route>
       </Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

@@ -2,13 +2,13 @@ import styled from '@emotion/styled';
 
 const BottomSheetHeader = () => {
   return (
-    <Wrapper>
-      <Handle />
-    </Wrapper>
+    <BottomSheetHeaderWrapper>
+      <BottomSheetHandle />
+    </BottomSheetHeaderWrapper>
   );
 };
 
-const Wrapper = styled.div`
+const BottomSheetHeaderWrapper = styled.div`
   height: 48px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   padding-bottom: 4px;
 `;
 
-const Handle = styled.div`
+const BottomSheetHandle = styled.div`
   width: 32px;
   height: 4px;
   border-radius: 2px;
