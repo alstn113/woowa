@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 import { useMemo } from 'react';
 
-import usePortal from '../../../hooks/usePortal';
+import usePortal from './hooks/use-portal';
 import BottomSheetHeader from './bottom-sheet-header';
 import { BottomSheetConfig, BottomSheetProvider } from './bottom-sheet-context';
 import BottomSheetContent from './bottom-sheet-content';
