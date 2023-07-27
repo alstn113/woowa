@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom';
 import { useMemo } from 'react';
 
 import usePortal from './hooks/use-portal';
+import BottomSheetWrapper from './bottom-sheet-wrapper';
 import BottomSheetHeader from './bottom-sheet-header';
 import { BottomSheetConfig, BottomSheetProvider } from './bottom-sheet-context';
 import BottomSheetContent from './bottom-sheet-content';
@@ -26,7 +27,7 @@ const BottomSheet = ({ children }: BottomSheetProps) => {
 
   return createPortal(
     <BottomSheetProvider value={bottomSheetConfig}>
-      {children}
+      <BottomSheetWrapper>{children}</BottomSheetWrapper>
     </BottomSheetProvider>,
     portal,
   );
