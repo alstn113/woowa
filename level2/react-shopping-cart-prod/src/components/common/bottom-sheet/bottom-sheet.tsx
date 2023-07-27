@@ -1,8 +1,10 @@
+import { createPortal } from 'react-dom';
+import { useMemo } from 'react';
+
 import usePortal from '../../../hooks/usePortal';
 import BottomSheetHeader from './bottom-sheet-header';
-import { BottomSheetContext } from './bottom-sheet-context';
+import { BottomSheetConfig, BottomSheetProvider } from './bottom-sheet-context';
 import BottomSheetContent from './bottom-sheet-content';
-import { createPortal } from 'react-dom';
 
 interface BottomSheetProps {
   children: React.ReactNode;
@@ -11,12 +13,21 @@ interface BottomSheetProps {
 const BottomSheet = ({ children }: BottomSheetProps) => {
   const portal = usePortal('bottom-sheet');
 
+  const bottomSheetConfig: BottomSheetConfig = useMemo(
+    () => ({
+      close: () => {
+        console.log('close');
+      },
+    }),
+    [],
+  );
+
   if (!portal) return null;
 
   return createPortal(
-    <BottomSheetContext.Provider value={{ portal }}>
+    <BottomSheetProvider value={bottomSheetConfig}>
       {children}
-    </BottomSheetContext.Provider>,
+    </BottomSheetProvider>,
     portal,
   );
 };
