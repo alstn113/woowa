@@ -1,16 +1,23 @@
+import usePortal from '../../../hooks/usePortal';
 import BottomSheetHeader from './bottom-sheet-header';
-import BottomSheetContent from './bottom-sheet-content';
 import { BottomSheetContext } from './bottom-sheet-context';
+import BottomSheetContent from './bottom-sheet-content';
+import { createPortal } from 'react-dom';
 
 interface BottomSheetProps {
   children: React.ReactNode;
 }
 
 const BottomSheet = ({ children }: BottomSheetProps) => {
-  return (
-    <BottomSheetContext.Provider value={children}>
-      <div>BottomSheet</div>
-    </BottomSheetContext.Provider>
+  const portal = usePortal('bottom-sheet');
+
+  if (!portal) return null;
+
+  return createPortal(
+    <BottomSheetContext.Provider value={{ portal }}>
+      {children}
+    </BottomSheetContext.Provider>,
+    portal,
   );
 };
 
