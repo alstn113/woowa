@@ -1,15 +1,30 @@
 import React from 'react';
 
-const useCreateContext = <T>(defaultValue: T) => {
-  const CustomContext = React.createContext<T | undefined>(defaultValue);
+type CreateContextReturn<T> = [React.Provider<T>, () => T];
+
+interface UseCreateContextProps<T> {
+  name?: string;
+  errorMessage?: string;
+  defaultValue?: T;
+}
+
+const useCreateContext = <T>(props: UseCreateContextProps<T> = {}) => {
+  const { name, errorMessage, defaultValue } = props;
+
+  const Context = React.createContext<T | undefined>(defaultValue);
+
+  Context.displayName = name;
+
   const useContext = () => {
-    const value = React.useContext(CustomContext);
+    const value = React.useContext(Context);
     if (!value) {
-      throw new Error('useContext must be inside a Provider with a value');
+      throw new Error(
+        errorMessage || `useContext must be used within a Provider`,
+      );
     }
     return value;
   };
-  return [CustomContext.Provider, useContext] as const;
+  return [Context.Provider, useContext] as CreateContextReturn<T>;
 };
 
 export default useCreateContext;

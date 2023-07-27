@@ -7,6 +7,11 @@ export interface BottomSheetConfig {
 const defaultContext = {};
 
 const [BottomSheetProvider, useBottomSheetContext] =
-  createReactContext<BottomSheetConfig>(defaultContext);
+  createReactContext<BottomSheetConfig>({
+    name: 'BottomSheetContext',
+    errorMessage:
+      'useBottomSheetContext must be used within a BottomSheetProvider',
+    defaultValue: defaultContext,
+  });
 
 export { BottomSheetProvider, useBottomSheetContext };
