@@ -11,6 +11,7 @@ const Container = styled.div<{ isFixed: boolean }>`
 `;
 
 const Placeholder = styled.div<{ height: number; width: number }>`
+  display: block;
   height: ${({ height }) => height}px;
   width: ${({ width }) => width}px;
 `;
@@ -34,21 +35,17 @@ const Sticky: React.FC<StickyProps> = ({ className, top, children }) => {
     const pos = element.current.getBoundingClientRect();
     setY(pos.top + getScrollTop());
     setX(pos.left);
+    setPlaceholderHeight(element.current.offsetHeight);
+    setPlaceholderWidth(element.current.offsetWidth);
   }, []);
 
   const onScroll = useCallback(() => {
     const scrollTop = getScrollTop();
-    const nextFixed = scrollTop + 112 > y;
+    const nextFixed = scrollTop + top > y;
     if (fixed !== nextFixed) {
       setFixed(nextFixed);
-      setPlaceholderHeight(
-        nextFixed ? element.current?.getBoundingClientRect().height || 0 : 0,
-      );
-      setPlaceholderWidth(
-        nextFixed ? element.current?.getBoundingClientRect().width || 0 : 0,
-      );
     }
-  }, [fixed, y]);
+  }, [fixed, y, top]);
 
   useEffect(() => {
     setup();

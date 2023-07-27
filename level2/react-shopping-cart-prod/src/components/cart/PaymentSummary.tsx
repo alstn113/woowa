@@ -35,7 +35,6 @@ const PaymentSummary = ({
 
 const PaymentSummaryContainer = styled.div`
   min-width: 448px;
-  margin-top: 40px;
   border: 1px solid #ddd;
   height: fit-content;
 

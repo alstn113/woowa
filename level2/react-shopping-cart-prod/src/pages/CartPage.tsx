@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 
 import cartItemsState from '../recoil/atoms/cartItemsState';
 import { QUERY_KEYS } from '../constants';
+import Sticky from '../components/common/Sticky';
 import PaymentSummary from '../components/cart/PaymentSummary';
 import CartItemList from '../components/cart/CartItemList';
 import CartItemsAPI from '../api/cart-items';
@@ -57,11 +58,15 @@ const CartPageContent = () => {
       ) : (
         <ContentWrapper>
           <CartItemList cartItems={cartItems} />
-          <PaymentSummary
-            totalProductPrice={totalProductPrice}
-            totalDeliveryFee={totalDeliveryFee}
-            totalPrice={totalPrice}
-          />
+          <PaymentSummaryWrapper>
+            <Sticky top={120}>
+              <PaymentSummary
+                totalProductPrice={totalProductPrice}
+                totalDeliveryFee={totalDeliveryFee}
+                totalPrice={totalPrice}
+              />
+            </Sticky>
+          </PaymentSummaryWrapper>
         </ContentWrapper>
       )}
     </CartContainer>
@@ -94,6 +99,10 @@ const ContentWrapper = styled.div`
     flex-direction: column;
     gap: 0;
   }
+`;
+
+const PaymentSummaryWrapper = styled.div`
+  margin-top: 40px;
 `;
 
 const BlankMessage = styled.div`
