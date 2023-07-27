@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import createReactContext from './utils/createReactContext';
 
 export interface BottomSheetConfig {
   close?: () => void;
@@ -6,31 +6,7 @@ export interface BottomSheetConfig {
 
 const defaultContext = {};
 
-/**
- * TODO: hook으로 만들기
- */
-const createBottomSheetContext = () => {
-  const Context = createContext<BottomSheetConfig | undefined>(defaultContext);
-
-  const useContext = () => {
-    const context = React.useContext(Context);
-
-    if (context === undefined) {
-      throw new Error(
-        'useBottomSheetContext must be used within a BottomSheetProvider',
-      );
-    }
-
-    return context;
-  };
-
-  return {
-    BottomSheetProvider: Context.Provider,
-    useBottomSheetContext: useContext,
-  };
-};
-
-const { BottomSheetProvider, useBottomSheetContext } =
-  createBottomSheetContext();
+const [BottomSheetProvider, useBottomSheetContext] =
+  createReactContext<BottomSheetConfig>(defaultContext);
 
 export { BottomSheetProvider, useBottomSheetContext };
