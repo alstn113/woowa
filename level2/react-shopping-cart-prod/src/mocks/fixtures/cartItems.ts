@@ -31,6 +31,26 @@ const cartItems: CartItemEntity[] = [
       imageUrl: `/images/products/10.png`,
     },
   },
+  {
+    id: 4,
+    quantity: 2,
+    product: {
+      id: 4,
+      name: 'PET보틀-납작(450ml)',
+      price: 10000,
+      imageUrl: '/images/products/4.png',
+    },
+  },
+  {
+    id: 5,
+    quantity: 1,
+    product: {
+      id: 5,
+      name: 'PET보틀-단지(480ml)',
+      price: 41000,
+      imageUrl: '/images/products/5.png',
+    },
+  },
 ];
 
 export default cartItems;
