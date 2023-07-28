@@ -3,26 +3,31 @@ import styled from '@emotion/styled';
 const BottomSheetHeader = () => {
   return (
     <BottomSheetHeaderWrapper>
-      <BottomSheetHandle />
+      <BottomSheetHandle>
+        <span />
+      </BottomSheetHandle>
     </BottomSheetHeaderWrapper>
   );
 };
 
 const BottomSheetHeaderWrapper = styled.div`
-  height: 48px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  position: relative;
-  padding-top: 16px;
-  padding-bottom: 4px;
+  display: flex;
+  justify-content: center;
 `;
 
 const BottomSheetHandle = styled.div`
-  width: 32px;
-  height: 4px;
-  border-radius: 2px;
-  background-color: #d0d0d0;
-  margin: auto;
+  cursor: grab;
+  user-select: none;
+  padding: 15px;
+  margin-top: -15px;
+
+  span {
+    height: 4px;
+    width: 40px;
+    display: block;
+    background: #c7d0e1;
+    border-radius: 50px;
+  }
 `;
 
 export default BottomSheetHeader;

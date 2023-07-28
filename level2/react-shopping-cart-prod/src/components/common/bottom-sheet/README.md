@@ -6,6 +6,10 @@ https://blog.mathpresso.com/bottom-sheet-for-web-55ed6cc78c00
 https://www.youtube.com/watch?v=Ac9Z6UtHdZ0&list=WL&index=11&t=314s
 https://reactjsexample.com/a-responsive-react-draggable-sheet-and-dialog-component/
 
+애니메이션
+https://github.com/nextui-org/nextui/blob/main/apps/docs/src/components/css-transition/index.tsx#L25
+https://github.com/woowacourse-teams/2022-review-duck/blob/main/frontend/src/common/components/TransitionDiv/index.tsx
+
 폴더, 파일명은 케밥 케이스로 한 번 작성해보고 싶었음. ex) bottom-sheet
 
 ```

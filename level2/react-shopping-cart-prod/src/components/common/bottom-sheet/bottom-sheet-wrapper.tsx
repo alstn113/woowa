@@ -1,9 +1,9 @@
 import { forwardRef } from 'react';
 
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
-const MIN_Y = 60; // 바텀시트가 최대로 높이 올라갔을 때의 y 값
-const BOTTOM_SHEET_HEIGHT = window.innerHeight - MIN_Y; // 바텀시트의 세로 길이
+import { useBottomSheetContext } from './bottom-sheet-context';
 
 interface BottomSheetWrapperProps {
   children: React.ReactNode;
@@ -11,25 +11,36 @@ interface BottomSheetWrapperProps {
 
 const BottomSheetWrapper = forwardRef<HTMLDivElement, BottomSheetWrapperProps>(
   function BottomSheetWrapper({ children }: BottomSheetWrapperProps, ref) {
+    const { isOpen } = useBottomSheetContext();
+
     return (
-      <StyledBottomSheetWrapper ref={ref}>{children}</StyledBottomSheetWrapper>
+      <StyledBottomSheetWrapper ref={ref} isOpen={isOpen}>
+        {children}
+      </StyledBottomSheetWrapper>
     );
   },
 );
 
-const StyledBottomSheetWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+const StyledBottomSheetWrapper = styled.div<{ isOpen: boolean }>`
   position: fixed;
-  z-index: 1;
   top: 0;
   left: 0;
-  right: 0;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
-  height: ${BOTTOM_SHEET_HEIGHT}px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: 0.1s linear;
+
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      opacity: 1;
+      pointer-events: auto;
+    `}
 `;
 
 export default BottomSheetWrapper;
