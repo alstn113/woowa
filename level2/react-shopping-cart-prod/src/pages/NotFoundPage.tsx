@@ -18,7 +18,8 @@ const NotFoundPage = () => {
         visible={visible}
         enterEffect="flip"
         leaveEffect="flip"
-        onEnter={() => console.log('enter')}
+        enterTime={3000}
+        leaveTime={1000}
         onLeave={() => console.log('leave')}
       >
         <div
@@ -29,7 +30,7 @@ const NotFoundPage = () => {
         visible={false}
         enterEffect="flip"
         leaveEffect="flip"
-        onEnter={() => console.log('enter')}
+        leaveTime={5000}
         onLeave={() => console.log('leave')}
       >
         <div

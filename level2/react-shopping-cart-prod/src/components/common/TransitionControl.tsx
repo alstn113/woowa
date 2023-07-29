@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react';
 
 import styled from '@emotion/styled';
@@ -12,7 +13,6 @@ interface TransitionControlProps {
   leaveEffect?: EffectType;
   enterTime?: number;
   leaveTime?: number;
-  onEnter?: () => void;
   onLeave?: () => void;
 }
 
@@ -23,22 +23,17 @@ const TransitionControl = ({
   leaveEffect = 'fade',
   enterTime = 1000,
   leaveTime = 1000,
-  onEnter,
   onLeave,
 }: TransitionControlProps) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [isAnimating, setIsAnimating] = useState<boolean>(visible);
+  const [closed, setClosed] = useState<boolean>(visible);
 
   useEffect(() => {
     if (visible) {
-      setIsAnimating(false);
+      setClosed(false);
+    } else {
       timeoutRef.current = setTimeout(() => {
-        setIsAnimating(true);
-        onEnter?.();
-      }, enterTime);
-    } else if (isAnimating) {
-      timeoutRef.current = setTimeout(() => {
-        setIsAnimating(false);
+        setClosed(false);
         onLeave?.();
       }, leaveTime);
     }
@@ -47,12 +42,12 @@ const TransitionControl = ({
       if (!timeoutRef.current) return;
       clearTimeout(timeoutRef.current);
     };
-  }, [visible, enterTime, leaveTime, isAnimating, onEnter, onLeave]);
+  }, [visible, leaveTime, onLeave]);
 
-  if (!visible && !isAnimating) return null;
+  if (!visible && closed) return null;
 
   return (
-    <Div visible={visible} duration={1000}>
+    <Div visible={visible} enterTime={enterTime} leaveTime={leaveTime}>
       {children}
     </Div>
   );
@@ -76,14 +71,18 @@ const fadeOut = keyframes`
   }
 `;
 
-const Div = styled.div<{ visible: boolean; duration: number }>`
+const Div = styled.div<{
+  visible: boolean;
+  enterTime: number;
+  leaveTime: number;
+}>`
   ${(props) =>
     props.visible
       ? css`
-          animation: ${fadeIn} ${props.duration}ms ease-in-out forwards;
+          animation: ${fadeIn} ${props.enterTime}ms ease-in-out forwards;
         `
       : css`
-          animation: ${fadeOut} ${props.duration}ms ease-in-out forwards;
+          animation: ${fadeOut} ${props.leaveTime}ms ease-in-out forwards;
         `}
 `;
 
