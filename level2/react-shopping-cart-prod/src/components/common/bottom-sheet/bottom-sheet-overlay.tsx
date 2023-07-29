@@ -1,7 +1,11 @@
 import styled from '@emotion/styled';
 
+import { useBottomSheetContext } from './bottom-sheet-context';
+
 const BottomSheetOverlay = () => {
-  return <StyledBottomSheetOverlay />;
+  const { onClose } = useBottomSheetContext();
+
+  return <StyledBottomSheetOverlay onClick={onClose} />;
 };
 
 const StyledBottomSheetOverlay = styled.div`
