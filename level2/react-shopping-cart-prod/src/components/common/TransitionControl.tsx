@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react';
 
 import styled from '@emotion/styled';
@@ -37,7 +36,7 @@ const TransitionControl = ({
         setIsAnimating(true);
         onEnter?.();
       }, enterTime);
-    } else {
+    } else if (isAnimating) {
       timeoutRef.current = setTimeout(() => {
         setIsAnimating(false);
         onLeave?.();
@@ -48,7 +47,7 @@ const TransitionControl = ({
       if (!timeoutRef.current) return;
       clearTimeout(timeoutRef.current);
     };
-  }, [visible, enterTime, leaveTime, onEnter, onLeave]);
+  }, [visible, enterTime, leaveTime, isAnimating, onEnter, onLeave]);
 
   if (!visible && !isAnimating) return null;
 

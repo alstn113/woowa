@@ -25,6 +25,17 @@ const NotFoundPage = () => {
           style={{ width: '100px', height: '100px', background: 'orange' }}
         />
       </TransitionControl>
+      <TransitionControl
+        visible={false}
+        enterEffect="flip"
+        leaveEffect="flip"
+        onEnter={() => console.log('enter')}
+        onLeave={() => console.log('leave')}
+      >
+        <div
+          style={{ width: '100px', height: '100px', background: 'orange' }}
+        />
+      </TransitionControl>
     </div>
   );
 };
