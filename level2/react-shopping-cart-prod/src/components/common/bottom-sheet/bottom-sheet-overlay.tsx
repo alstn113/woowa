@@ -1,11 +1,16 @@
 import styled from '@emotion/styled';
 
+import TransitionControl from '../transition-control';
 import { useBottomSheetContext } from './bottom-sheet-context';
 
 const BottomSheetOverlay = () => {
-  const { onClose } = useBottomSheetContext();
+  const { isOpen, onClose } = useBottomSheetContext();
 
-  return <StyledBottomSheetOverlay onClick={onClose} />;
+  return (
+    <TransitionControl enterDuration={500} exitDuration={500} visible={isOpen}>
+      <StyledBottomSheetOverlay onClick={onClose} />
+    </TransitionControl>
+  );
 };
 
 const StyledBottomSheetOverlay = styled.div`
@@ -15,8 +20,7 @@ const StyledBottomSheetOverlay = styled.div`
   z-index: -1;
   width: 100%;
   height: 100%;
-  opacity: 0.2;
-  background: #000;
+  background: rgba(0, 0, 0, 0.3);
 `;
 
 export default BottomSheetOverlay;

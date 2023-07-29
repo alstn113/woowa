@@ -20,6 +20,18 @@ const NotFoundPage = () => {
             labore cupiditate beatae sed non architecto, aliquam similique
             corrupti officiis sit voluptate dolorum.
           </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
+            eligendi voluptates totam repellat sint, consequatur ipsa corporis
+            labore cupiditate beatae sed non architecto, aliquam similique
+            corrupti officiis sit voluptate dolorum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
+            eligendi voluptates totam repellat sint, consequatur ipsa corporis
+            labore cupiditate beatae sed non architecto, aliquam similique
+            corrupti officiis sit voluptate dolorum.
+          </p>
         </BottomSheet.Content>
       </BottomSheet>
     </div>
