@@ -1,26 +1,30 @@
+import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 
-import TransitionControl from '../transition-control';
 import { useBottomSheetContext } from './bottom-sheet-context';
 
 const BottomSheetOverlay = () => {
-  const { isOpen, onClose } = useBottomSheetContext();
+  const { onClose } = useBottomSheetContext();
 
   return (
-    <TransitionControl enterDuration={500} exitDuration={500} visible={isOpen}>
-      <StyledBottomSheetOverlay onClick={onClose} />
-    </TransitionControl>
+    <StyledBottomSheetOverlay
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      onClick={onClose}
+    />
   );
 };
 
-const StyledBottomSheetOverlay = styled.div`
+const StyledBottomSheetOverlay = styled(motion.div)`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
 `;
 
 export default BottomSheetOverlay;

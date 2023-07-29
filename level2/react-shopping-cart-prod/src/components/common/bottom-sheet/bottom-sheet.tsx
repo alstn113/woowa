@@ -1,7 +1,8 @@
 import { createPortal } from 'react-dom';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
-import useBottomSheet from './use-bottom-sheet';
+import { AnimatePresence } from 'framer-motion';
+
 import usePortal from './hooks/use-portal';
 import BottomSheetWrapper from './bottom-sheet-wrapper';
 import BottomSheetOverlay from './bottom-sheet-overlay';
@@ -24,19 +25,36 @@ const BottomSheet = ({ children, isOpen, onClose }: BottomSheetProps) => {
     [isOpen, onClose],
   );
 
-  const { sheetRef } = useBottomSheet({
-    onClose,
-  });
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [onClose]);
 
   if (!portal) return null;
 
-  return createPortal(
+  const BottomSheetContent = (
     <BottomSheetProvider value={bottomSheetConfig}>
-      <BottomSheetOverlay />
-      <BottomSheetWrapper ref={sheetRef}>{children}</BottomSheetWrapper>
-    </BottomSheetProvider>,
-    portal,
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <BottomSheetOverlay />
+            <BottomSheetWrapper>{children}</BottomSheetWrapper>
+          </>
+        )}
+      </AnimatePresence>
+    </BottomSheetProvider>
   );
+
+  return createPortal(BottomSheetContent, portal);
 };
 
 type BottomSheetComponent = typeof BottomSheet & {

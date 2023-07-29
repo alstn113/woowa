@@ -26,7 +26,7 @@ const TransitionControl = ({
   onExit,
 }: TransitionControlProps) => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [closed, setClosed] = useState<boolean>(visible);
+  const [closed, setClosed] = useState<boolean>(true);
 
   useEffect(() => {
     if (visible) {
