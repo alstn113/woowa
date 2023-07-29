@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import TransitionControl from '../components/common/TransitionControl';
+import TransitionControl from '../components/common/transition-control';
 
 const NotFoundPage = () => {
   const [visible, setVisible] = useState(true);
@@ -16,11 +16,9 @@ const NotFoundPage = () => {
       </button>
       <TransitionControl
         visible={visible}
-        enterEffect="flip"
-        leaveEffect="flip"
-        enterTime={3000}
-        leaveTime={1000}
-        onLeave={() => console.log('leave')}
+        enterDuration={3000}
+        exitDuration={1000}
+        onExit={() => console.log('leave')}
       >
         <div
           style={{ width: '100px', height: '100px', background: 'orange' }}
@@ -28,10 +26,9 @@ const NotFoundPage = () => {
       </TransitionControl>
       <TransitionControl
         visible={false}
-        enterEffect="flip"
-        leaveEffect="flip"
-        leaveTime={5000}
-        onLeave={() => console.log('leave')}
+        enterDuration={3000}
+        exitDuration={2000}
+        onExit={() => console.log('leave')}
       >
         <div
           style={{ width: '100px', height: '100px', background: 'orange' }}
