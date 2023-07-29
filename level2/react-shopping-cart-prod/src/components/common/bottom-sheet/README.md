@@ -10,8 +10,7 @@ https://reactjsexample.com/a-responsive-react-draggable-sheet-and-dialog-compone
 https://github.com/nextui-org/nextui/blob/main/apps/docs/src/components/css-transition/index.tsx#L25
 https://github.com/woowacourse-teams/2022-review-duck/blob/main/frontend/src/common/components/TransitionDiv/index.tsx
 
+pointer-events: none;으로 컴포넌트 사라질 때 클릭 이벤트 막기
+appear, disappear 애니메이션 Props, onAppear, onDisappear 이벤트 Props
+
 폴더, 파일명은 케밥 케이스로 한 번 작성해보고 싶었음. ex) bottom-sheet
-
-```
-
-```
