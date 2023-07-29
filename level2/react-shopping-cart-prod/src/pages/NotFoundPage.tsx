@@ -1,39 +1,27 @@
 import { useState } from 'react';
 
-import TransitionControl from '../components/common/transition-control';
+import BottomSheet from '../components/common/bottom-sheet';
 
 const NotFoundPage = () => {
-  const [visible, setVisible] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleToggle = () => {
-    setVisible((prevVisible) => !prevVisible);
-  };
-
+  const toggle = () => setIsOpen((prev) => !prev);
   return (
     <div>
-      <button type="button" onClick={handleToggle}>
-        Toggle Flip
+      <button type="button" onClick={toggle}>
+        toggle
       </button>
-      <TransitionControl
-        visible={visible}
-        enterDuration={3000}
-        exitDuration={1000}
-        onExit={() => console.log('leave')}
-      >
-        <div
-          style={{ width: '100px', height: '100px', background: 'orange' }}
-        />
-      </TransitionControl>
-      <TransitionControl
-        visible={false}
-        enterDuration={3000}
-        exitDuration={2000}
-        onExit={() => console.log('leave')}
-      >
-        <div
-          style={{ width: '100px', height: '100px', background: 'orange' }}
-        />
-      </TransitionControl>
+      <BottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <BottomSheet.Header />
+        <BottomSheet.Content>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
+            eligendi voluptates totam repellat sint, consequatur ipsa corporis
+            labore cupiditate beatae sed non architecto, aliquam similique
+            corrupti officiis sit voluptate dolorum.
+          </p>
+        </BottomSheet.Content>
+      </BottomSheet>
     </div>
   );
 };

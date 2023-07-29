@@ -42,6 +42,7 @@ const usePortal = (selectId: string): HTMLElement | null => {
       parentElement.appendChild(el);
     }
     setElSnapshot(el);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return elSnapshot;

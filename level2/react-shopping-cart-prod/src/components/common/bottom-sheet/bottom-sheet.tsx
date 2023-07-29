@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { useEffect, useMemo, useRef } from 'react';
 
+import TransitionControl from '../transition-control';
 import usePortal from './hooks/use-portal';
 import BottomSheetWrapper from './bottom-sheet-wrapper';
 import BottomSheetOverlay from './bottom-sheet-overlay';
@@ -53,8 +54,6 @@ const BottomSheet = ({ children, isOpen, onClose }: BottomSheetProps) => {
 
   useEffect(() => {
     const dragStart = (e: MouseEvent) => {
-      console.log('asdf');
-
       metricsRef.current.isDragging = true;
       metricsRef.current.startY = e.pageY;
       metricsRef.current.startHeight = parseInt(
@@ -107,12 +106,14 @@ const BottomSheet = ({ children, isOpen, onClose }: BottomSheetProps) => {
   if (!portal) return null;
 
   return createPortal(
-    <BottomSheetProvider value={bottomSheetConfig}>
-      <BottomSheetWrapper ref={sheetRef}>
-        <BottomSheetOverlay />
-        {children}
-      </BottomSheetWrapper>
-    </BottomSheetProvider>,
+    <TransitionControl visible={isOpen}>
+      <BottomSheetProvider value={bottomSheetConfig}>
+        <BottomSheetWrapper ref={sheetRef}>
+          <BottomSheetOverlay />
+          {children}
+        </BottomSheetWrapper>
+      </BottomSheetProvider>
+    </TransitionControl>,
     portal,
   );
 };

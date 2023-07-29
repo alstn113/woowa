@@ -33,7 +33,7 @@ const TransitionControl = ({
       setClosed(false);
     } else {
       timeoutRef.current = setTimeout(() => {
-        setClosed(false);
+        setClosed(true);
         onExit?.();
       }, exitDuration);
     }
