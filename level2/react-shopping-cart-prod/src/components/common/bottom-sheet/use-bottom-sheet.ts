@@ -69,10 +69,18 @@ const useBottomSheet = () => {
     document.addEventListener('mousemove', dragging);
     document.addEventListener('mouseup', dragStop);
 
+    sheetRef.current?.addEventListener('touchstart', dragStart);
+    document.addEventListener('touchmove', dragging);
+    document.addEventListener('touchend', dragStop);
+
     return () => {
       sheetRef.current?.removeEventListener('mousedown', dragStart);
       document.removeEventListener('mousemove', dragging);
       document.removeEventListener('mouseup', dragStop);
+
+      sheetRef.current?.removeEventListener('touchstart', dragStart);
+      document.removeEventListener('touchmove', dragging);
+      document.removeEventListener('touchend', dragStop);
     };
   }, []);
 
