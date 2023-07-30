@@ -41,7 +41,7 @@ const BottomSheet = ({ children, isOpen, onClose }: BottomSheetProps) => {
 
   if (!portal) return null;
 
-  const BottomSheetContent = (
+  return createPortal(
     <BottomSheetProvider value={bottomSheetConfig}>
       <AnimatePresence>
         {isOpen && (
@@ -51,10 +51,9 @@ const BottomSheet = ({ children, isOpen, onClose }: BottomSheetProps) => {
           </>
         )}
       </AnimatePresence>
-    </BottomSheetProvider>
+    </BottomSheetProvider>,
+    portal,
   );
-
-  return createPortal(BottomSheetContent, portal);
 };
 
 type BottomSheetComponent = typeof BottomSheet & {
