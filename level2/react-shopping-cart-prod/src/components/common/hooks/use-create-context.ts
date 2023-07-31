@@ -1,6 +1,6 @@
 import React from 'react';
 
-type CreateContextReturn<T> = [React.Provider<T>, () => T];
+type CreateContextReturn<T> = [React.Provider<T>, () => T, React.Context<T>];
 
 interface UseCreateContextProps<T> {
   name?: string;
@@ -24,7 +24,7 @@ const useCreateContext = <T>(props: UseCreateContextProps<T> = {}) => {
     }
     return value;
   };
-  return [Context.Provider, useContext] as CreateContextReturn<T>;
+  return [Context.Provider, useContext, Context] as CreateContextReturn<T>;
 };
 
 export default useCreateContext;
