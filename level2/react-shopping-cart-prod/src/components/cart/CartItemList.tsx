@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import Checkbox from '../common/Checkbox';
+import Checkbox from '../common-cart/Checkbox';
 import { Product } from '../../types';
 import { CartItemsState } from '../../recoil/atoms/cartItemsState';
 import useCart from '../../hooks/useCart';

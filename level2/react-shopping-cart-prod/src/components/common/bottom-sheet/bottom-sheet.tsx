@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react';
 
 import { AnimatePresence } from 'framer-motion';
 
-import usePortal from './hooks/use-portal';
+import usePortal from '../hooks/use-portal';
 import BottomSheetWrapper from './bottom-sheet-wrapper';
 import BottomSheetOverlay from './bottom-sheet-overlay';
 import BottomSheetHeader from './bottom-sheet-header';

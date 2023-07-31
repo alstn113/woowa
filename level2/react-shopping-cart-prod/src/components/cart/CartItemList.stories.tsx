@@ -16,7 +16,7 @@ export const Default: Story = {
   args: {
     cartItems: [
       {
-        cartItemId: 1,
+        id: 1,
         product: {
           id: 1,
           name: 'KP 아이스컵 107파이 32온스(국산형)',
@@ -28,7 +28,7 @@ export const Default: Story = {
         checked: false,
       },
       {
-        cartItemId: 2,
+        id: 2,
         product: {
           id: 2,
           name: '[코코넛용기] 92파이 16온스 아이스컵 (국산)',
@@ -40,7 +40,7 @@ export const Default: Story = {
         checked: false,
       },
       {
-        cartItemId: 3,
+        id: 3,
         product: {
           id: 3,
           name: '서울우유 멸균우유 1Lx10개',

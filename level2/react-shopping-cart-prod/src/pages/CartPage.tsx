@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 
 import cartItemsState from '../recoil/atoms/cartItemsState';
 import { QUERY_KEYS } from '../constants';
-import Sticky from '../components/common/Sticky';
+import Sticky from '../components/common-cart/Sticky';
 import PaymentSummary from '../components/cart/PaymentSummary';
 import CartItemList from '../components/cart/CartItemList';
 import CartItemsAPI from '../api/cart-items';

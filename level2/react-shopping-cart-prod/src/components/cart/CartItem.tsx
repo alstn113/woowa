@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
 import TrashSVG from '../vectors/TrashSVG';
-import NumberInputStepper from '../common/NumberInputStepper';
-import Checkbox from '../common/Checkbox';
+import NumberInputStepper from '../common-cart/NumberInputStepper';
+import Checkbox from '../common-cart/Checkbox';
 import { CartItemState } from '../../recoil/atoms/cartItemsState';
 
 interface CartItemProps {

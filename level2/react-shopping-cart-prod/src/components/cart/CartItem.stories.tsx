@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     cartItem: {
-      cartItemId: 1,
+      id: 1,
       product: {
         id: 1,
         name: 'KP 아이스컵 107파이 32온스(국산형)',

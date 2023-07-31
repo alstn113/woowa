@@ -1,4 +1,4 @@
-import createReactContext from './hooks/use-create-context';
+import createReactContext from '../hooks/use-create-context';
 
 export interface BottomSheetConfig {
   isOpen: boolean;
