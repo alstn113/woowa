@@ -6,32 +6,29 @@ const createElement = (id: string): HTMLElement => {
   return el;
 };
 
-const isBrowser = (): boolean => {
-  return Boolean(
-    typeof window !== 'undefined' &&
-      window.document &&
-      window.document.createElement,
-  );
-};
+const isBrowser = Boolean(
+  typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement,
+);
 
 const usePortal = (selectId: string): HTMLElement | null => {
   const id = `${selectId}`;
 
   const [elSnapshot, setElSnapshot] = useState<HTMLElement | null>(
-    isBrowser() ? createElement(id) : null,
+    isBrowser ? createElement(id) : null,
   );
 
   useEffect(() => {
     const parentElement = document.body;
     const hasElement = parentElement?.querySelector<HTMLElement>(`#${id}`);
-    const el = hasElement || createElement(id);
+    const el = hasElement ?? createElement(id);
 
     if (!hasElement) {
       parentElement.appendChild(el);
     }
     setElSnapshot(el);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   return elSnapshot;
 };
