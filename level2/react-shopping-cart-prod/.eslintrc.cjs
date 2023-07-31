@@ -54,6 +54,8 @@ module.exports = {
     'react/no-array-index-key': 'off',
     // error boundary fallbackRender 사용 가능하게 하기 위해 off
     'react/no-unstable-nested-components': 'off',
+    // consistent-return off는 typescript 사용으로 인해 off
+    'consistent-return': 'off',
     // import 순서 관련
     'import/order': [
       'error',
