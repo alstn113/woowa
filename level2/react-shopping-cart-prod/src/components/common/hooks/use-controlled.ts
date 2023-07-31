@@ -19,7 +19,7 @@ const useControlled = <T>({
     [isControlled],
   );
 
-  return [value, setValue];
+  return [value, setValue] as [T, React.Dispatch<React.SetStateAction<T>>];
 };
 
 export default useControlled;
