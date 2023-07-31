@@ -1,9 +1,8 @@
-import { createPortal } from 'react-dom';
 import { useEffect, useMemo } from 'react';
 
 import { AnimatePresence } from 'framer-motion';
 
-import usePortal from '../hooks/use-portal';
+import Portal from '../portal/portal';
 import BottomSheetWrapper from './bottom-sheet-wrapper';
 import BottomSheetOverlay from './bottom-sheet-overlay';
 import BottomSheetHeader from './bottom-sheet-header';
@@ -15,8 +14,6 @@ interface BottomSheetProps extends BottomSheetConfig {
 }
 
 const BottomSheet = ({ children, isOpen, onClose }: BottomSheetProps) => {
-  const portal = usePortal('bottom-sheet');
-
   const bottomSheetConfig: BottomSheetConfig = useMemo(
     () => ({
       isOpen,
@@ -39,20 +36,19 @@ const BottomSheet = ({ children, isOpen, onClose }: BottomSheetProps) => {
     };
   }, [onClose]);
 
-  if (!portal) return null;
-
-  return createPortal(
-    <BottomSheetProvider value={bottomSheetConfig}>
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <BottomSheetOverlay />
-            <BottomSheetWrapper>{children}</BottomSheetWrapper>
-          </>
-        )}
-      </AnimatePresence>
-    </BottomSheetProvider>,
-    portal,
+  return (
+    <Portal id="bottom-sheet">
+      <BottomSheetProvider value={bottomSheetConfig}>
+        <AnimatePresence>
+          {isOpen && (
+            <>
+              <BottomSheetOverlay />
+              <BottomSheetWrapper>{children}</BottomSheetWrapper>
+            </>
+          )}
+        </AnimatePresence>
+      </BottomSheetProvider>
+    </Portal>
   );
 };
 
