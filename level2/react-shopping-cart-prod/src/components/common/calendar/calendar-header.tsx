@@ -1,19 +1,35 @@
-import { format } from 'date-fns';
+import { addMonths, format } from 'date-fns';
 import styled from '@emotion/styled';
 
-import { useCalendarContext } from './calendar-context';
+interface CalendarHeaderProps {
+  currentMonth: Date;
+  setCurrentMonth: (date: Date) => void;
+}
 
-const CalendarHeader = () => {
-  const { now } = useCalendarContext();
+const CalendarHeader = ({
+  currentMonth,
+  setCurrentMonth,
+}: CalendarHeaderProps) => {
+  const currentMonthYear = format(currentMonth, 'MM yyyy');
 
-  const currentMonthYear = format(now, 'LLLL yyyy');
+  const handleNextMonth = () => {
+    setCurrentMonth(addMonths(currentMonth, 1));
+  };
+
+  const handlePreviousMonth = () => {
+    setCurrentMonth(addMonths(currentMonth, -1));
+  };
 
   return (
     <CalendarHeaderContainer>
       <CalendarHeaderLabel>{currentMonthYear}</CalendarHeaderLabel>
       <CalendarHeaderMonthSwitcherContainer>
-        <div>{'<'}</div>
-        <div>{'>'}</div>
+        <button type="button" onClick={handlePreviousMonth}>
+          {'<'}
+        </button>
+        <button type="button" onClick={handleNextMonth}>
+          {'>'}
+        </button>
       </CalendarHeaderMonthSwitcherContainer>
     </CalendarHeaderContainer>
   );

@@ -4,18 +4,15 @@ import { isSameDay } from 'date-fns';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-import { useCalendarContext } from './calendar-context';
-
 interface CalendarDayProps {
   day: Date;
-  currentMonth: number;
+  currentMonth: Date;
 }
 
 const CalendarDay = ({ day, currentMonth }: CalendarDayProps) => {
-  const { now } = useCalendarContext();
-
+  const now = new Date();
   const isOutsideCurrentMonth = useMemo(() => {
-    return day.getMonth() !== currentMonth;
+    return day.getMonth() !== currentMonth.getMonth();
   }, [day, currentMonth]);
 
   const isToday = isSameDay(day, now);
@@ -37,6 +34,7 @@ const CalendarDayWrapper = styled.span<{
   height: 36px;
   margin: 0px 2px;
   color: rgba(0, 0, 0, 0.6);
+  user-select: none;
 
   ${({ isToday }) =>
     isToday &&
