@@ -18,6 +18,7 @@ const calendar = () => {
 
   const locale = ko;
 
+  const currentMonth = now.getMonth();
   const getWeekArray = (value: Date) => {
     const start = startOfWeek(startOfMonth(value), { locale });
     const end = endOfWeek(endOfMonth(value), { locale });
@@ -49,7 +50,7 @@ const calendar = () => {
         {weeksToDisplay.map((week, idx) => (
           <CalendarWeek key={idx}>
             {week.map((day, idx) => (
-              <CalendarDay key={idx} day={day} />
+              <CalendarDay key={idx} day={day} currentMonth={currentMonth} />
             ))}
           </CalendarWeek>
         ))}

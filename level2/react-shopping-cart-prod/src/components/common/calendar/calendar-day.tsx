@@ -1,10 +1,19 @@
+import { useMemo } from 'react';
+
 import styled from '@emotion/styled';
 
 interface CalendarDayProps {
   day: Date;
+  currentMonth: number;
 }
 
-const CalendarDay = ({ day }: CalendarDayProps) => {
+const CalendarDay = ({ day, currentMonth }: CalendarDayProps) => {
+  const isOutsideCurrentMonth = useMemo(() => {
+    return day.getMonth() !== currentMonth;
+  }, [day, currentMonth]);
+
+  if (isOutsideCurrentMonth) return <CalendarDayWrapper />;
+
   return <CalendarDayWrapper>{day.getDate()}</CalendarDayWrapper>;
 };
 
