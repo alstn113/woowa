@@ -19,7 +19,6 @@ const CalendarHeaderContainer = styled.div`
   padding: 0 12px;
   max-height: 30px;
   min-height: 30px;
-  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 const CalendarHeaderLabel = styled.div`

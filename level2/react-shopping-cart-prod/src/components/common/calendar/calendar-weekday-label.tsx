@@ -27,7 +27,6 @@ const WeekdayLabel = styled.span`
   height: 40px;
   margin: 0px 2px;
   color: rgba(0, 0, 0, 0.6);
-  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 export default CalendarWeekdayLabel;
