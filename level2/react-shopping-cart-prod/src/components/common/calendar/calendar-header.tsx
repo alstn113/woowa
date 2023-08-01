@@ -15,12 +15,11 @@ const CalendarHeader = () => {
 const CalendarHeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 16px;
-  margin-bottom: 8px;
-  padding-left: 24px;
-  padding-right: 12px;
+  margin: 8px 0;
+  padding: 0 12px;
   max-height: 30px;
   min-height: 30px;
+  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 const CalendarHeaderLabel = styled.div`

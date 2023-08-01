@@ -1,5 +1,5 @@
 const CalendarDay = () => {
-  return <div>CalendarDay</div>;
+  return <div></div>;
 };
 
 export default CalendarDay;
