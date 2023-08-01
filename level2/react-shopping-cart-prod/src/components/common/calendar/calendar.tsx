@@ -1,61 +1,34 @@
-import { ko } from 'date-fns/locale';
-import {
-  addDays,
-  endOfMonth,
-  endOfWeek,
-  isBefore,
-  startOfMonth,
-  startOfWeek,
-} from 'date-fns';
 import styled from '@emotion/styled';
 
+import useCalendar from './use-calendar';
 import CalendarWeekdayLabel from './calendar-weekday-label';
 import CalendarHeader from './calendar-header';
 import CalendarDay from './calendar-day';
+import { CalendarProvider } from './calendar-context';
 
-const calendar = () => {
-  const now = new Date();
-
-  const locale = ko;
-
-  const currentMonth = now.getMonth();
-  const getWeekArray = (value: Date) => {
-    const start = startOfWeek(startOfMonth(value), { locale });
-    const end = endOfWeek(endOfMonth(value), { locale });
-
-    let count = 0;
-    let current = start;
-    const nestedWeeks: Date[][] = [];
-
-    while (isBefore(current, end)) {
-      const weekNumber = Math.floor(count / 7);
-      nestedWeeks[weekNumber] = nestedWeeks[weekNumber] || [];
-      nestedWeeks[weekNumber].push(current);
-
-      current = addDays(current, 1);
-      count += 1;
-    }
-
-    return nestedWeeks;
-  };
-
-  const weeksToDisplay = getWeekArray(now);
-  console.log(weeksToDisplay);
+const Calendar = () => {
+  const { currentMonth, weeksToDisplay, now } = useCalendar();
 
   return (
-    <CalendarContainer>
-      <CalendarHeader />
-      <CalendarWeekContainer>
-        <CalendarWeekdayLabel />
-        {weeksToDisplay.map((week, idx) => (
-          <CalendarWeek key={idx}>
-            {week.map((day, idx) => (
-              <CalendarDay key={idx} day={day} currentMonth={currentMonth} />
-            ))}
-          </CalendarWeek>
-        ))}
-      </CalendarWeekContainer>
-    </CalendarContainer>
+    <CalendarProvider
+      value={{
+        now,
+      }}
+    >
+      <CalendarContainer>
+        <CalendarHeader />
+        <CalendarWeekContainer>
+          <CalendarWeekdayLabel />
+          {weeksToDisplay.map((week, idx) => (
+            <CalendarWeek key={idx}>
+              {week.map((day, idx) => (
+                <CalendarDay key={idx} day={day} currentMonth={currentMonth} />
+              ))}
+            </CalendarWeek>
+          ))}
+        </CalendarWeekContainer>
+      </CalendarContainer>
+    </CalendarProvider>
   );
 };
 
@@ -76,4 +49,4 @@ const CalendarWeek = styled.div`
   justify-content: center;
 `;
 
-export default calendar;
+export default Calendar;

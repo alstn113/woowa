@@ -24,7 +24,7 @@ const WeekdayLabel = styled.span`
   align-items: center;
 
   width: 36px;
-  height: 40px;
+  height: 36px;
   margin: 0px 2px;
   color: rgba(0, 0, 0, 0.6);
 `;

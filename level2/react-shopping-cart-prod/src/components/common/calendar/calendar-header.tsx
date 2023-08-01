@@ -1,9 +1,16 @@
+import { format } from 'date-fns';
 import styled from '@emotion/styled';
 
+import { useCalendarContext } from './calendar-context';
+
 const CalendarHeader = () => {
+  const { now } = useCalendarContext();
+
+  const currentMonthYear = format(now, 'LLLL yyyy');
+
   return (
     <CalendarHeaderContainer>
-      <CalendarHeaderLabel>August 2023</CalendarHeaderLabel>
+      <CalendarHeaderLabel>{currentMonthYear}</CalendarHeaderLabel>
       <CalendarHeaderMonthSwitcherContainer>
         <div>{'<'}</div>
         <div>{'>'}</div>
@@ -26,7 +33,6 @@ const CalendarHeaderLabel = styled.div`
   overflow: hidden;
   align-items: center;
   margin-right: auto;
-  cursor: pointer;
 `;
 
 const CalendarHeaderMonthSwitcherContainer = styled.div`
@@ -34,7 +40,6 @@ const CalendarHeaderMonthSwitcherContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 40px;
-  cursor: pointer;
 `;
 
 export default CalendarHeader;
