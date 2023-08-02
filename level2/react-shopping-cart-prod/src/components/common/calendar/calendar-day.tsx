@@ -29,7 +29,7 @@ const CalendarDay = ({
     onClick?.(event);
   };
 
-  if (isOutsideCurrentMonth) return <CalendarDayWrapper />;
+  if (isOutsideCurrentMonth) return <CalendarDayFilter />;
 
   return (
     <CalendarDayWrapper
@@ -41,6 +41,19 @@ const CalendarDay = ({
     </CalendarDayWrapper>
   );
 };
+
+const CalendarDayFilter = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 36px;
+  height: 36px;
+  margin: 0px 2px;
+  color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  user-select: none;
+`;
 
 const CalendarDayWrapper = styled.button<{
   isToday?: boolean;
@@ -54,19 +67,22 @@ const CalendarDayWrapper = styled.button<{
   height: 36px;
   margin: 0px 2px;
   color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
   user-select: none;
+
+  &:hover {
+    border: 1px dashed rgba(0, 0, 0, 0.1);
+  }
 
   ${({ isToday }) =>
     isToday &&
     css`
-      border-radius: 50%;
       background-color: rgba(0, 0, 0, 0.1);
     `}
 
   ${({ isSelected }) =>
     isSelected &&
     css`
-      border-radius: 50%;
       background-color: #1976d2;
       color: #fff;
     `}

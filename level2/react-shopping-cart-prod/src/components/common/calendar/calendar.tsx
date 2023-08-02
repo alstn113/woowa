@@ -24,12 +24,11 @@ const Calendar = ({ value, onChange }: CalendarProps) => {
 
   const [currentMonth, setCurrentMonth] = useState(startOfMonth(calendarState));
 
-  const weeksToDisplay = getWeekArray(calendarState);
+  const weeksToDisplay = getWeekArray(currentMonth);
 
   const handleSelectedDateChange = (date: Date) => {
     setCalendarState(date);
     onChange?.(date);
-    console.log(calendarState);
   };
 
   const isSelected = (date: Date) => {
