@@ -80,7 +80,10 @@ const DateRangeCalendar = ({
 
     if (!isInRange) return 'none';
 
-    if (isSameDay(date, selectedDateRangeState[0])) return 'start';
+    if (isSameDay(date, selectedDateRangeState[0])) {
+      if (isSameDay(date, selectedDateRangeState[1])) return 'none';
+      return 'start';
+    }
     if (isSameDay(date, selectedDateRangeState[1])) return 'end';
 
     return 'within';
