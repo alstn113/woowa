@@ -10,15 +10,18 @@ import DateCalendarHeader from './date-calendar-header';
 import DateCalendarDay from './date-calendar-day';
 
 interface DateCalendarProps {
-  value?: Date;
-  onChange?: (date: Date) => void;
+  selectedDate?: Date;
+  onSelectedDateChange?: (newDate: Date) => void;
 }
 
-const DateCalendar = ({ value, onChange }: DateCalendarProps) => {
+const DateCalendar = ({
+  selectedDate,
+  onSelectedDateChange,
+}: DateCalendarProps) => {
   const now = new Date();
 
   const [DatecalendarState, setDateCalendarState] = useControlled({
-    controlledValue: value,
+    controlledValue: selectedDate,
     defaultValue: now,
   });
 
@@ -30,7 +33,7 @@ const DateCalendar = ({ value, onChange }: DateCalendarProps) => {
 
   const handleSelectedDateChange = (date: Date) => {
     setDateCalendarState(date);
-    onChange?.(date);
+    onSelectedDateChange?.(date);
   };
 
   const isSelected = (date: Date) => {
@@ -68,6 +71,8 @@ const DateCalendarContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
 `;
 
 const DateCalendarWeekContainer = styled.div`

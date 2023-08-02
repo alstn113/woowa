@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import DateCalendar from './date-calendar';
+import DateCalendar from './index';
 
 const meta = {
   title: 'components/common/DateCalendar',
@@ -17,7 +17,10 @@ type Story = StoryObj<typeof meta>;
 
 export const ControlledDateCalendar: Story = {
   render: () => {
-    const [dateCalendarState, setDateCalendarState] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const handleSelectedDateChange = (newDate: Date) => {
+      setSelectedDate(newDate);
+    };
 
     return (
       <div
@@ -28,10 +31,10 @@ export const ControlledDateCalendar: Story = {
           gap: '16px',
         }}
       >
-        <div>Selected Date: {format(dateCalendarState, 'yyyy-MM-dd')}</div>
+        <div>Selected Date: {format(selectedDate, 'yyyy-MM-dd')}</div>
         <DateCalendar
-          value={dateCalendarState}
-          onChange={(date) => setDateCalendarState(date)}
+          selectedDate={selectedDate}
+          onSelectedDateChange={handleSelectedDateChange}
         />
       </div>
     );
