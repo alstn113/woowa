@@ -36,16 +36,25 @@ const DateRangeCalendar = ({
     let newDateRange: DateRange = [...selectedDateRangeState];
 
     if (!newDateRange[0]) {
-      newDateRange = [date];
+      newDateRange[0] = date;
     } else if (!newDateRange[1]) {
-      newDateRange = [newDateRange[0], date];
+      newDateRange[1] = date;
     } else {
       newDateRange = [date];
+    }
+
+    if (
+      newDateRange[0] &&
+      newDateRange[1] &&
+      newDateRange[0] > newDateRange[1]
+    ) {
+      newDateRange = [newDateRange[1], newDateRange[0]];
     }
 
     setSelectedDateRangeState(newDateRange);
     onSelectedDateRangeChange?.(newDateRange);
   };
+
   const isSelected = (date: Date) => {
     if (!selectedDateRangeState[0]) {
       return false;
