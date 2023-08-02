@@ -5,48 +5,50 @@ import styled from '@emotion/styled';
 
 import useControlled from '../hooks/use-controlled';
 import { getWeekArray } from './utils/getWeekArray';
-import CalendarWeekdayLabel from './calendar-weekday-label';
-import CalendarHeader from './calendar-header';
-import CalendarDay from './calendar-day';
+import DateCalendarWeekdayLabel from './date-calendar-weekday-label';
+import DateCalendarHeader from './date-calendar-header';
+import DateCalendarDay from './date-calendar-day';
 
-interface CalendarProps {
+interface DateCalendarProps {
   value?: Date;
   onChange?: (date: Date) => void;
 }
 
-const Calendar = ({ value, onChange }: CalendarProps) => {
+const DateCalendar = ({ value, onChange }: DateCalendarProps) => {
   const now = new Date();
 
-  const [calendarState, setCalendarState] = useControlled({
+  const [DatecalendarState, setDateCalendarState] = useControlled({
     controlledValue: value,
     defaultValue: now,
   });
 
-  const [currentMonth, setCurrentMonth] = useState(startOfMonth(calendarState));
+  const [currentMonth, setCurrentMonth] = useState(
+    startOfMonth(DatecalendarState),
+  );
 
   const weeksToDisplay = getWeekArray(currentMonth);
 
   const handleSelectedDateChange = (date: Date) => {
-    setCalendarState(date);
+    setDateCalendarState(date);
     onChange?.(date);
   };
 
   const isSelected = (date: Date) => {
-    return isSameDay(date, calendarState);
+    return isSameDay(date, DatecalendarState);
   };
 
   return (
-    <CalendarContainer>
-      <CalendarHeader
+    <DateCalendarContainer>
+      <DateCalendarHeader
         currentMonth={currentMonth}
         setCurrentMonth={setCurrentMonth}
       />
-      <CalendarWeekContainer>
-        <CalendarWeekdayLabel />
+      <DateCalendarWeekContainer>
+        <DateCalendarWeekdayLabel />
         {weeksToDisplay.map((week) => (
-          <CalendarWeek key={`week-${week[0]}`}>
+          <DateCalendarWeek key={`week-${week[0]}`}>
             {week.map((day) => (
-              <CalendarDay
+              <DateCalendarDay
                 key={day.toString()}
                 day={day}
                 currentMonth={currentMonth}
@@ -54,28 +56,28 @@ const Calendar = ({ value, onChange }: CalendarProps) => {
                 onClick={() => handleSelectedDateChange(day)}
               />
             ))}
-          </CalendarWeek>
+          </DateCalendarWeek>
         ))}
-      </CalendarWeekContainer>
-    </CalendarContainer>
+      </DateCalendarWeekContainer>
+    </DateCalendarContainer>
   );
 };
 
-const CalendarContainer = styled.div`
+const DateCalendarContainer = styled.div`
   width: 320px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
 `;
 
-const CalendarWeekContainer = styled.div`
+const DateCalendarWeekContainer = styled.div`
   padding: 8px 0;
 `;
 
-const CalendarWeek = styled.div`
+const DateCalendarWeek = styled.div`
   margin: 2px 0;
   display: flex;
   justify-content: center;
 `;
 
-export default Calendar;
+export default DateCalendar;

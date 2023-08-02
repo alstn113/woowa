@@ -4,19 +4,19 @@ import { isSameDay } from 'date-fns';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-interface CalendarDayProps {
+interface DateCalendarDayProps {
   day: Date;
   currentMonth: Date;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isSelected?: boolean;
 }
 
-const CalendarDay = ({
+const DateCalendarDay = ({
   day,
   currentMonth,
   onClick,
   isSelected,
-}: CalendarDayProps) => {
+}: DateCalendarDayProps) => {
   const now = new Date();
   const isOutsideCurrentMonth = useMemo(() => {
     return day.getMonth() !== currentMonth.getMonth();
@@ -29,20 +29,20 @@ const CalendarDay = ({
     onClick?.(event);
   };
 
-  if (isOutsideCurrentMonth) return <CalendarDayFilter />;
+  if (isOutsideCurrentMonth) return <DateCalendarDayFilter />;
 
   return (
-    <CalendarDayWrapper
+    <DateCalendarDayWrapper
       isToday={isToday}
       onClick={handleClick}
       isSelected={isSelected}
     >
       {day.getDate()}
-    </CalendarDayWrapper>
+    </DateCalendarDayWrapper>
   );
 };
 
-const CalendarDayFilter = styled.div`
+const DateCalendarDayFilter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,7 +55,7 @@ const CalendarDayFilter = styled.div`
   user-select: none;
 `;
 
-const CalendarDayWrapper = styled.button<{
+const DateCalendarDayWrapper = styled.button<{
   isToday?: boolean;
   isSelected?: boolean;
 }>`
@@ -88,4 +88,4 @@ const CalendarDayWrapper = styled.button<{
     `}
 `;
 
-export default CalendarDay;
+export default DateCalendarDay;

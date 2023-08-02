@@ -4,15 +4,15 @@ import styled from '@emotion/styled';
 import ArrowRightSVG from './vectors/arrow-right-svg';
 import ArrowLeftSVG from './vectors/arrow-left-svg';
 
-interface CalendarHeaderProps {
+interface DateCalendarHeaderProps {
   currentMonth: Date;
   setCurrentMonth: (date: Date) => void;
 }
 
-const CalendarHeader = ({
+const DateCalendarHeader = ({
   currentMonth,
   setCurrentMonth,
-}: CalendarHeaderProps) => {
+}: DateCalendarHeaderProps) => {
   const currentMonthYear = format(currentMonth, 'LLLL yyyy');
 
   const handleNextMonth = () => {
@@ -24,28 +24,28 @@ const CalendarHeader = ({
   };
 
   return (
-    <CalendarHeaderContainer>
-      <CalendarHeaderLabel>{currentMonthYear}</CalendarHeaderLabel>
-      <CalendarHeaderMonthSwitcherContainer>
-        <CalendarHeaderMonthSwitcherButton
+    <DateCalendarHeaderContainer>
+      <DateCalendarHeaderLabel>{currentMonthYear}</DateCalendarHeaderLabel>
+      <DateCalendarHeaderMonthSwitcherContainer>
+        <DateCalendarHeaderMonthSwitcherButton
           type="button"
           onClick={handlePreviousMonth}
         >
           <ArrowLeftSVG />
-        </CalendarHeaderMonthSwitcherButton>
+        </DateCalendarHeaderMonthSwitcherButton>
         <div />
-        <CalendarHeaderMonthSwitcherButton
+        <DateCalendarHeaderMonthSwitcherButton
           type="button"
           onClick={handleNextMonth}
         >
           <ArrowRightSVG />
-        </CalendarHeaderMonthSwitcherButton>
-      </CalendarHeaderMonthSwitcherContainer>
-    </CalendarHeaderContainer>
+        </DateCalendarHeaderMonthSwitcherButton>
+      </DateCalendarHeaderMonthSwitcherContainer>
+    </DateCalendarHeaderContainer>
   );
 };
 
-const CalendarHeaderContainer = styled.div`
+const DateCalendarHeaderContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 8px 0;
@@ -54,21 +54,21 @@ const CalendarHeaderContainer = styled.div`
   min-height: 30px;
 `;
 
-const CalendarHeaderLabel = styled.div`
+const DateCalendarHeaderLabel = styled.div`
   display: flex;
   overflow: hidden;
   align-items: center;
   margin-right: auto;
 `;
 
-const CalendarHeaderMonthSwitcherContainer = styled.div`
+const DateCalendarHeaderMonthSwitcherContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 60px;
 `;
 
-const CalendarHeaderMonthSwitcherButton = styled.button`
+const DateCalendarHeaderMonthSwitcherButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,4 +80,4 @@ const CalendarHeaderMonthSwitcherButton = styled.button`
   }
 `;
 
-export default CalendarHeader;
+export default DateCalendarHeader;

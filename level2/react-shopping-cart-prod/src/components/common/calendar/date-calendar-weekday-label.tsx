@@ -1,18 +1,18 @@
 import styled from '@emotion/styled';
 
-const CalendarWeekdayLabel = () => {
+const DateCalendarWeekdayLabel = () => {
   const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const defaultWeekDayFormatter = (day: string) => day.charAt(0).toUpperCase();
   return (
-    <CalendarWeekdayLabelContainer>
+    <DateCalendarWeekdayLabelContainer>
       {WEEK_DAYS.map((day, idx) => (
         <WeekdayLabel key={idx}>{defaultWeekDayFormatter(day)}</WeekdayLabel>
       ))}
-    </CalendarWeekdayLabelContainer>
+    </DateCalendarWeekdayLabelContainer>
   );
 };
 
-const CalendarWeekdayLabelContainer = styled.div`
+const DateCalendarWeekdayLabelContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,4 +29,4 @@ const WeekdayLabel = styled.span`
   color: rgba(0, 0, 0, 0.6);
 `;
 
-export default CalendarWeekdayLabel;
+export default DateCalendarWeekdayLabel;
