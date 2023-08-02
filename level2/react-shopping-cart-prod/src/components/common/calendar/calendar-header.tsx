@@ -1,6 +1,9 @@
 import { addMonths, format } from 'date-fns';
 import styled from '@emotion/styled';
 
+import ArrowRightSVG from './vectors/arrow-right-svg';
+import ArrowLeftSVG from './vectors/arrow-left-svg';
+
 interface CalendarHeaderProps {
   currentMonth: Date;
   setCurrentMonth: (date: Date) => void;
@@ -24,12 +27,19 @@ const CalendarHeader = ({
     <CalendarHeaderContainer>
       <CalendarHeaderLabel>{currentMonthYear}</CalendarHeaderLabel>
       <CalendarHeaderMonthSwitcherContainer>
-        <button type="button" onClick={handlePreviousMonth}>
-          {'<'}
-        </button>
-        <button type="button" onClick={handleNextMonth}>
-          {'>'}
-        </button>
+        <CalendarHeaderMonthSwitcherButton
+          type="button"
+          onClick={handlePreviousMonth}
+        >
+          <ArrowLeftSVG />
+        </CalendarHeaderMonthSwitcherButton>
+        <div />
+        <CalendarHeaderMonthSwitcherButton
+          type="button"
+          onClick={handleNextMonth}
+        >
+          <ArrowRightSVG />
+        </CalendarHeaderMonthSwitcherButton>
       </CalendarHeaderMonthSwitcherContainer>
     </CalendarHeaderContainer>
   );
@@ -55,7 +65,19 @@ const CalendarHeaderMonthSwitcherContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 40px;
+  width: 60px;
+`;
+
+const CalendarHeaderMonthSwitcherButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
 `;
 
 export default CalendarHeader;
