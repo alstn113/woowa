@@ -10,7 +10,7 @@ const CalendarHeader = ({
   currentMonth,
   setCurrentMonth,
 }: CalendarHeaderProps) => {
-  const currentMonthYear = format(currentMonth, 'MM yyyy');
+  const currentMonthYear = format(currentMonth, 'LLLL yyyy');
 
   const handleNextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));

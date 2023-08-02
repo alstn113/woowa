@@ -43,11 +43,11 @@ const Calendar = ({ value, onChange }: CalendarProps) => {
       />
       <CalendarWeekContainer>
         <CalendarWeekdayLabel />
-        {weeksToDisplay.map((week, idx) => (
-          <CalendarWeek key={idx}>
-            {week.map((day, idx) => (
+        {weeksToDisplay.map((week) => (
+          <CalendarWeek key={`week-${week[0]}`}>
+            {week.map((day) => (
               <CalendarDay
-                key={idx}
+                key={day.toString()}
                 day={day}
                 currentMonth={currentMonth}
                 isSelected={isSelected(day)}
