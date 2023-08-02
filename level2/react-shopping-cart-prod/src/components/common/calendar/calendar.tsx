@@ -1,4 +1,6 @@
-import { startOfMonth } from 'date-fns';
+import { useState } from 'react';
+
+import { isSameDay, startOfMonth } from 'date-fns';
 import styled from '@emotion/styled';
 
 import useControlled from '../hooks/use-controlled';
@@ -17,28 +19,41 @@ const Calendar = ({ value, onChange }: CalendarProps) => {
 
   const [calendarState, setCalendarState] = useControlled({
     controlledValue: value,
-    defaultValue: startOfMonth(now),
+    defaultValue: now,
   });
 
-  const handleChangeCalendarState = (date: Date) => {
-    setCalendarState(date);
-    onChange?.(date);
-  };
+  const [currentMonth, setCurrentMonth] = useState(startOfMonth(calendarState));
 
   const weeksToDisplay = getWeekArray(calendarState);
+
+  const handleSelectedDateChange = (date: Date) => {
+    setCalendarState(date);
+    onChange?.(date);
+    console.log(calendarState);
+  };
+
+  const isSelected = (date: Date) => {
+    return isSameDay(date, calendarState);
+  };
 
   return (
     <CalendarContainer>
       <CalendarHeader
-        currentMonth={calendarState}
-        setCurrentMonth={handleChangeCalendarState}
+        currentMonth={currentMonth}
+        setCurrentMonth={setCurrentMonth}
       />
       <CalendarWeekContainer>
         <CalendarWeekdayLabel />
         {weeksToDisplay.map((week, idx) => (
           <CalendarWeek key={idx}>
             {week.map((day, idx) => (
-              <CalendarDay key={idx} day={day} currentMonth={calendarState} />
+              <CalendarDay
+                key={idx}
+                day={day}
+                currentMonth={currentMonth}
+                isSelected={isSelected(day)}
+                onClick={() => handleSelectedDateChange(day)}
+              />
             ))}
           </CalendarWeek>
         ))}
