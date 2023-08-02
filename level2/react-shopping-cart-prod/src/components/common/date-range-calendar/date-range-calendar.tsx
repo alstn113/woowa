@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { isSameDay, startOfMonth } from 'date-fns';
+import { isSameDay, isWithinInterval, startOfMonth } from 'date-fns';
 import styled from '@emotion/styled';
 
 import useControlled from '../hooks/use-controlled';
@@ -69,6 +69,23 @@ const DateRangeCalendar = ({
     );
   };
 
+  // TODO: 나중에 validation 추가
+  const rangeStyle = (date: Date): 'none' | 'start' | 'end' | 'within' => {
+    if (!selectedDateRangeState[0] || !selectedDateRangeState[1]) return 'none';
+
+    const isInRange = isWithinInterval(date, {
+      start: selectedDateRangeState[0],
+      end: selectedDateRangeState[1],
+    });
+
+    if (!isInRange) return 'none';
+
+    if (isSameDay(date, selectedDateRangeState[0])) return 'start';
+    if (isSameDay(date, selectedDateRangeState[1])) return 'end';
+
+    return 'within';
+  };
+
   return (
     <DateCalendarContainer>
       <DateCalendarHeader
@@ -86,6 +103,7 @@ const DateRangeCalendar = ({
                 currentMonth={currentMonth}
                 isSelected={isSelected(day)}
                 onClick={() => handleSelectedDateChange(day)}
+                rangeStyle={rangeStyle(day)}
               />
             ))}
           </DateCalendarWeek>
