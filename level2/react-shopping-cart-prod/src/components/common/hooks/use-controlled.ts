@@ -1,25 +1,31 @@
-import React, { useState, useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
-interface UseControlledProps<T> {
+interface UseControlledProps<T = unknown> {
   controlledValue?: T;
-  defaultValue: T;
+  defaultValue?: T;
 }
 
-const useControlled = <T>({
+const useControlled = <T = unknown>({
   controlledValue,
   defaultValue,
 }: UseControlledProps<T>) => {
-  const [state, setState] = useState(defaultValue);
-
   const { current: isControlled } = useRef(controlledValue !== undefined);
+  const [uncontrolledState, setUncontrolledState] = useState(defaultValue as T);
+  const value = isControlled ? controlledValue : uncontrolledState;
 
-  const value = isControlled ? controlledValue : state;
-  const setValue: React.Dispatch<React.SetStateAction<T>> = useCallback(
-    (newState) => !isControlled && setState(newState),
+  const setValueIfUncontrolled = useCallback(
+    (next: React.SetStateAction<T>) => {
+      if (!isControlled) {
+        setUncontrolledState(next);
+      }
+    },
     [isControlled],
   );
 
-  return [value, setValue] as [T, React.Dispatch<React.SetStateAction<T>>];
+  return [value, setValueIfUncontrolled] as [
+    T,
+    React.Dispatch<React.SetStateAction<T>>,
+  ];
 };
 
 export default useControlled;

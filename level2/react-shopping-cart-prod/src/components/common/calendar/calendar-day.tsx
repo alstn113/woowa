@@ -23,7 +23,7 @@ const CalendarDay = ({ day, currentMonth }: CalendarDayProps) => {
   );
 };
 
-const CalendarDayWrapper = styled.span<{
+const CalendarDayWrapper = styled.button<{
   isToday?: boolean;
 }>`
   display: flex;
