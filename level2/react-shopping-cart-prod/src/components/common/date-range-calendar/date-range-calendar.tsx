@@ -1,13 +1,108 @@
+import { useState } from 'react';
+
+import { isSameDay, startOfMonth } from 'date-fns';
+import styled from '@emotion/styled';
+
+import useControlled from '../hooks/use-controlled';
+import { getWeekArray } from '../date-calendar/utils/getWeekArray';
+import DateCalendarWeekdayLabel from '../date-calendar/date-calendar-weekday-label';
+import DateCalendarHeader from '../date-calendar/date-calendar-header';
+import DateCalendarDay from '../date-calendar/date-calendar-day';
+
+type DateRange = [Date?, Date?];
+
 interface DateRangeCalendarProps {
-  selectedDateRange?: [Date, Date];
-  onSelectedRangeChange?: (value: [Date, Date]) => void;
+  selectedDateRange?: DateRange;
+  onSelectedDateRangeChange?: (value: DateRange) => void;
 }
 
 const DateRangeCalendar = ({
   selectedDateRange,
-  onSelectedRangeChange,
+  onSelectedDateRangeChange,
 }: DateRangeCalendarProps) => {
-  return <div>DateRangeCalendar</div>;
+  const now = new Date();
+  const [selectedDateRangeState, setSelectedDateRangeState] = useControlled({
+    controlledValue: selectedDateRange,
+    defaultValue: [undefined, undefined],
+  });
+
+  const [currentMonth, setCurrentMonth] = useState(
+    startOfMonth(selectedDateRangeState[1] || selectedDateRangeState[0] || now),
+  );
+
+  const weeksToDisplay = getWeekArray(currentMonth);
+
+  const handleSelectedDateChange = (date: Date) => {
+    let newDateRange: DateRange = [...selectedDateRangeState];
+
+    if (!newDateRange[0]) {
+      newDateRange = [date];
+    } else if (!newDateRange[1]) {
+      newDateRange = [newDateRange[0], date];
+    } else {
+      newDateRange = [date];
+    }
+
+    setSelectedDateRangeState(newDateRange);
+    onSelectedDateRangeChange?.(newDateRange);
+  };
+  const isSelected = (date: Date) => {
+    if (!selectedDateRangeState[0]) {
+      return false;
+    }
+    if (!selectedDateRangeState[1]) {
+      return isSameDay(date, selectedDateRangeState[0]);
+    }
+
+    return (
+      isSameDay(date, selectedDateRangeState[0]) ||
+      isSameDay(date, selectedDateRangeState[1])
+    );
+  };
+
+  return (
+    <DateCalendarContainer>
+      <DateCalendarHeader
+        currentMonth={currentMonth}
+        setCurrentMonth={setCurrentMonth}
+      />
+      <DateCalendarWeekContainer>
+        <DateCalendarWeekdayLabel />
+        {weeksToDisplay.map((week) => (
+          <DateCalendarWeek key={`week-${week[0]}`}>
+            {week.map((day) => (
+              <DateCalendarDay
+                key={day.toString()}
+                day={day}
+                currentMonth={currentMonth}
+                isSelected={isSelected(day)}
+                onClick={() => handleSelectedDateChange(day)}
+              />
+            ))}
+          </DateCalendarWeek>
+        ))}
+      </DateCalendarWeekContainer>
+    </DateCalendarContainer>
+  );
 };
+
+const DateCalendarContainer = styled.div`
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 16px;
+`;
+
+const DateCalendarWeekContainer = styled.div`
+  padding: 8px 0;
+`;
+
+const DateCalendarWeek = styled.div`
+  margin: 2px 0;
+  display: flex;
+  justify-content: center;
+`;
 
 export default DateRangeCalendar;

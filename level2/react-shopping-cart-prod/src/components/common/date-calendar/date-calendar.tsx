@@ -20,24 +20,24 @@ const DateCalendar = ({
 }: DateCalendarProps) => {
   const now = new Date();
 
-  const [DatecalendarState, setDateCalendarState] = useControlled({
+  const [selectedDateState, setSelectedDateState] = useControlled({
     controlledValue: selectedDate,
     defaultValue: now,
   });
 
   const [currentMonth, setCurrentMonth] = useState(
-    startOfMonth(DatecalendarState),
+    startOfMonth(selectedDateState),
   );
 
   const weeksToDisplay = getWeekArray(currentMonth);
 
   const handleSelectedDateChange = (date: Date) => {
-    setDateCalendarState(date);
+    setSelectedDateState(date);
     onSelectedDateChange?.(date);
   };
 
   const isSelected = (date: Date) => {
-    return isSameDay(date, DatecalendarState);
+    return isSameDay(date, selectedDateState);
   };
 
   return (
@@ -71,7 +71,7 @@ const DateCalendarContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.03);
   border-radius: 16px;
 `;
 
