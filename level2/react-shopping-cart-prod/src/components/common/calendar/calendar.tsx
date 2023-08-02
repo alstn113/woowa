@@ -1,31 +1,44 @@
-import { useState } from 'react';
-
 import { startOfMonth } from 'date-fns';
 import styled from '@emotion/styled';
 
+import useControlled from '../hooks/use-controlled';
 import { getWeekArray } from './utils/getWeekArray';
 import CalendarWeekdayLabel from './calendar-weekday-label';
 import CalendarHeader from './calendar-header';
 import CalendarDay from './calendar-day';
 
-const Calendar = () => {
-  const now = new Date();
-  const [currentMonth, setCurrentMonth] = useState<Date>(startOfMonth(now));
+interface CalendarProps {
+  value?: Date;
+  onChange?: (date: Date) => void;
+}
 
-  const weeksToDisplay = getWeekArray(currentMonth);
+const Calendar = ({ value, onChange }: CalendarProps) => {
+  const now = new Date();
+
+  const [calendarState, setCalendarState] = useControlled({
+    controlledValue: value,
+    defaultValue: startOfMonth(now),
+  });
+
+  const handleChangeCalendarState = (date: Date) => {
+    setCalendarState(date);
+    onChange?.(date);
+  };
+
+  const weeksToDisplay = getWeekArray(calendarState);
 
   return (
     <CalendarContainer>
       <CalendarHeader
-        currentMonth={currentMonth}
-        setCurrentMonth={setCurrentMonth}
+        currentMonth={calendarState}
+        setCurrentMonth={handleChangeCalendarState}
       />
       <CalendarWeekContainer>
         <CalendarWeekdayLabel />
         {weeksToDisplay.map((week, idx) => (
           <CalendarWeek key={idx}>
             {week.map((day, idx) => (
-              <CalendarDay key={idx} day={day} currentMonth={currentMonth} />
+              <CalendarDay key={idx} day={day} currentMonth={calendarState} />
             ))}
           </CalendarWeek>
         ))}
