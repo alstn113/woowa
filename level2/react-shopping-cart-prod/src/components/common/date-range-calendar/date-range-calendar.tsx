@@ -81,6 +81,7 @@ const DateRangeCalendar = ({
     if (!isInRange) return 'none';
 
     if (isSameDay(date, selectedDateRangeState[0])) {
+      // 같은 날짜인 경우
       if (isSameDay(date, selectedDateRangeState[1])) return 'none';
       return 'start';
     }
