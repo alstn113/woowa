@@ -4,41 +4,22 @@
 
 - ## 프리코스
 
-  - [x] javascript-onboarding
-  - [x] javascript-lotto
-  - [x] javascript-baseball
-  - [x] javascript-bridge
-  - [x] javascript-menu
+  - javascript-onboarding
+  - javascript-lotto
+  - javascript-baseball
+  - javascript-bridge
+  - javascript-menu
 
 - ## 레벨 1
 
-  - [x] javascript-racingcar (1단계 - 자동차 경주 구현)
-  - [x] javascript-racingcar (2단계 - 자동차 경주 리팩토링)
-
-  - [x] javascript-lotto (1단계 - 콘솔 기반 로또 게임)
-  - [x] javascript-lotto (2단계 - 웹 기반 로또 게임)
-
-  - [x] javascript-lunch (1단계 - 음식점 목록)
-  - [x] javascript-lunch (2단계 - 자주 가는 음식점)
-
-  - [x] javascript-movie-review (1단계 - 영화 목록 불러오기)
-  - [x] javascript-movie-review (2단계 - 상세 정보 & UI/UX 개선하기)
+  - javascript-racingcar
+  - javascript-lotto
+  - javascript-lunch
+  - javascript-movie-review
 
 - ## 레벨 2
 
-  - [x] react-lunch (1단계 - class component)
-  - [x] react-lunch (2단계 - functional component)
-
-  - [x] react-payments (1단계)
-  - [x] react-payments (2단계)
-  - [x] react-payments (3단계)
-
-  - [x] react-shopping-cart (1단계)
-  - [x] react-shopping-cart (2단계)
-
-  - [] react-shopping-cart-prod (1단계)
-  - [] react-shopping-cart-prod (2단계)
-
-- ## 레벨 3, 4
-
-  - 이거는 팀 프로젝트로 진행한다.
+  - react-lunch
+  - react-payments
+  - react-shopping-cart
+  - react-shopping-cart-prod
