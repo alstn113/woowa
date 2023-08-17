@@ -28,6 +28,10 @@ const usePortal = (selectId: string): HTMLElement | null => {
       parentElement.appendChild(el);
     }
     setElSnapshot(el);
+
+    return () => {
+      parentElement.removeChild(el);
+    };
   }, [id]);
 
   return elSnapshot;
