@@ -8,13 +8,14 @@ interface UseToastOptions {
 }
 
 const useToast = () => {
-  const { nofity } = useToastStore();
+  const { notify } = useToastStore();
+
   const toast = (options?: UseToastOptions) => {
     const message = <div>토스트 메시지</div>;
-    return nofity(message, options);
+    return notify(message, options);
   };
 
-  return { toast };
+  return toast;
 };
 
 export default useToast;

@@ -11,7 +11,12 @@ import { ToastOptions } from './toast-types';
 interface ToastComponentProps extends ToastOptions {}
 
 const motionVariants: Variants = {
-  initial: {},
+  initial: {
+    opacity: 0,
+    y: 50,
+    x: 50,
+    scale: 0.85,
+  },
   animate: {
     opacity: 1,
     y: 0,

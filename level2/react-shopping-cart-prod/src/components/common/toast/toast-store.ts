@@ -6,7 +6,7 @@ import { ToastOptions, ToastState } from './toast-types';
 
 interface ToastStore {
   toasts: ToastState;
-  nofity: (
+  notify: (
     message: ToastOptions['message'],
     options?: CreateToastOptions,
   ) => ToastOptions['id'];
@@ -16,7 +16,7 @@ interface ToastStore {
 
 const useToastStore = create<ToastStore>((set) => ({
   toasts: [],
-  nofity: (message, options) => {
+  notify: (message, options) => {
     const toast = createToast(message, options);
     set((state) => ({ toasts: [...state.toasts, toast] }));
     return toast.id;
@@ -42,12 +42,10 @@ const createToast = (
   message: React.ReactNode,
   options: CreateToastOptions = {},
 ) => {
-  const { removeToast } = useToastStore();
-
   counter += 1;
   const id = options.id ?? counter;
-  const duration = options.duration ?? 5000;
-  const handleRequestClose = () => removeToast(id);
+  const duration = options.duration ?? 2000;
+  const handleRequestClose = () => useToastStore().removeToast(id);
 
   return {
     id,

@@ -15,7 +15,7 @@ const ToastProvider = () => {
       <div>
         <AnimatePresence initial={false}>
           {toasts.map((toast) => (
-            <ToastComponent key={toast.id} />
+            <ToastComponent key={toast.id} {...toast} />
           ))}
         </AnimatePresence>
       </div>

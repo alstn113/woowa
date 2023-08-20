@@ -1,12 +1,13 @@
 import useToast from '../components/common/toast/use-toast';
 
 const NotFoundPage = () => {
-  const { toast } = useToast();
+  const toast = useToast();
+
   return (
     <div>
       NotFoundPage
       <div>
-        <button type="button" onClick={() => toast({})}>
+        <button type="button" onClick={() => toast()}>
           toast
         </button>
       </div>
