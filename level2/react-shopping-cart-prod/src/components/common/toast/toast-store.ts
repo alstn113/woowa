@@ -7,8 +7,8 @@ import { ToastOptions, ToastState } from './toast-types';
 interface ToastStore {
   toasts: ToastState;
   nofity: (
-    message: React.ReactNode,
-    options: ToastOptions,
+    message: ToastOptions['message'],
+    options?: CreateToastOptions,
   ) => ToastOptions['id'];
   close: () => void;
   removeToast: (id: ToastOptions['id']) => void;
@@ -36,16 +36,22 @@ const useToastStore = create<ToastStore>((set) => ({
 
 let counter = 0;
 
-const createToast = (message: React.ReactNode, options: ToastOptions) => {
+type CreateToastOptions = Partial<Pick<ToastOptions, 'id' | 'duration'>>;
+
+const createToast = (
+  message: React.ReactNode,
+  options: CreateToastOptions = {},
+) => {
   const { removeToast } = useToastStore();
 
   counter += 1;
   const id = options.id ?? counter;
+  const duration = options.duration ?? 5000;
 
   return {
     id,
     message,
-    duration: options.duration,
+    duration,
     onRequestClose: () => removeToast(id),
     requestClose: false,
   };
