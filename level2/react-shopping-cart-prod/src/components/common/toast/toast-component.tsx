@@ -2,24 +2,40 @@
 
 import { useState } from 'react';
 
-import { motion, Variants } from 'framer-motion';
+import { motion, useIsPresent, Variants } from 'framer-motion';
 
 import useTimeout from '../hooks/use-timeout';
 import useDidUpdateEffect from '../hooks/use-did-update-effect';
+import { ToastOptions } from './toast-types';
 
-interface ToastComponentProps {
-  duration: number;
-}
+interface ToastComponentProps extends ToastOptions {}
 
 const motionVariants: Variants = {
   initial: {},
-  animate: {},
-  exit: {},
+  animate: {
+    opacity: 1,
+    y: 0,
+    x: 0,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      ease: [0.4, 0, 0.2, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.85,
+    transition: {
+      duration: 0.2,
+      ease: [0.4, 0, 1, 1],
+    },
+  },
 };
 
 const ToastComponent = (props: ToastComponentProps) => {
-  const { duration } = props;
+  const { duration, onRequestClose } = props;
   const [delay, setDelay] = useState<number | null>(duration);
+  const isPresent = useIsPresent();
 
   useDidUpdateEffect(() => {
     setDelay(duration);
@@ -28,7 +44,9 @@ const ToastComponent = (props: ToastComponentProps) => {
   const onMouseEnter = () => setDelay(null);
   const onMouseLeave = () => setDelay(duration);
 
-  const close = () => {};
+  const close = () => {
+    if (isPresent) onRequestClose();
+  };
 
   useTimeout(close, delay);
 

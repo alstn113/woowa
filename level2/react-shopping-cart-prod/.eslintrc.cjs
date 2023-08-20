@@ -56,6 +56,8 @@ module.exports = {
     'react/no-unstable-nested-components': 'off',
     // consistent-return off는 typescript 사용으로 인해 off
     'consistent-return': 'off',
+    // react-hooks 관련
+    'react-hooks/rules-of-hooks': 'off',
     // import 순서 관련
     'import/order': [
       'error',

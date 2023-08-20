@@ -1,13 +1,16 @@
 // hook으로 toast를 간단하게 사용하기 위함.
 
-import React from 'react';
-
 import { ToastOptions } from './toast-types';
 import useToastStore from './toast-store';
 
+interface UseToastOptions {
+  duration?: ToastOptions['duration'];
+}
+
 const useToast = () => {
   const { nofity } = useToastStore();
-  const toast = (message: React.ReactNode, options: ToastOptions) => {
+  const toast = (options?: UseToastOptions) => {
+    const message = <div>토스트 메시지</div>;
     return nofity(message, options);
   };
 

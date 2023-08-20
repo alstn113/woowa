@@ -3,6 +3,7 @@ import type { Preview } from '@storybook/react';
 import { RecoilRoot } from 'recoil';
 import GlobalStyle from '../src/styles/GlobalStyle';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ToastProvider from '../src/components/common/toast/toast-provider';
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const preview: Preview = {
         <RecoilRoot>
           <GlobalStyle />
           <Story />
+          <ToastProvider />
         </RecoilRoot>
       </QueryClientProvider>
     ),
