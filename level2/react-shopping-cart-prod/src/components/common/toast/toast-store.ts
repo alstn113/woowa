@@ -13,19 +13,28 @@ interface ToastStore {
 const useToastStore = create<ToastStore>((set) => ({
   toasts: [],
   nofity: (message) =>
-    set((state) => ({
-      toasts: [
-        ...state.toasts,
-        {
-          id: Date.now(),
-          message,
-        },
-      ],
-    })),
+    set((state) => {
+      const toast = createToast(message);
+      return {
+        toasts: [...state.toasts, toast],
+      };
+    }),
   close: () =>
     set((state) => ({
       toasts: state.toasts.slice(1),
     })),
 }));
+
+let counter = 0;
+
+const createToast = (message: React.ReactNode) => {
+  counter += 1;
+  const id = counter;
+
+  return {
+    id,
+    message,
+  };
+};
 
 export default useToastStore;
