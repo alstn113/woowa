@@ -1,9 +1,10 @@
 // Framer motion 코드가 들어갈 부분.
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { motion, Variants } from 'framer-motion';
 
+import useTimeout from '../hooks/use-timeout';
 import useDidUpdateEffect from '../hooks/use-did-update-effect';
 
 interface ToastComponentProps {
@@ -27,22 +28,9 @@ const ToastComponent = (props: ToastComponentProps) => {
   const onMouseEnter = () => setDelay(null);
   const onMouseLeave = () => setDelay(duration);
 
-  const close = useCallback(() => {}, []);
+  const close = () => {};
 
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    if (!delay) return;
-
-    timeoutRef.current = setTimeout(() => {
-      close();
-    }, delay);
-
-    return () => {
-      if (!timeoutRef.current) return;
-      clearTimeout(timeoutRef.current);
-    };
-  }, [delay, close]);
+  useTimeout(close, delay);
 
   return (
     <motion.div
