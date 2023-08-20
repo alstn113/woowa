@@ -1,6 +1,6 @@
 // Framer motion 코드가 들어갈 부분.
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { motion, useIsPresent, Variants } from 'framer-motion';
 
@@ -33,7 +33,7 @@ const motionVariants: Variants = {
 };
 
 const ToastComponent = (props: ToastComponentProps) => {
-  const { duration, onRequestClose } = props;
+  const { duration, onRequestClose, requestClose } = props;
   const [delay, setDelay] = useState<number | null>(duration);
   const isPresent = useIsPresent();
 
@@ -47,6 +47,14 @@ const ToastComponent = (props: ToastComponentProps) => {
   const close = () => {
     if (isPresent) onRequestClose();
   };
+
+  // toast가 사라지면 requestClose가 true가 되고, 이때 onRequestClose를 호출한다.
+  // onRequestClose는 removeToast를 호출하고, removeToast는 store에서 toast를 filter한다.
+  useEffect(() => {
+    if (isPresent && requestClose) {
+      onRequestClose();
+    }
+  }, [isPresent, requestClose, onRequestClose]);
 
   useTimeout(close, delay);
 
