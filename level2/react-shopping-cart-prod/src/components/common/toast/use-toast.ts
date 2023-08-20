@@ -2,12 +2,13 @@
 
 import React from 'react';
 
+import { ToastOptions } from './toast-types';
 import useToastStore from './toast-store';
 
 const useToast = () => {
   const { nofity } = useToastStore();
-  const toast = (message: React.ReactNode) => {
-    return nofity(message);
+  const toast = (message: React.ReactNode, options: ToastOptions) => {
+    return nofity(message, options);
   };
 
   return { toast };

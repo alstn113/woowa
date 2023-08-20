@@ -2,18 +2,21 @@ import React from 'react';
 
 import { create } from 'zustand';
 
-import { ToastState } from './toast-types';
+import { ToastOptions, ToastState } from './toast-types';
 
 interface ToastStore {
   toasts: ToastState;
-  nofity: (message: React.ReactNode) => number;
+  nofity: (
+    message: React.ReactNode,
+    options: ToastOptions,
+  ) => ToastOptions['id'];
   close: () => void;
 }
 
 const useToastStore = create<ToastStore>((set) => ({
   toasts: [],
-  nofity: (message) => {
-    const toast = createToast(message);
+  nofity: (message, options) => {
+    const toast = createToast(message, options);
     set((state) => ({ toasts: [...state.toasts, toast] }));
     return toast.id;
   },
@@ -25,13 +28,14 @@ const useToastStore = create<ToastStore>((set) => ({
 
 let counter = 0;
 
-const createToast = (message: React.ReactNode) => {
+const createToast = (message: React.ReactNode, options: ToastOptions) => {
   counter += 1;
-  const id = counter;
+  const id = options.id ?? counter;
 
   return {
     id,
     message,
+    duration: options.duration,
   };
 };
 
