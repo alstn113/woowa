@@ -6,19 +6,17 @@ import { ToastState } from './toast-types';
 
 interface ToastStore {
   toasts: ToastState;
-  nofity: (message: React.ReactNode) => void;
+  nofity: (message: React.ReactNode) => number;
   close: () => void;
 }
 
 const useToastStore = create<ToastStore>((set) => ({
   toasts: [],
-  nofity: (message) =>
-    set((state) => {
-      const toast = createToast(message);
-      return {
-        toasts: [...state.toasts, toast],
-      };
-    }),
+  nofity: (message) => {
+    const toast = createToast(message);
+    set((state) => ({ toasts: [...state.toasts, toast] }));
+    return toast.id;
+  },
   close: () =>
     set((state) => ({
       toasts: state.toasts.slice(1),
