@@ -43,14 +43,16 @@ const createToast = (
   options: CreateToastOptions = {},
 ) => {
   counter += 1;
+
   const id = options.id ?? counter;
   const duration = options.duration ?? 2000;
+  const handleRequestClose = () => useToastStore.getState().removeToast(id);
 
   return {
     id,
     message,
     duration,
-    onRequestClose: () => useToastStore.getState().removeToast(id),
+    onRequestClose: handleRequestClose,
     requestClose: false,
   };
 };
