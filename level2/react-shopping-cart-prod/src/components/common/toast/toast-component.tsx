@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { motion, useIsPresent, Variants } from 'framer-motion';
+import styled from '@emotion/styled';
 
 import useTimeout from '../hooks/use-timeout';
 import useDidUpdateEffect from '../hooks/use-did-update-effect';
 import { ToastOptions } from './toast-types';
+import Toast from './toast';
 
 interface ToastComponentProps extends ToastOptions {}
 
@@ -71,9 +73,17 @@ const ToastComponent = (props: ToastComponentProps) => {
       onHoverStart={onMouseEnter}
       onHoverEnd={onMouseLeave}
     >
-      ToastComponent
+      <ToastContainer>
+        <Toast />
+      </ToastContainer>
     </motion.div>
   );
 };
+
+const ToastContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default ToastComponent;

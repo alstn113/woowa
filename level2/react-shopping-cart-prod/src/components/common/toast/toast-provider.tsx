@@ -1,4 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
+import styled from '@emotion/styled';
 
 import Portal from '../portal';
 import useToastStore from './toast-store';
@@ -9,17 +10,25 @@ const ToastProvider = () => {
 
   const toastList = () => {
     return (
-      <div>
+      <ToastContainer>
         <AnimatePresence initial={false}>
           {toasts.map((toast) => (
             <ToastComponent key={toast.id} {...toast} />
           ))}
         </AnimatePresence>
-      </div>
+      </ToastContainer>
     );
   };
 
   return <Portal id="toast">{toastList()}</Portal>;
 };
+
+const ToastContainer = styled.div`
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+`;
 
 export default ToastProvider;
