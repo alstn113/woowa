@@ -1,3 +1,4 @@
-import toast from './toast';
+import useToast from './use-toast';
+import ToastProvider from './toast-provider';
 
-export default toast;
+export { ToastProvider, useToast };

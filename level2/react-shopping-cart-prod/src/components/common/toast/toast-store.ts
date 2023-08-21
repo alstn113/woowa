@@ -36,7 +36,7 @@ const useToastStore = create<ToastStore>((set) => ({
 
 let counter = 0;
 
-type CreateToastOptions = Partial<Pick<ToastOptions, 'id' | 'duration'>>;
+type CreateToastOptions = Partial<Pick<ToastOptions, 'duration'>>;
 
 const createToast = (
   message: React.ReactNode,
@@ -44,7 +44,7 @@ const createToast = (
 ) => {
   counter += 1;
 
-  const id = options.id ?? counter;
+  const id = counter;
   const duration = options.duration ?? 5000;
   const handleRequestClose = () => useToastStore.getState().removeToast(id);
 
