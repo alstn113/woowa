@@ -1,6 +1,3 @@
-// Root Provider에 추가할 Provider
-// useToas를 통해서 사용하기 위함.
-
 import { AnimatePresence } from 'framer-motion';
 
 import Portal from '../portal';

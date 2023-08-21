@@ -1,5 +1,3 @@
-// Framer motion 코드가 들어갈 부분.
-
 import { useEffect, useState } from 'react';
 
 import { motion, useIsPresent, Variants } from 'framer-motion';

@@ -1,5 +1,3 @@
-// hook으로 toast를 간단하게 사용하기 위함.
-
 import { ToastOptions } from './toast-types';
 import useToastStore from './toast-store';
 
