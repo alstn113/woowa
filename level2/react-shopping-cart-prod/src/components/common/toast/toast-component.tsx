@@ -13,8 +13,7 @@ interface ToastComponentProps extends ToastOptions {}
 const motionVariants: Variants = {
   initial: {
     opacity: 0,
-    y: 50,
-    x: 50,
+    y: 24,
     scale: 0.85,
   },
   animate: {
@@ -30,6 +29,7 @@ const motionVariants: Variants = {
   exit: {
     opacity: 0,
     scale: 0.85,
+    y: 24,
     transition: {
       duration: 0.2,
       ease: [0.4, 0, 1, 1],
