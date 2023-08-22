@@ -1,3 +1,5 @@
+import { ToastPosition } from './toast-placement';
+
 export type ToastStatus = 'success' | 'error' | 'info';
 
 export type ToastOptions = {
@@ -5,8 +7,11 @@ export type ToastOptions = {
   title?: string;
   description?: string;
   duration: number | null;
+  position?: ToastPosition;
   onRequestClose: () => void;
   status: ToastStatus;
 };
 
-export type ToastState = ToastOptions[];
+export type ToastState = {
+  [K in ToastPosition]: ToastOptions[];
+};

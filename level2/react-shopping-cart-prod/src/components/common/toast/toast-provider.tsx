@@ -8,19 +8,21 @@ import ToastComponent from './toast-component';
 const ToastProvider = () => {
   const { toasts } = useToastStore();
 
-  const toastList = () => {
+  const stateKeys = Object.keys(toasts) as Array<keyof typeof toasts>;
+  const toastList = stateKeys.map((position) => {
+    const positionToasts = toasts[position];
     return (
-      <ToastContainer>
+      <ToastContainer key={position}>
         <AnimatePresence initial={false}>
-          {toasts.map((toast) => (
+          {positionToasts.map((toast) => (
             <ToastComponent key={toast.id} {...toast} />
           ))}
         </AnimatePresence>
       </ToastContainer>
     );
-  };
+  });
 
-  return <Portal id="toast">{toastList()}</Portal>;
+  return <Portal id="toast">{toastList}</Portal>;
 };
 
 const ToastContainer = styled.div`
