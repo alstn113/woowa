@@ -7,6 +7,8 @@ import SvgCross from './vectors/SvgCross';
 import { ToastOptions } from './toast-types';
 
 interface ToastProps {
+  title?: string;
+  description?: string;
   status: ToastOptions['status'];
   onClose: () => void;
 }
@@ -28,17 +30,15 @@ const toastStatusMap: {
   },
 };
 
-const Toast = ({ status, onClose }: ToastProps) => {
+const Toast = ({ title, description, status, onClose }: ToastProps) => {
   const toastStatus = toastStatusMap[status];
 
   return (
     <Container toastColor={toastStatus.color}>
       <ToastIcon>{toastStatus.icon}</ToastIcon>
       <ToastContent>
-        <ToastTitle>Error Connecting...</ToastTitle>
-        <ToastDescription>
-          You do not have permissions to perform this action.
-        </ToastDescription>
+        {title && <ToastTitle>{title}</ToastTitle>}
+        {description && <ToastDescription>{description}</ToastDescription>}
       </ToastContent>
       <CloseButton onClick={onClose}>
         <SvgCross />
@@ -76,6 +76,7 @@ const ToastContent = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  margin: auto 0;
 `;
 
 const ToastTitle = styled.div`
@@ -83,7 +84,6 @@ const ToastTitle = styled.div`
   font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.5rem;
-  margin-bottom: 4px;
 `;
 
 const ToastDescription = styled.div`

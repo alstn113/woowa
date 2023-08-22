@@ -23,6 +23,8 @@ export const Default = {
             onClick={() =>
               toast({
                 status: 'info',
+                title: 'Info Toast',
+                duration: null,
               })
             }
           >
@@ -35,6 +37,7 @@ export const Default = {
             onClick={() =>
               toast({
                 status: 'success',
+                description: 'Success Toast',
               })
             }
           >
@@ -47,6 +50,9 @@ export const Default = {
             onClick={() =>
               toast({
                 status: 'error',
+                title: 'Error Connecting...',
+                description:
+                  'You do not have permissions to perform this action.',
               })
             }
           >

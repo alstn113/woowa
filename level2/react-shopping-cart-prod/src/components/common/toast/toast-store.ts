@@ -1,23 +1,18 @@
-import React from 'react';
-
 import { create } from 'zustand';
 
 import { ToastOptions, ToastState } from './toast-types';
 
 interface ToastStore {
   toasts: ToastState;
-  notify: (
-    message: ToastOptions['message'],
-    options?: CreateToastOptions,
-  ) => ToastOptions['id'];
+  notify: (options?: CreateToastOptions) => ToastOptions['id'];
   close: (id: ToastOptions['id']) => void;
   removeToast: (id: ToastOptions['id']) => void;
 }
 
 const useToastStore = create<ToastStore>((set) => ({
   toasts: [],
-  notify: (message, options) => {
-    const toast = createToast(message, options);
+  notify: (options) => {
+    const toast = createToast(options);
     set((state) => ({ toasts: [...state.toasts, toast] }));
     return toast.id;
   },
@@ -39,13 +34,10 @@ const useToastStore = create<ToastStore>((set) => ({
 let counter = 0;
 
 type CreateToastOptions = Partial<
-  Pick<ToastOptions, 'id' | 'duration' | 'status'>
+  Pick<ToastOptions, 'id' | 'duration' | 'status' | 'title' | 'description'>
 >;
 
-const createToast = (
-  message: React.ReactNode,
-  options: CreateToastOptions = {},
-) => {
+const createToast = (options: CreateToastOptions = {}) => {
   counter += 1;
 
   const id = options.id ?? counter;
@@ -56,7 +48,8 @@ const createToast = (
 
   return {
     id,
-    message,
+    title: options.title,
+    description: options.description,
     duration,
     status,
     onRequestClose: handleRequestClose,

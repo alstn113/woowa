@@ -2,7 +2,8 @@ export type ToastStatus = 'success' | 'error' | 'info';
 
 export type ToastOptions = {
   id: number;
-  message: React.ReactNode;
+  title?: string;
+  description?: string;
   duration: number | null;
   onRequestClose: () => void;
   requestClose?: boolean;
