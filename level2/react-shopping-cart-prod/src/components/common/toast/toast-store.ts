@@ -34,13 +34,13 @@ const useToastStore = create<ToastStore>((set) => ({
 let counter = 0;
 
 type CreateToastOptions = Partial<
-  Pick<ToastOptions, 'id' | 'duration' | 'status' | 'title' | 'description'>
+  Pick<ToastOptions, 'duration' | 'status' | 'title' | 'description'>
 >;
 
 const createToast = (options: CreateToastOptions = {}) => {
   counter += 1;
 
-  const id = options.id ?? counter;
+  const id = counter;
   const duration =
     typeof options.duration === 'undefined' ? 5000 : options.duration;
   const status = options.status || 'info';
