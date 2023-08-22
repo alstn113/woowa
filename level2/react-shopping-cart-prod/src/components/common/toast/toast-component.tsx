@@ -15,10 +15,11 @@ const motionVariants: Variants = {
   initial: (props) => {
     const { position } = props;
 
-    const dir = ['top-center', 'bottom-center'].includes(position) ? 'y' : 'x';
+    const isVertical = ['top-center', 'bottom-center'].includes(position);
+    const isRightAligned = ['top-right', 'bottom-right'].includes(position);
 
-    let factor = ['top-right', 'bottom-right'].includes(position) ? 1 : -1;
-    if (position === 'bottom-center') factor = 1;
+    const dir = isVertical ? 'y' : 'x';
+    const factor = isRightAligned || position === 'bottom-center' ? 1 : -1;
 
     return {
       opacity: 0,
@@ -39,7 +40,6 @@ const motionVariants: Variants = {
   exit: {
     opacity: 0,
     scale: 0.85,
-    y: 24,
     transition: {
       duration: 0.2,
       ease: [0.4, 0, 1, 1],
