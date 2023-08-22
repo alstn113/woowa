@@ -74,7 +74,7 @@ const ToastComponent = (props: ToastComponentProps) => {
       onHoverEnd={onMouseLeave}
     >
       <ToastContainer>
-        <Toast status={status} />
+        <Toast status={status} onClose={close} />
       </ToastContainer>
     </motion.div>
   );

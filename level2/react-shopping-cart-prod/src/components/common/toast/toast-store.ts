@@ -10,7 +10,7 @@ interface ToastStore {
     message: ToastOptions['message'],
     options?: CreateToastOptions,
   ) => ToastOptions['id'];
-  close: () => void;
+  close: (id: ToastOptions['id']) => void;
   removeToast: (id: ToastOptions['id']) => void;
 }
 
@@ -25,12 +25,14 @@ const useToastStore = create<ToastStore>((set) => ({
     set((state) => ({
       toasts: state.toasts.filter((toast) => toast.id !== id),
     })),
-  close: () =>
+  close: (id) =>
     set((state) => ({
-      toasts: state.toasts.map((toast) => ({
-        ...toast,
-        requestClose: true,
-      })),
+      toasts: state.toasts.map((toast) => {
+        if (toast.id === id) {
+          return { ...toast, requestClose: true };
+        }
+        return toast;
+      }),
     })),
 }));
 
@@ -46,7 +48,7 @@ const createToast = (
 
   const id = counter;
   const duration =
-    typeof options.duration === 'undefined' ? 5000 : options.duration;
+    typeof options.duration === 'undefined' ? 3000 : options.duration;
   const status = options.status || 'info';
   const handleRequestClose = () => useToastStore.getState().removeToast(id);
 

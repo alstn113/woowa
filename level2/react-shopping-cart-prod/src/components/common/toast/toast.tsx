@@ -8,6 +8,7 @@ import { ToastOptions } from './toast-types';
 
 interface ToastProps {
   status: ToastOptions['status'];
+  onClose: () => void;
 }
 
 const toastStatusMap: {
@@ -27,8 +28,9 @@ const toastStatusMap: {
   },
 };
 
-const Toast = ({ status }: ToastProps) => {
+const Toast = ({ status, onClose }: ToastProps) => {
   const toastStatus = toastStatusMap[status];
+
   return (
     <Container toastColor={toastStatus.color}>
       <ToastIcon>{toastStatus.icon}</ToastIcon>
@@ -38,7 +40,7 @@ const Toast = ({ status }: ToastProps) => {
           You do not have permissions to perform this action.
         </ToastDescription>
       </ToastContent>
-      <CloseButton>
+      <CloseButton onClick={onClose}>
         <SvgCross />
       </CloseButton>
     </Container>
