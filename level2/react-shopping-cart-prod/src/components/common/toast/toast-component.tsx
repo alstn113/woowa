@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { motion, useIsPresent, Variants } from 'framer-motion';
 import styled from '@emotion/styled';
@@ -38,8 +38,7 @@ const motionVariants: Variants = {
 };
 
 const ToastComponent = (props: ToastComponentProps) => {
-  const { duration, onRequestClose, requestClose, status, title, description } =
-    props;
+  const { duration, onRequestClose, status, title, description } = props;
   const [delay, setDelay] = useState<number | null>(duration);
   const isPresent = useIsPresent();
 
@@ -54,14 +53,7 @@ const ToastComponent = (props: ToastComponentProps) => {
     if (isPresent) onRequestClose();
   };
 
-  // toast가 사라지면 requestClose가 true가 되고, 이때 onRequestClose를 호출한다.
-  // onRequestClose는 removeToast를 호출하고, removeToast는 store에서 toast를 filter한다.
-  useEffect(() => {
-    if (isPresent && requestClose) {
-      onRequestClose();
-    }
-  }, [isPresent, requestClose, onRequestClose]);
-
+  // delay 이후 onRequestClose 호출 -> removeToast 호출 -> toast filter
   useTimeout(close, delay);
 
   return (

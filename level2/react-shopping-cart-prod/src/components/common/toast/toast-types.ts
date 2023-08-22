@@ -6,7 +6,6 @@ export type ToastOptions = {
   description?: string;
   duration: number | null;
   onRequestClose: () => void;
-  requestClose?: boolean;
   status: ToastStatus;
 };
 

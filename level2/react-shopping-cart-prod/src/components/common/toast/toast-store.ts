@@ -5,7 +5,6 @@ import { ToastOptions, ToastState } from './toast-types';
 interface ToastStore {
   toasts: ToastState;
   notify: (options?: CreateToastOptions) => ToastOptions['id'];
-  close: (id: ToastOptions['id']) => void;
   removeToast: (id: ToastOptions['id']) => void;
 }
 
@@ -19,15 +18,6 @@ const useToastStore = create<ToastStore>((set) => ({
   removeToast: (id) =>
     set((state) => ({
       toasts: state.toasts.filter((toast) => toast.id !== id),
-    })),
-  close: (id) =>
-    set((state) => ({
-      toasts: state.toasts.map((toast) => {
-        if (toast.id === id) {
-          return { ...toast, requestClose: true };
-        }
-        return toast;
-      }),
     })),
 }));
 
@@ -53,7 +43,6 @@ const createToast = (options: CreateToastOptions = {}) => {
     duration,
     status,
     onRequestClose: handleRequestClose,
-    requestClose: false,
   };
 };
 
