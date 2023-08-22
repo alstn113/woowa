@@ -58,7 +58,7 @@ const createToast = (options: CreateToastOptions = {}) => {
 
   const id = counter;
   const duration =
-    typeof options.duration === 'undefined' ? 5000 : options.duration;
+    typeof options.duration === 'undefined' ? 3000 : options.duration;
   const position = options.position || 'bottom-center';
   const status = options.status || 'info';
   const handleRequestClose = () =>

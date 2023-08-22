@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import Portal from '../portal';
 import useToastStore from './toast-store';
+import { getToastContainerStyle } from './toast-placement';
 import ToastComponent from './toast-component';
 
 const ToastProvider = () => {
@@ -12,7 +13,7 @@ const ToastProvider = () => {
   const toastList = stateKeys.map((position) => {
     const positionToasts = toasts[position];
     return (
-      <ToastContainer key={position}>
+      <ToastContainer key={position} style={getToastContainerStyle(position)}>
         <AnimatePresence initial={false}>
           {positionToasts.map((toast) => (
             <ToastComponent key={toast.id} {...toast} />
@@ -26,14 +27,14 @@ const ToastProvider = () => {
 };
 
 const ToastContainer = styled.div`
-  position: fixed;
+  /* position: fixed;
   pointer-events: none;
   bottom: 0px;
   right: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 100%; */
 `;
 
 export default ToastProvider;

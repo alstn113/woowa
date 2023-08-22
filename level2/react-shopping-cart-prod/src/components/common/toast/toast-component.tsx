@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import useTimeout from '../hooks/use-timeout';
 import useDidUpdateEffect from '../hooks/use-did-update-effect';
 import { ToastOptions } from './toast-types';
+import { getToastStyle } from './toast-placement';
 import Toast from './toast';
 
 interface ToastComponentProps extends ToastOptions {}
@@ -38,7 +39,14 @@ const motionVariants: Variants = {
 };
 
 const ToastComponent = (props: ToastComponentProps) => {
-  const { duration, onRequestClose, status, title, description } = props;
+  const {
+    duration,
+    onRequestClose,
+    status,
+    title,
+    description,
+    position = 'bottom-center',
+  } = props;
   const [delay, setDelay] = useState<number | null>(duration);
   const isPresent = useIsPresent();
 
@@ -65,6 +73,7 @@ const ToastComponent = (props: ToastComponentProps) => {
       exit="exit"
       onHoverStart={onMouseEnter}
       onHoverEnd={onMouseLeave}
+      style={getToastStyle(position)}
     >
       <ToastContainer>
         <Toast
