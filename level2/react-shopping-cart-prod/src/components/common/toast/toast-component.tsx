@@ -12,10 +12,19 @@ import Toast from './toast';
 interface ToastComponentProps extends ToastOptions {}
 
 const motionVariants: Variants = {
-  initial: {
-    opacity: 0,
-    y: 24,
-    scale: 0.85,
+  initial: (props) => {
+    const { position } = props;
+
+    const dir = ['top-center', 'bottom-center'].includes(position) ? 'y' : 'x';
+
+    let factor = ['top-right', 'bottom-right'].includes(position) ? 1 : -1;
+    if (position === 'bottom-center') factor = 1;
+
+    return {
+      opacity: 0,
+      scale: 0.85,
+      [dir]: factor * 24,
+    };
   },
   animate: {
     opacity: 1,
@@ -74,6 +83,7 @@ const ToastComponent = (props: ToastComponentProps) => {
       onHoverStart={onMouseEnter}
       onHoverEnd={onMouseLeave}
       style={getToastStyle(position)}
+      custom={{ position }}
     >
       <ToastContainer>
         <Toast
