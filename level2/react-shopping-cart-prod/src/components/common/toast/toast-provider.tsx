@@ -25,6 +25,7 @@ const ToastProvider = () => {
 
 const ToastContainer = styled.div`
   position: fixed;
+  pointer-events: none;
   bottom: 0px;
   right: 0px;
   display: flex;
