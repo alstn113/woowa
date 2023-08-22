@@ -3,6 +3,7 @@ import useToastStore from './toast-store';
 
 interface UseToastOptions {
   duration?: ToastOptions['duration'];
+  status?: ToastOptions['status'];
 }
 
 const useToast = () => {

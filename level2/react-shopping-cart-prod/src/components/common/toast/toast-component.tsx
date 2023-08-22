@@ -38,7 +38,7 @@ const motionVariants: Variants = {
 };
 
 const ToastComponent = (props: ToastComponentProps) => {
-  const { duration, onRequestClose, requestClose } = props;
+  const { duration, onRequestClose, requestClose, status } = props;
   const [delay, setDelay] = useState<number | null>(duration);
   const isPresent = useIsPresent();
 
@@ -74,7 +74,7 @@ const ToastComponent = (props: ToastComponentProps) => {
       onHoverEnd={onMouseLeave}
     >
       <ToastContainer>
-        <Toast />
+        <Toast status={status} />
       </ToastContainer>
     </motion.div>
   );
