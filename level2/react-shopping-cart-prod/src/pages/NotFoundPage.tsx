@@ -7,7 +7,14 @@ const NotFoundPage = () => {
     <div>
       NotFoundPage
       <div>
-        <button type="button" onClick={() => toast()}>
+        <button
+          type="button"
+          onClick={() =>
+            toast({
+              duration: null,
+            })
+          }
+        >
           toast
         </button>
       </div>

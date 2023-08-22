@@ -45,7 +45,9 @@ const createToast = (
   counter += 1;
 
   const id = counter;
-  const duration = options.duration ?? 5000;
+  const duration =
+    typeof options.duration === 'undefined' ? 5000 : options.duration;
+
   const handleRequestClose = () => useToastStore.getState().removeToast(id);
 
   return {
