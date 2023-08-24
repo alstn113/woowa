@@ -85,26 +85,18 @@ const ToastComponent = (props: ToastComponentProps) => {
       custom={{ position }}
       position={position}
     >
-      <ToastWrapper>
-        <Toast
-          title={title}
-          description={description}
-          status={status}
-          onClose={close}
-        />
-      </ToastWrapper>
+      <Toast
+        title={title}
+        description={description}
+        status={status}
+        onClose={close}
+      />
     </ToastMotionWrapper>
   );
 };
 
 const ToastMotionWrapper = styled(motion.div)<{ position: ToastPosition }>`
   ${({ position }) => getToastAlign(position)}
-`;
-
-const ToastWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 export default ToastComponent;
