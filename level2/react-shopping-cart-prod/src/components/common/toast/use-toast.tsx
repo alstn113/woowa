@@ -1,5 +1,5 @@
 import { ToastOptions } from './toast-types';
-import useToastStore from './toast-store';
+import { toastStore } from './toast-store';
 
 type UseToastOptions = Partial<
   Pick<
@@ -9,10 +9,8 @@ type UseToastOptions = Partial<
 >;
 
 const useToast = (defaultOptions?: UseToastOptions) => {
-  const { notify } = useToastStore();
-
   const toast = (options?: UseToastOptions) => {
-    return notify({
+    return toastStore.notify({
       ...defaultOptions,
       ...options,
     });

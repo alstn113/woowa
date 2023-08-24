@@ -1,14 +1,20 @@
+import { useSyncExternalStore } from 'react';
+
 import { AnimatePresence } from 'framer-motion';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 import Portal from '../portal';
 import { ToastPosition } from './toast-types';
-import useToastStore from './toast-store';
+import { toastStore } from './toast-store';
 import ToastComponent from './toast-component';
-import { css } from '@emotion/react';
 
 const ToastProvider = () => {
-  const { toasts } = useToastStore();
+  const toasts = useSyncExternalStore(
+    toastStore.subscribe,
+    toastStore.getState,
+    toastStore.getState,
+  );
 
   const toastPositions = Object.keys(toasts) as ToastPosition[];
 

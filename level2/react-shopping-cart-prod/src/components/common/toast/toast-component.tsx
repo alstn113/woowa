@@ -5,7 +5,6 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
 import useTimeout from '../hooks/use-timeout';
-import useDidUpdateEffect from '../hooks/use-did-update-effect';
 import { ToastOptions, ToastPosition } from './toast-types';
 import Toast from './toast';
 
@@ -58,10 +57,6 @@ const ToastComponent = (props: ToastComponentProps) => {
   } = props;
   const [delay, setDelay] = useState<number | null>(duration);
   const isPresent = useIsPresent();
-
-  useDidUpdateEffect(() => {
-    setDelay(duration);
-  }, [duration]);
 
   const onMouseEnter = () => setDelay(null);
   const onMouseLeave = () => setDelay(duration);

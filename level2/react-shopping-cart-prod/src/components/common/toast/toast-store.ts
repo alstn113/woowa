@@ -1,48 +1,54 @@
-import { create } from 'zustand';
-
 import { ToastOptions, ToastState, ToastPosition } from './toast-types';
 
 interface ToastStore {
-  toasts: ToastState;
+  getState: () => ToastState;
+  subscribe: (listener: () => void) => () => void;
   notify: (options?: CreateToastOptions) => void;
   removeToast: (id: ToastOptions['id'], position: ToastPosition) => void;
 }
 
-const useToastStore = create<ToastStore>((set) => ({
-  toasts: {
-    'top-center': [],
-    'top-left': [],
-    'top-right': [],
-    'bottom-center': [],
-    'bottom-left': [],
-    'bottom-right': [],
-  },
-  notify: (options) => {
-    const toast = createToast(options);
-    const { position } = toast;
+const initialState: ToastState = {
+  'top-center': [],
+  'top-left': [],
+  'top-right': [],
+  'bottom-center': [],
+  'bottom-left': [],
+  'bottom-right': [],
+};
 
-    set((state) => {
-      const isTop = position.includes('top');
-      const newToasts = isTop
-        ? [toast, ...state.toasts[position]]
-        : [...state.toasts[position], toast];
+export const createStore = (initialState: ToastState): ToastStore => {
+  let state = initialState;
+  const listeners = new Set<() => void>();
 
-      return {
-        toasts: {
-          ...state.toasts,
-          [position]: newToasts,
-        },
-      };
-    });
-  },
-  removeToast: (id, position) =>
-    set((state) => ({
-      toasts: {
-        ...state.toasts,
-        [position]: state.toasts[position].filter((toast) => toast.id !== id),
-      },
-    })),
-}));
+  const setState = (setStateFn: (values: ToastState) => ToastState) => {
+    state = setStateFn(state);
+    listeners.forEach((listener) => listener());
+  };
+
+  return {
+    getState: () => state,
+    subscribe: (listener) => {
+      listeners.add(listener);
+      return () => listeners.delete(listener);
+    },
+    notify: (options) => {
+      const toast = createToast(options);
+      const { position } = toast;
+
+      setState((state) => ({
+        ...state,
+        [position]: [...state[position], toast],
+      }));
+    },
+    removeToast: (id, position) =>
+      setState((state) => ({
+        ...state,
+        [position]: state[position].filter((toast) => toast.id !== id),
+      })),
+  };
+};
+
+export const toastStore = createStore(initialState);
 
 let counter = 0;
 
@@ -61,8 +67,7 @@ const createToast = (options: CreateToastOptions = {}) => {
     typeof options.duration === 'undefined' ? 3000 : options.duration;
   const position = options.position || 'bottom-center';
   const status = options.status || 'info';
-  const handleRequestClose = () =>
-    useToastStore.getState().removeToast(id, position);
+  const handleRequestClose = () => toastStore.removeToast(id, position);
 
   return {
     id,
@@ -75,4 +80,4 @@ const createToast = (options: CreateToastOptions = {}) => {
   };
 };
 
-export default useToastStore;
+export default toastStore;
