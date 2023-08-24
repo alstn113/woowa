@@ -8,11 +8,14 @@ type UseToastOptions = Partial<
   >
 >;
 
-const useToast = () => {
+const useToast = (defaultOptions?: UseToastOptions) => {
   const { notify } = useToastStore();
 
   const toast = (options?: UseToastOptions) => {
-    return notify(options);
+    return notify({
+      ...defaultOptions,
+      ...options,
+    });
   };
 
   return toast;
