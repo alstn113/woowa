@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import Portal from '../portal';
 import useToastStore from './toast-store';
-import { ToastPosition, getToastContainerPosition } from './toast-placement';
+import { ToastPosition, getToastContainerPosition } from './toast-position';
 import ToastComponent from './toast-component';
 
 const ToastProvider = () => {

@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import useTimeout from '../hooks/use-timeout';
 import useDidUpdateEffect from '../hooks/use-did-update-effect';
 import { ToastOptions } from './toast-types';
-import { getToastAlign, ToastPosition } from './toast-placement';
+import { getToastAlign, ToastPosition } from './toast-position';
 import Toast from './toast';
 
 interface ToastComponentProps extends ToastOptions {}

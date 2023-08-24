@@ -1,4 +1,4 @@
-import { ToastPosition } from './toast-placement';
+import { ToastPosition } from './toast-position';
 
 export type ToastStatus = 'success' | 'error' | 'info';
 

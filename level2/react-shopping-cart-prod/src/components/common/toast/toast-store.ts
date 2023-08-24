@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 import { ToastOptions, ToastState } from './toast-types';
-import { ToastPosition } from './toast-placement';
+import { ToastPosition } from './toast-position';
 
 interface ToastStore {
   toasts: ToastState;
@@ -24,13 +24,14 @@ const useToastStore = create<ToastStore>((set) => ({
 
     set((state) => {
       const isTop = position.includes('top');
+      const newToasts = isTop
+        ? [toast, ...state.toasts[position]]
+        : [...state.toasts[position], toast];
 
       return {
         toasts: {
           ...state.toasts,
-          [position]: isTop
-            ? [toast, ...state.toasts[position]]
-            : [...state.toasts[position], toast],
+          [position]: newToasts,
         },
       };
     });
