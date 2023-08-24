@@ -21,11 +21,11 @@ const toastStatusMap: {
     icon: <SvgSuccessStatus />,
   },
   error: {
-    color: '#e74c3c',
+    color: '#ef5350',
     icon: <SvgErrorStatus />,
   },
   info: {
-    color: '#3498db',
+    color: '#42a5f5',
     icon: <SvgInfoStatus />,
   },
 };
@@ -57,9 +57,12 @@ const Container = styled.div<{
   min-width: 250px;
   margin: 0.5rem;
   padding: 16px 32px 16px 16px;
-  border-radius: 0.5rem;
+  border-radius: 6px;
   color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 
   background-color: ${(props) => props.toastColor};
 `;
