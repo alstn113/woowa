@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 export type ToastPosition =
   | 'top-center'
   | 'top-left'
@@ -6,9 +8,7 @@ export type ToastPosition =
   | 'bottom-left'
   | 'bottom-right';
 
-export const getToastContainerStyle = (
-  position: ToastPosition,
-): React.CSSProperties => {
+export const getToastContainerPosition = (position: ToastPosition) => {
   const isCenter = position.includes('center');
   const margin = isCenter ? '0 auto' : undefined;
 
@@ -26,21 +26,16 @@ export const getToastContainerStyle = (
     ? 'env(safe-area-inset-left, 0px)'
     : undefined;
 
-  return {
-    position: 'fixed',
-    zIndex: 9999,
-    pointerEvents: 'none',
-    display: 'flex',
-    flexDirection: 'column',
-    margin,
-    top,
-    bottom,
-    right,
-    left,
-  };
+  return css`
+    margin: ${margin};
+    top: ${top};
+    bottom: ${bottom};
+    right: ${right};
+    left: ${left};
+  `;
 };
 
-export function getToastStyle(position: ToastPosition): React.CSSProperties {
+export function getToastAlign(position: ToastPosition) {
   const isRighty = position.includes('right');
   const isLefty = position.includes('left');
 
@@ -48,9 +43,9 @@ export function getToastStyle(position: ToastPosition): React.CSSProperties {
   if (isRighty) alignItems = 'flex-end';
   if (isLefty) alignItems = 'flex-start';
 
-  return {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems,
-  };
+  return css`
+    display: flex;
+    flex-direction: column;
+    align-items: ${alignItems};
+  `;
 }

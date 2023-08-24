@@ -1,28 +1,42 @@
 import { AnimatePresence } from 'framer-motion';
+import styled from '@emotion/styled';
 
 import Portal from '../portal';
 import useToastStore from './toast-store';
-import { getToastContainerStyle } from './toast-placement';
+import { ToastPosition, getToastContainerPosition } from './toast-placement';
 import ToastComponent from './toast-component';
 
 const ToastProvider = () => {
   const { toasts } = useToastStore();
 
-  const stateKeys = Object.keys(toasts) as Array<keyof typeof toasts>;
-  const toastList = stateKeys.map((position) => {
-    const positionToasts = toasts[position];
-    return (
-      <div key={position} style={getToastContainerStyle(position)}>
-        <AnimatePresence initial={false}>
-          {positionToasts.map((toast) => (
-            <ToastComponent key={toast.id} {...toast} />
-          ))}
-        </AnimatePresence>
-      </div>
-    );
-  });
+  const toastPositions = Object.keys(toasts) as ToastPosition[];
 
-  return <Portal id="toast">{toastList}</Portal>;
+  const renderToastList = () => {
+    return toastPositions.map((position) => {
+      const positionToasts = toasts[position];
+
+      return (
+        <ToastContainer key={position} position={position}>
+          <AnimatePresence initial={false}>
+            {positionToasts.map((toast) => (
+              <ToastComponent key={toast.id} {...toast} />
+            ))}
+          </AnimatePresence>
+        </ToastContainer>
+      );
+    });
+  };
+
+  return <Portal id="toast">{renderToastList()}</Portal>;
 };
+
+const ToastContainer = styled.div<{ position: ToastPosition }>`
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  ${({ position }) => getToastContainerPosition(position)}
+`;
 
 export default ToastProvider;

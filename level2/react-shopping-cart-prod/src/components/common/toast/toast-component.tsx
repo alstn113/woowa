@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import useTimeout from '../hooks/use-timeout';
 import useDidUpdateEffect from '../hooks/use-did-update-effect';
 import { ToastOptions } from './toast-types';
-import { getToastStyle } from './toast-placement';
+import { getToastAlign, ToastPosition } from './toast-placement';
 import Toast from './toast';
 
 interface ToastComponentProps extends ToastOptions {}
@@ -74,7 +74,7 @@ const ToastComponent = (props: ToastComponentProps) => {
   useTimeout(close, delay);
 
   return (
-    <motion.div
+    <ToastMotionWrapper
       layout
       variants={motionVariants}
       initial="initial"
@@ -82,22 +82,26 @@ const ToastComponent = (props: ToastComponentProps) => {
       exit="exit"
       onHoverStart={onMouseEnter}
       onHoverEnd={onMouseLeave}
-      style={getToastStyle(position)}
       custom={{ position }}
+      position={position}
     >
-      <ToastContainer>
+      <ToastWrapper>
         <Toast
           title={title}
           description={description}
           status={status}
           onClose={close}
         />
-      </ToastContainer>
-    </motion.div>
+      </ToastWrapper>
+    </ToastMotionWrapper>
   );
 };
 
-const ToastContainer = styled.div`
+const ToastMotionWrapper = styled(motion.div)<{ position: ToastPosition }>`
+  ${({ position }) => getToastAlign(position)}
+`;
+
+const ToastWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
