@@ -1,5 +1,3 @@
-import { ToastPosition } from './toast-position';
-
 export type ToastStatus = 'success' | 'error' | 'info';
 
 export type ToastOptions = {
@@ -15,3 +13,11 @@ export type ToastOptions = {
 export type ToastState = {
   [K in ToastPosition]: ToastOptions[];
 };
+
+export type ToastPosition =
+  | 'top-center'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-center'
+  | 'bottom-left'
+  | 'bottom-right';

@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 
-import { ToastOptions, ToastState } from './toast-types';
-import { ToastPosition } from './toast-position';
+import { ToastOptions, ToastState, ToastPosition } from './toast-types';
 
 interface ToastStore {
   toasts: ToastState;

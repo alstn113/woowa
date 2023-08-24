@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import { motion, useIsPresent, Variants } from 'framer-motion';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 import useTimeout from '../hooks/use-timeout';
 import useDidUpdateEffect from '../hooks/use-did-update-effect';
-import { ToastOptions } from './toast-types';
-import { getToastAlign, ToastPosition } from './toast-position';
+import { ToastOptions, ToastPosition } from './toast-types';
 import Toast from './toast';
 
 interface ToastComponentProps extends ToastOptions {}
@@ -96,7 +96,20 @@ const ToastComponent = (props: ToastComponentProps) => {
 };
 
 const ToastMotionWrapper = styled(motion.div)<{ position: ToastPosition }>`
-  ${({ position }) => getToastAlign(position)}
+  ${({ position }) => {
+    const isRighty = position.includes('right');
+    const isLefty = position.includes('left');
+
+    let alignItems = 'center';
+    if (isRighty) alignItems = 'flex-end';
+    if (isLefty) alignItems = 'flex-start';
+
+    return css`
+      display: flex;
+      flex-direction: column;
+      align-items: ${alignItems};
+    `;
+  }}
 `;
 
 export default ToastComponent;

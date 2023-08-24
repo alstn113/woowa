@@ -4,8 +4,7 @@ import type { Meta } from '@storybook/react';
 import styled from '@emotion/styled';
 
 import useToast from './use-toast';
-import { ToastStatus } from './toast-types';
-import { ToastPosition } from './toast-position';
+import { ToastStatus, ToastPosition } from './toast-types';
 import Toast from './toast';
 
 const meta = {

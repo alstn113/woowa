@@ -13,23 +13,6 @@ interface ToastProps {
   onClose: () => void;
 }
 
-const toastStatusMap: {
-  [key in ToastOptions['status']]: { color: string; icon: React.ReactNode };
-} = {
-  success: {
-    color: '#2ecc71',
-    icon: <SvgSuccessStatus />,
-  },
-  error: {
-    color: '#ef5350',
-    icon: <SvgErrorStatus />,
-  },
-  info: {
-    color: '#42a5f5',
-    icon: <SvgInfoStatus />,
-  },
-};
-
 const Toast = ({ title, description, status, onClose }: ToastProps) => {
   const toastStatus = toastStatusMap[status];
 
@@ -45,6 +28,23 @@ const Toast = ({ title, description, status, onClose }: ToastProps) => {
       </CloseButton>
     </Container>
   );
+};
+
+const toastStatusMap: {
+  [key in ToastOptions['status']]: { color: string; icon: React.ReactNode };
+} = {
+  success: {
+    color: '#2ecc71',
+    icon: <SvgSuccessStatus />,
+  },
+  error: {
+    color: '#ef5350',
+    icon: <SvgErrorStatus />,
+  },
+  info: {
+    color: '#42a5f5',
+    icon: <SvgInfoStatus />,
+  },
 };
 
 const Container = styled.div<{
@@ -108,7 +108,7 @@ const CloseButton = styled.button`
   border-radius: 5px;
   transition: background-color 0.2s ease-in-out;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
   }
   svg {
     color: #fff;
